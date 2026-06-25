@@ -1975,8 +1975,8 @@ objection handling, and next-step.</div>
     });
   }
   function resetBall(){
-    ball={ x:cx, y:cy-base*0.03, vx:(Math.random()*2-1)*base*0.11, vy:-base*0.04, r:base*0.062 };
-    gravity=base*2.4; trail=[]; particles=[]; flashes=[];
+    ball={ x:cx, y:cy-base*0.03, vx:(Math.random()*2-1)*base*0.55, vy:(Math.random()*2-1)*base*0.55, r:base*0.062 };
+    gravity=base*1.2; trail=[]; particles=[]; flashes=[];   // gravity now only pulls on the shatter debris
   }
   function fullReset(){ makeRings(); resetBall(); mode='play'; freeT=0; }
 
@@ -2003,7 +2003,7 @@ objection handling, and next-step.</div>
     for(var i=0;i<rings.length;i++) if(rings[i].alive) rings[i].gap+=rings[i].spin*dt;
 
     if(mode==='play'){
-      ball.vy+=gravity*dt;
+      // no gravity on the ball — it bounces weightlessly, pinballing off the rings
       ball.x+=ball.vx*dt; ball.y+=ball.vy*dt;
 
       var ring=activeRing();
