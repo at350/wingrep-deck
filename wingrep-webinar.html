@@ -37,10 +37,9 @@
   .slide.active{display:flex}
   .wrap{width:100%;max-width:1100px;margin:0 auto;position:relative}
 
-  .slide.dark{background:radial-gradient(130% 130% at 70% 10%,#114e30,#0a2c1b 60%,#071f14)}
-  .slide.dark h1,.slide.dark .sub,.slide.dark p.body,.slide.dark .eyebrow{color:#F2EEE2}
-  .slide.dark .eyebrow{color:#7fe0a6}.slide.dark .eyebrow::before{background:#1BB061}
-  .slide.dark h1 .hl{color:#7fe0a6}
+  /* (formerly the dark-green slide treatment) these slides now use the same
+     warm paper background as the rest of the deck; device/terminal panels
+     inside them keep their own dark screens. */
 
   .slide.active .wrap>*{opacity:0;animation:rev .6s cubic-bezier(.2,.85,.25,1) forwards}
   .slide.active .wrap>*:nth-child(1){animation-delay:.04s}
@@ -193,8 +192,8 @@
   .pane2 .row{display:flex;justify-content:space-between;border-top:1px solid #1c4631;padding:.35rem 0;font-size:13px;color:#dbeee0} .pane2 .row:first-of-type{border-top:none} .pane2 .row b{font-weight:700;color:#fff}
   .pane2.coach{background:#0a3a23;border-color:#1BB061} .pane2.coach .stuck{color:#7fe0a6;font-weight:800}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(27,176,97,.5)}70%{box-shadow:0 0 0 9px rgba(27,176,97,0)}100%{box-shadow:0 0 0 0 rgba(27,176,97,0)}}
-  .caption{margin-top:1rem;font-size:clamp(15px,1.6vw,19px);font-weight:600;color:#F2EEE2;opacity:0;transition:opacity .5s} .caption.show{opacity:1}
-  .replay{margin-top:.7rem;font-family:var(--body);font-weight:700;font-size:12.5px;background:none;border:1.5px solid #2c5c41;border-radius:999px;padding:.36rem .9rem;cursor:pointer;color:#7fe0a6}
+  .caption{margin-top:1rem;font-size:clamp(15px,1.6vw,19px);font-weight:600;color:var(--ink-soft);opacity:0;transition:opacity .5s} .caption.show{opacity:1}
+  .replay{margin-top:.7rem;font-family:var(--body);font-weight:700;font-size:12.5px;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.36rem .9rem;cursor:pointer;color:var(--green)}
 
   .roi{margin-top:1.4rem;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem 1.7rem;max-width:640px;box-shadow:var(--shadow)}
   .roi .repline{display:flex;align-items:baseline;gap:.6rem;font-weight:600;font-size:16px}
@@ -216,7 +215,7 @@
 
   /* animated checks */
   .checks{margin-top:1.4rem;display:grid;gap:.9rem;max-width:62ch}
-  .checks li{list-style:none;display:flex;gap:.8rem;align-items:flex-start;font-size:clamp(15px,1.55vw,19px);font-weight:500;color:#eaf4ec;line-height:1.35}
+  .checks li{list-style:none;display:flex;gap:.8rem;align-items:flex-start;font-size:clamp(15px,1.55vw,19px);font-weight:500;color:var(--ink);line-height:1.35}
   .checks svg{flex:0 0 auto;margin-top:2px}
   .checks .ck{stroke:#1BB061;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s ease forwards}
   .checks li:nth-child(2) .ck{animation-delay:.5s} .checks li:nth-child(3) .ck{animation-delay:1s} .checks li:nth-child(4) .ck{animation-delay:1.5s}
@@ -425,14 +424,14 @@
   
   
   .s8-slide{
-    /* dark-slide palette (restored on integration; these scoped vars were dropped) */
-    --s8-paper:#F2EEE2; --s8-accent:#7fe0a6; --s8-bright:#1BB061; --s8-hair:rgba(127,224,166,.14);
+    /* card is warm paper; the flywheel keeps its dark stage (see .s8-stage) */
+    --s8-paper:#14120D; --s8-accent:#0E7A41; --s8-bright:#1BB061; --s8-hair:var(--line);
     position:relative;
     width:100%;
     max-width:1180px;
     aspect-ratio:16/9;
-    background:radial-gradient(130% 130% at 70% 10%,#114e30,#0a2c1b 60%,#071f14);
-    border:1px solid var(--s8-hair);
+    background:linear-gradient(180deg,var(--card),var(--paper-2));
+    border:1px solid var(--line);
     border-radius:18px;
     overflow:hidden;
     display:grid;
@@ -440,13 +439,13 @@
     align-items:center;
     gap:24px;
     padding:clamp(28px,4.2vw,64px);
-    box-shadow:0 40px 120px -40px rgba(0,0,0,.7);
+    box-shadow:var(--shadow);
   }
   .s8-slide::after{
     content:"";
     position:absolute;inset:0;
     background:
-      radial-gradient(60% 60% at 78% 64%, rgba(127,224,166,.07), transparent 70%);
+      radial-gradient(60% 60% at 78% 64%, rgba(14,122,65,.05), transparent 70%);
     pointer-events:none;
   }
 
@@ -482,7 +481,7 @@
   .s8-body{
     font-size:clamp(15px,1.45vw,18px);
     line-height:1.55;
-    color:rgba(242,238,226,.82);
+    color:var(--ink-soft);
     max-width:440px;
     font-weight:400;
   }
@@ -496,7 +495,15 @@
     max-height:100%;
     justify-self:center;
   }
-  .s8-stage svg{width:100%;height:100%;display:block;overflow:visible;}
+  /* dark disc so the flywheel (tuned for a dark backdrop) reads as a framed
+     figure on the light card */
+  .s8-stage::before{
+    content:"";position:absolute;inset:4%;
+    border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,#0e4a2e,#082216 70%);
+    box-shadow:inset 0 1px 0 rgba(127,224,166,.08), 0 24px 60px -28px rgba(0,0,0,.6);
+  }
+  .s8-stage svg{position:relative;width:100%;height:100%;display:block;overflow:visible;}
 
   .s8-status{
     position:absolute;
@@ -506,7 +513,7 @@
     font-size:11px;
     letter-spacing:.14em;
     text-transform:uppercase;
-    color:rgba(127,224,166,.6);
+    color:var(--ink-soft);
     white-space:nowrap;
   }
 
@@ -527,8 +534,8 @@
   
 
   .s12-slide{
-    /* dark-slide palette (restored on integration; these scoped vars were dropped) */
-    --s12-cream:#F2EEE2; --s12-accent:#7fe0a6; --s12-sub:rgba(242,238,226,.82);
+    /* text palette on warm paper; the eye mark keeps its own dark figure colors */
+    --s12-cream:#14120D; --s12-accent:#0E7A41; --s12-sub:#56503F;
     width:100%;
     max-width:1180px;
     margin:0 auto;
@@ -638,25 +645,26 @@
 
   /* 16:9 slide shell */
   .s5-slide{
-    /* dark-slide palette (restored on integration; these scoped vars were dropped) */
+    /* device palette: the inner app screen stays dark, the card is warm paper */
     --s5-paper:#F2EEE2; --s5-green:#7fe0a6; --s5-bright:#1BB061; --s5-amber:#F2A33C; --s5-rust:#E07a5f; --s5-hair:rgba(127,224,166,.14);
     position:relative;
     width:100%; max-width:1180px; aspect-ratio:16/9;
     min-height:560px;
     border-radius:22px; overflow:hidden;
-    background:radial-gradient(130% 130% at 70% 10%,#114e30,#0a2c1b 60%,#071f14);
-    box-shadow:0 40px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(127,224,166,.08);
+    background:linear-gradient(180deg,var(--card),var(--paper-2));
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
     display:grid;
     grid-template-columns:1.04fr .96fr;
     gap:0;
-    color:var(--s5-paper);
+    color:var(--ink);
   }
   /* faint grid texture on bg */
   .s5-slide::before{
     content:""; position:absolute; inset:0; pointer-events:none;
     background:
-      linear-gradient(rgba(127,224,166,.035) 1px,transparent 1px) 0 0/100% 44px,
-      linear-gradient(90deg,rgba(127,224,166,.035) 1px,transparent 1px) 0 0/44px 100%;
+      linear-gradient(rgba(20,18,13,.035) 1px,transparent 1px) 0 0/100% 44px,
+      linear-gradient(90deg,rgba(20,18,13,.035) 1px,transparent 1px) 0 0/44px 100%;
     mask:radial-gradient(120% 100% at 75% 0%,#000,transparent 78%);
     opacity:.7;
   }
@@ -671,7 +679,7 @@
     display:flex; align-items:center; gap:12px;
     font-family:"JetBrains Mono",monospace;
     text-transform:uppercase; letter-spacing:.18em; font-size:12px;
-    color:var(--s5-green);
+    color:var(--green);
   }
   .s5-eyebrow::before{
     content:""; width:30px; height:3px; background:var(--s5-bright); border-radius:2px;
@@ -680,16 +688,16 @@
   .s5-head{
     font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
     font-size:clamp(32px,5.6vw,64px); line-height:1.02; letter-spacing:-.02em;
-    color:var(--s5-paper); margin:2px 0 4px;
+    color:var(--ink); margin:2px 0 4px;
   }
-  .s5-head .s5-wm{ color:var(--s5-green); position:relative; }
+  .s5-head .s5-wm{ color:var(--green); position:relative; }
 
   .s5-chips{ display:flex; flex-wrap:wrap; gap:9px; margin:4px 0 2px; }
   .s5-body{
     font-family:"Space Grotesk",sans-serif; font-size:clamp(15px,1.35vw,18px);
-    line-height:1.55; color:rgba(242,238,226,.82); max-width:34ch;
+    line-height:1.55; color:var(--ink-soft); max-width:34ch;
   }
-  .s5-body .s5-hot{ color:var(--s5-amber); font-weight:600; }
+  .s5-body .s5-hot{ color:var(--rust); font-weight:600; }
 
   /* ---------- RIGHT : the device ---------- */
   .s5-right{
@@ -1058,7 +1066,7 @@
   </section>
 
   <!-- 5 dark + blind spot / listening scanner -->
-  <section class="slide dark">
+  <section class="slide">
 <div class="s5-slide" id="s5-slide">
   <!-- LEFT -->
   <div class="s5-left">
@@ -1182,7 +1190,7 @@
   </section>
 
   <!-- 8 pivot dark + loop -->
-  <section class="slide dark">
+  <section class="slide">
 <div class="s8-slide" aria-label="So we tried something. Could Claude run the whole coaching loop?">
     <div class="s8-copy">
       <div class="s8-eyebrow">So we tried something</div>
@@ -1343,7 +1351,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 10 dark oneliner + self-typing ledger -->
-  <section class="slide dark" data-animate="type">
+  <section class="slide" data-animate="type">
     <div class="wrap">
       <div class="eyebrow">The obvious question</div>
       <h1>What if it ran itself, <br>and <span class="hl">remembered?</span></h1>
@@ -1352,7 +1360,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 11 reveal dark -->
-  <section class="slide dark" data-animate="app">
+  <section class="slide" data-animate="app">
     <div class="wrap">
       <div class="eyebrow">This is the part we built</div>
       <h1>Same loop. No files. <span class="hl">No pasting.</span></h1>
@@ -1365,13 +1373,13 @@ objection handling, and next-step.</div>
           <div class="pane2 coach" data-step="4"><div class="h">Coaching · checked vs last call, automatically</div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did. ✓</span> The log updated itself.</p></div>
         </div>
       </div>
-      <p class="caption" id="appCaption">No file to keep. No prompt to run. <span class="scribble" style="color:#7fe0a6">it just happened.</span></p>
+      <p class="caption" id="appCaption">No file to keep. No prompt to run. <span class="scribble">it just happened.</span></p>
       <button class="replay" id="appReplay">↺ replay</button>
     </div>
   </section>
 
   <!-- 12 dark oneliner + eye -->
-  <section class="slide dark">
+  <section class="slide">
 <div class="s12-slide" >
     <div class="s12-wrap">
 
@@ -1534,7 +1542,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 17 walk away dark + animated checks -->
-  <section class="slide dark">
+  <section class="slide">
     <div class="wrap">
       <div class="eyebrow">Last call</div>
       <h1>What you walk away with.</h1>
@@ -1596,11 +1604,11 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 20 stop cleaning up -->
-  <section class="slide dark oneliner">
+  <section class="slide oneliner">
     <div class="wrap">
       <svg class="endhorizon" width="240" height="64" viewBox="0 0 240 64" aria-hidden="true">
-        <line x1="0" y1="52" x2="240" y2="52" stroke="#1c4631" stroke-width="2" stroke-dasharray="3 7"/>
-        <path class="endplane" d="M0 0 L20 8 L0 16 L5 8 Z" fill="#7fe0a6"/>
+        <line x1="0" y1="52" x2="240" y2="52" stroke="#C2BBA6" stroke-width="2" stroke-dasharray="3 7"/>
+        <path class="endplane" d="M0 0 L20 8 L0 16 L5 8 Z" fill="#0E7A41"/>
       </svg>
       <h1>Stop cleaning up<br>after every call.</h1>
       <p class="sub">Let the next call be the only thing your reps think about.</p>
