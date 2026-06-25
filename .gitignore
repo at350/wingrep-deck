@@ -1,0 +1,8 @@
+# Whitelist approach: ignore EVERYTHING, then allow only the files meant to be published.
+# This guarantees the confidential "wingrep context/" material, local config, and
+# working notes can never be committed, even with `git add -A`.
+/*
+!/index.html
+!/wingrep-webinar.html
+!/README.md
+!/.gitignore
