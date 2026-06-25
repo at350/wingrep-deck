@@ -1575,25 +1575,7 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 19 thank you + confetti -->
-  <section class="slide" data-animate="confetti">
-    <canvas id="confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-    <div class="wrap" style="z-index:1">
-      <div class="s19-grid">
-        <div>
-          <h1>Thanks for staying<br>to the end.</h1>
-          <p class="body">Take the SalesOS workflow, it's yours, no strings. And if you'd rather have the version that runs itself, start a trial.</p>
-          <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a><a class="btn btn-ghost" href="#">Reply to whoever invited you</a></div>
-        </div>
-        <figure class="s19-cheers">
-          <img data-img="slide19_finale.green" data-img-reduced="slide19_finale_static.green" alt="A celebratory toast to the audience">
-          <figcaption>cheers to a quarter you actually closed.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 20 friday -->
+  <!-- 19 friday -->
   <section class="slide">
     <div class="wrap">
       <h1>Your rep's Friday afternoon.</h1>
@@ -1613,7 +1595,7 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 21 final -->
+  <!-- 20 stop cleaning up -->
   <section class="slide dark oneliner">
     <div class="wrap">
       <svg class="endhorizon" width="240" height="64" viewBox="0 0 240 64" aria-hidden="true">
@@ -1622,6 +1604,24 @@ objection handling, and next-step.</div>
       </svg>
       <h1>Stop cleaning up<br>after every call.</h1>
       <p class="sub">Let the next call be the only thing your reps think about.</p>
+    </div>
+  </section>
+
+  <!-- 21 thank you + confetti (finale) -->
+  <section class="slide" data-animate="confetti">
+    <canvas id="confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+    <div class="wrap" style="z-index:1">
+      <div class="s19-grid">
+        <div>
+          <h1>Thanks for staying<br>to the end.</h1>
+          <p class="body">Take the SalesOS workflow, it's yours, no strings. And if you'd rather have the version that runs itself, start a trial.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a><a class="btn btn-ghost" href="#">Reply to whoever invited you</a></div>
+        </div>
+        <figure class="s19-cheers">
+          <img data-img="slide19_finale.green" data-img-reduced="slide19_finale_static.green" alt="A celebratory toast to the audience">
+          <figcaption>cheers to a quarter you actually closed.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -1662,7 +1662,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","Title","From WingRep","The receipts","The blind spot","Honeymoon → reckoning","Two bad options","Could Claude run it?","SalesOS '95","What if it remembered","The reveal","Tools watch, we work","Cost calculator","Three options","The 3-week trial","FAQ","What you walk away with","Game","Thank you","Your Friday","Stop cleaning up"];
+  var titles=["Starting soon","Title","From WingRep","The receipts","The blind spot","Honeymoon → reckoning","Two bad options","Could Claude run it?","SalesOS '95","What if it remembered","The reveal","Tools watch, we work","Cost calculator","Three options","The 3-week trial","FAQ","What you walk away with","Game","Your Friday","Stop cleaning up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
 
   function show(n){
