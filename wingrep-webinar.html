@@ -1976,7 +1976,7 @@ objection handling, and next-step.</div>
   }
   function resetBall(){
     ball={ x:cx, y:cy-base*0.03, vx:(Math.random()*2-1)*base*0.11, vy:-base*0.04, r:base*0.062 };
-    gravity=base*1.75; trail=[]; particles=[]; flashes=[];
+    gravity=base*2.4; trail=[]; particles=[]; flashes=[];
   }
   function fullReset(){ makeRings(); resetBall(); mode='play'; freeT=0; }
 
@@ -2016,8 +2016,9 @@ objection handling, and next-step.</div>
             ring.alive=false; shatter(ring);          // slips through the gap
           } else {
             var nx=dx/dist, ny=dy/dist, vn=ball.vx*nx+ball.vy*ny;   // bounce off solid arc
-            ball.vx-=2*vn*nx; ball.vy-=2*vn*ny;
-            ball.vx*=0.99; ball.vy*=0.99;
+            var REST=1.12, VMAX=base*1.6;                           // springy: gains energy on each hit, capped
+            ball.vx=(ball.vx-2*vn*nx)*REST; ball.vy=(ball.vy-2*vn*ny)*REST;
+            var sp=Math.hypot(ball.vx,ball.vy); if(sp>VMAX){ ball.vx*=VMAX/sp; ball.vy*=VMAX/sp; }
             ball.x=cx+nx*Reff; ball.y=cy+ny*Reff;
             flashes.push({ x:ball.x,y:ball.y,t:1,color:ring.color });
           }
