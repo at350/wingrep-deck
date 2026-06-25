@@ -1954,7 +1954,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var COLORS=['#D97757','#1BB061','#7fe0a6'];   // inner -> outer
-  var rings=[], ball=null, particles=[], trail=[], flashes=[];
+  var rings=[], ball=null, particles=[], trail=[], flashes=[], mark=null;
   var gravity=0, mode='play', waitT=0, freeT=0;
 
   function resize(){
@@ -1974,7 +1974,7 @@ objection handling, and next-step.</div>
     });
   }
   function resetBall(){
-    ball={ x:cx, y:cy-base*0.03, vx:(Math.random()*2-1)*base*0.11, vy:-base*0.04, r:base*0.05 };
+    ball={ x:cx, y:cy-base*0.03, vx:(Math.random()*2-1)*base*0.11, vy:-base*0.04, r:base*0.062 };
     gravity=base*1.75; trail=[]; particles=[]; flashes=[];
   }
   function fullReset(){ makeRings(); resetBall(); mode='play'; freeT=0; }
@@ -2016,7 +2016,7 @@ objection handling, and next-step.</div>
           } else {
             var nx=dx/dist, ny=dy/dist, vn=ball.vx*nx+ball.vy*ny;   // bounce off solid arc
             ball.vx-=2*vn*nx; ball.vy-=2*vn*ny;
-            ball.vx*=0.94; ball.vy*=0.94;
+            ball.vx*=0.99; ball.vy*=0.99;
             ball.x=cx+nx*Reff; ball.y=cy+ny*Reff;
             flashes.push({ x:ball.x,y:ball.y,t:1,color:ring.color });
           }
@@ -2084,6 +2084,15 @@ objection handling, and next-step.</div>
       bg.addColorStop(0,'#eafff2'); bg.addColorStop(0.55,'#7fe0a6'); bg.addColorStop(1,'#1BB061');
       ctx.beginPath(); ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2); ctx.fillStyle=bg; ctx.fill();
       ctx.restore();
+      // the ball wears the WingRep mark (clipped to the ball, dark halo so the light logo reads)
+      if(mark&&mark.complete&&mark.naturalWidth>0){
+        var lw=ball.r*1.4, lh=lw*(mark.naturalHeight/mark.naturalWidth);
+        ctx.save();
+        ctx.beginPath(); ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2); ctx.clip();
+        ctx.shadowColor='rgba(6,24,15,0.85)'; ctx.shadowBlur=base*0.012;
+        ctx.drawImage(mark, ball.x-lw/2, ball.y-lh/2, lw, lh);
+        ctx.restore();
+      }
     }
   }
 
@@ -2101,6 +2110,7 @@ objection handling, and next-step.</div>
     canvas=c||document.getElementById('s3-canvas'); if(!canvas) return;
     if(started) return; started=true;
     ctx=canvas.getContext('2d');
+    mark=document.getElementById('markImg');
     resize();
     var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(function(){ resize(); if(!reduce) fullReset(); else renderStatic(); },150); });
     if(reduce){ renderStatic(); return; }
