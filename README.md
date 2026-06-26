@@ -1,6 +1,6 @@
 # WingRep webinar deck
 
-**"Build your own AI sales assistant with Claude"** — an interactive HTML presentation (21 slides) for WingRep, modeled on the workplace.io style: real imagery, surgical humor, and live interactions. Markup, CSS and JS live in `wingrep-webinar.html`; the base64 images are split into a sibling `wingrep-assets.js` (loaded locally, no network) so the deck stays small and editable.
+**"Build your own AI sales assistant with Claude"** — an interactive HTML presentation (17 slides) for WingRep, modeled on the workplace.io style: real imagery, surgical humor, and live interactions. The deck is built to teach first (roughly 80% hands-on content, 20% product): it walks through the coaching-loop framework, the four prompting moves, and five copy-paste prompts before a short, honest WingRep section near the end. Markup, CSS and JS live in `wingrep-webinar.html`; the base64 images are split into a sibling `wingrep-assets.js` (loaded locally, no network) so the deck stays small and editable.
 
 ## View it
 

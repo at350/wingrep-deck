@@ -957,6 +957,58 @@
   .s19-cheers img{width:min(360px,90%);border-radius:16px;box-shadow:0 30px 70px -28px rgba(20,18,13,.55);border:3px solid #fff;display:block;background:var(--paper-2)}
   .s19-cheers figcaption{font-family:var(--hand);color:var(--green);font-weight:700;font-size:clamp(18px,2.2vw,24px);margin-top:.9rem;transform:rotate(-1.5deg)}
   @media (max-width:760px){.s19-grid{grid-template-columns:1fr} .s19-cheers{margin-top:1.2rem}}
+
+  /* NEW: the 4 prompting moves, 2x2 ocard grid with big emoji */
+  .cols.moves{grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem}
+  .cols.moves .ocard{padding:1rem 1.2rem 1.1rem}
+  .cols.moves .ocard .art{height:64px;margin-bottom:.3rem}
+  .move-emoji{font-size:46px;line-height:1;display:inline-block;animation:float 5s ease-in-out infinite}
+  .cols.moves .ocard:nth-child(2) .move-emoji{animation-delay:-1.2s}
+  .cols.moves .ocard:nth-child(3) .move-emoji{animation-delay:-2.4s}
+  .cols.moves .ocard:nth-child(4) .move-emoji{animation-delay:-3.6s}
+  .cols.moves .ocard h3{color:var(--green)}
+  @media (max-width:680px){.cols.moves{grid-template-columns:1fr}}
+
+  /* NEW: five-prompts takeaway list */
+  ol.prompts5{list-style:none;counter-reset:p;margin-top:1.3rem;display:grid;gap:.55rem;max-width:60ch}
+  ol.prompts5 li{counter-increment:p;position:relative;padding:.55rem .9rem .55rem 3rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;font-size:clamp(14px,1.5vw,17px);font-weight:500;line-height:1.35}
+  ol.prompts5 li::before{content:counter(p);position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:1.7rem;height:1.7rem;border-radius:50%;background:var(--green);color:#fff;font-family:var(--display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  ol.prompts5 li b{color:var(--ink)}
+
+  /* NEW: prompt "glow-up" slider, lazy prompt -> top 1% */
+  .glow{margin-top:1.4rem;max-width:760px}
+  .glow-stage{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .glow-col{display:flex;flex-direction:column;gap:.4rem}
+  .glow-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .glow-prompt,.glow-out{font-family:var(--mono);font-size:12.5px;line-height:1.5;border-radius:10px;padding:.75rem .85rem;min-height:108px;transition:background .35s,color .35s,box-shadow .35s,border-color .35s}
+  .glow-prompt{background:#0f1a13;color:#cfe8d6;border:1px solid #1c4631}
+  .glow-out{background:#fff;color:#56503f;border:1.5px solid var(--line)}
+  .glow.lvl2 .glow-out{color:#2c2920}
+  .glow.lvl3 .glow-out{color:#0b6a3a;border-color:var(--green-bright);box-shadow:0 0 0 3px rgba(27,176,97,.16),0 14px 30px -16px rgba(14,122,65,.6)}
+  .glow.lvl3 .glow-prompt{box-shadow:0 0 0 2px rgba(127,224,166,.35)}
+  .glow-ctrl{display:flex;align-items:center;gap:.9rem;margin-top:1rem}
+  .glow-lab{font-family:var(--display);font-weight:800;font-size:13px;white-space:nowrap;color:var(--ink-soft)}
+  .glow.lvl3 .glow-lab:last-child{color:var(--green)}
+  .glow-spark{position:relative}
+  @media (max-width:680px){.glow-stage{grid-template-columns:1fr}}
+
+  /* NEW: Win95 easter eggs, Clippy + fake BSOD on tab 6 */
+  .os{position:relative}
+  .clippy{position:absolute;right:-6px;bottom:54px;z-index:6;display:flex;align-items:flex-end;gap:.4rem;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+  .clippy.show{opacity:1;transform:none}
+  .clippy-bubble{max-width:210px;background:#fffbdc;border:1.5px solid #b8b48f;border-radius:10px;padding:.5rem .7rem;font-family:var(--body);font-weight:600;font-size:12px;line-height:1.35;color:#3a3722;box-shadow:3px 3px 0 rgba(20,18,13,.2)}
+  .clippy-art{font-size:30px;line-height:1;animation:float 4s ease-in-out infinite}
+  .bsod{position:absolute;inset:0;z-index:7;background:#0b3ec2;color:#fff;display:none;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:var(--mono)}
+  .bsod.show{display:flex}
+  .bsod-face{font-size:54px;font-weight:700;margin-bottom:1rem}
+  .bsod-in p{font-size:13.5px;line-height:1.6;max-width:44ch;margin:0 auto .8rem}
+  .bsod-press{opacity:.85;font-size:12px}
+  @media (max-width:680px){.clippy{display:none!important}}
+
+  /* NEW: Konami emoji-rain easter egg */
+  .emojirain{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
+  .emojirain i{position:absolute;top:-40px;font-size:28px;animation:efall linear forwards}
+  @keyframes efall{to{transform:translateY(115vh) rotate(220deg)}}
 </style>
 </head>
 <body>
@@ -1008,60 +1060,18 @@
     </div>
   </section>
 
-  <!-- 3  bouncing ball + from WingRep -->
+  <!-- 3 agenda + honesty (the teaching contract) -->
   <section class="slide">
-<div class="s3-card" aria-label="WingRep honesty slide">
-    <div class="s3-copy">
-      <p class="s3-eyebrow">Quick honesty</p>
-      <h1 class="s3-headline">Yeah, this is <span style="color:var(--rust)">from WingRep.</span></h1>
-      <p class="s3-body">We sell software, so obviously we'd love you to try it. But what we build in the next twenty minutes is yours to keep, whether or not we ever talk again.</p>
-    </div>
-
-    <div class="s3-stage">
-      <div class="s3-panel">
-        <canvas id="s3-canvas" aria-label="A ball breaks free through layers of rotating rings, each ring shattering as it escapes."></canvas>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- 4 -->
-  <section class="slide" data-animate="count">
     <div class="wrap">
-      <div class="eyebrow">Why listen to us</div>
-      <h1>The receipts.</h1>
-      <div class="s4-grid">
-        <ul class="stats">
-          <li><span class="num" data-to="1.6" data-prefix="$" data-suffix="M">$0</span><span class="txt">closed in 3 meetings, not the usual 5–7 · TBConsulting</span></li>
-          <li><span class="num" data-to="75" data-suffix="%">0%</span><span class="txt">faster rep ramp · 50% faster time to close</span></li>
-          <li><span class="num" data-to="10" data-suffix=" hrs">0</span><span class="txt">a week handed back to every rep</span></li>
-        </ul>
-        <div class="s4-slack" aria-label="A wins channel message">
-          <div class="s4-slackbar"><span class="s4-hash">#</span>wins <span class="s4-slackmeta">&middot; 3 new</span></div>
-          <div class="s4-msg">
-            <div class="s4-av">LD</div>
-            <div class="s4-mbody">
-              <div class="s4-mhead"><b>Lucas, Rho</b><span class="s4-time">5:31 PM</span></div>
-              <div class="s4-mtext">the follow-up was drafted before I closed my laptop. sent it, changed nothing. that's <b>9 of my last 10.</b> 🙌</div>
-              <div class="s4-react"><span>🔥 18</span><span>💯 11</span><span>👀 7</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="trust">
-        <div class="cap">Teams leveling up with WingRep</div>
-        <div class="logobanner"><div class="bandstrip">
-          <img class="np" data-client="client-6" alt="RapidFort">
-          <img class="np" data-client="client-7" alt="Vumedi">
-          <img class="np" data-client="client-2" alt="Rho">
-          <img class="np" data-client="client-9" alt="Arrcus">
-          <img class="np" data-client="client-5" alt="Chore">
-          <img class="np" data-client="client-4" alt="TBConsulting">
-          <img class="np" data-client="client-8" alt="Uber">
-          <img class="np" data-client="client-3" alt="Pioneer Power Solutions">
-          <img class="np" data-client="client-10" alt="Salesforce">
-        </div></div>
-      </div>
+      <div class="eyebrow">Here's the deal</div>
+      <h1><span class="ln">In twenty minutes, you</span><br><span class="ln">build a sales assistant</span><br><span class="ln"><span class="hl">you keep.</span></span></h1>
+      <ul class="checks" aria-label="What you will be able to do tonight">
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Run a coaching loop that sticks.</b> Coach one thing, then check the next call to see if it landed.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Write prompts Claude takes seriously.</b> The four moves that separate junk from gold.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Give Claude memory.</b> One running file per rep, so nothing resets every Monday.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Prep and drill before the call</b>, not scramble after it.</span></li>
+      </ul>
+      <p class="sub" style="max-width:62ch">Yes, this is from WingRep, and we sell software, so of course we'd love you to try it. But everything we build in the next twenty minutes is yours to keep, whether or not we ever talk again.</p>
     </div>
   </section>
 
@@ -1193,13 +1203,13 @@
   <section class="slide">
 <div class="s8-slide" aria-label="So we tried something. Could Claude run the whole coaching loop?">
     <div class="s8-copy">
-      <div class="s8-eyebrow">So we tried something</div>
+      <div class="s8-eyebrow">The framework</div>
       <h1 class="s8-headline">
-        Could Claude run the whole<br>
-        <span class="s8-loopword">coaching loop?</span>
+        The coaching loop:<br>
+        <span class="s8-loopword">coach, check, adjust.</span>
       </h1>
       <p class="s8-body">
-<b>$27B</b> went into watching sales calls. The number it was supposed to move never did. Summarizing is table stakes; the real loop is coach, then check the next call whether it stuck. Watch it turn.
+Most coaching dies because nobody checks the <b>next</b> call. The whole method is four turns: coach one thing, watch the next call, ask <b>did it stick?</b>, then adjust. Works on a whiteboard. Works better when AI runs it for you. Steal the loop either way.
       </p>
     </div>
 
@@ -1282,11 +1292,67 @@
   </div>
 </section>
 
+  <!-- NEW: how to talk to Claude, the 4 moves -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">How to talk to Claude</div>
+      <h1>Four moves that get<br>Claude's <span class="hl">best work.</span></h1>
+      <div class="cols moves">
+        <div class="ocard"><div class="art"><span class="move-emoji">🎭</span></div><h3>Give it a role</h3><p>"You're my coaching log for Jordan." Claude writes sharper when it knows who it's being.</p></div>
+        <div class="ocard"><div class="art"><span class="move-emoji">📎</span></div><h3>Show, don't tell</h3><p>Paste a real call, not a description of one. Examples beat adjectives every single time.</p></div>
+        <div class="ocard"><div class="art"><span class="move-emoji">🧠</span></div><h3>Give it memory</h3><p>One running file per rep, pasted back each time, so nothing resets every Monday.</p></div>
+        <div class="ocard"><div class="art"><span class="move-emoji">🔁</span></div><h3>Make it self-critique</h3><p>"What's the weakest part of that?" then "now fix it." Two prompts, far better output.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Drake, bad prompt vs good prompt (teaching meme) -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Same call, two prompts</div>
+      <h1>Garbage in, <span class="rust">garbage out.</span></h1>
+      <div class="s14-grid">
+        <figure class="s14-drake">
+          <img data-img="slide14_drake.clay" alt="Drake meme: rejecting the lazy prompt, approving the structured one">
+        </figure>
+        <div class="s14-opts">
+          <div class="s14-opt no"><span class="s14-mk">&#10005;</span><div><b>"Summarize this call."</b> Vague in, vague out. You get a bland blob you still have to rewrite.</div></div>
+          <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my coaching log for Jordan. Add a dated entry, check if last call's focus (ask budget early) showed up, quote the moment, then give one focus for next time."</b> Role + memory + example + one clear ask.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: the 5 prompts to steal + prompt glow-up slider -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Your takeaway</div>
+      <h1>Five prompts. <span class="hl">Copy them all.</span></h1>
+      <ol class="prompts5">
+        <li><b>Capture</b> a call into the rep's running file.</li>
+        <li><b>Coaching ledger</b>, did last call's focus stick?</li>
+        <li><b>Scorecard</b>, render the log into one glanceable page.</li>
+        <li><b>Game plan</b>, a 60-second pre-call brief.</li>
+        <li><b>Drill</b>, practice the pitch on Claude, not the customer.</li>
+      </ol>
+      <div class="glow" aria-label="Drag to upgrade a lazy prompt into a structured one">
+        <div class="glow-stage">
+          <div class="glow-col"><span class="glow-tag">your prompt</span><div class="glow-prompt" id="glowPrompt">summarize this call</div></div>
+          <div class="glow-col"><span class="glow-tag">claude's output</span><div class="glow-out" id="glowOut">Call summary: they discussed the product and some pricing. Next steps: follow up soon.</div></div>
+        </div>
+        <div class="glow-ctrl"><span class="glow-lab" id="glowLab">lazy</span><input type="range" id="glowRange" min="0" max="100" value="0"><span class="glow-lab">top 1%</span></div>
+      </div>
+      <div class="os-cap">drag it. watch the output glow up. ↑</div>
+    </div>
+  </section>
+
   <!-- 9 SalesOS -->
   <section class="slide">
     <div class="wrap">
       <div class="eyebrow">Build it live, click each tab</div>
       <div class="os">
+        <div class="bsod" id="bsod" aria-hidden="true"><div class="bsod-in"><div class="bsod-face">:(</div><p>COACHING.EXE has stopped responding.<br>You kept the file by hand for three weeks. It rotted.</p><p class="bsod-press">click tab 6 again to continue _</p></div></div>
+        <div class="clippy" id="clippy" aria-hidden="true"><div class="clippy-bubble">It looks like you're coaching a rep. Want Claude to remember it for you?</div><div class="clippy-art">📎</div></div>
         <div class="titlebar"><img data-asset="ui_titlebar" alt=""> SalesOS '95, coaching.exe <span class="sp"><i>_</i><i>▢</i><i>✕</i></span></div>
         <div class="tabs">
           <button class="on" data-tab="t1">1 · Capture</button>
@@ -1378,132 +1444,6 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 12 dark oneliner + eye -->
-  <section class="slide">
-<div class="s12-slide" >
-    <div class="s12-wrap">
-
-      <div class="s12-markwrap">
-        <!-- The mark: an eye whose iris becomes a turning gear that sets a checkmark.
-             The eyelid is a real curved SVG path that arcs shut, never a rectangle. -->
-        <svg class="s12-mark" viewBox="0 0 120 80" aria-label="An eye that blinks and turns into a working gear" role="img">
-          <defs>
-            <radialGradient id="s12-iris" cx="42%" cy="40%" r="62%">
-              <stop offset="0%" stop-color="#bdf4d4"/>
-              <stop offset="42%" stop-color="#7fe0a6"/>
-              <stop offset="100%" stop-color="#1BB061"/>
-            </radialGradient>
-            <linearGradient id="s12-sclera" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0e3d26"/>
-              <stop offset="100%" stop-color="#0a2c1b"/>
-            </linearGradient>
-            <!-- almond eye shape, used to clip everything inside the eye -->
-            <clipPath id="s12-eyeclip">
-              <path d="M6 40 C 26 14, 94 14, 114 40 C 94 66, 26 66, 6 40 Z"/>
-            </clipPath>
-          </defs>
-
-          <g class="s12-float">
-            <!-- eye white / interior -->
-            <path d="M6 40 C 26 14, 94 14, 114 40 C 94 66, 26 66, 6 40 Z"
-                  fill="url(#s12-sclera)" stroke="#1c4631" stroke-width="1.4"/>
-
-            <!-- everything that lives inside the eye is clipped to the almond -->
-            <g clip-path="url(#s12-eyeclip)">
-
-              <!-- WATCH state: iris + pupil + catchlight -->
-              <g id="s12-iriswrap">
-                <circle cx="60" cy="40" r="19" fill="url(#s12-iris)"/>
-                <circle cx="60" cy="40" r="19" fill="none" stroke="#0a2c1b" stroke-width="1.2" stroke-opacity="0.45"/>
-                <circle id="s12-pupil" cx="60" cy="40" r="8.5" fill="#06170e"/>
-                <circle id="s12-spark" cx="54.5" cy="34.5" r="3.1" fill="#F2EEE2" opacity="0.92"/>
-              </g>
-
-              <!-- WORK state: a turning gear with a checkmark seated in it -->
-              <g id="s12-work" opacity="0">
-                <g id="s12-gear">
-                  <!-- gear body built from a smooth toothed path, no rectangles -->
-                  <path id="s12-gearbody"
-                        fill="#7fe0a6"
-                        d="M60 18
-                           L63.2 19.0 L66.1 18.0 L67.9 20.6 L71.0 20.7 L71.6 23.8 L74.4 24.9 L73.6 27.9
-                           L75.8 30.1 L73.9 32.6 L75.1 35.5 L72.6 37.3 L72.6 40.5
-                           L75.0 42.4 L73.6 45.2 L74.9 48.1 L72.0 49.2 L71.0 52.1 L67.9 51.9
-                           L65.7 54.1 L62.8 52.8 L60.0 54.4 L57.2 52.8 L54.3 54.1 L52.1 51.9
-                           L49.0 52.1 L48.0 49.2 L45.1 48.1 L46.4 45.2 L45.0 42.4 L47.4 40.5
-                           L47.4 37.3 L44.9 35.5 L46.1 32.6 L44.2 30.1 L46.4 27.9 L45.6 24.9
-                           L48.4 23.8 L49.0 20.7 L52.1 20.6 L53.9 18.0 L56.8 19.0 Z"/>
-                  <circle cx="60" cy="38" r="9.5" fill="#0a2c1b"/>
-                  <circle cx="60" cy="38" r="9.5" fill="none" stroke="#1BB061" stroke-width="1.4"/>
-                </g>
-                <!-- checkmark seated in the gear hub, drawn-on -->
-                <path id="s12-check" d="M55 38 L59 42 L66 33"
-                      fill="none" stroke="#bdf4d4" stroke-width="3"
-                      stroke-linecap="round" stroke-linejoin="round"
-                      stroke-dasharray="22" stroke-dashoffset="22"/>
-              </g>
-
-              <!-- THE EYELID: a real curved path that sweeps shut and open.
-                   It is a lens-shaped path morphed via its own keyframed d-attribute. -->
-              <path id="s12-lid" fill="url(#s12-sclera)"
-                    d="M6 40 C 26 14, 94 14, 114 40 C 94 14, 26 14, 6 40 Z"/>
-            </g>
-
-            <!-- eye outline drawn on top so the rim stays crisp over the lid -->
-            <path d="M6 40 C 26 14, 94 14, 114 40 C 94 66, 26 66, 6 40 Z"
-                  fill="none" stroke="#1c4631" stroke-width="1.4"/>
-          </g>
-        </svg>
-
-        <span class="s12-marklabel"><b>watch</b> &nbsp;to&nbsp; work</span>
-      </div>
-
-      <h1 class="s12-h">
-        <span class="s12-line s12-l1"><span class="s12-rise">Your tools watch.</span></span>
-        <span class="s12-line s12-l2"><span class="s12-rise">WingRep works.</span></span>
-      </h1>
-
-      <p class="s12-sub">Prep before. Help during. Follow-up, CRM, and the coaching loop after, nothing to maintain.</p>
-
-    </div>
-  </div>
-</section>
-
-  <!-- 13 ROI calc -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Drag it, what's this costing you</div>
-      <h1>The expensive thing isn't<br>software. It's the <span class="rust">hours.</span></h1>
-      <div class="roi">
-        <div class="repline">A team of <b id="roiReps">10</b> reps</div>
-        <input type="range" id="roiRange" min="3" max="50" value="10">
-        <div class="out">
-          <div><div class="big" id="roiHours">70</div><div class="cap">hours a week lost to admin &amp; forgotten coaching</div></div>
-          <div><div class="big" id="roiCost">$252K</div><div class="cap">a year, at a blended $75/hour</div></div>
-        </div>
-        <div class="roi-payoff" id="roiPayoff"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 14 three choices -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">So, three options</div>
-      <h1>Where this leaves you.</h1>
-      <div class="s14-grid">
-        <figure class="s14-drake">
-          <img data-img="slide14_drake.clay" alt="Drake meme: waving off the manual and blind options, approving Let WingRep run it">
-        </figure>
-        <div class="s14-opts">
-          <div class="s14-opt no"><span class="s14-mk">&#10005;</span><div><b>Keep it manual.</b> Run SalesOS yourself, every call, forever. Works, until you're busy.</div></div>
-          <div class="s14-opt no"><span class="s14-mk">&#10005;</span><div><b>Stay blind.</b> Skip it. Lose the hours. Never know if coaching landed.</div></div>
-          <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>Let WingRep run it.</b> Connect once. It preps, drafts, writes the CRM, keeps the loop on its own.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 15 CTA + 3-week bar -->
   <section class="slide">
     <div class="wrap">
@@ -1529,15 +1469,14 @@ objection handling, and next-step.</div>
         <div><b>WEEK 3</b><span>You look at whether coaching stuck, and decide.</span></div>
       </div>
       <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a></div>
-    </div>
-  </section>
-
-  <!-- 16 FAQ accordion (Uber logo lives here) -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Tap a question</div>
-      <h1>The honest answers.</h1>
       <div id="faq" style="margin-top:1.3rem;max-width:780px;display:grid;gap:.6rem"></div>
+      <div class="logobanner" style="margin-top:1.4rem"><div class="bandstrip">
+        <img class="np" data-client="client-2" alt="Rho">
+        <img class="np" data-client="client-8" alt="Uber">
+        <img class="np" data-client="client-4" alt="TBConsulting">
+        <img class="np" data-client="client-6" alt="RapidFort">
+        <img class="np" data-client="client-10" alt="Salesforce">
+      </div></div>
     </div>
   </section>
 
@@ -1547,10 +1486,10 @@ objection handling, and next-step.</div>
       <div class="eyebrow">Last call</div>
       <h1>What you walk away with.</h1>
       <ul class="checks">
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Reps get their evenings back.</b> Five to ten hours a week.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>The CRM writes itself.</b> No Friday catch-up, no nagging.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>You know if coaching stuck</b>, on the next call, not next quarter.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Your best rep coaches everyone.</b> One team turned their top closer's playbook into the default; coaching went from one-to-one to one-to-thirty.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Five prompts, yours to keep.</b> Capture, ledger, scorecard, game plan, drill. Run them tonight.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>The coaching loop</b>, coach, check, adjust. A method that works with or without our software.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>The four prompting moves.</b> Role, example, memory, self-critique. They work on any AI task, not just coaching.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>And if you'd rather not run it by hand</b>, WingRep does the loop for you, and you get your evenings back.</span></li>
       </ul>
     </div>
   </section>
@@ -1558,7 +1497,7 @@ objection handling, and next-step.</div>
   <!-- 18 GAME -->
   <section class="slide">
     <div class="wrap">
-      <div class="eyebrow">While you decide, feel the problem</div>
+      <div class="eyebrow">Feel why the manual loop doesn't scale</div>
       <h1>Clear the admin. <span class="hl">Manually.</span></h1>
       <div class="game">
         <div class="gamehud">
@@ -1580,38 +1519,6 @@ objection handling, and next-step.</div>
         </div>
         <div class="gamebtns" style="justify-content:flex-start"><button class="btn btn-primary" id="gStart" style="font-size:14px;padding:.65rem 1.3rem">Start</button><button class="btn btn-ghost" id="gWingTop" style="font-size:14px;padding:.65rem 1.3rem">Skip, let WingRep do it</button></div>
       </div>
-    </div>
-  </section>
-
-  <!-- 19 friday -->
-  <section class="slide">
-    <div class="wrap">
-      <h1>Your rep's Friday afternoon.</h1>
-      <div class="s20-grid">
-      <div class="friday">
-        <div class="clockrow"><svg id="fridayIcon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C84026" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg></div>
-        <div class="state" id="fridayState">4:50pm, still logging Monday's calls.</div>
-        <div class="desc" id="fridayDesc">Twelve calls, twelve CRM entries, twelve follow-ups. The weekend waits.</div>
-        <button class="btn btn-primary" id="fridayBtn" style="margin-top:1.1rem">Turn on WingRep →</button>
-      </div>
-      <figure class="s20-photo">
-        <img class="s20-before" data-img="slide20_before.clay" alt="A rep still at their desk on Friday evening, exhausted">
-        <img class="s20-after" data-img="slide20_after.green" alt="Done for the week, free at golden hour" style="opacity:0">
-        <figcaption class="s20-cap" id="s20cap">4:50pm. still logging.</figcaption>
-      </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 20 stop cleaning up -->
-  <section class="slide oneliner">
-    <div class="wrap">
-      <svg class="endhorizon" width="240" height="64" viewBox="0 0 240 64" aria-hidden="true">
-        <line x1="0" y1="52" x2="240" y2="52" stroke="#C2BBA6" stroke-width="2" stroke-dasharray="3 7"/>
-        <path class="endplane" d="M0 0 L20 8 L0 16 L5 8 Z" fill="#0E7A41"/>
-      </svg>
-      <h1>Stop cleaning up<br>after every call.</h1>
-      <p class="sub">Let the next call be the only thing your reps think about.</p>
     </div>
   </section>
 
@@ -1671,7 +1578,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","Title","From WingRep","The receipts","The blind spot","Honeymoon → reckoning","Two bad options","Could Claude run it?","SalesOS '95","What if it remembered","The reveal","Tools watch, we work","Cost calculator","Three options","The 3-week trial","FAQ","What you walk away with","Game","Your Friday","Stop cleaning up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
 
   function show(n){
@@ -1854,13 +1761,11 @@ objection handling, and next-step.</div>
   /* FAQ: grid-template-rows accordion (smooth, no layout thrash), rotating +/x, active border */
   (function(){
     var faqs=[
-      ["Can't I just keep the homemade version?","You can, and honestly, try it. The week it turns into a chore, you'll know exactly what WingRep is for."],
       ["Do you replace Gong?","No, we plug into it. Gong watches the call; WingRep does the work after. (One CRO did tell us we're \"a thousand percent more useful,\" but we'll let you be the judge.)"],
-      ["Is my call data safe?","ISO 27001 certified. We cleared Uber's security review. SOC 2 in flight. Your calls don't train anyone else's model."],
-      ["How fast will I see it work?","First follow-up impresses on day one. The real moment is around call five, when coaching changes what a rep actually does."],
-      ["Is this only for big teams?","Built for 5–50 reps. Small enough to feel it, big enough that the lost hours add up to real money."]
+      ["Is my call data safe?","ISO 27001 certified. We cleared Uber's security review. SOC 2 in flight. Your calls don't train anyone else's model."]
     ];
     var box=document.getElementById('faq');
+    if(!box) return;
     faqs.forEach(function(f,idx){
       var d=document.createElement('div'); d.className='faqrow';
       d.style.cssText='background:var(--card);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .25s';
@@ -1878,15 +1783,7 @@ objection handling, and next-step.</div>
     });
   })();
 
-  /* friday */
-  var fb=document.getElementById('fridayBtn'),fs=document.getElementById('fridayState'),fd=document.getElementById('fridayDesc'),fi=document.getElementById('fridayIcon'),on=false;
-  var fBefore=document.querySelector('.s20-before'),fAfter=document.querySelector('.s20-after'),fCap=document.getElementById('s20cap');
-  fb.onclick=function(){on=!on;
-    if(on){fs.textContent='4:50pm, already gone home.';fs.style.color='var(--green)';fd.textContent='Calls logged. Follow-ups sent. Coaching tracked. None of it by hand.';fi.setAttribute('stroke','#0E7A41');fb.textContent='↺ turn it back off';
-      if(fBefore)fBefore.style.opacity=0; if(fAfter)fAfter.style.opacity=1; if(fCap)fCap.textContent='4:50pm. already gone.';}
-    else{fs.textContent="4:50pm, still logging Monday's calls.";fs.style.color='';fd.textContent='Twelve calls, twelve CRM entries, twelve follow-ups. The weekend waits.';fi.setAttribute('stroke','#C84026');fb.textContent='Turn on WingRep →';
-      if(fBefore)fBefore.style.opacity=1; if(fAfter)fAfter.style.opacity=0; if(fCap)fCap.textContent='4:50pm. still logging.';}
-  };
+  /* (cut) friday before/after, removed in the 80/20 rebalance */
 
   /* confetti */
   var confRAF=null;
@@ -2843,6 +2740,85 @@ objection handling, and next-step.</div>
       setTimeout(function(){li=(li+1)%lines.length;tick.textContent=lines[li];tick.style.opacity=1;},430);
     },5200);
   }
+})();
+</script>
+<script>
+/* NEW fun + teaching effects: prompt glow-up slider, Win95 Clippy + BSOD, Konami emoji rain */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- prompt glow-up slider ---- */
+  (function(){
+    var r=document.getElementById('glowRange'); if(!r) return;
+    var glow=r.closest('.glow'),pr=document.getElementById('glowPrompt'),out=document.getElementById('glowOut'),lab=document.getElementById('glowLab');
+    var STAGES=[
+      {lab:'lazy',cls:'',
+       p:'summarize this call',
+       o:'Call summary: they discussed the product and some pricing. Next steps: follow up soon.'},
+      {lab:'better',cls:'lvl2',
+       p:'summarize this call, list the objection and the next step',
+       o:'Summary: pricing + security came up. Objection: needs SOC 2. Next step: send security docs.'},
+      {lab:'top 1%',cls:'lvl3',
+       p:"You're my coaching log for Jordan. Add a dated entry, check if last call's focus (ask budget early) stuck, quote the moment, then give one focus for next call.",
+       o:'Apr 18 · Northwind. Focus "ask budget early": STUCK. Quoted "what is the budget owner name?" at 4:12. Next focus: name a number first. Ledger updated.'}
+    ];
+    function paint(){
+      var v=+r.value, s= v<34?0 : v<67?1 : 2;
+      var st=STAGES[s];
+      glow.classList.remove('lvl2','lvl3'); if(st.cls) glow.classList.add(st.cls);
+      pr.textContent=st.p; out.textContent=st.o; lab.textContent=st.lab;
+    }
+    r.oninput=paint; paint();
+  })();
+
+  /* ---- Win95 Clippy appears on the SalesOS slide; BSOD gag on tab 6 ---- */
+  (function(){
+    var clippy=document.getElementById('clippy'); if(!clippy) return;
+    var os=clippy.closest('.slide');
+    // show clippy a beat after the SalesOS slide becomes active
+    var seen=false;
+    var obs=new MutationObserver(function(){
+      if(os.classList.contains('active')&&!seen){ seen=true; setTimeout(function(){clippy.classList.add('show');},900); }
+    });
+    obs.observe(os,{attributes:true,attributeFilter:['class']});
+
+    var bsod=document.getElementById('bsod');
+    var t6=document.querySelector('.os .tabs button[data-tab="t6"]');
+    if(t6&&bsod){
+      t6.addEventListener('click',function(){
+        if(reduce) return;
+        if(bsod.classList.contains('show')){ bsod.classList.remove('show'); return; }
+        bsod.classList.add('show');
+        setTimeout(function(){ bsod.classList.remove('show'); },2600);
+      });
+    }
+  })();
+
+  /* ---- Konami code -> emoji rain ---- */
+  (function(){
+    var seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    var pos=0;
+    document.addEventListener('keydown',function(e){
+      var k=e.key.length===1?e.key.toLowerCase():e.key;
+      pos=(k===seq[pos])?pos+1:(k===seq[0]?1:0);
+      if(pos===seq.length){ pos=0; rain(); }
+    });
+    function rain(){
+      if(reduce) return;
+      var box=document.createElement('div'); box.className='emojirain';
+      var set=['📎','🎉','📞','✅','💸','🧠','🔥'];
+      for(var n=0;n<60;n++){
+        var i=document.createElement('i'); i.textContent=set[(n*7)%set.length];
+        i.style.left=(Math.random()*100)+'vw';
+        i.style.animationDuration=(2.4+Math.random()*2.4)+'s';
+        i.style.animationDelay=(Math.random()*0.8)+'s';
+        i.style.fontSize=(20+Math.random()*26)+'px';
+        box.appendChild(i);
+      }
+      document.body.appendChild(box);
+      setTimeout(function(){ box.remove(); },5200);
+    }
+  })();
 })();
 </script>
 </body>
