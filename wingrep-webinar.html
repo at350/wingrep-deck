@@ -240,6 +240,13 @@
   .s3c .checks li{font-size:clamp(14px,1.45vw,17px)}
   .s3c .sub{margin-top:.9rem;font-size:clamp(15px,1.6vw,18px);line-height:1.4}
   .s3c .s3-guide{margin-top:1.1rem;padding-top:1rem}
+  /* slide 3: the headshot bounces like a DVD logo while the slide is up (motion only) */
+  .s3-dvd{position:absolute;top:0;left:0;width:56px;height:56px;z-index:6;display:none;pointer-events:none;will-change:transform}
+  .s3-dvd-in{width:56px;height:56px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px var(--dvdc,#D97757),0 10px 22px -8px rgba(20,18,13,.5);transition:box-shadow .18s}
+  .s3-dvd-in img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+  .s3-dvd-in.pop{animation:s3dvdpop .45s cubic-bezier(.2,.8,.3,1)}
+  @keyframes s3dvdpop{0%{transform:scale(1)}35%{transform:scale(1.24)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.s3-dvd{display:none!important}}
   @keyframes draw{to{stroke-dashoffset:0}}
 
   .oneliner h1{font-size:clamp(44px,8.6vw,108px);line-height:.98}
@@ -1116,6 +1123,7 @@
 
   <!-- 3 agenda + honesty (the teaching contract) -->
   <section class="slide s3c">
+    <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap">
       <div class="eyebrow">Here's the deal</div>
       <h1><span class="ln">In twenty minutes, you</span><br><span class="ln">build a sales assistant</span><br><span class="ln"><span class="hl">you keep.</span></span></h1>
@@ -1621,6 +1629,39 @@ objection handling, and next-step.</div>
 <div class="toast" id="toast"><span>Use <kbd>←</kbd> <kbd>→</kbd> · <kbd>F</kbd> fullscreen · <kbd>S</kbd> index</span></div>
 <div class="index" id="index"><button class="close" id="closeIndex">Close ✕</button><h2>Jump to slide</h2><ol id="indexList"></ol></div>
 <script src="wingrep-assets.js"></script>
+<script>
+(function(){
+  var dvd=document.getElementById('s3dvd'); if(!dvd) return;
+  var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56;
+  function measure(){var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;}
+  function loop(ts){
+    if(!running)return;
+    if(!last)last=ts;var dt=Math.min(.05,(ts-last)/1000);last=ts;
+    x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
+    if(x<=0){x=0;dx=Math.abs(dx);hit=true;edges++;}else if(x>=W-SZ){x=W-SZ;dx=-Math.abs(dx);hit=true;edges++;}
+    if(y<=0){y=0;dy=Math.abs(dy);hit=true;edges++;}else if(y>=H-SZ){y=H-SZ;dy=-Math.abs(dy);hit=true;edges++;}
+    if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
+      if(edges>=2){inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
+    dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+    raf=requestAnimationFrame(loop);
+  }
+  function start(){
+    if(reduce||running)return;
+    measure();if(W<20){setTimeout(start,80);return;}
+    var spd=118,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
+    x=Math.min(x,W-SZ);y=Math.min(y,H-SZ);
+    if(ava)ava.style.display='none';
+    dvd.style.display='block';running=true;last=0;raf=requestAnimationFrame(loop);
+  }
+  function stop(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;dvd.style.display='none';if(ava)ava.style.display='';}
+  new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
+  addEventListener('resize',function(){if(running)measure();});
+  if(slide.classList.contains('active'))start();
+})();
+</script>
 
 <script>
 (function(){
