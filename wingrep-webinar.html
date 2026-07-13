@@ -1247,7 +1247,7 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
     </div>
 
     <div class="s8-stage" id="s8-stage">
-      <svg id="s8-svg" viewBox="0 0 440 440" role="img" aria-label="A spinning flywheel of the coaching loop: Coach, Next call, Did it stick, Adjust, powered by Claude Fable 5 at the hub.">
+      <svg id="s8-svg" viewBox="0 0 440 440" role="img" aria-label="A spinning flywheel of the coaching loop: Coach, Next call, Did it stick, Adjust, powered by Claude at the hub.">
         <defs>
           <radialGradient id="s8-hubGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#D97757" stop-opacity=".55"/>
@@ -1317,7 +1317,7 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
                 letter-spacing="1.6" fill="#D97757" opacity=".92">CLAUDE</text>
           <text x="220" y="257" text-anchor="middle"
                 font-family="JetBrains Mono, monospace" font-size="7.4"
-                letter-spacing="2.2" fill="rgba(217,119,87,.62)">FABLE 5</text>
+                letter-spacing="2.2" fill="rgba(217,119,87,.62)">POWERED BY</text>
         </g>
       </svg>
       <div class="s8-status" id="s8-statusTxt">spinning up...</div>
@@ -1336,6 +1336,39 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
         <div class="ocard"><div class="art"><span class="move-emoji">🧠</span></div><h3>Give it memory</h3><p>One running file per rep, pasted back each time, so nothing resets every Monday.</p></div>
         <div class="ocard"><div class="art"><span class="move-emoji">🔁</span></div><h3>Make it self-critique</h3><p>"What's the weakest part of that?" then "now fix it." Two prompts, far better output.</p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- AI literacy: three words (teaching section) -->
+  <style>
+  .ailit{list-style:none;margin-top:1.4rem;display:grid;gap:.85rem;max-width:78ch}
+  .ailit li{display:grid;grid-template-columns:minmax(9.5em,10.5em) 1fr;gap:1.2rem;align-items:baseline;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:.95rem 1.3rem;box-shadow:var(--shadow)}
+  .ailit .term{font-family:var(--display);font-weight:800;color:var(--green);font-size:clamp(19px,2.2vw,27px);line-height:1.02}
+  .ailit .term small{display:block;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;color:var(--rust-deep);margin-top:.25rem}
+  .ailit .def{font-size:clamp(14px,1.5vw,17px);line-height:1.42;color:var(--ink-soft);font-weight:500}
+  .ailit .def b{color:var(--ink);font-weight:700}
+  @media (max-width:640px){.ailit li{grid-template-columns:1fr;gap:.35rem}.ailit .term small{margin-top:.15rem}}
+  </style>
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">AI, minus the jargon</div>
+      <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
+      <p class="sub" style="max-width:66ch">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
+      <ul class="ailit">
+        <li>
+          <span class="term">Context window<small>ITS MEMORY</small></span>
+          <span class="def">How much the model can hold at once before it answers. Bigger window, more it can read in one go. <b>Fable 5 holds a million tokens, roughly 750,000 words, a whole quarter of call notes in a single pass.</b></span>
+        </li>
+        <li>
+          <span class="term">Reasoning<small>IT THINKS FIRST</small></span>
+          <span class="def">Newer models work through a problem in steps before replying, and you can turn the effort up for the hard ones. That is why they run circles around older AI on anything that takes real thought. <b>On Fable 5 it is always on.</b></span>
+        </li>
+        <li>
+          <span class="term">Agentic<small>IT DOES THE JOB</small></span>
+          <span class="def">AI that does a task, not just answers a question. It plans, uses tools, and checks its own work across many steps. The longer the task, the more this matters. <b>Fable 5 can run for days and validate what it did.</b></span>
+        </li>
+      </ul>
+      <div class="scribble" style="margin-top:1.05rem">now you're the one explaining it at the next meeting.</div>
     </div>
   </section>
 
@@ -1478,67 +1511,6 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 12b the engine: Claude Fable 5 -->
-  <style>
-  .fable-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
-  .fable-cards .art{height:70px;margin-bottom:.35rem}
-  .fable-cards .ocard h3{color:var(--green)}
-  .fable-strip{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
-  .fable-strip span{font-family:var(--mono);font-size:clamp(12px,1.3vw,14px);font-weight:500;color:var(--ink-soft);background:var(--green-wash);border:1.5px solid var(--line);border-radius:999px;padding:.42rem .95rem}
-  .fable-strip b{font-family:var(--display);font-weight:800;color:var(--green)}
-  @media (max-width:680px){.fable-cards{grid-template-columns:1fr}}
-  </style>
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Under the hood</div>
-      <h1><span class="ln">None of that magic without</span><br><span class="ln"><span class="hl">Claude Fable 5.</span></span></h1>
-      <p class="sub" style="max-width:64ch">Anthropic's most capable model, out June 2026, built for exactly this: long, multi-step work it runs on its own and checks as it goes. The harder and longer the job, the bigger its lead.</p>
-      <div class="fable-cards">
-        <div class="ocard"><div class="art"><span class="move-emoji">🛰️</span></div><h3>Works for days</h3><p>Most AI answers once and stops. Fable 5 plans across stages, hands pieces to sub-agents, and keeps going. It takes the call, drafts the follow-up, writes the CRM, and checks the coaching, unattended.</p></div>
-        <div class="ocard"><div class="art"><span class="move-emoji">🧠</span></div><h3>Remembers a million tokens</h3><p>Its context window holds 1,000,000 tokens, about 750,000 words. A rep's entire history fits at once, so "did it stick?" reads across every call, not the one transcript you pasted.</p></div>
-        <div class="ocard"><div class="art"><span class="move-emoji">✅</span></div><h3>Checks its own work</h3><p>It reflects on what it did and validates it, and it is trained to report what really happened instead of faking "done." A coaching loop lives or dies on an honest "did it stick?".</p></div>
-      </div>
-      <div class="fable-strip" aria-label="Claude Fable 5 at a glance">
-        <span><b>Most capable</b> model Anthropic ships to everyone</span>
-        <span><b>1M-token</b> context, ~750k words</span>
-        <span><b>Reasons</b> before it answers, always</span>
-      </div>
-      <div class="scribble" style="margin-top:1.1rem">we don't hype often. this one earns it.</div>
-    </div>
-  </section>
-
-  <!-- 12c AI literacy: three words -->
-  <style>
-  .ailit{list-style:none;margin-top:1.4rem;display:grid;gap:.85rem;max-width:76ch}
-  .ailit li{display:grid;grid-template-columns:minmax(9.5em,10.5em) 1fr;gap:1.2rem;align-items:baseline;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:.95rem 1.3rem;box-shadow:var(--shadow)}
-  .ailit .term{font-family:var(--display);font-weight:800;color:var(--green);font-size:clamp(19px,2.2vw,27px);line-height:1.02}
-  .ailit .term small{display:block;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;color:var(--rust-deep);margin-top:.25rem}
-  .ailit .def{font-size:clamp(14px,1.5vw,17px);line-height:1.42;color:var(--ink-soft);font-weight:500}
-  .ailit .def b{color:var(--ink);font-weight:700}
-  @media (max-width:640px){.ailit li{grid-template-columns:1fr;gap:.35rem}.ailit .term small{margin-top:.15rem}}
-  </style>
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">AI, minus the jargon</div>
-      <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
-      <ul class="ailit">
-        <li>
-          <span class="term">Context window<small>ITS MEMORY</small></span>
-          <span class="def">How much the model can hold at once before it answers. Bigger window, more it can read in one go. <b>Fable 5 holds a million tokens, roughly 750,000 words, a rep's whole call history in a single pass.</b></span>
-        </li>
-        <li>
-          <span class="term">Reasoning<small>IT THINKS FIRST</small></span>
-          <span class="def">Newer models work through a problem in steps before replying, and you can turn the effort up for the hard ones. That is why they run circles around older AI on anything that takes real thought. <b>On Fable 5 it is always on.</b></span>
-        </li>
-        <li>
-          <span class="term">Agentic<small>IT DOES THE JOB</small></span>
-          <span class="def">AI that does a task, not just answers a question. It plans, uses tools, and checks its own work across many steps. The longer the task, the more this matters. <b>Fable 5 can run for days and validate what it did.</b></span>
-        </li>
-      </ul>
-      <div class="scribble" style="margin-top:1.05rem">now you're the one explaining it at the next meeting.</div>
-    </div>
-  </section>
-
   <!-- 15 CTA + 3-week bar -->
   <section class="slide">
     <div class="wrap">
@@ -1673,7 +1645,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The engine: Claude Fable 5","AI, minus the jargon","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
 
   function show(n){
