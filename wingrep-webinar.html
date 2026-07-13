@@ -1029,9 +1029,9 @@
      closing scribble. Values scoped to .s9lit so no other slide is touched. */
   .s9lit .eyebrow{margin-bottom:.7rem}
   .s9lit h1{font-size:clamp(26px,4vw,48px);line-height:1.04}
-  .s9lit .s9-lead{display:flex;gap:clamp(14px,2vw,30px);align-items:center;margin-top:.75rem}
+  .s9lit .s9-lead{display:flex;gap:clamp(18px,2.6vw,44px);align-items:center;margin-top:.75rem}
   .s9lit.has-fable .s9-lead{margin-top:.55rem}
-  .s9lit .s9-lead .sub{margin-top:0}
+  .s9lit .s9-lead .sub{margin-top:0;flex:1 1 auto;min-width:0}
   .s9lit .sub{font-size:clamp(14px,1.45vw,16.5px);line-height:1.42;max-width:62ch}
   .s9lit .ailit{margin-top:.9rem;gap:.6rem}
   .s9lit .ailit li{padding:.6rem 1.2rem}
@@ -1043,11 +1043,13 @@
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
   /* Fable 5 title card: hidden until window.ASSETS.slide9_fable exists, so the
      deck ships clean with no broken box. The card is a 16:9 landscape banner
-     (source is 16:9, so object-fit:cover shows all of it, no crop). Drop the
-     base64 under that key to light it up (see README). */
-  .s9-fable{display:none;flex:0 0 auto;margin:0}
+     (source is 16:9, so object-fit:cover shows all of it, no crop). It's anchored
+     flush to the content column's right edge (margin-left:auto) so it lines up
+     with the feature cards below and reads as a deliberate brand mark, not a
+     floating box. Drop the base64 under that key to light it up (see README). */
+  .s9-fable{display:none;flex:0 0 auto;margin:0 0 0 auto}
   .s9lit.has-fable .s9-fable{display:block}
-  .s9-fable img{height:clamp(84px,12vh,128px);width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow);display:block}
+  .s9-fable img{height:clamp(100px,15vh,158px);width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);display:block}
   /* phones read the slide as a tall scroll; the Fable card is a decorative
      brand accent, so drop it below 640px to keep the teaching content tight */
   @media (max-width:640px){.s9lit.has-fable .s9-fable{display:none}}
