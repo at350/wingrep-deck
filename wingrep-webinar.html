@@ -1033,37 +1033,56 @@
      closing scribble. Values scoped to .s9lit so no other slide is touched. */
   .s9lit .eyebrow{margin-bottom:.7rem}
   .s9lit h1{font-size:clamp(26px,4vw,48px);line-height:1.04}
-  .s9lit .s9-lead{display:flex;gap:clamp(14px,2vw,30px);align-items:center;margin-top:.75rem}
-  .s9lit.has-fable .s9-lead{margin-top:.55rem}
-  .s9lit .s9-lead .sub{margin-top:0}
-  .s9lit .sub{font-size:clamp(14px,1.45vw,16.5px);line-height:1.42;max-width:62ch}
+  .s9lit .sub{font-size:clamp(14px,1.45vw,16.5px);line-height:1.42;max-width:56ch}
+  /* Two-zone hero layout when the Fable 5 numeral is present: teaching content
+     on the left, the oversized butterfly "5" anchored large on the right with a
+     small margin. Trim the slide's right padding so the numeral sits close to the
+     screen edge, and let the grid span the full width (no centering) so the left
+     column keeps enough room for the cards. Falls back to the plain single-column
+     slide with no asset. */
+  .s9lit.has-fable{padding-right:clamp(16px,2.6vw,40px)}
+  .s9lit.has-fable .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:clamp(18px,2.8vw,48px);max-width:none;margin:0}
+  .s9lit .s9-main{min-width:0}
   .s9lit .ailit{margin-top:.9rem;gap:.6rem}
   .s9lit .ailit li{padding:.6rem 1.2rem}
-  /* when the Fable 5 badge is shown it takes a little height; claw it back from the cards so the slide still fits short laptops */
+  /* in the two-zone layout the cards get a narrower column; tighten them so the slide still fits short laptops */
   .s9lit.has-fable .ailit{margin-top:.6rem;gap:.5rem}
   .s9lit.has-fable .ailit li{padding-top:.5rem;padding-bottom:.5rem}
   .s9lit .ailit .term{font-size:clamp(17px,1.9vw,24px)}
   .s9lit .ailit .def{font-size:clamp(13px,1.4vw,15.5px);line-height:1.38}
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
-  /* Fable 5 title card: hidden until window.ASSETS.slide9_fable exists, so the
-     deck ships clean with no broken box. The card is a 16:9 landscape banner
-     (source is 16:9, so object-fit:cover shows all of it, no crop). Drop the
-     base64 under that key to light it up (see README). */
-  .s9-fable{display:none;flex:0 0 auto;margin:0}
+  /* Fable 5 numeral: an oversized butterfly "5" (transparent WebP cutout, so it
+     floats straight on the cream slide with no box) anchored large in the right
+     column. Hidden until window.ASSETS.slide9_fable exists, so the deck ships
+     clean with no gap. Swap that one base64 entry to change it (see README). */
+  .s9-fable{display:none;margin:0;justify-self:end;position:relative}
   .s9lit.has-fable .s9-fable{display:block}
-  .s9-fable img{height:clamp(84px,12vh,128px);width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow);display:block}
-  /* phones read the slide as a tall scroll; the Fable card is a decorative
-     brand accent, so drop it below 640px to keep the teaching content tight */
-  @media (max-width:640px){.s9lit.has-fable .s9-fable{display:none}}
+  .s9-num{width:clamp(240px,27vw,420px);height:auto;display:block;filter:drop-shadow(0 20px 34px rgba(20,18,13,.14))}
+  /* a few butterflies breaking off the numeral, gently flapping and drifting
+     nearby (positions are % of the numeral box, so they track the "5" at any
+     size). Each is a transparent cutout of one butterfly from the same plate. */
+  .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,6s) ease-in-out infinite}
+  .s9-bf>img{display:block;width:100%;height:auto;transform-origin:50% 45%;filter:drop-shadow(0 6px 10px rgba(20,18,13,.16));animation:s9flap var(--f,.7s) ease-in-out infinite}
+  .s9-bf1{width:20%;top:-2%;left:-15%}
+  .s9-bf2{width:19%;top:45%;left:-15%}
+  .s9-bf3{width:16%;bottom:9%;left:-6%}
+  .s9-bf4{width:14%;top:-4%;right:15%}
+  .s9-bf5{width:13%;bottom:-5%;right:25%}
+  @keyframes s9flap{0%,100%{transform:scaleX(1) scaleY(1)}50%{transform:scaleX(.66) scaleY(1.05)}}
+  @keyframes s9float{0%,100%{translate:0 0;rotate:-6deg}50%{translate:6px -12px;rotate:7deg}}
+  /* house rule: reduced-motion gets a still slide, so drop the flutter entirely */
+  @media (prefers-reduced-motion:reduce){.s9-bf{display:none}}
+  /* narrow tablets/phones read the slide as a tall scroll and the two-zone grid
+     starves the cards, so below 820px drop the numeral, collapse to one column and
+     restore the slide's symmetric side padding */
+  @media (max-width:820px){.s9lit.has-fable .s9-fable{display:none}.s9lit.has-fable .wrap{display:block;margin:0 auto;max-width:1100px}.s9lit.has-fable{padding-right:clamp(20px,6vw,104px)}}
   </style>
   <section class="slide s9lit">
     <div class="wrap">
+     <div class="s9-main">
       <div class="eyebrow">AI, minus the jargon</div>
       <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
-      <div class="s9-lead">
-        <p class="sub">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
-        <figure class="s9-fable"><img data-asset="slide9_fable" alt="Claude Fable 5, by Anthropic"></figure>
-      </div>
+      <p class="sub">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
       <ul class="ailit">
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><rect x="5" y="9" width="56" height="41" rx="7" stroke="var(--green)" stroke-width="2.2"/><line x1="5" y1="18" x2="61" y2="18" stroke="var(--green)" stroke-width="1.3" opacity=".45"/><circle cx="11" cy="13.5" r="1.4" fill="var(--rust)"/><circle cx="16.5" cy="13.5" r="1.4" fill="var(--green-bright)" opacity=".75"/><rect x="11" y="24" width="40" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="31" width="44" height="3.2" rx="1.6" fill="var(--rust)" opacity=".7"/><rect x="11" y="38" width="33" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="45" width="41" height="3.2" rx="1.6" fill="var(--green-bright)" opacity=".55"/></svg></span>
@@ -1082,6 +1101,14 @@
         </li>
       </ul>
       <div class="scribble" style="margin-top:.7rem">now you're the one explaining it at the next meeting.</div>
+     </div>
+     <figure class="s9-fable" aria-hidden="true"><img class="s9-num" data-asset="slide9_fable" alt="The Fable 5 wordmark: a numeral 5 formed from vintage butterfly illustrations">
+       <span class="s9-bf s9-bf1" style="--f:.95s;--d:6.6s"><img data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf2" style="--f:1.05s;--d:7.6s"><img data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf3" style="--f:.88s;--d:5.9s"><img data-asset="s9_bf3" alt=""></span>
+       <span class="s9-bf s9-bf4" style="--f:.78s;--d:5.3s"><img data-asset="s9_bf4" alt=""></span>
+       <span class="s9-bf s9-bf5" style="--f:.82s;--d:7.1s"><img data-asset="s9_bf5" alt=""></span>
+     </figure>
     </div>
   </section>
 
