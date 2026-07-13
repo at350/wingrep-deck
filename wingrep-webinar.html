@@ -1247,7 +1247,7 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
     </div>
 
     <div class="s8-stage" id="s8-stage">
-      <svg id="s8-svg" viewBox="0 0 440 440" role="img" aria-label="A spinning flywheel of the coaching loop: Coach, Next call, Did it stick, Adjust, powered by Claude at the hub.">
+      <svg id="s8-svg" viewBox="0 0 440 440" role="img" aria-label="A spinning flywheel of the coaching loop: Coach, Next call, Did it stick, Adjust, powered by Claude Fable 5 at the hub.">
         <defs>
           <radialGradient id="s8-hubGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#D97757" stop-opacity=".55"/>
@@ -1317,7 +1317,7 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
                 letter-spacing="1.6" fill="#D97757" opacity=".92">CLAUDE</text>
           <text x="220" y="257" text-anchor="middle"
                 font-family="JetBrains Mono, monospace" font-size="7.4"
-                letter-spacing="2.2" fill="rgba(217,119,87,.62)">POWERED BY</text>
+                letter-spacing="2.2" fill="rgba(217,119,87,.62)">FABLE 5</text>
         </g>
       </svg>
       <div class="s8-status" id="s8-statusTxt">spinning up...</div>
@@ -1478,6 +1478,35 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
+  <!-- 12b the engine: Claude Fable 5 -->
+  <style>
+  .fable-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+  .fable-cards .art{height:70px;margin-bottom:.35rem}
+  .fable-cards .ocard h3{color:var(--green)}
+  .fable-strip{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+  .fable-strip span{font-family:var(--mono);font-size:clamp(12px,1.3vw,14px);font-weight:500;color:var(--ink-soft);background:var(--green-wash);border:1.5px solid var(--line);border-radius:999px;padding:.42rem .95rem}
+  .fable-strip b{font-family:var(--display);font-weight:800;color:var(--green)}
+  @media (max-width:680px){.fable-cards{grid-template-columns:1fr}}
+  </style>
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Under the hood</div>
+      <h1><span class="ln">None of that magic without</span><br><span class="ln"><span class="hl">Claude Fable 5.</span></span></h1>
+      <p class="sub" style="max-width:60ch">Anthropic's most capable model, built for long work that finishes on its own and remembers what happened. That is the whole trick behind a loop with no files and no pasting.</p>
+      <div class="fable-cards">
+        <div class="ocard"><div class="art"><span class="move-emoji">🛰️</span></div><h3>Runs the whole loop</h3><p>Long-horizon agentic work. It takes the call, drafts the follow-up, writes the CRM, and checks the coaching end to end, with no human nudging each step.</p></div>
+        <div class="ocard"><div class="art"><span class="move-emoji">🧠</span></div><h3>Holds every call</h3><p>A 1M-token context window. A rep's entire history fits at once, so "did it stick?" looks across every call, not just the last transcript you pasted.</p></div>
+        <div class="ocard"><div class="art"><span class="move-emoji">📓</span></div><h3>Keeps its own notes</h3><p>It maintains the running log itself. No more hand-keeping rep-jordan.md by Friday. Nothing resets on Monday.</p></div>
+      </div>
+      <div class="fable-strip" aria-label="Claude Fable 5 at a glance">
+        <span><b>Most capable</b> model Anthropic ships</span>
+        <span><b>1M-token</b> context window</span>
+        <span><b>Extended thinking</b>, always on</span>
+      </div>
+      <div class="scribble" style="margin-top:1.1rem">we don't hype often. this one earns it.</div>
+    </div>
+  </section>
+
   <!-- 15 CTA + 3-week bar -->
   <section class="slide">
     <div class="wrap">
@@ -1612,7 +1641,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The engine: Claude Fable 5","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
 
   function show(n){
