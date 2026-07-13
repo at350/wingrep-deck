@@ -2894,11 +2894,19 @@ objection handling, and next-step.</div>
     var clippy=document.getElementById('clippy'); if(!clippy) return;
     var os=clippy.closest('.slide');
     // show clippy a beat after the SalesOS slide becomes active
-    var seen=false;
+    var seen=false,dismissed=false;
     var obs=new MutationObserver(function(){
-      if(os.classList.contains('active')&&!seen){ seen=true; setTimeout(function(){clippy.classList.add('show');},900); }
+      if(os.classList.contains('active')&&!seen){ seen=true; setTimeout(function(){ if(!dismissed) clippy.classList.add('show'); },900); }
     });
     obs.observe(os,{attributes:true,attributeFilter:['class']});
+
+    // Clippy is a greeting, not a fixture: the moment the presenter starts
+    // clicking through the tabs, fade it out so its bubble never covers the
+    // panel content underneath.
+    function dismissClippy(){ dismissed=true; clippy.classList.remove('show'); }
+    document.querySelectorAll('.os .tabs button').forEach(function(b){
+      b.addEventListener('click',dismissClippy);
+    });
 
     var bsod=document.getElementById('bsod');
     var t6=document.querySelector('.os .tabs button[data-tab="t6"]');
