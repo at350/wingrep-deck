@@ -221,8 +221,12 @@
   .checks li:nth-child(2) .ck{animation-delay:.5s} .checks li:nth-child(3) .ck{animation-delay:1s} .checks li:nth-child(4) .ck{animation-delay:1.5s}
 
   /* slide 3 presenter beat: understated credibility, not a trophy wall */
-  .s3-guide{margin-top:2rem;position:relative;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;padding:14px 17px;border-radius:11px;background:linear-gradient(180deg,#DCD5C4 0%,#D3CBB8 52%,#C4BAA0 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 0 0 1px rgba(120,110,86,.16),inset 0 -8px 12px -7px rgba(120,110,86,.55),0 14px 30px -16px rgba(20,18,13,.45)}
-  .s3-guide::before{content:"";position:absolute;left:19px;right:19px;top:-13px;height:17px;background-repeat:repeat-x;background-size:31px 17px;background-image:radial-gradient(circle at 12.6px 4.8px,rgba(255,255,255,.92) 0 2px,rgba(255,255,255,0) 4.2px),radial-gradient(circle at 15px 7px,#ECE5D4 0 4.4px,#DAD2BE 6.1px,#B4AA90 7.3px,rgba(180,170,144,0) 7.8px),radial-gradient(ellipse 8px 3px at 15px 13.4px,rgba(104,94,72,.46),rgba(104,94,72,0) 72%);pointer-events:none}
+  .s3-guide{margin-top:2rem;position:relative;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;padding:14px 17px;border-radius:11px;background:linear-gradient(180deg,#DED7C6 0%,#D3CBB8 55%,#BEB49B 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 0 0 1px rgba(120,110,86,.18),inset 0 -10px 14px -8px rgba(120,110,86,.55),0 16px 32px -16px rgba(20,18,13,.45)}
+  /* cylindrical LEGO studs: each is an SVG tile (top cap + shaded wall + contact shadow) so they read as raised studs, not flat discs */
+  .s3-guide::before{content:"";position:absolute;left:16px;right:16px;top:-15px;height:24px;pointer-events:none;background-repeat:repeat-x;background-position:left center;background-size:32px 24px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='26' viewBox='0 0 34 26'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23C7BEA7'/><stop offset='1' stop-color='%23958B70'/></linearGradient><radialGradient id='c' cx='38%25' cy='32%25' r='72%25'><stop offset='0' stop-color='%23F1EADA'/><stop offset='48%25' stop-color='%23E0D8C4'/><stop offset='100%25' stop-color='%23BCB299'/></radialGradient></defs><ellipse cx='17' cy='18' rx='9.6' ry='4.4' fill='rgba(88,80,58,0.32)'/><path d='M7.4,11 L7.4,16.5 A9.6,5 0 0 0 26.6,16.5 L26.6,11 Z' fill='url(%23w)'/><ellipse cx='17' cy='11' rx='9.6' ry='8.4' fill='url(%23c)' stroke='%23B2A88D' stroke-width='0.7'/><ellipse cx='13.4' cy='7.8' rx='3.1' ry='2.1' fill='rgba(255,255,255,0.62)'/></svg>")}
+  /* front lip: a thin darkened bottom edge so the brick reads as a solid block with height */
+  .s3-guide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;border-radius:0 0 11px 11px;background:linear-gradient(180deg,rgba(120,110,86,0),rgba(120,110,86,.18));pointer-events:none}
+  .s3-guide>*{position:relative;z-index:1}
   .s3-ava{position:relative;flex:0 0 auto;width:62px;height:62px;border-radius:50%;overflow:hidden;background:var(--green-wash);box-shadow:0 8px 20px -12px rgba(20,18,13,.5),0 0 0 3px var(--card),0 0 0 4px var(--line)}
   .s3-ava img[data-img]{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
   .s3-ava .fallback{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:22px;color:var(--green);letter-spacing:.02em}
@@ -242,8 +246,8 @@
   .s3c .sub{margin-top:.9rem;font-size:clamp(15px,1.6vw,18px);line-height:1.4}
   .s3c .s3-guide{margin-top:1.2rem;padding:11px 15px}
   /* slide 3: the headshot bounces like a DVD logo while the slide is up (motion only) */
-  .s3-dvd{position:absolute;top:0;left:0;width:168px;height:168px;z-index:6;display:none;pointer-events:none;will-change:transform}
-  .s3-dvd-in{width:168px;height:168px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 5px var(--dvdc,#D97757),0 20px 44px -14px rgba(20,18,13,.5);transition:box-shadow .18s}
+  .s3-dvd{position:absolute;top:0;left:0;width:252px;height:252px;z-index:6;display:none;pointer-events:none;will-change:transform}
+  .s3-dvd-in{width:252px;height:252px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 7px var(--dvdc,#D97757),0 30px 60px -20px rgba(20,18,13,.5);transition:box-shadow .18s}
   .s3-dvd-in img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
   .s3-dvd-in.pop{animation:s3dvdpop .45s cubic-bezier(.2,.8,.3,1)}
   @keyframes s3dvdpop{0%{transform:scale(1)}35%{transform:scale(1.24)}100%{transform:scale(1)}}
@@ -1340,7 +1344,7 @@ objection handling, and next-step.</div>
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=8;
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=10;
   function measure(){var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;}
   function loop(ts){
     if(!running)return;
@@ -1349,17 +1353,19 @@ objection handling, and next-step.</div>
     x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
     // bounce a small margin (M) early so the ring/glow around the ball kisses the
     // edge instead of poking off-screen (SZ is the box; the visible ring sits outside it)
-    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;}else if(x>=W-SZ-M){x=W-SZ-M;dx=-Math.abs(dx);hit=true;edges++;}
-    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;}else if(y>=H-SZ-M){y=H-SZ-M;dy=-Math.abs(dy);hit=true;edges++;}
+    var hx='',hy='';
+    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=W-SZ-M){x=W-SZ-M;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
+    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=H-SZ-M){y=H-SZ-M;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
     if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
-      if(edges>=2){inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
+      // on a corner hit, grow the pop away from the touched corner so it never bulges off-screen
+      if(edges>=2){inner.style.transformOrigin=hx+' '+hy;inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
     dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
     raf=requestAnimationFrame(loop);
   }
   function start(){
     if(reduce||running)return;
     measure();if(W<20){setTimeout(start,80);return;}
-    var spd=236,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
+    var spd=472,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
     x=Math.min(x,W-SZ-M);y=Math.min(y,H-SZ-M);
     if(ava)ava.style.display='none';
     dvd.style.display='block';running=true;last=0;raf=requestAnimationFrame(loop);
