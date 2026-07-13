@@ -1041,14 +1041,16 @@
   .s9lit .ailit .term{font-size:clamp(17px,1.9vw,24px)}
   .s9lit .ailit .def{font-size:clamp(13px,1.4vw,15.5px);line-height:1.38}
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
-  /* Fable 5 image slot: hidden until window.ASSETS.slide9_fable exists, so the
-     deck ships clean with no broken box. object-fit:cover keeps any aspect
-     ratio tidy. Drop the base64 under that key to light it up (see README). */
+  /* Fable 5 title card: hidden until window.ASSETS.slide9_fable exists, so the
+     deck ships clean with no broken box. The card is a 16:9 landscape banner
+     (source is 16:9, so object-fit:cover shows all of it, no crop). Drop the
+     base64 under that key to light it up (see README). */
   .s9-fable{display:none;flex:0 0 auto;margin:0}
   .s9lit.has-fable .s9-fable{display:block}
-  .s9-fable img{height:clamp(78px,10.5vh,120px);width:auto;aspect-ratio:1/1;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow);display:block}
-  .s9-fable figcaption{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--rust-deep);text-align:center;margin-top:.4rem}
-  @media (max-width:640px){.s9lit .s9-lead{flex-direction:column;align-items:flex-start}.s9-fable img{height:auto;width:clamp(130px,36vw,180px)}}
+  .s9-fable img{height:clamp(84px,12vh,128px);width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:1.5px solid var(--line);box-shadow:var(--shadow);display:block}
+  /* phones read the slide as a tall scroll; the Fable card is a decorative
+     brand accent, so drop it below 640px to keep the teaching content tight */
+  @media (max-width:640px){.s9lit.has-fable .s9-fable{display:none}}
   </style>
   <section class="slide s9lit">
     <div class="wrap">
@@ -1056,7 +1058,7 @@
       <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
       <div class="s9-lead">
         <p class="sub">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
-        <figure class="s9-fable"><img data-asset="slide9_fable" alt="Claude Fable 5"><figcaption>Claude Fable 5</figcaption></figure>
+        <figure class="s9-fable"><img data-asset="slide9_fable" alt="Claude Fable 5, by Anthropic"></figure>
       </div>
       <ul class="ailit">
         <li>

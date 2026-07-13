@@ -15,7 +15,7 @@
 
 The deck markup, CSS and JS all live in **`wingrep-webinar.html`** (one Google Fonts link, no build step). The images are base64 in **`wingrep-assets.js`** as `window.IMG` / `window.EMBED` / `window.CLIENTS` / `window.ASSETS` — edit copy/layout in the HTML, swap imagery in the JS. Keep the two files together.
 
-Slide 9 ("AI, minus the jargon") has an optional Fable 5 image slot next to the intro line. It stays hidden until the asset exists, so add a base64 entry `"slide9_fable"` to `window.ASSETS` in `wingrep-assets.js` and the badge (plus its two-up layout) lights up automatically. Any aspect ratio is fine; it renders as a rounded square via `object-fit:cover`.
+Slide 9 ("AI, minus the jargon") shows the Fable 5 title card next to the intro line, loaded from the `"slide9_fable"` entry in `window.ASSETS` (`wingrep-assets.js`). It renders as a 16:9 landscape card and is hidden on phones (≤640px) to keep the teaching content tight. The slot self-hides if that key is ever removed (no broken box), so to swap the image just replace that one base64 entry.
 
 Navigation while presenting: **← / → / Space** to move, **F** for fullscreen, **S** for the slide index.
 
