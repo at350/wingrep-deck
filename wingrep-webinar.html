@@ -648,218 +648,37 @@
 
 .slide>.s3-card,.slide>.s8-slide,.slide>.s12-slide{margin-left:auto;margin-right:auto}
 
-/* ===== slide 5 redesign ===== */
+/* ===== slide 4 redesign: the observation room (image-led) ===== */
+  /* A real, branded-treated scene carries the problem: a rep on a call, watched from
+     behind a one-way mirror by the tools, whose faces are their own logos. */
 
-  
-  
-  
-  
+  .oroom-wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(12px,2.4vh,24px)}
+  .oroom-head{display:flex;flex-direction:column;gap:.7rem;padding:0 4px}
+  .oroom-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--rust-deep)}
+  .oroom-eyebrow::before{content:"";width:30px;height:3px;background:var(--rust);border-radius:2px;flex:none}
+  .oroom-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.9vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin:0}
+  .oroom-title em{font-style:normal;color:var(--rust-deep)}
 
-  /* 16:9 slide shell */
-  .s5-slide{
-    /* device palette: the inner app screen stays dark, the card is warm paper */
-    --s5-paper:#F2EEE2; --s5-green:#de9a81; --s5-bright:#a44927; --s5-amber:#F2A33C; --s5-rust:#E07a5f; --s5-hair:rgba(222,154,129,.14);
-    position:relative;
-    width:100%; max-width:1180px; aspect-ratio:16/9;
-    min-height:560px;
-    border-radius:22px; overflow:hidden;
-    background:linear-gradient(180deg,var(--card),var(--paper-2));
-    border:1px solid var(--line);
-    box-shadow:var(--shadow);
-    display:grid;
-    grid-template-columns:1.04fr .96fr;
-    gap:0;
-    color:var(--ink);
-  }
-  /* faint grid texture on bg */
-  .s5-slide::before{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:
-      linear-gradient(rgba(20,18,13,.035) 1px,transparent 1px) 0 0/100% 44px,
-      linear-gradient(90deg,rgba(20,18,13,.035) 1px,transparent 1px) 0 0/44px 100%;
-    mask:radial-gradient(120% 100% at 75% 0%,#000,transparent 78%);
-    opacity:.7;
-  }
+  /* cinematic image band, locked to 16:9 so the logo positions stay put */
+  .oroom-frame{position:relative;margin:0 auto;width:100%;max-width:min(1180px,calc(58vh * 16 / 9));aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#160a05}
+  .oroom-stage{position:absolute;inset:0;transform-origin:center 42%}
+  .slide.active .oroom-stage{animation:oromKen 22s ease-out both}
+  @keyframes oromKen{from{transform:scale(1.004)}to{transform:scale(1.05)}}
+  .oroom-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 46%}
 
-  /* ---------- LEFT : message ---------- */
-  .s5-left{
-    position:relative; z-index:2;
-    padding:clamp(28px,4.2vw,56px);
-    display:flex; flex-direction:column; justify-content:center; gap:22px;
-  }
-  .s5-eyebrow{
-    display:flex; align-items:center; gap:12px;
-    font-family:"JetBrains Mono",monospace;
-    text-transform:uppercase; letter-spacing:.18em; font-size:12px;
-    color:var(--green);
-  }
-  .s5-eyebrow::before{
-    content:""; width:30px; height:3px; background:var(--s5-bright); border-radius:2px;
-    flex:none;
-  }
-  .s5-head{
-    font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
-    font-size:clamp(32px,5.6vw,64px); line-height:1.02; letter-spacing:-.02em;
-    color:var(--ink); margin:2px 0 4px;
-  }
-  .s5-head .s5-wm{ color:var(--green); position:relative; }
-
-  .s5-chips{ display:flex; flex-wrap:wrap; gap:9px; margin:4px 0 2px; }
-  .s5-body{
-    font-family:"Space Grotesk",sans-serif; font-size:clamp(15px,1.35vw,18px);
-    line-height:1.55; color:var(--ink-soft); max-width:34ch;
-  }
-  .s5-body .s5-hot{ color:var(--rust); font-weight:600; }
-
-  /* ---------- RIGHT : the device ---------- */
-  .s5-right{
-    position:relative; z-index:2;
-    display:flex; align-items:center; justify-content:center;
-    padding:clamp(20px,2.6vw,44px) clamp(20px,3vw,48px) clamp(20px,2.6vw,44px) 0;
-  }
-
-  .s5-app{
-    position:relative;
-    width:100%; max-width:460px;
-    background:linear-gradient(180deg,#33170d,#26120b);
-    border:1px solid var(--s5-hair);
-    border-radius:18px;
-    box-shadow:0 30px 70px rgba(0,0,0,.5), inset 0 1px 0 rgba(222,154,129,.07);
-    overflow:hidden;
-    font-family:"JetBrains Mono",monospace;
-  }
-  /* app chrome bar */
-  .s5-bar{
-    display:flex; align-items:center; gap:8px;
-    padding:11px 14px; border-bottom:1px solid var(--s5-hair);
-    background:rgba(0,0,0,.18);
-  }
-  .s5-dot{ width:9px;height:9px;border-radius:50%; background:#5e3d30; }
-  .s5-dot.r{ background:var(--s5-rust); }
-  .s5-bartxt{
-    margin-left:6px; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-    color:rgba(242,238,226,.45);
-  }
-  .s5-live{
-    margin-left:auto; display:flex; align-items:center; gap:6px;
-    font-size:10.5px; letter-spacing:.14em; color:var(--s5-green);
-  }
-  .s5-live i{ width:7px;height:7px;border-radius:50%; background:var(--s5-bright);
-    box-shadow:0 0 0 0 rgba(164,73,39,.6); animation:s5pulse 1.8s infinite; }
-  @keyframes s5pulse{0%{box-shadow:0 0 0 0 rgba(164,73,39,.55)}70%{box-shadow:0 0 0 8px rgba(164,73,39,0)}100%{box-shadow:0 0 0 0 rgba(164,73,39,0)}}
-
-  .s5-screen{ padding:18px 18px 20px; }
-
-  /* metric blocks */
-  .s5-metric{ margin-bottom:6px; }
-  .s5-mlabel{
-    font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
-    color:rgba(242,238,226,.5); margin-bottom:8px; display:flex; align-items:center; gap:8px;
-  }
-  .s5-mlabel .s5-tick{ color:var(--s5-green); }
-
-  /* odometer */
-  .s5-odo{
-    display:flex; align-items:flex-end; gap:3px;
-    font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
-  }
-  .s5-digit{
-    position:relative; width:30px; height:46px; overflow:hidden;
-    background:rgba(0,0,0,.28); border:1px solid var(--s5-hair); border-radius:7px;
-  }
-  .s5-reel{ position:absolute; left:0; right:0; top:0; will-change:transform; }
-  .s5-reel span{
-    display:flex; align-items:center; justify-content:center;
-    height:46px; font-size:30px; color:var(--s5-paper); line-height:1;
-  }
-  .s5-comma{
-    font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:30px;
-    color:rgba(242,238,226,.4); align-self:center; padding-bottom:4px;
-  }
-  .s5-unit{
-    align-self:center; margin-left:8px; font-family:"Space Grotesk";
-    font-size:11px; color:rgba(242,238,226,.45); letter-spacing:.04em; line-height:1.2;
-    max-width:74px;
-  }
-
-  /* receipts: stacked identical waveforms piling up */
-  .s5-stackwrap{ margin:18px 0 16px; }
-  .s5-stack{
-    position:relative; height:118px; overflow:hidden;
-    -webkit-mask:linear-gradient(180deg,transparent,#000 22%,#000 100%);
-            mask:linear-gradient(180deg,transparent,#000 22%,#000 100%);
-  }
-  .s5-receipt{
-    position:absolute; left:0; right:0;
-    display:flex; align-items:center; gap:9px;
-    padding:7px 10px; height:30px;
-    background:rgba(255,255,255,.025);
-    border:1px solid rgba(222,154,129,.12);
-    border-radius:8px;
-    will-change:transform;
-  }
-  .s5-rwave{ flex:1; height:16px; display:block; }
-  .s5-rtime{ font-size:9.5px; color:rgba(242,238,226,.4); flex:none; }
-  .s5-rdup{ font-size:9px; color:var(--s5-amber); opacity:.0; flex:none; letter-spacing:.08em; }
-
-  /* divider */
-  .s5-div{ height:1px; background:var(--s5-hair); margin:6px 0 16px; position:relative; }
-  .s5-div span{
-    position:absolute; left:50%; top:-7px; transform:translateX(-50%);
-    background:#26120b; padding:0 10px; font-size:9px; letter-spacing:.22em;
-    color:rgba(242,238,226,.32); text-transform:uppercase;
-  }
-
-  /* the frozen outcome */
-  .s5-out{
-    position:relative;
-    display:flex; align-items:center; gap:16px;
-    padding:16px 16px 16px 18px;
-    background:rgba(200,64,38,.06);
-    border:1px solid rgba(200,64,38,.3);
-    border-radius:12px;
-  }
-  .s5-out::after{
-    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
-    background:var(--s5-rust); border-radius:3px 0 0 3px;
-  }
-  .s5-zero{
-    font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
-    font-size:54px; line-height:.9; color:var(--s5-rust); letter-spacing:-.02em;
-    position:relative;
-  }
-  .s5-outmeta{ display:flex; flex-direction:column; gap:5px; }
-  .s5-outlbl{
-    font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
-    color:rgba(242,238,226,.72); line-height:1.4;
-  }
-  .s5-seal{
-    align-self:flex-start; margin-top:1px;
-    font-size:9px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--s5-rust); border:1px solid rgba(200,64,38,.55);
-    border-radius:5px; padding:3px 8px;
-    transform:rotate(-4deg); display:inline-block;
-  }
-
-  /* footer ticker */
-  .s5-foot{
-    margin-top:14px; font-size:10px; letter-spacing:.05em;
-    color:rgba(242,238,226,.38); display:flex; gap:6px; align-items:center;
-  }
-  .s5-foot b{ color:var(--s5-green); font-weight:600; }
+  /* each shadow-watcher's face is the tool's logo, glowing like a lit screen */
+  .oroom-mark{position:absolute;transform:translate(-50%,-50%);width:clamp(26px,3.1vw,44px);aspect-ratio:1;border-radius:26%;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.6),0 0 15px 3px rgba(224,160,90,.3),0 0 4px rgba(0,0,0,.5)}
+  .oroom-mark img{width:100%;height:100%;object-fit:cover;display:block}
 
   @media (max-width:880px){
-    .s5-slide{ grid-template-columns:minmax(0,1fr); aspect-ratio:auto; min-height:0; }
-    .s5-right{ padding:0 clamp(20px,5vw,40px) 40px; }
-    .s5-app{ max-width:min(460px,100%); }
-    .s5-slide::before{ mask:radial-gradient(140% 120% at 50% 0%,#000,transparent 80%); }
+    .oroom-frame{max-width:100%}
+    .oroom-title{font-size:clamp(26px,7vw,40px)}
   }
-
   @media (prefers-reduced-motion:reduce){
-    .s5-live i{ animation:none; }
+    .slide.active .oroom-stage{animation:none}
   }
 
-.slide>.s5-slide{margin-left:auto;margin-right:auto}
+  .slide>.oroom-wrap{margin-left:auto;margin-right:auto}
   /* ============================== WAVE 1 ============================== */
   /* treated real imagery: fade in once src is set by the IMG loader */
   img[data-img]{opacity:0;transition:opacity .5s ease} img[data-img].imgon{opacity:1}
@@ -925,12 +744,7 @@
   .s4-react span{font-size:12px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.12rem .55rem}
   @media (max-width:760px){.s4-grid{grid-template-columns:1fr}}
 
-  /* slide 5: waiting-skeleton sticker on the dead dashboard */
-  .s5-right{position:relative}
-  .s5-sticker{position:absolute;right:18px;bottom:104px;width:clamp(110px,11.5vw,128px);background:#fff;padding:6px 6px 0;border-radius:7px;box-shadow:0 20px 44px -16px rgba(0,0,0,.7);transform:rotate(6deg);z-index:6;border:1px solid rgba(255,255,255,.7)}
-  .s5-sticker img{width:100%;display:block;border-radius:3px}
-  .s5-sticker figcaption{font-family:var(--hand);color:var(--ink);font-weight:700;font-size:13.5px;text-align:center;line-height:1.05;padding:5px 2px 8px}
-  @media (max-width:880px){.s5-sticker{position:static;transform:rotate(2deg);width:160px;margin:14px auto 0}}
+  /* (the observation-room slide 4 is image-led; no sticker) */
 
   /* slide 6: meme chat cards that swap on the slider */
   .tl-stage{display:grid;grid-template-columns:clamp(240px,30%,310px) 1fr;gap:clamp(18px,3vw,36px);min-height:300px;align-items:stretch}
@@ -1120,77 +934,24 @@
     </div>
   </section>
 
-  <!-- 5 dark + blind spot / listening scanner -->
+  <!-- 4 the observation room: tools watch behind glass, their faces are their logos -->
   <section class="slide">
-<div class="s5-slide" id="s5-slide">
-  <!-- LEFT -->
-  <div class="s5-left">
-    <div class="s5-eyebrow">The thing nobody fixes</div>
-    <h1 class="s5-head">
-      Your tools <span class="s5-wm">watch</span> the call.<br>
-      None change the next one.
-    </h1>
-
-    <div class="s5-chips">
-      <span class="lchip" data-domain="gong.io"><img class="brand" alt="Gong"><b>Gong</b></span>
-      <span class="lchip" data-domain="otter.ai"><img class="brand" alt="Otter"><b>Otter</b></span>
-      <span class="lchip" data-domain="fireflies.ai"><img class="brand" alt="Fireflies"><b>Fireflies</b></span>
-      <span class="lchip" data-domain="fathom.video"><img class="brand" alt="Fathom"><b>Fathom</b></span>
-      <span class="lchip" data-domain="sybill.ai"><img class="brand" alt="Sybill"><b>Sybill</b></span>
+    <div class="oroom-wrap">
+      <header class="oroom-head">
+        <div class="oroom-eyebrow">The thing nobody fixes</div>
+        <h1 class="oroom-title">They see everything. <em>They change nothing.</em></h1>
+      </header>
+      <figure class="oroom-frame">
+        <div class="oroom-stage">
+          <img data-img="slide4_mirror.clay" alt="A sales rep on a call, watched from behind a one-way mirror by four faceless observers whose faces are the logos of the revenue tools Gong, Otter, Fireflies and Fathom.">
+          <span class="oroom-mark" data-domain="gong.io" style="left:44%;top:27.5%"><img alt="Gong"></span>
+          <span class="oroom-mark" data-domain="otter.ai" style="left:57.3%;top:27.5%"><img alt="Otter"></span>
+          <span class="oroom-mark" data-domain="fireflies.ai" style="left:71.6%;top:27.5%"><img alt="Fireflies"></span>
+          <span class="oroom-mark" data-domain="fathom.video" style="left:85.2%;top:27.5%"><img alt="Fathom"></span>
+        </div>
+      </figure>
     </div>
-
-    <p class="s5-body">
-      They record. They summarize. Then the rep still writes the
-      <span class="s5-hot">follow-up at 7pm</span>, the CRM goes stale,
-      and last week's coaching evaporates.
-    </p>
-  </div>
-
-  <!-- RIGHT : the device -->
-  <div class="s5-right">
-    <div class="s5-app" id="s5-app">
-      <div class="s5-bar">
-        <span class="s5-dot r"></span><span class="s5-dot"></span><span class="s5-dot"></span>
-        <span class="s5-bartxt">revenue&nbsp;intelligence</span>
-        <span class="s5-live"><i></i>LIVE</span>
-      </div>
-
-      <div class="s5-screen">
-        <!-- climbing metric -->
-        <div class="s5-metric">
-          <div class="s5-mlabel"><span class="s5-tick">&#9650;</span> Calls analyzed</div>
-          <div class="s5-odo" id="s5-odo" aria-label="Calls analyzed counter"></div>
-        </div>
-
-        <!-- piling receipts -->
-        <div class="s5-stackwrap">
-          <div class="s5-stack" id="s5-stack" aria-hidden="true"></div>
-        </div>
-
-        <div class="s5-div"><span>outcome</span></div>
-
-        <!-- frozen -->
-        <div class="s5-out">
-          <div class="s5-zero" id="s5-zero">00</div>
-          <div class="s5-outmeta">
-            <span class="s5-outlbl">Calls that changed<br>the next one</span>
-            <span class="s5-seal">unchanged since day one</span>
-          </div>
-        </div>
-
-        <div class="s5-foot">
-          <span>watching:</span><b id="s5-elapsed">00:00:00</b>
-          <span>&nbsp;&middot;&nbsp; delta to pipeline: 0%</span>
-        </div>
-      </div>
-    </div>
-    <figure class="s5-sticker">
-      <img data-img="slide5_waiting.green" alt="Skeleton still waiting on a park bench">
-      <figcaption>still waiting for it<br>to change the next call</figcaption>
-    </figure>
-  </div>
-</div>
-</section>
+  </section>
 
   <!-- 6 testimonial slider + face -->
   <section class="slide">
@@ -1658,6 +1419,12 @@ objection handling, and next-step.</div>
     img.onload=function(){c.classList.add('hasimg');}; img.src=EMBED[d];
   });
 
+  // slide 4: the shadow-watchers' faces are the incumbent logos
+  document.querySelectorAll('.oroom-mark[data-domain]').forEach(function(m){
+    var d=m.dataset.domain, img=m.querySelector('img'); if(!d||!img||!EMBED[d])return;
+    img.src=EMBED[d];
+  });
+
   // customer wordmark nameplates (pulled from wingrep.ai), CLIENTS map populated inline below
   var CLIENTS=window.CLIENTS;
   document.querySelectorAll('img[data-client]').forEach(function(im){ var k=im.dataset.client; if(CLIENTS[k]) im.src=CLIENTS[k]; });
@@ -1669,7 +1436,7 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","The blind spot","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","One-way mirror","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
 
   function show(n){
@@ -2584,216 +2351,6 @@ objection handling, and next-step.</div>
   setLid(OPEN);
   startGaze();
   setTimeout(function(){ quickBlink(function(){ setTimeout(watchToWork, 1300); }); }, 1600);
-})();
-
-</script>
-<script>
-/* slide 5 */
-
-(function(){
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- ODOMETER ---------- */
-  var DIGIT_H = 46;
-  var odo = document.getElementById('s5-odo');
-  var startCount = 12847;
-  var layout = [3,',',3];           // 12, 847  -> we render as groups
-  // Build a 7-slot odometer: 1 2, 8 4 7  (5 digits)
-  var digitCount = 5;
-  var reels = [];
-
-  function buildOdo(){
-    odo.innerHTML = '';
-    // we want pattern: D D, D D D  (positions 0,1 then comma then 2,3,4)
-    var order = [0,1,'c',2,3,4];
-    for(var i=0;i<order.length;i++){
-      if(order[i]==='c'){
-        var c = document.createElement('span'); c.className='s5-comma'; c.textContent=','; odo.appendChild(c);
-        continue;
-      }
-      var d = document.createElement('div'); d.className='s5-digit';
-      var reel = document.createElement('div'); reel.className='s5-reel';
-      // two full 0-9 cycles + leading 0 for smooth wraparound
-      var html='';
-      for(var k=0;k<=20;k++){ html += '<span>'+(k%10)+'</span>'; }
-      reel.innerHTML = html;
-      d.appendChild(reel); odo.appendChild(d);
-      reels.push(reel);
-    }
-    var u = document.createElement('div'); u.className='s5-unit'; u.textContent='and rising'; odo.appendChild(u);
-  }
-
-  var prevDigits = null;
-  function setOdo(value){
-    var s = String(value).padStart(digitCount,'0').slice(-digitCount);
-    var digits = s.split('').map(Number);
-    for(var i=0;i<digitCount;i++){
-      var reel = reels[i];
-      // map digit d to offset; use second cycle (10..19) so we can roll smoothly
-      var d = digits[i];
-      var slot = 10 + d; // sits mid-strip
-      reel.style.transition = reduce ? 'none' : 'transform .42s cubic-bezier(.22,.9,.32,1)';
-      reel.style.transform = 'translateY(' + (-(slot)*DIGIT_H) + 'px)';
-    }
-    prevDigits = digits;
-  }
-
-  /* ---------- RECEIPT STACK ---------- */
-  var stack = document.getElementById('s5-stack');
-  var RH = 36;          // row pitch
-  var ROWS = 5;         // visible-ish rows
-  var receiptEls = [];
-  var seq = 0;
-
-  // one canonical waveform path, IDENTICAL every time (that's the point)
-  var WAVE = (function(){
-    var pts=[]; var w=100;
-    var sample=[3,7,4,9,5,8,3,10,6,4,7,5,9,4,6,8,3,7,5,9,4,2,6,4];
-    var step = w/(sample.length-1);
-    for(var i=0;i<sample.length;i++){ pts.push((i*step).toFixed(1)+','+(8-(sample[i]-5)).toFixed(1)); }
-    return pts;
-  })();
-  function waveSVG(){
-    return '<svg class="s5-rwave" viewBox="0 0 100 16" preserveAspectRatio="none">'+
-      '<polyline points="'+WAVE.join(' ')+'" fill="none" stroke="rgba(222,154,129,.55)" stroke-width="1" stroke-linejoin="round"/>'+
-      '</svg>';
-  }
-
-  function pad(n){ return n<10?'0'+n:''+n; }
-  function clockStr(total){
-    var s=total%60, m=Math.floor(total/60)%60, h=Math.floor(total/3600);
-    return pad(h)+':'+pad(m)+':'+pad(s);
-  }
-
-  function makeReceipt(idx){
-    var el = document.createElement('div');
-    el.className='s5-receipt';
-    var t = 7*3600 + (idx*137)%3600; // all in the 7pm hour, ish
-    el.innerHTML = waveSVG() +
-      '<span class="s5-rdup">DUP</span>' +
-      '<span class="s5-rtime">19:'+pad((idx*7)%60)+'</span>';
-    return el;
-  }
-
-  function initStack(){
-    stack.innerHTML='';
-    receiptEls=[];
-    for(var i=0;i<ROWS+1;i++){
-      var r = makeReceipt(i);
-      r.style.transform = 'translateY(' + ((ROWS-i)*RH) + 'px)';
-      r.style.opacity = (i===0?0.18:1);
-      stack.appendChild(r);
-      receiptEls.push(r);
-    }
-    seq = ROWS;
-  }
-
-  // push a new receipt at the top; everything slides down one notch; bottom recycles
-  function pushReceipt(){
-    seq++;
-    // array[0] is top-most newest. recycle the bottom row to become the new top.
-    var recycled = receiptEls.pop();
-    receiptEls.unshift(recycled);
-    // refresh its label so the "new" call looks new (but waveform identical)
-    recycled.querySelector('.s5-rtime').textContent = '19:'+pad((seq*7)%60);
-    // flash DUP on it briefly. the joke: it's the same wave again
-    var dup = recycled.querySelector('.s5-rdup');
-    if(!reduce){
-      recycled.style.transition='none';
-      recycled.style.transform='translateY(-'+RH+'px)';
-      recycled.style.opacity='0';
-      dup.style.transition='none'; dup.style.opacity='0';
-      // force reflow so the no-transition reset is committed before we animate
-      void recycled.offsetWidth;
-    }
-    // place each row
-    requestAnimationFrame(function(){
-      for(var i=0;i<receiptEls.length;i++){
-        var el = receiptEls[i];
-        var y = i*RH;
-        var fade = (i>=ROWS) ? 0.18 : 1;
-        if(!reduce) el.style.transition='transform .55s cubic-bezier(.22,.9,.32,1), opacity .55s';
-        el.style.transform='translateY('+y+'px)';
-        el.style.opacity=fade;
-      }
-      if(!reduce){
-        dup.style.transition='opacity .25s'; dup.style.opacity='.85';
-        setTimeout(function(){ dup.style.opacity='0'; }, 900);
-      }
-    });
-  }
-
-  /* ---------- ZERO : frozen, with a futile twitch ---------- */
-  var zero = document.getElementById('s5-zero');
-  function twitchZero(){
-    if(reduce) return;
-    // it tries to tick... and snaps back to 00
-    zero.style.transition='none';
-    zero.style.transform='translateY(-3px)';
-    zero.style.opacity='.7';
-    setTimeout(function(){
-      zero.style.transition='transform .5s cubic-bezier(.22,1,.36,1), opacity .5s';
-      zero.style.transform='translateY(0)';
-      zero.style.opacity='1';
-    },70);
-  }
-
-  /* ---------- elapsed clock ---------- */
-  var elapsedEl = document.getElementById('s5-elapsed');
-  var baseElapsed = 5*3600 + 12*60 + 9; // already been watching 5h+
-  var t0 = null;
-
-  /* ---------- run loop ---------- */
-  var count = startCount;
-  var lastPush = 0;
-  var lastCount = 0;
-  var lastTwitch = 0;
-  var started=false;
-
-  function frame(ts){
-    if(t0===null) t0=ts;
-    var sec = (ts - t0)/1000;
-    // elapsed clock
-    elapsedEl.textContent = clockStr(baseElapsed + Math.floor(sec));
-
-    if(reduce){ return; } // static after first paint
-    // bump counter ~ every 520ms, accelerating slightly
-    if(ts - lastCount > 520){
-      lastCount = ts;
-      count += 1 + Math.floor(Math.random()*2);
-      setOdo(count);
-    }
-    // push a receipt every ~1.6s
-    if(ts - lastPush > 1600){
-      lastPush = ts;
-      pushReceipt();
-    }
-    // zero twitches every ~3.4s then gives up
-    if(ts - lastTwitch > 3400){
-      lastTwitch = ts;
-      twitchZero();
-    }
-    requestAnimationFrame(frame);
-  }
-
-  // public init (mirrors deck's s5Init)
-  window.s5Init = function(){
-    if(started) return; started=true;
-    buildOdo();
-    setOdo(startCount);
-    initStack();
-    elapsedEl.textContent = clockStr(baseElapsed);
-    if(reduce){
-      // static, honest snapshot
-      requestAnimationFrame(frame);
-      return;
-    }
-    requestAnimationFrame(frame);
-  };
-
-  // auto-run on load for the standalone demo
-  if(document.readyState!=='loading') window.s5Init();
-  else document.addEventListener('DOMContentLoaded', window.s5Init);
 })();
 
 </script>
