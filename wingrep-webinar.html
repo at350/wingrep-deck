@@ -458,114 +458,38 @@
   }
 
 
-/* ===== slide 8 redesign ===== */
-
-  
-  
-  
-  
-  .s8-slide{
-    /* card is warm paper; the flywheel keeps its dark stage (see .s8-stage) */
-    --s8-paper:#14120D; --s8-accent:#6e311a; --s8-bright:#a44927; --s8-hair:var(--line);
-    position:relative;
-    width:100%;
-    max-width:1180px;
-    aspect-ratio:16/9;
+/* ===== slide 7: the coaching loop (film-room hero) ===== */
+  .s7-slide{
+    position:relative;width:100%;max-width:1180px;aspect-ratio:16/9;
     background:linear-gradient(180deg,var(--card),var(--paper-2));
-    border:1px solid var(--line);
-    border-radius:18px;
-    overflow:hidden;
-    display:grid;
-    grid-template-columns:1.02fr 1fr;
-    align-items:center;
-    gap:24px;
-    padding:clamp(28px,4.2vw,64px);
-    box-shadow:var(--shadow);
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    display:grid;grid-template-columns:1fr .8fr;align-items:center;
+    gap:clamp(24px,4vw,56px);
+    padding:clamp(28px,4.4vw,60px);box-shadow:var(--shadow);
   }
-  .s8-slide::after{
-    content:"";
-    position:absolute;inset:0;
-    background:
-      radial-gradient(60% 60% at 78% 64%, rgba(110,49,26,.05), transparent 70%);
-    pointer-events:none;
-  }
+  .s7-copy{position:relative;z-index:2;max-width:560px;}
+  .s7-eyebrow{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;color:var(--green);font-family:var(--mono);margin-bottom:22px;}
+  .s7-eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright);flex:none;border-radius:2px;}
+  .s7-headline{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.2vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin-bottom:22px;}
+  .s7-headline .s7-loopword{color:var(--green);}
+  .s7-body{font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:var(--ink-soft);max-width:460px;}
+  .s7-body b{color:var(--ink);font-weight:600;}
 
-  /* ---------- LEFT: copy ---------- */
-  .s8-copy{position:relative;z-index:2;max-width:540px;}
-  .s8-eyebrow{
-    display:flex;align-items:center;gap:14px;
-    text-transform:uppercase;
-    letter-spacing:.18em;
-    font-size:12px;
-    font-weight:600;
-    color:var(--s8-accent);
-    font-family:"JetBrains Mono",monospace;
-    margin-bottom:22px;
-  }
-  .s8-eyebrow::before{
-    content:"";
-    width:30px;height:3px;
-    background:var(--s8-bright);
-    flex:none;
-    border-radius:2px;
-  }
-  .s8-headline{
-    font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;
-    font-size:clamp(32px,5.6vw,64px);
-    line-height:1.02;
-    letter-spacing:-.02em;
-    color:var(--s8-paper);
-    margin-bottom:24px;
-  }
-  .s8-headline .s8-loopword{color:var(--s8-accent);}
-  .s8-body{
-    font-size:clamp(15px,1.45vw,18px);
-    line-height:1.55;
-    color:var(--ink-soft);
-    max-width:440px;
-    font-weight:400;
-  }
-  .s8-body b{color:var(--s8-paper);font-weight:600;}
-
-  /* ---------- RIGHT: flywheel ---------- */
-  .s8-stage{
-    position:relative;z-index:2;
-    width:100%;
-    aspect-ratio:1/1;
-    max-height:100%;
-    justify-self:center;
-  }
-  /* dark disc so the flywheel (tuned for a dark backdrop) reads as a framed
-     figure on the light card */
-  .s8-stage::before{
-    content:"";position:absolute;inset:4%;
-    border-radius:50%;
-    background:radial-gradient(circle at 38% 32%,#471f11,#210f09 70%);
-    box-shadow:inset 0 1px 0 rgba(222,154,129,.08), 0 24px 60px -28px rgba(0,0,0,.6);
-  }
-  .s8-stage svg{position:relative;width:100%;height:100%;display:block;overflow:visible;}
-
-  .s8-status{
-    position:absolute;
-    left:50%;bottom:-6px;
-    transform:translateX(-50%);
-    font-family:"JetBrains Mono",monospace;
-    font-size:11px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    white-space:nowrap;
-  }
+  .s7-stage{position:relative;z-index:2;justify-self:center;width:100%;max-width:400px;}
+  .s7-frame{position:relative;margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;border:1px solid rgba(177,74,44,.28);box-shadow:0 30px 70px -30px rgba(20,18,13,.55);}
+  .s7-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;}
+  .s7-tape{position:absolute;inset:0;z-index:2;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;pointer-events:none;}
+  @keyframes s7pan{from{transform:scale(1.04)}to{transform:scale(1.13) translate(-1.5%,-2%)}}
+  .s7-markup{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 3px rgba(20,10,6,.5));}
+  .s7-note{position:absolute;top:5%;right:6%;font-family:var(--hand);font-weight:700;color:#F7E9DF;font-size:clamp(17px,2vw,25px);line-height:.98;text-align:right;transform:rotate(-5deg);filter:drop-shadow(0 1px 4px rgba(20,10,6,.6));}
 
   @media (max-width:720px){
-    .s8-slide{grid-template-columns:1fr;aspect-ratio:auto;gap:8px;}
-    .s8-stage{max-width:420px;margin:0 auto;}
+    .s7-slide{grid-template-columns:1fr;aspect-ratio:auto;gap:14px;}
+    .s7-stage{max-width:300px;margin:0 auto;}
   }
   @media (prefers-reduced-motion:reduce){
-    .s8-status{display:none;}
+    .s7-photo,.s7-tape{animation:none;transform:scale(1.04);}
   }
-
 
 /* ===== slide 12 redesign ===== */
 
@@ -675,7 +599,7 @@
   }
 
 
-.slide>.s3-card,.slide>.s8-slide,.slide>.s12-slide{margin-left:auto;margin-right:auto}
+.slide>.s3-card,.slide>.s7-slide,.slide>.s12-slide{margin-left:auto;margin-right:auto}
 
 /* ===== slide 4 redesign: the observation room (image-led) ===== */
   /* A real, branded-treated scene carries the problem: a rep on a call, watched from
@@ -1050,98 +974,29 @@
     </div>
   </section>
 
-  <!-- 8 pivot dark + loop -->
+  <!-- 7 the coaching loop: film-room hero -->
   <section class="slide">
-<div class="s8-slide" aria-label="So we tried something. Could Claude run the whole coaching loop?">
-    <div class="s8-copy">
-      <div class="s8-eyebrow">The framework</div>
-      <h1 class="s8-headline">
-        The coaching loop:<br>
-        <span class="s8-loopword">coach, check, adjust.</span>
-      </h1>
-      <p class="s8-body">
-Most coaching dies because nobody checks the <b>next</b> call. The whole method is four turns: coach one thing, watch the next call, ask <b>did it stick?</b>, then adjust. Works on a whiteboard. Works better when AI runs it for you. Steal the loop either way.
-      </p>
+    <div class="s7-slide">
+      <div class="s7-copy">
+        <div class="s7-eyebrow">The framework</div>
+        <h1 class="s7-headline">The coaching loop:<br><span class="s7-loopword">coach, check, adjust.</span></h1>
+        <p class="s7-body">Most coaching dies because nobody checks the <b>next</b> call. The whole method is four turns: coach one thing, watch the next call, ask <b>did it stick?</b>, then adjust. It only compounds if you close the loop.</p>
+      </div>
+      <div class="s7-stage">
+        <figure class="s7-frame">
+          <img class="s7-photo" data-img="slide7_filmroom.clay" alt="A sales manager and rep reviewing a recorded call together, one pointing at the screen, the other taking notes">
+          <div class="s7-tape">
+            <svg class="s7-markup" viewBox="0 0 400 500" fill="none" aria-hidden="true" preserveAspectRatio="none">
+              <path class="s7-ring" d="M212 140 C250 137 296 156 296 200 C297 242 260 268 210 269 C158 270 130 245 131 199 C132 155 172 137 230 139" stroke="#F7E9DF" stroke-width="5" stroke-linecap="round"/>
+              <path class="s7-arr" d="M336 92 C324 116 314 140 302 166" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round"/>
+              <path class="s7-arrhead" d="M293 152 L303 168 L286 171" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="s7-note">there<br>it is</span>
+          </div>
+        </figure>
+      </div>
     </div>
-
-    <div class="s8-stage" id="s8-stage">
-      <svg id="s8-svg" viewBox="0 0 440 440" role="img" aria-label="A spinning flywheel of the coaching loop: Coach, Next call, Did it stick, Adjust, powered by Claude at the hub.">
-        <defs>
-          <radialGradient id="s8-hubGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#D97757" stop-opacity=".55"/>
-            <stop offset="45%" stop-color="#D97757" stop-opacity=".14"/>
-            <stop offset="100%" stop-color="#D97757" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="s8-rimSheen" cx="38%" cy="32%" r="72%">
-            <stop offset="0%" stop-color="#a44927" stop-opacity=".55"/>
-            <stop offset="55%" stop-color="#471f11" stop-opacity=".0"/>
-          </radialGradient>
-          <linearGradient id="s8-pulseGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#de9a81" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#de9a81" stop-opacity="1"/>
-          </linearGradient>
-          <filter id="s8-soft" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="2.4"/>
-          </filter>
-          <symbol id="s8-claudeMark" viewBox="-50 -50 100 100">
-            <!-- radial sunburst spark -->
-            <g id="s8-spokes"></g>
-          </symbol>
-        </defs>
-
-        <!-- soft hub glow -->
-        <circle cx="220" cy="220" r="120" fill="url(#s8-hubGlow)"/>
-
-        <!-- rotating wheel group -->
-        <g id="s8-wheel">
-          <!-- outer rim -->
-          <circle cx="220" cy="220" r="150" fill="none" stroke="#391a0f" stroke-width="22"/>
-          <circle cx="220" cy="220" r="150" fill="none" stroke="url(#s8-rimSheen)" stroke-width="22"/>
-          <circle cx="220" cy="220" r="150" fill="none" stroke="#45281d" stroke-width="1"/>
-          <circle cx="220" cy="220" r="161" fill="none" stroke="#2b140b" stroke-width="1.2"/>
-          <circle cx="220" cy="220" r="139" fill="none" stroke="#2b140b" stroke-width="1.2"/>
-
-          <!-- progress arc that grows + tightens each lap -->
-          <circle id="s8-progress" cx="220" cy="220" r="150" fill="none"
-                  stroke="#de9a81" stroke-width="3.4" stroke-linecap="round"
-                  stroke-dasharray="0 942.5" transform="rotate(-90 220 220)" opacity=".9"/>
-
-          <!-- spokes -->
-          <g id="s8-spokeGroup" stroke="#432317" stroke-width="6" stroke-linecap="round"></g>
-          <!-- inner spoke highlight -->
-          <g id="s8-spokeHi" stroke="#593020" stroke-width="2" stroke-linecap="round"></g>
-
-          <!-- station markers ride the rim; filled at runtime -->
-          <g id="s8-stations"></g>
-        </g>
-
-        <!-- energy pulse comet (counter-rotated separately) -->
-        <g id="s8-pulseGroup">
-          <circle id="s8-pulse" r="6.5" fill="#f0cec1"/>
-          <circle id="s8-pulseHalo" r="13" fill="#de9a81" opacity=".28" filter="url(#s8-soft)"/>
-        </g>
-
-        <!-- fixed station labels (do not rotate) -->
-        <g id="s8-labels"></g>
-
-        <!-- HUB: Claude spark -->
-        <g id="s8-hub">
-          <circle cx="220" cy="220" r="58" fill="#2b140b" stroke="#45281d" stroke-width="1.4"/>
-          <circle cx="220" cy="220" r="58" fill="none" stroke="#D97757" stroke-width="1" opacity=".4"/>
-          <circle id="s8-hubPulse" cx="220" cy="220" r="58" fill="none" stroke="#D97757" stroke-width="1.4" opacity="0"/>
-          <g id="s8-hubMark" transform="translate(220 206)"></g>
-          <text x="220" y="244" text-anchor="middle"
-                font-family="JetBrains Mono, monospace" font-size="10.5"
-                letter-spacing="1.6" fill="#D97757" opacity=".92">CLAUDE</text>
-          <text x="220" y="257" text-anchor="middle"
-                font-family="JetBrains Mono, monospace" font-size="7.4"
-                letter-spacing="2.2" fill="rgba(217,119,87,.62)">POWERED BY</text>
-        </g>
-      </svg>
-      <div class="s8-status" id="s8-statusTxt">spinning up...</div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- NEW: how to talk to Claude, the 4 moves -->
   <section class="slide">
@@ -1980,332 +1835,8 @@ objection handling, and next-step.</div>
 
 /* slide 8 */
 
-(function(){
-  "use strict";
-
-  var SVGNS = "http://www.w3.org/2000/svg";
-  function el(name, attrs){
-    var n = document.createElementNS(SVGNS, name);
-    if(attrs) for(var k in attrs) n.setAttribute(k, attrs[k]);
-    return n;
-  }
-
-  var CX = 220, CY = 220, RIM = 150;
-  var STATIONS = [
-    {label:"Coach",        sub:"set the move"},
-    {label:"Next call",    sub:"it goes live"},
-    {label:"Did it stick?",sub:"check + verify"},
-    {label:"Adjust",       sub:"carry it forward"}
-  ];
-  var N = STATIONS.length;
-  var CHECK_INDEX = 2; // "Did it stick?"
-
-  // ---- build the Claude sunburst spark (radial spokes) ----
-  function buildSpark(group, n, len, inner, w){
-    for(var i=0;i<n;i++){
-      var a = (i/n)*Math.PI*2 - Math.PI/2;
-      var x1 = Math.cos(a)*inner, y1 = Math.sin(a)*inner;
-      var x2 = Math.cos(a)*len,   y2 = Math.sin(a)*len;
-      group.appendChild(el("line",{
-        x1:x1.toFixed(2), y1:y1.toFixed(2),
-        x2:x2.toFixed(2), y2:y2.toFixed(2),
-        stroke:"#D97757", "stroke-width":w, "stroke-linecap":"round"
-      }));
-    }
-    var core = el("circle",{cx:0,cy:0,r:3.4,fill:"#D97757"});
-    group.appendChild(core);
-  }
-  buildSpark(document.getElementById("s8-hubMark"), 12, 19, 7, 2.6);
-
-  // ---- spokes of the wheel ----
-  var spokeG = document.getElementById("s8-spokeGroup");
-  var spokeHi = document.getElementById("s8-spokeHi");
-  var SPOKES = 8;
-  for(var s=0;s<SPOKES;s++){
-    var sa = (s/SPOKES)*Math.PI*2;
-    var ix = CX + Math.cos(sa)*60, iy = CY + Math.sin(sa)*60;
-    var ox = CX + Math.cos(sa)*139, oy = CY + Math.sin(sa)*139;
-    spokeG.appendChild(el("line",{x1:ix,y1:iy,x2:ox,y2:oy}));
-    spokeHi.appendChild(el("line",{x1:ix,y1:iy,x2:ox,y2:oy}));
-  }
-
-  // ---- station markers (ride the rim, rotate with wheel) ----
-  var stationsG = document.getElementById("s8-stations");
-  var stationNodes = [];
-  function stationAngle(i){ return (i/N)*Math.PI*2 - Math.PI/2; }
-  for(var i=0;i<N;i++){
-    var a = stationAngle(i);
-    var sx = CX + Math.cos(a)*RIM;
-    var sy = CY + Math.sin(a)*RIM;
-    var g = el("g",{});
-    var ring = el("circle",{cx:sx,cy:sy,r:13,fill:"#2b140b",stroke:"#693c2c","stroke-width":1.6});
-    var dot  = el("circle",{cx:sx,cy:sy,r:5.4,fill:"#45281d"});
-    g.appendChild(ring); g.appendChild(dot);
-    // check mark holder for station 2
-    if(i===CHECK_INDEX){
-      var chk = el("path",{
-        d:"M "+(sx-5.4)+" "+(sy+0.4)+" L "+(sx-1.4)+" "+(sy+4.2)+" L "+(sx+5.8)+" "+(sy-4.6),
-        fill:"none", stroke:"#140905", "stroke-width":2.2,
-        "stroke-linecap":"round","stroke-linejoin":"round", opacity:"0"
-      });
-      g.appendChild(chk);
-      g._check = chk;
-    }
-    g._ring = ring; g._dot = dot; g._sx = sx; g._sy = sy;
-    stationsG.appendChild(g);
-    stationNodes.push(g);
-  }
-
-  // ---- fixed labels (outside rim, do NOT rotate) ----
-  var labelsG = document.getElementById("s8-labels");
-  var labelNodes = [];
-  for(var j=0;j<N;j++){
-    var a2 = stationAngle(j);
-    var lr = 150; // base on rim
-    var lx = CX + Math.cos(a2)*(lr+34);
-    var ly = CY + Math.sin(a2)*(lr+34);
-    // anchor + nudge per quadrant for clean placement
-    var anchor = "middle";
-    var dy1 = 0;
-    if(Math.abs(Math.cos(a2)) > 0.5){
-      anchor = Math.cos(a2) > 0 ? "start" : "end";
-    }
-    // vertical offset so top/bottom labels clear the rim
-    if(Math.sin(a2) < -0.5) ly -= 6;
-    if(Math.sin(a2) > 0.5) ly += 14;
-
-    var lg = el("g",{opacity:"0.32"});
-    var t1 = el("text",{
-      x:lx, y:ly, "text-anchor":anchor,
-      "font-family":"JetBrains Mono, monospace",
-      "font-size":"13.5", "font-weight":"600",
-      fill:"#F2EEE2"
-    });
-    t1.textContent = STATIONS[j].label;
-    var t2 = el("text",{
-      x:lx, y:ly+15, "text-anchor":anchor,
-      "font-family":"Space Grotesk, sans-serif",
-      "font-size":"10.5", fill:"rgba(222,154,129,.7)"
-    });
-    t2.textContent = STATIONS[j].sub;
-    lg.appendChild(t1); lg.appendChild(t2);
-    labelsG.appendChild(lg);
-    labelNodes.push(lg);
-  }
-
-  // ---- elements we animate ----
-  var wheel    = document.getElementById("s8-wheel");
-  var progress = document.getElementById("s8-progress");
-  var pulseG   = document.getElementById("s8-pulseGroup");
-  var pulse    = document.getElementById("s8-pulse");
-  var pulseHalo= document.getElementById("s8-pulseHalo");
-  var hubPulse = document.getElementById("s8-hubPulse");
-  var statusTxt= document.getElementById("s8-statusTxt");
-
-  var CIRC = 2 * Math.PI * RIM; // 942.48
-
-  var reduce = window.matchMedia &&
-               window.matchMedia("(prefers-reduced-motion:reduce)").matches;
-
-  // ===== reduced motion: render a finished static state =====
-  if(reduce){
-    wheel.setAttribute("transform","rotate(0 220 220)");
-    progress.setAttribute("stroke-dasharray", CIRC + " " + CIRC);
-    progress.setAttribute("stroke-dashoffset","0");
-    // place pulse at hub-neutral, light all stations
-    pulseG.setAttribute("opacity","0");
-    for(var r=0;r<N;r++){
-      stationNodes[r]._ring.setAttribute("stroke","#de9a81");
-      stationNodes[r]._dot.setAttribute("fill","#de9a81");
-      labelNodes[r].setAttribute("opacity","1");
-    }
-    stationNodes[CHECK_INDEX]._dot.setAttribute("fill","#a44927");
-    stationNodes[CHECK_INDEX]._check.setAttribute("opacity","1");
-    var st = document.getElementById("s8-statusTxt");
-    if(st) st.textContent = "loop complete";
-    return;
-  }
-
-  // ===== animated state =====
-  var t0 = null;
-  var wheelAngle = 0;       // degrees
-  var wheelSpeed = 0;       // deg/sec, eases up
-  var TARGET_SPEED = 22;    // steady spin
-  var lap = 0;
-  var lapProgress = 0;      // 0..1 within current lap for the pulse
-  var PULSE_PERIOD = 3.0;   // seconds for one pulse circuit
-  var litStation = -1;
-  var checkFired = false;
-  var statusStage = 0;
-
-  // progress arc: grows to a target fraction that tightens (increases) each lap
-  function lapTargetFraction(l){
-    // lap 0 -> .55, then climbs toward ~1 and holds
-    var f = 0.55 + l*0.16;
-    return Math.min(f, 1);
-  }
-
-  function setStationLit(idx, on, isCheck){
-    var node = stationNodes[idx];
-    if(on){
-      node._ring.setAttribute("stroke", isCheck ? "#a44927" : "#de9a81");
-      node._ring.setAttribute("stroke-width","2.4");
-      node._dot.setAttribute("fill", isCheck ? "#a44927" : "#f0cec1");
-      node._dot.setAttribute("r","6.4");
-      labelNodes[idx].setAttribute("opacity","1");
-    } else {
-      node._ring.setAttribute("stroke","#693c2c");
-      node._ring.setAttribute("stroke-width","1.6");
-      node._dot.setAttribute("fill","#45281d");
-      node._dot.setAttribute("r","5.4");
-      // keep label slightly visible once visited
-      labelNodes[idx].setAttribute("opacity","0.5");
-    }
-  }
-
-  function fadeStations(){
-    // gentle decay of "lit" glow on non-current stations
-    for(var i=0;i<N;i++){
-      if(i===litStation) continue;
-      var node = stationNodes[i];
-      // pull dot back toward dim
-      node._dot.setAttribute("fill","#784431");
-      node._dot.setAttribute("r","5.4");
-      node._ring.setAttribute("stroke","#5c3324");
-      node._ring.setAttribute("stroke-width","1.6");
-    }
-  }
-
-  function setStatus(txt){
-    if(statusTxt && statusTxt.textContent !== txt) statusTxt.textContent = txt;
-  }
-
-  function frame(ts){
-    if(t0===null) t0 = ts;
-    var now = (ts - t0)/1000;
-    var dt = 0.016;
-    // compute dt from last
-    if(frame._last!=null) dt = Math.min(0.05, (ts - frame._last)/1000);
-    frame._last = ts;
-
-    // ease wheel speed up
-    wheelSpeed += (TARGET_SPEED - wheelSpeed) * Math.min(1, dt*1.6);
-    wheelAngle = (wheelAngle + wheelSpeed*dt) % 360;
-    wheel.setAttribute("transform","rotate("+wheelAngle.toFixed(3)+" 220 220)");
-
-    // ---- pulse circuit ----
-    lapProgress += dt / PULSE_PERIOD;
-    if(lapProgress >= 1){
-      lapProgress -= 1;
-      lap++;
-      checkFired = false;
-      // reset check visual at start of new lap
-      var c = stationNodes[CHECK_INDEX]._check;
-      if(c) c.setAttribute("opacity","0");
-      stationNodes[CHECK_INDEX]._dot.setAttribute("fill","#45281d");
-    }
-
-    // pulse angular position (independent of wheel, travels the loop)
-    var pa = lapProgress*Math.PI*2 - Math.PI/2;
-    var pr = RIM;
-    var px = CX + Math.cos(pa)*pr;
-    var py = CY + Math.sin(pa)*pr;
-    pulse.setAttribute("cx", px.toFixed(2));
-    pulse.setAttribute("cy", py.toFixed(2));
-    pulseHalo.setAttribute("cx", px.toFixed(2));
-    pulseHalo.setAttribute("cy", py.toFixed(2));
-
-    // which station are we closest to / passing?
-    var stationFloat = lapProgress * N; // 0..N
-    var idx = Math.floor(stationFloat + 0.0001) % N;
-    var frac = stationFloat - Math.floor(stationFloat);
-
-    // light station when pulse arrives (frac near 0)
-    if(frac < 0.16){
-      if(litStation !== idx){
-        fadeStations();
-        litStation = idx;
-        var isChk = (idx===CHECK_INDEX);
-        setStationLit(idx, true, isChk);
-        // hub pulse flash on each station hit
-        flashHub();
-        // status text per station
-        if(idx===0) setStatus("coach: set the move");
-        else if(idx===1) setStatus("next call goes live");
-        else if(idx===2) setStatus("checking if it stuck...");
-        else if(idx===3) setStatus("adjust, carry forward");
-      }
-    }
-
-    // fire the green check at "Did it stick?"
-    if(litStation===CHECK_INDEX && !checkFired && frac > 0.04){
-      checkFired = true;
-      var chk = stationNodes[CHECK_INDEX]._check;
-      if(chk){
-        chk.setAttribute("opacity","1");
-        chk._t = now;
-      }
-      stationNodes[CHECK_INDEX]._dot.setAttribute("fill","#a44927");
-      setStatus("yes. it stuck.");
-    }
-
-    // animate the check pop
-    var chk2 = stationNodes[CHECK_INDEX]._check;
-    if(chk2 && chk2.getAttribute("opacity")==="1" && chk2._t!=null){
-      var age = now - chk2._t;
-      var pop = age < 0.18 ? (0.4 + age/0.18*0.6) : 1;
-      // (purely visual reinforce via dot radius)
-      var dr = 6.4 + Math.max(0, (0.18-age))/0.18*2.6;
-      stationNodes[CHECK_INDEX]._dot.setAttribute("r", dr.toFixed(2));
-    }
-
-    // ---- progress arc grows + tightens each lap ----
-    var tgt = lapTargetFraction(lap);
-    // within a lap, fill smoothly from prev target to current target
-    var prevTgt = lapTargetFraction(Math.max(0,lap-1));
-    var fillFrac;
-    if(lap===0){
-      fillFrac = tgt * easeOut(lapProgress);
-    } else {
-      fillFrac = prevTgt + (tgt - prevTgt) * easeOut(lapProgress);
-    }
-    var dashOn = CIRC * fillFrac;
-    progress.setAttribute("stroke-dasharray", dashOn.toFixed(2)+" "+(CIRC - dashOn).toFixed(2));
-    // tighten: arc gets slightly brighter + thicker as momentum builds
-    var thick = 3.0 + Math.min(lap,4)*0.35;
-    progress.setAttribute("stroke-width", thick.toFixed(2));
-
-    // status overall stage
-    if(now < 1.2) setStatus("spinning up...");
-    else if(lap>=4) setStatus("loop self-sustaining");
-
-    requestAnimationFrame(frame);
-  }
-
-  function easeOut(x){ return 1 - Math.pow(1-x, 2.2); }
-
-  var hubFlashT = -10;
-  function flashHub(){
-    hubFlashT = (frame._last||0)/1000;
-  }
-  // hub pulse uses its own simple ring expansion
-  function hubLoop(ts){
-    var tnow = ts/1000;
-    var age = tnow - hubFlashT;
-    if(age >= 0 && age < 0.6){
-      var p = age/0.6;
-      var r = 58 + p*22;
-      hubPulse.setAttribute("r", r.toFixed(1));
-      hubPulse.setAttribute("opacity", (0.6*(1-p)).toFixed(3));
-    } else {
-      hubPulse.setAttribute("opacity","0");
-    }
-    requestAnimationFrame(hubLoop);
-  }
-
-  requestAnimationFrame(frame);
-  requestAnimationFrame(hubLoop);
-})();
+  /* slide 7 is now a static film-room hero image (.s7-slide); the old
+     coaching-loop flywheel animation was removed in favor of real imagery. */
 
 
 /* slide 12 */
