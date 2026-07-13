@@ -936,21 +936,25 @@
 
   /* ============================== WAVE 3 ============================== */
   /* slide 14: Drake meme drives the three options */
-  .s14-grid{display:grid;grid-template-columns:290px 1fr;gap:clamp(24px,4vw,52px);align-items:center;margin-top:1.4rem}
-  .s14-drake{justify-self:center;margin:0;width:230px;max-width:100%}
-  .s14-drake img{width:100%;height:auto;border-radius:14px;box-shadow:var(--shadow);border:1.5px solid var(--line);display:block;background:var(--paper-2)}
-  .s14-opts{display:flex;flex-direction:column;gap:.85rem}
-  .s14-opt{display:flex;gap:.85rem;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.95rem 1.15rem;box-shadow:var(--shadow);transition:transform .2s}
+  /* each row pairs one Drake panel with its box: reject panel (top crop) -> no, approve panel (bottom crop) -> yes.
+     the square panel sets the row height; the box stretches to match so both columns are equal-height (no floating) */
+  .s14-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.6rem;max-width:980px}
+  .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
+  .s14-panel{margin:0;width:138px;aspect-ratio:1;overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:var(--paper-2)}
+  .s14-panel img{width:100%;height:100%;object-fit:cover;display:block}
+  .s14-row.no .s14-panel img{object-position:center top}
+  .s14-row.yes .s14-panel img{object-position:center bottom}
+  .s14-opt{display:flex;gap:.9rem;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.4rem;box-shadow:var(--shadow);transition:transform .2s}
   .s14-opt:hover{transform:translateX(4px)}
   .s14-opt b{font-family:var(--display);font-weight:800}
-  .s14-opt>div{font-size:15px;line-height:1.45;color:var(--ink-soft);font-weight:500}
+  .s14-opt>div{font-size:15.5px;line-height:1.5;color:var(--ink-soft);font-weight:500}
   .s14-opt.no{background:#F4F0E4}
   .s14-opt.yes{border-color:var(--green-bright);background:var(--green-wash);opacity:1;box-shadow:0 22px 50px -24px rgba(110,49,26,.5)}
   .s14-opt.yes b{color:var(--green)} .s14-opt.yes>div{color:var(--ink)}
   .s14-mk{flex:0 0 auto;width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-top:1px}
   .s14-opt.no .s14-mk{background:rgba(200,64,38,.13);color:var(--rust)}
   .s14-opt.yes .s14-mk{background:var(--green);color:#fff}
-  @media (max-width:760px){.s14-grid{grid-template-columns:1fr} .s14-drake{width:200px}}
+  @media (max-width:760px){.s14-row{grid-template-columns:96px 1fr;gap:14px;align-items:start} .s14-panel{width:96px} .s14-opt{padding:.85rem 1rem} .s14-opt>div{font-size:14px}}
 
   /* slide 20: Friday before/after photo swaps on the toggle */
   .s20-grid{display:grid;grid-template-columns:1fr .92fr;gap:clamp(24px,4vw,48px);align-items:center;margin-top:1.4rem}
@@ -1337,11 +1341,12 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
       <div class="eyebrow">Same call, two prompts</div>
       <h1>Garbage in, <span class="rust">garbage out.</span></h1>
       <div class="s14-grid">
-        <figure class="s14-drake">
-          <img data-img="slide14_drake.clay" alt="Drake meme: rejecting the lazy prompt, approving the structured one">
-        </figure>
-        <div class="s14-opts">
+        <div class="s14-row no">
+          <figure class="s14-panel"><img data-img="slide14_drake.clay" alt="Drake rejecting the lazy prompt"></figure>
           <div class="s14-opt no"><span class="s14-mk">&#10005;</span><div><b>"Summarize this call."</b> Vague in, vague out. You get a bland blob you still have to rewrite.</div></div>
+        </div>
+        <div class="s14-row yes">
+          <figure class="s14-panel"><img data-img="slide14_drake.clay" alt="Drake approving the structured prompt"></figure>
           <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my coaching log for Jordan. Add a dated entry, check if last call's focus (ask budget early) showed up, quote the moment, then give one focus for next time."</b> Role + memory + example + one clear ask.</div></div>
         </div>
       </div>
