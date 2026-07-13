@@ -1340,14 +1340,17 @@ objection handling, and next-step.</div>
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56;
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=8;
   function measure(){var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;}
   function loop(ts){
     if(!running)return;
+    measure(); // re-measure each frame: the start-time size can be stale (reflow during the slide's entrance), which let the ball run past the real edge
     if(!last)last=ts;var dt=Math.min(.05,(ts-last)/1000);last=ts;
     x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
-    if(x<=0){x=0;dx=Math.abs(dx);hit=true;edges++;}else if(x>=W-SZ){x=W-SZ;dx=-Math.abs(dx);hit=true;edges++;}
-    if(y<=0){y=0;dy=Math.abs(dy);hit=true;edges++;}else if(y>=H-SZ){y=H-SZ;dy=-Math.abs(dy);hit=true;edges++;}
+    // bounce a small margin (M) early so the ring/glow around the ball kisses the
+    // edge instead of poking off-screen (SZ is the box; the visible ring sits outside it)
+    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;}else if(x>=W-SZ-M){x=W-SZ-M;dx=-Math.abs(dx);hit=true;edges++;}
+    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;}else if(y>=H-SZ-M){y=H-SZ-M;dy=-Math.abs(dy);hit=true;edges++;}
     if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
       if(edges>=2){inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
     dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
@@ -1356,8 +1359,8 @@ objection handling, and next-step.</div>
   function start(){
     if(reduce||running)return;
     measure();if(W<20){setTimeout(start,80);return;}
-    var spd=118,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
-    x=Math.min(x,W-SZ);y=Math.min(y,H-SZ);
+    var spd=236,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
+    x=Math.min(x,W-SZ-M);y=Math.min(y,H-SZ-M);
     if(ava)ava.style.display='none';
     dvd.style.display='block';running=true;last=0;raf=requestAnimationFrame(loop);
   }
