@@ -861,6 +861,20 @@
   .s1-tick{font-family:var(--hand);color:var(--rust-deep);font-size:clamp(19px,2.3vw,27px);font-weight:700;margin-top:1.2rem;min-height:1.5em;transition:opacity .4s;transform:rotate(-1.3deg);max-width:34ch}
   .s1-keys{margin-top:1.6rem;font-family:var(--body);font-size:12.5px;color:var(--ink-soft);font-weight:600;display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;justify-content:center}
   .s1-keys kbd{font-family:var(--mono);background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:.08rem .42rem;font-size:11.5px;color:var(--ink)}
+  /* presenter-only start-time setter (hidden until the "t" key is pressed) */
+  .s1-timeset{position:fixed;inset:0;z-index:120;display:none;place-items:center;background:rgba(20,18,13,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .s1-timeset.on{display:grid}
+  .s1-ts-card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;box-shadow:0 40px 90px -30px rgba(20,18,13,.7);padding:1.5rem 1.6rem;width:min(360px,88vw);text-align:center;font-family:var(--body)}
+  .s1-ts-h{font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--ink-soft);margin-bottom:.9rem}
+  .s1-ts-in{width:100%;box-sizing:border-box;font-family:var(--mono);font-size:30px;font-weight:600;text-align:center;color:var(--green);background:var(--paper-2);border:1.5px solid var(--line);border-radius:10px;padding:.5rem .3rem;letter-spacing:.02em;outline:none}
+  .s1-ts-in:focus{border-color:var(--green-bright)}
+  .s1-ts-in.bad{border-color:#c0392b;animation:s1shake .34s}
+  @keyframes s1shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+  @media (prefers-reduced-motion: reduce){.s1-ts-in.bad{animation:none}}
+  .s1-ts-hint{margin-top:.8rem;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+  .s1-ts-hint b{color:var(--ink);font-weight:800}
+  .s1-ts-keys{margin-top:.9rem;font-size:11px;color:var(--ink-soft);font-weight:700}
+  .s1-ts-keys kbd{font-family:var(--mono);background:var(--paper-2);border:1.5px solid var(--line);border-radius:5px;padding:.05rem .35rem;font-size:10.5px;color:var(--ink)}
 
   /* slide 2: polaroid */
   .s2-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:clamp(24px,4vw,58px);align-items:center}
@@ -1035,6 +1049,17 @@
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
     </div>
   </section>
+
+  <!-- Presenter-only: press the "t" key (hidden, never shown to the audience) to type an
+       absolute webinar start time. The slide-1 clock then counts down to it. -->
+  <div class="s1-timeset" id="s1TimeSet" aria-hidden="true">
+    <div class="s1-ts-card" role="dialog" aria-label="Set webinar start time">
+      <div class="s1-ts-h">Count down to start time</div>
+      <input id="s1TimeInput" class="s1-ts-in" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="11am" aria-label="Start time">
+      <div class="s1-ts-hint">e.g. <b>11am</b> · <b>1:30pm</b> · <b>14:00</b> · blank to reset</div>
+      <div class="s1-ts-keys"><kbd>Enter</kbd> set &nbsp; <kbd>Esc</kbd> cancel</div>
+    </div>
+  </div>
 
   <!-- 2 -->
   <section class="slide">
@@ -2711,21 +2736,21 @@ objection handling, and next-step.</div>
 (function(){
   var clk=document.getElementById('s1Clock'); if(!clk) return;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // ── EDIT THE TIMER HERE: change data-minutes="5" on the #s1Clock span in the markup ──
-  var mins=parseFloat(clk.getAttribute('data-minutes')); if(!(mins>0)) mins=5;
-  var t=Math.round(mins*60), rotTimer=null;
-  function pad(n){return (n<10?'0':'')+n;}
-  function paint(){clk.textContent=pad(Math.floor(t/60))+':'+pad(t%60);}
-  paint();
-  // a once-per-second text update is not animated motion, so the countdown stays
-  // functional under reduced-motion too (only the line-rotation fade is gated below)
-  var iv=setInterval(function(){
-    if(t>0){t--;paint();}
-    if(t===0){clearInterval(iv);clk.textContent='LIVE';clk.classList.add('live');
-      var lbl=document.querySelector('.s1-clabel');if(lbl)lbl.textContent='We are live. Let us build.';
-      if(rotTimer){clearInterval(rotTimer);rotTimer=null;}}
-  },1000);
+  var lbl=document.querySelector('.s1-clabel');
   var tick=document.getElementById('s1Tick');
+
+  /* SET THE TIMER
+     Default: a relative countdown from data-minutes="5" on the #s1Clock span.
+     Presenter-only: press the "t" key to type an absolute start time (11am, 1:30pm,
+     14:00) and the clock counts down to it. The choice is remembered in localStorage
+     ("wr_start"); typing a blank value resets to the relative countdown. */
+  var STORE='wr_start';
+  var END=null, live=false, rotTimer=null, li=0;
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function fmt(s){var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),x=s%60;return (h>0?h+':'+pad(m):pad(m))+':'+pad(x);}
+  function label12(p){var ap=p.h<12?'am':'pm',hh=p.h%12||12;return hh+':'+pad(p.m)+ap;}
+
   var lines=[
     "yes, this is being recorded. no, you will not rewatch it.",
     "there is a meme about your week 3. you have been warned.",
@@ -2733,13 +2758,97 @@ objection handling, and next-step.</div>
     "the people who build along win. the people who watch later do not.",
     "bring a deal you are stuck on. we will use a real one."
   ];
-  var li=0;
-  if(tick && !reduce){
+  function startRotation(){
+    if(!(tick && !reduce)) return;
+    if(rotTimer) clearInterval(rotTimer);
     rotTimer=setInterval(function(){
       tick.style.opacity=0;
       setTimeout(function(){li=(li+1)%lines.length;tick.textContent=lines[li];tick.style.opacity=1;},430);
     },5200);
   }
+  function goLive(){
+    live=true; clk.textContent='LIVE'; clk.classList.add('live');
+    if(lbl) lbl.textContent='We are live. Let us build.';
+    if(rotTimer){clearInterval(rotTimer);rotTimer=null;}
+  }
+  // a once-per-second text update is not animated motion, so the countdown stays
+  // functional under reduced-motion too (only the line-rotation fade is gated above)
+  function paint(){
+    if(!END || live) return;
+    var s=Math.round((END-new Date())/1000);
+    if(s<=0){goLive();return;}
+    clk.textContent=fmt(s);
+  }
+
+  // "11am" / "1:30 pm" / "14:00" / "9:05" / "9" -> {h,m} or null
+  function parseTime(str){
+    str=(str||'').trim().toLowerCase();
+    var m=str.match(/^(\d{1,2})(?::(\d{2}))?\s*(a|p)m?$|^(\d{1,2}):(\d{2})$|^(\d{1,2})$/);
+    if(!m) return null;
+    var h,mn;
+    if(m[1]!=null){ h=+m[1]; mn=m[2]?+m[2]:0; if(h<1||h>12) return null; if(m[3]==='p'&&h!==12)h+=12; if(m[3]==='a'&&h===12)h=0; }
+    else if(m[4]!=null){ h=+m[4]; mn=+m[5]; if(h>23) return null; }
+    else { h=+m[6]; mn=0; if(h>23) return null; }
+    if(mn>59) return null;
+    return {h:h,m:mn};
+  }
+  function nextOccur(p){
+    var now=new Date(), d=new Date(now.getFullYear(),now.getMonth(),now.getDate(),p.h,p.m,0,0);
+    if(d.getTime()<=now.getTime()) d.setDate(d.getDate()+1); // already passed today -> aim at tomorrow
+    return d;
+  }
+  function setStart(str,persist){
+    var p=parseTime(str); if(!p) return false;
+    END=nextOccur(p); live=false; clk.classList.remove('live');
+    if(lbl) lbl.textContent='Doors open in';
+    if(persist){ try{localStorage.setItem(STORE,p.h+':'+pad(p.m));}catch(e){} }
+    startRotation(); paint();
+    if(tick){ tick.style.opacity=1; tick.textContent='starting at '+label12(p).replace(/(am|pm)/,' $1')+'. counting down now.'; }
+    return true;
+  }
+  function resetStart(){
+    var mins=parseFloat(clk.getAttribute('data-minutes')); if(!(mins>0)) mins=5;
+    END=new Date(new Date().getTime()+mins*60000); live=false; clk.classList.remove('live');
+    if(lbl) lbl.textContent='Doors open in';
+    try{localStorage.removeItem(STORE);}catch(e){}
+    startRotation(); paint();
+  }
+
+  // initial target: a saved start time if present, else the relative data-minutes countdown
+  var saved=null; try{saved=localStorage.getItem(STORE);}catch(e){}
+  var sp=saved?parseTime(saved):null;
+  if(sp){ END=nextOccur(sp); }
+  else { var m0=parseFloat(clk.getAttribute('data-minutes')); if(!(m0>0)) m0=5; END=new Date(new Date().getTime()+m0*60000); }
+  paint(); startRotation();
+  setInterval(paint,1000);
+
+  /* hidden presenter overlay to type the start time (opens on the "t" key) */
+  var ov=document.getElementById('s1TimeSet'), inp=document.getElementById('s1TimeInput');
+  function openOv(){
+    if(!ov||!inp) return;
+    var cur=''; var sv=null; try{sv=localStorage.getItem(STORE);}catch(e){}
+    var c=sv?parseTime(sv):null; if(c) cur=label12(c);
+    inp.value=cur; inp.classList.remove('bad');
+    ov.classList.add('on'); ov.setAttribute('aria-hidden','false');
+    setTimeout(function(){try{inp.focus();inp.select();}catch(e){}},20);
+  }
+  function closeOv(){ if(!ov)return; ov.classList.remove('on'); ov.setAttribute('aria-hidden','true'); }
+  if(inp){
+    inp.addEventListener('keydown',function(e){
+      e.stopPropagation(); // keep space/arrows from driving deck navigation while typing
+      if(e.key==='Enter'){ e.preventDefault(); var v=inp.value.trim();
+        if(v===''){ resetStart(); closeOv(); return; }
+        if(setStart(v,true)){ closeOv(); } else { inp.classList.remove('bad'); void inp.offsetWidth; inp.classList.add('bad'); }
+      } else if(e.key==='Escape'){ e.preventDefault(); closeOv(); }
+    });
+  }
+  if(ov){ ov.addEventListener('click',function(e){ if(e.target===ov) closeOv(); }); }
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='t'&&e.key!=='T') return;
+    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    var el=e.target; if(el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.isContentEditable)) return;
+    e.preventDefault(); openOv();
+  });
 })();
 </script>
 <script>
