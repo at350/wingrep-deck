@@ -1011,7 +1011,11 @@
   .clippy{position:absolute;right:-6px;bottom:54px;z-index:6;display:flex;align-items:flex-end;gap:.4rem;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
   .clippy.show{opacity:1;transform:none}
   .clippy-bubble{max-width:210px;background:#fffbdc;border:1.5px solid #b8b48f;border-radius:10px;padding:.5rem .7rem;font-family:var(--body);font-weight:600;font-size:12px;line-height:1.35;color:#3a3722;box-shadow:3px 3px 0 rgba(20,18,13,.2)}
-  .clippy-art{font-size:30px;line-height:1;animation:float 4s ease-in-out infinite}
+  .clippy-art{line-height:0;animation:float 4s ease-in-out infinite}
+  .clippy-art svg{width:54px;height:74px;display:block;overflow:visible;filter:drop-shadow(1.5px 2.5px 1.5px rgba(20,18,13,.3))}
+  .clippy-brow{transform-box:fill-box;transform-origin:center 90%;animation:clippyBrow 3.4s ease-in-out infinite}
+  .clippy-brow.r{animation-delay:.12s}
+  @keyframes clippyBrow{0%,70%,100%{transform:translateY(0) rotate(0)}78%{transform:translateY(-2.5px) rotate(-4deg)}86%{transform:translateY(-1px) rotate(-1deg)}}
   .bsod{position:absolute;inset:0;z-index:7;background:#0b3ec2;color:#fff;display:none;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:var(--mono)}
   .bsod.show{display:flex}
   .bsod-face{font-size:54px;font-weight:700;margin-bottom:1rem}
@@ -1377,7 +1381,7 @@ Most coaching dies because nobody checks the <b>next</b> call. The whole method 
       <div class="eyebrow">Build it live, click each tab</div>
       <div class="os">
         <div class="bsod" id="bsod" aria-hidden="true"><div class="bsod-in"><div class="bsod-face">:(</div><p>COACHING.EXE has stopped responding.<br>You kept the file by hand for three weeks. It rotted.</p><p class="bsod-press">click tab 6 again to continue _</p></div></div>
-        <div class="clippy" id="clippy" aria-hidden="true"><div class="clippy-bubble">It looks like you're coaching a rep. Want Claude to remember it for you?</div><div class="clippy-art">📎</div></div>
+        <div class="clippy" id="clippy" aria-hidden="true"><div class="clippy-bubble">It looks like you're coaching a rep. Want Claude to remember it for you?</div><div class="clippy-art"><svg viewBox="0 0 120 168" role="img" aria-label="Clippy"><defs><linearGradient id="clippyMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2ee"/><stop offset=".45" stop-color="#b3b3c9"/><stop offset="1" stop-color="#83839b"/></linearGradient></defs><g transform="rotate(-5 60 90)"><path d="M20 54 A34 34 0 0 1 88 54 L88 122 A34 34 0 0 1 20 122 Z" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M72 108 L72 66 A18 18 0 0 0 36 66 L36 106 A18 18 0 0 0 68 114" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g><g><ellipse cx="45" cy="51" rx="15" ry="16.5" fill="#fff" stroke="#242424" stroke-width="2.4"/><ellipse cx="75" cy="45" rx="16.5" ry="18" fill="#fff" stroke="#242424" stroke-width="2.4"/><circle cx="49.5" cy="55" r="7.6" fill="#1b1b1b"/><circle cx="79.5" cy="49" r="8.2" fill="#1b1b1b"/><circle cx="46.6" cy="51.5" r="2.5" fill="#fff"/><circle cx="76.4" cy="45.4" r="2.7" fill="#fff"/></g><path class="clippy-brow" d="M29 34 Q43 24 55 32" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/><path class="clippy-brow r" d="M61 28 Q76 20 89 30" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/></svg></div></div>
         <div class="titlebar"><img data-asset="ui_titlebar" alt=""> SalesOS '95, coaching.exe <span class="sp"><i>_</i><i>▢</i><i>✕</i></span></div>
         <div class="tabs">
           <button class="on" data-tab="t1">1 · Capture</button>
