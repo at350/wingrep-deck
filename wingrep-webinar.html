@@ -1110,12 +1110,28 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 10 dark oneliner + self-typing ledger -->
-  <section class="slide" data-animate="type">
+  <!-- 10 where Claude falls short. Scoped styles only, nothing outside .sShort. -->
+  <style>
+    /* Slide 10. The terminal does the hard part well, then hits three walls it
+       cannot get past, and just sits there blinking. The stall is the argument,
+       so the caret never goes away. Refusals are dimmed rather than alarmed:
+       this is a boundary, not a bug. */
+    .sShort h1{max-width:19ch}
+    /* height is reserved for all 9 lines up front, otherwise the panel grows as it
+       types and shoves the line underneath it down the screen. */
+    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:13.5px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.02em + 2.3rem)}
+    .sShort .typer .n{color:#a68b80}
+    .sShort .s10-cap{margin-top:1.15rem;font-size:clamp(15px,1.6vw,19px);line-height:1.4;font-weight:600;color:var(--ink-soft);max-width:48ch}
+    .sShort .s10-cap b{color:var(--green);font-weight:700}
+    @media (max-width:880px){.sShort .typer{font-size:12px;line-height:1.7}}
+    @media (prefers-reduced-motion:reduce){.sShort .typer .cr{animation:none;opacity:1}}
+  </style>
+  <section class="slide sShort" data-animate="type">
     <div class="wrap">
-      <div class="eyebrow">The obvious question</div>
-      <h1>What if it ran itself, <br>and <span class="hl">remembered?</span></h1>
-      <div class="typer" id="typer"></div>
+      <div class="eyebrow">Where Claude falls short</div>
+      <h1>Claude does the thinking.<br>You're still the <span class="hl">plumbing.</span></h1>
+      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: it updates the coaching log correctly, then answers three follow-ups with I have no hands, I have no clock, I have no ears. The cursor sits waiting."></div>
+      <p class="s10-cap">The thinking was never the bottleneck. <b>Everything around it is.</b></p>
     </div>
   </section>
 
@@ -1427,34 +1443,41 @@ objection handling, and next-step.</div>
     navigator.clipboard&&navigator.clipboard.writeText(t).then(function(){var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
   };});
 
-  /* self-typing ledger, types PLAIN text per line, colorizes only once a line is done */
+  /* slide 10, "where Claude falls short". Types PLAIN text per line, colorizes
+     only once a line is done. Claude nails the coaching update, then answers the
+     next three asks with an honest no. The run ends on a live prompt that never
+     goes anywhere: the waiting IS the point, so the caret stays. */
   var typeTimer;
+  var TYPER_TAIL='> ';
   function runTyper(){
     var el=document.getElementById('typer'); if(!el)return;
-    // {t: plain text, g: true => render green after the line finishes}
+    // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
     var lines=[
-      {t:'> new call: Jordan @ Northwind'},
-      {t:'> checking last focus… "ask budget early"'},
-      {t:'✓ she asked at 4:12, it stuck', g:true},
-      {t:'> next focus: name a number first'},
-      {t:'✓ ledger updated. nothing for you to do.', g:true}
+      {t:'> here is the rep log. here is today’s call. update it.'},
+      {t:'✓ done. she asked for the budget at 4:12. it stuck.', g:true},
+      {t:'> now put it in the CRM.'},
+      {t:'✗ I have no hands. paste it in yourself.', n:true},
+      {t:'> remind me before Thursday’s call.'},
+      {t:'✗ I have no clock. I only run when you type.', n:true},
+      {t:'> did she actually say it, or did the transcript miss it?'},
+      {t:'✗ I have no ears. I only know what you pasted.', n:true}
     ];
     function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    function line(l){return l.g ? '<span class="g">'+esc(l.t)+'</span>' : esc(l.t);}
+    function line(l){var c=l.g?'g':(l.n?'n':''); return c ? '<span class="'+c+'">'+esc(l.t)+'</span>' : esc(l.t);}
     function render(done,cur,caret){
       var html=done.map(line).join('<br>');
       if(cur!==null){ if(done.length) html+='<br>'; html+=esc(cur)+(caret?'<span class="cr"></span>':''); }
       return html;
     }
     clearTimeout(typeTimer);
-    if(reduce){ el.innerHTML=lines.map(line).join('<br>'); return; }
+    if(reduce){ el.innerHTML=lines.map(line).join('<br>')+'<br>'+esc(TYPER_TAIL)+'<span class="cr"></span>'; return; }
     var li=0,ch=0,done=[]; el.innerHTML='';
     function tick(){
-      if(li>=lines.length){ el.innerHTML=render(done,null,false); return; }
+      if(li>=lines.length){ el.innerHTML=render(done,TYPER_TAIL,true); return; }
       var full=lines[li].t; ch++;
       el.innerHTML=render(done, full.slice(0,ch), true);
-      if(ch>=full.length){ done.push(lines[li]); li++; ch=0; typeTimer=setTimeout(tick,520); }
-      else{ typeTimer=setTimeout(tick,30); }
+      if(ch>=full.length){ done.push(lines[li]); li++; ch=0; typeTimer=setTimeout(tick,lines[li]&&lines[li].n?420:300); }
+      else{ typeTimer=setTimeout(tick,22); }
     }
     tick();
   }
