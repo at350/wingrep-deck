@@ -1194,6 +1194,31 @@ objection handling, and next-step.</div>
   #wingrepReveal .pane2.coach .h{color:var(--wr-lit)}
   #wingrepReveal .pane2.coach .stuck{color:var(--wr-lit);font-weight:800}
 
+  /* The caption is the last beat, so it has to arrive last. The deck's entry
+     animation (.slide.active .wrap>* runs `rev` with fill forwards) otherwise wins
+     the cascade over .caption{opacity:0} and puts "it just happened" on screen
+     before anything has happened. Opting this one caption out of `rev` hands the
+     timing back to the .show class runApp() already toggles. */
+  #wingrepReveal .caption{animation:none;opacity:0}
+  #wingrepReveal .caption.show{opacity:1}
+
+  /* A 1280x720 laptop is 80px shorter than the design target, and this set-piece is
+     the tallest thing in the deck: at that height the headline and eyebrow ride up
+     under the fixed top-bar mark, which lands on exactly the slide where that mark
+     first appears. Tighten the whole column on short viewports. Nothing is dropped,
+     it just gets closer together. Untouched at 800px and above. */
+  @media (max-height:780px){
+    #wingrepReveal h1{font-size:clamp(30px,4.2vw,56px)}
+    #wingrepReveal .app{margin-top:.55rem}
+    #wingrepReveal .stage{padding:.6rem}
+    #wingrepReveal .panes{gap:.42rem}
+    #wingrepReveal .pane2{padding:.48rem .75rem}
+    #wingrepReveal .pane2 .row{padding:.2rem 0}
+    #wingrepReveal .lvtx{max-height:116px}
+    #wingrepReveal .caption{margin-top:.55rem;font-size:16px}
+    #wingrepReveal .replay{margin-top:.4rem}
+  }
+
   @media (max-width:900px){#wingrepReveal .stage{grid-template-columns:1fr;gap:.6rem}#wingrepReveal .divide{display:none}}
   @media (prefers-reduced-motion:reduce){
     #wingrepReveal .wave i,#wingrepReveal .lvbadge::before,#wingrepReveal .nudge.show{animation:none}
@@ -1228,7 +1253,7 @@ objection handling, and next-step.</div>
             </div>
             <div class="nudge" id="wrNudge">
               <div class="nh"><img data-asset="ui_barwm" alt="">nudge<span class="nok" id="wrNok">she asked ✓</span></div>
-              <p><b>Ask who signs off on the budget.</b> Now, while she is still on it.</p>
+              <p><b>Ask who signs off on the budget.</b> Now, while Dana is still on it.</p>
               <div class="nf">your coached focus from last call</div>
             </div>
           </div>
@@ -1610,6 +1635,7 @@ objection handling, and next-step.</div>
   // first, because it is the thing the hand-rolled Claude workflow cannot do.
   var appTimers=[],appClock=null,appType=null;
   var APP_LINE="…we'd want to run the numbers past someone on our side first.";
+  var APP_T0="32:00", APP_TEND="32:04";
   function runApp(){var slide=slides[i],panes=slide.querySelectorAll('.pane2'),cap=slide.querySelector('#appCaption');
     var live=slide.querySelector('#wrLive'),nudge=slide.querySelector('#wrNudge'),typeEl=slide.querySelector('#wrType'),
         clock=slide.querySelector('#wrClock'),badge=slide.querySelector('#wrBadge'),status=slide.querySelector('#appStatus'),
@@ -1622,21 +1648,26 @@ objection handling, and next-step.</div>
     live.classList.remove('show','ended');nudge.classList.remove('show');
     nok.classList.remove('on');pivot.classList.remove('on');
     status.classList.add('on');status.textContent='listening, live';
-    badge.textContent='LIVE';typeEl.textContent='';clock.textContent='29:41';
+    badge.textContent='LIVE';typeEl.textContent='';clock.textContent=APP_T0;
 
-    var secs=29*60+41;
+    // The call is a 32-minute call: the bar and the first after-call pane both say so.
+    // So the clock has to be running out the end of those 32 minutes while we watch,
+    // and it has to land on APP_TEND exactly, which is also where the reduced-motion
+    // end state puts it. Pinning it in endCall keeps the two paths identical even if
+    // a throttled tab drops an interval tick.
+    var secs=32*60;
     var fmt=function(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60);};
     function endCall(){
       if(appClock){clearInterval(appClock);appClock=null;}
       if(appType){clearInterval(appType);appType=null;}
-      typeEl.textContent=APP_LINE;
+      typeEl.textContent=APP_LINE;clock.textContent=APP_TEND;
       live.classList.add('ended');badge.textContent='ENDED';
       status.classList.remove('on');status.textContent='call ended · 32 min';
       nok.classList.add('on');pivot.classList.add('on');
     }
     if(reduce){
       live.classList.add('show');typeEl.textContent=APP_LINE;nudge.classList.add('show');
-      clock.textContent='32:04';endCall();
+      endCall();
       [].forEach.call(panes,function(p){p.classList.add('show');});cap.classList.add('show');return;
     }
     T(function(){live.classList.add('show');},250);
