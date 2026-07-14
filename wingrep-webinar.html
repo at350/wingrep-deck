@@ -1139,24 +1139,173 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 11 reveal dark -->
+  <!-- 11 reveal.
+       Two things happen on this slide and nowhere else in the deck.
+       1. WingRep's real brand green (#009443) arrives. Everything before this is
+          Claude clay on purpose, so the green has to mean something when it lands.
+          It is used only for WingRep's own presence inside the product: the mark,
+          the live indicator, the nudge, the work it finished. Not a repaint.
+       2. The set-piece runs on a time axis, left to right. The left column is the
+          call still happening, WingRep listening and nudging the rep mid-sentence.
+          The right column is the after-call work, which is the consequence. The
+          live column is the payoff: it is the one thing the Claude workflow on
+          slide 9 structurally cannot do, because Claude never hears the call. -->
+  <style>
+  #wingrepReveal{--wr:#009443;--wr-lit:#22c06d;--wr-dim:rgba(0,148,67,.34)}
+  #wingrepReveal .app{max-width:1000px;margin-top:1rem}
+  #wingrepReveal .bar .wm{color:var(--wr-lit)}
+  #wingrepReveal .bar .status{color:#9d8279;font-variant-numeric:tabular-nums}
+  #wingrepReveal .bar .status::before{background:#553529;animation:none;transition:background .4s}
+  #wingrepReveal .bar .status.on{color:var(--wr-lit)}
+  #wingrepReveal .bar .status.on::before{background:var(--wr);animation:wrPulse 1.5s infinite}
+  @keyframes wrPulse{0%{box-shadow:0 0 0 0 rgba(0,148,67,.55)}70%{box-shadow:0 0 0 8px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
+
+  /* the time axis: during the call | the call ends | after the call */
+  #wingrepReveal .stage{display:grid;grid-template-columns:minmax(0,.94fr) 26px minmax(0,1fr);gap:.15rem;padding:.9rem}
+  #wingrepReveal .panes{padding:0;align-content:start;gap:.5rem}
+  #wingrepReveal .divide{position:relative;align-self:stretch}
+  #wingrepReveal .divide::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;margin-left:-.5px;background:#45281d}
+  #wingrepReveal .divide span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6355;background:#23130d;padding:.45rem 0;opacity:0;transition:opacity .6s}
+  #wingrepReveal .divide span.on{opacity:1}
+
+  /* left: the call, still running */
+  #wingrepReveal .lv{display:flex;flex-direction:column;gap:.58rem;background:#2a1811;border:1.5px solid var(--wr-dim);border-radius:12px;padding:.75rem .85rem;opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .6s}
+  #wingrepReveal .lv.show{opacity:1;transform:none}
+  #wingrepReveal .lv.ended{border-color:#45281d}
+  #wingrepReveal .lvtop{display:flex;align-items:center;gap:.5rem}
+  #wingrepReveal .lvbadge{display:inline-flex;align-items:center;gap:.34rem;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--wr);border-radius:4px;padding:.2rem .4rem;transition:background .4s,color .4s}
+  #wingrepReveal .lvbadge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:wrBlink 1.2s infinite}
+  @keyframes wrBlink{0%,100%{opacity:1}50%{opacity:.2}}
+  #wingrepReveal .lv.ended .lvbadge{background:#45281d;color:#b08d80}
+  #wingrepReveal .lv.ended .lvbadge::before{animation:none;background:#8a6355}
+  #wingrepReveal .lvwho{font-size:12.5px;font-weight:600;color:#d9c8c1}
+  #wingrepReveal .lvclock{margin-left:auto;font-family:var(--mono);font-size:12px;color:#de9a81;font-variant-numeric:tabular-nums}
+  /* WingRep is hearing it. the bars are the whole argument, so they are green. */
+  #wingrepReveal .wave{display:flex;align-items:center;gap:3px;height:26px}
+  #wingrepReveal .wave i{flex:1 1 0;min-width:0;height:100%;border-radius:1.5px;background:var(--wr);opacity:.85;transform:scaleY(.12);transform-origin:center;animation:wrWave 1s ease-in-out infinite;transition:transform .35s ease,background .5s ease}
+  @keyframes wrWave{0%,100%{transform:scaleY(.1)}50%{transform:scaleY(var(--a,1))}}
+  #wingrepReveal .lv.ended .wave i{animation:none;transform:scaleY(.07);background:#45281d;opacity:1}
+  /* a live transcript: newest line sits against the nudge, older ones scroll up
+     under the fade. the fade is what makes the pane read as still running. */
+  #wingrepReveal .lvtx{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-end;gap:.24rem;overflow:hidden;min-height:0;max-height:170px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%)}
+  #wingrepReveal .lvtx p{font-size:12.5px;line-height:1.42;font-weight:500;color:#b8a49c}
+  #wingrepReveal .lvtx p{padding-left:46px;text-indent:-46px}
+  #wingrepReveal .lvtx p b{display:inline-block;width:40px;margin-right:6px;text-indent:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#8a6355}
+  #wingrepReveal .lvtx p.now{color:#f4edea;font-size:13.5px}
+  #wingrepReveal .car{display:inline-block;width:2px;height:.95em;margin-left:2px;vertical-align:-1px;background:var(--wr);animation:wrBlink 1s step-end infinite}
+  #wingrepReveal .lv.ended .car{display:none}
+  /* the nudge lands from the right, while she is still mid-sentence */
+  #wingrepReveal .nudge{margin-top:auto;background:linear-gradient(180deg,rgba(0,148,67,.16),rgba(0,148,67,.05));border:1.5px solid var(--wr);border-radius:10px;padding:.62rem .72rem;opacity:0;transform:translateX(18px) scale(.97);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1)}
+  #wingrepReveal .nudge.show{opacity:1;transform:none;animation:wrLand .9s ease-out}
+  @keyframes wrLand{0%{box-shadow:0 0 0 0 rgba(0,148,67,.45)}60%{box-shadow:0 0 0 11px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
+  #wingrepReveal .nudge .nh{display:flex;align-items:center;gap:.35rem;margin-bottom:.36rem;font-family:var(--body);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--wr-lit)}
+  #wingrepReveal .nudge .nh img{height:12px}
+  #wingrepReveal .nudge p{font-size:13.5px;line-height:1.42;font-weight:500;color:#f4edea}
+  #wingrepReveal .nudge p b{color:#fff;font-weight:800}
+  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:11.5px;font-weight:600;color:#b79b91}
+  #wingrepReveal .nok{margin-left:auto;font-size:11px;text-transform:none;letter-spacing:0;color:var(--wr-lit);opacity:0;transition:opacity .55s}
+  #wingrepReveal .nok.on{opacity:1}
+
+  /* right: what it did about it. green marks the work WingRep finished. */
+  #wingrepReveal .pane2{padding:.62rem .8rem}
+  #wingrepReveal .pane2 .row{padding:.28rem 0}
+  #wingrepReveal .pane2 .h .ok{color:var(--wr-lit)}
+  #wingrepReveal .pane2.coach{background:linear-gradient(180deg,rgba(0,148,67,.12),rgba(0,148,67,.03)),#2a1811;border-color:rgba(0,148,67,.6)}
+  #wingrepReveal .pane2.coach .h{color:var(--wr-lit)}
+  #wingrepReveal .pane2.coach .stuck{color:var(--wr-lit);font-weight:800}
+
+  /* The caption is the last beat, so it has to arrive last. The deck's entry
+     animation (.slide.active .wrap>* runs `rev` with fill forwards) otherwise wins
+     the cascade over .caption{opacity:0} and puts "it just happened" on screen
+     before anything has happened. Opting this one caption out of `rev` hands the
+     timing back to the .show class runApp() already toggles. */
+  #wingrepReveal .caption{animation:none;opacity:0}
+  #wingrepReveal .caption.show{opacity:1}
+
+  /* A 1280x720 laptop is 80px shorter than the design target, and this set-piece is
+     the tallest thing in the deck: at that height the headline and eyebrow ride up
+     under the fixed top-bar mark, which lands on exactly the slide where that mark
+     first appears. Tighten the whole column on short viewports. Nothing is dropped,
+     it just gets closer together. Untouched at 800px and above. */
+  @media (max-height:780px){
+    #wingrepReveal h1{font-size:clamp(30px,4.2vw,56px)}
+    #wingrepReveal .app{margin-top:.55rem}
+    #wingrepReveal .stage{padding:.6rem}
+    #wingrepReveal .panes{gap:.42rem}
+    #wingrepReveal .pane2{padding:.48rem .75rem}
+    #wingrepReveal .pane2 .row{padding:.2rem 0}
+    #wingrepReveal .lvtx{max-height:116px}
+    #wingrepReveal .caption{margin-top:.55rem;font-size:16px}
+    #wingrepReveal .replay{margin-top:.4rem}
+  }
+
+  @media (max-width:900px){#wingrepReveal .stage{grid-template-columns:1fr;gap:.6rem}#wingrepReveal .divide{display:none}}
+  @media (prefers-reduced-motion:reduce){
+    #wingrepReveal .wave i,#wingrepReveal .lvbadge::before,#wingrepReveal .nudge.show{animation:none}
+    #wingrepReveal .car{display:none}
+  }
+  </style>
   <section class="slide" id="wingrepReveal" data-animate="app">
     <div class="wrap">
       <div class="eyebrow">This is the part we built</div>
       <h1>Same loop. No files. <span class="hl">No pasting.</span></h1>
       <div class="app">
-        <div class="bar"><span class="wm"><img data-asset="ui_barwm" alt="">WingRep</span><span class="status">live on the call</span></div>
-        <div class="panes">
-          <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Jordan @ Northwind, 32 min. The rep took the call. Did nothing else.</p></div>
-          <div class="pane2" data-step="2"><div class="h">Follow-up <span class="ok">· drafted &amp; queued ✓</span></div><p>Thanks Dana, sending the 2-week rollout plan, looping in security before the 24th…</p></div>
-          <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Security review · Apr 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
-          <div class="pane2 coach" data-step="4"><div class="h">Coaching · checked vs last call, automatically</div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did. ✓</span> The log updated itself.</p></div>
+        <div class="bar"><span class="wm"><img data-asset="ui_barwm" alt="">WingRep</span><span class="status on" id="appStatus">listening, live</span></div>
+        <div class="stage">
+          <div class="lv" id="wrLive">
+            <div class="lvtop">
+              <span class="lvbadge" id="wrBadge">LIVE</span>
+              <span class="lvwho">Dana · Northwind</span>
+              <span class="lvclock" id="wrClock">29:41</span>
+            </div>
+            <div class="wave" id="wrWave" aria-hidden="true"></div>
+            <div class="lvtx">
+              <p><b>Dana</b>We have been burned by a rollout before, so.</p>
+              <p><b>Rep</b>Understood. What went wrong last time?</p>
+              <p><b>Dana</b>Nobody owned it once the pilot finished.</p>
+              <p><b>Rep</b>And the team you'd roll this out to, how big is that?</p>
+              <p><b>Dana</b>Forty-odd. Maybe sixty by the autumn.</p>
+              <p><b>Rep</b>So if the pilot lands, what happens after?</p>
+              <p><b>Dana</b>Depends who else is asking for budget this quarter.</p>
+              <p><b>Rep</b>Fair.</p>
+              <p><b>Dana</b>Honestly, the pilot itself looks fine to me.</p>
+              <p class="now" id="wrLine"><b>Dana</b><span id="wrType"></span><i class="car"></i></p>
+            </div>
+            <div class="nudge" id="wrNudge">
+              <div class="nh"><img data-asset="ui_barwm" alt="">nudge<span class="nok" id="wrNok">she asked ✓</span></div>
+              <p><b>Ask who signs off on the budget.</b> Now, while Dana is still on it.</p>
+              <div class="nf">your coached focus from last call</div>
+            </div>
+          </div>
+          <div class="divide"><span id="wrPivot">call ends</span></div>
+          <div class="panes">
+            <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Dana @ Northwind, 32 min. The rep took the call. Did nothing else.</p></div>
+            <div class="pane2" data-step="2"><div class="h">Follow-up <span class="ok">· drafted &amp; queued ✓</span></div><p>Thanks Dana, sending the 2-week rollout plan, looping in security before the 24th…</p></div>
+            <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Security review · Apr 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
+            <div class="pane2 coach" data-step="4"><div class="h">Coaching <span class="ok">· checked vs last call ✓</span></div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did.</span> The log updated itself.</p></div>
+          </div>
         </div>
       </div>
       <p class="caption" id="appCaption">No file to keep. No prompt to run. <span class="scribble">it just happened.</span></p>
       <button class="replay" id="appReplay">↺ replay</button>
     </div>
   </section>
+  <script>
+  // Build the live waveform. Every bar gets its own amplitude, phase and speed:
+  // a single shared sine reads as a loading spinner, and audio does not march in
+  // step. Deterministic offsets, so the bars look the same on every replay.
+  document.addEventListener('DOMContentLoaded',function(){
+    var wave=document.getElementById('wrWave');
+    if(!wave) return;
+    for(var n=0;n<64;n++){
+      var b=document.createElement('i');
+      b.style.setProperty('--a',(0.34+((n*29)%67)/100).toFixed(2));
+      b.style.animationDuration=(0.66+((n*37)%9)/10).toFixed(2)+'s';
+      b.style.animationDelay=(-((n*53)%97)/100).toFixed(2)+'s';
+      wave.appendChild(b);
+    }
+  });
+  </script>
 
   <!-- 15 CTA + 3-week bar -->
   <section class="slide" id="trial">
@@ -1549,13 +1698,62 @@ objection handling, and next-step.</div>
   })();
 
   /* reveal */
-  var appTimers=[];
+  // The reveal runs on a time axis. First the call itself, with WingRep listening
+  // and nudging the rep while the prospect is still mid-sentence. Then the call
+  // ends, and only then does the after-call work land. The live beat has to come
+  // first, because it is the thing the hand-rolled Claude workflow cannot do.
+  var appTimers=[],appClock=null,appType=null;
+  var APP_LINE="…we'd want to run the numbers past someone on our side first.";
+  var APP_T0="32:00", APP_TEND="32:04";
   function runApp(){var slide=slides[i],panes=slide.querySelectorAll('.pane2'),cap=slide.querySelector('#appCaption');
+    var live=slide.querySelector('#wrLive'),nudge=slide.querySelector('#wrNudge'),typeEl=slide.querySelector('#wrType'),
+        clock=slide.querySelector('#wrClock'),badge=slide.querySelector('#wrBadge'),status=slide.querySelector('#appStatus'),
+        pivot=slide.querySelector('#wrPivot'),nok=slide.querySelector('#wrNok');
     appTimers.forEach(clearTimeout);appTimers=[];
+    if(appClock){clearInterval(appClock);appClock=null;}
+    if(appType){clearInterval(appType);appType=null;}
+    var T=function(fn,ms){appTimers.push(setTimeout(fn,ms));};
     [].forEach.call(panes,function(p){p.classList.remove('show');});cap.classList.remove('show');
-    if(reduce){[].forEach.call(panes,function(p){p.classList.add('show');});cap.classList.add('show');return;}
-    [].forEach.call(panes,function(p,idx){appTimers.push(setTimeout(function(){p.classList.add('show');},450+idx*820));});
-    appTimers.push(setTimeout(function(){cap.classList.add('show');},450+panes.length*820+250));
+    live.classList.remove('show','ended');nudge.classList.remove('show');
+    nok.classList.remove('on');pivot.classList.remove('on');
+    status.classList.add('on');status.textContent='listening, live';
+    badge.textContent='LIVE';typeEl.textContent='';clock.textContent=APP_T0;
+
+    // The call is a 32-minute call: the bar and the first after-call pane both say so.
+    // So the clock has to be running out the end of those 32 minutes while we watch,
+    // and it has to land on APP_TEND exactly, which is also where the reduced-motion
+    // end state puts it. Pinning it in endCall keeps the two paths identical even if
+    // a throttled tab drops an interval tick.
+    var secs=32*60;
+    var fmt=function(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60);};
+    function endCall(){
+      if(appClock){clearInterval(appClock);appClock=null;}
+      if(appType){clearInterval(appType);appType=null;}
+      typeEl.textContent=APP_LINE;clock.textContent=APP_TEND;
+      live.classList.add('ended');badge.textContent='ENDED';
+      status.classList.remove('on');status.textContent='call ended · 32 min';
+      nok.classList.add('on');pivot.classList.add('on');
+    }
+    if(reduce){
+      live.classList.add('show');typeEl.textContent=APP_LINE;nudge.classList.add('show');
+      endCall();
+      [].forEach.call(panes,function(p){p.classList.add('show');});cap.classList.add('show');return;
+    }
+    T(function(){live.classList.add('show');},250);
+    appClock=setInterval(function(){secs++;clock.textContent=fmt(secs);},1000);
+    // She keeps talking. Driven off elapsed time rather than a chain of timeouts,
+    // so a throttled tab cannot let the typing drift out of step with the panes.
+    var t0=Date.now();
+    appType=setInterval(function(){
+      var n=Math.round((Date.now()-t0-750)/38);
+      if(n<0) n=0; if(n>APP_LINE.length) n=APP_LINE.length;
+      typeEl.textContent=APP_LINE.slice(0,n);
+      if(n===APP_LINE.length){clearInterval(appType);appType=null;}
+    },40);
+    T(function(){nudge.classList.add('show');},2050);   // lands while she is still talking
+    T(endCall,4100);
+    [].forEach.call(panes,function(p,idx){T(function(){p.classList.add('show');},4550+idx*580);});
+    T(function(){cap.classList.add('show');},4550+panes.length*580+250);
   }
   document.getElementById('appReplay').onclick=runApp;
 
