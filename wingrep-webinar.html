@@ -1202,6 +1202,35 @@
   </section>
 
   <!-- NEW: Drake, bad prompt vs good prompt (teaching meme) -->
+  <style>
+  /* Oscar lives in the trash, and this is the garbage-in-garbage-out slide, so he
+     surfaces at a random spot along the bottom edge, hangs around a beat, and sinks
+     back down. No caption, no chip: it's a sight gag or it's nothing.
+
+     .gio-oscar is its own clipping window rather than leaning on the slide's overflow:
+     .slide is overflow-y:auto (which forces overflow-x to auto too), so a sprite parked
+     below the bottom edge would grow scrollbars. Three nested elements because three
+     transforms have to not fight each other: the window clips, .gio-lift slides him up
+     and down, and the <img> carries the per-appearance lean plus the idle bob. */
+  .gio-oscar{position:absolute;bottom:0;left:6%;width:clamp(104px,12.5vw,164px);overflow:hidden;pointer-events:none;z-index:6;line-height:0}
+  /* down: quick, ease-in, he drops. up: slower, with overshoot, so he pops.
+     The overshoot rises past the rest position; the cutout carries transparent
+     headroom above his lid so the window never guillotines it. */
+  .gio-lift{display:block;transform:translateY(101%);transition:transform .40s cubic-bezier(.5,0,.75,0)}
+  .gio-oscar.up .gio-lift{transform:translateY(0);transition:transform .82s cubic-bezier(.2,1.4,.45,1)}
+  .gio-oscar img{display:block;width:100%;height:auto;transform:rotate(var(--lean,0deg))}
+  .gio-oscar.up img{animation:gioBob 2.7s ease-in-out infinite}
+  @keyframes gioBob{
+    0%,100%{transform:rotate(var(--lean,0deg)) translateY(0)}
+    50%{transform:rotate(calc(var(--lean,0deg) * -1)) translateY(-4px)}
+  }
+  /* reduced motion: he just sits there, permanently grouchy. The JS never starts, so
+     `left` keeps its CSS default instead of a random one. */
+  @media (prefers-reduced-motion:reduce){
+    .gio-lift{transform:translateY(0);transition:none}
+    .gio-oscar img{animation:none}
+  }
+  </style>
   <section class="slide">
     <div class="wrap">
       <div class="eyebrow">Same call, two prompts</div>
@@ -1217,7 +1246,65 @@
         </div>
       </div>
     </div>
+    <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-lift"><img data-asset="oscar_grouch" alt=""></span></div>
   </section>
+  <script>
+  (function(){
+    var box=document.getElementById('gioOscar'); if(!box) return;
+    var slide=box.closest('.slide');
+    var lift=box.querySelector('.gio-lift');
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)');
+    var upT=0,downT=0,alive=false;
+    function rnd(a,b){return a+Math.random()*(b-a);}
+
+    /* Pick a fresh spot every time he surfaces. Measured, never guessed: .slide is
+       display:none until it's active, so offsetWidth here only reads true because
+       place() is called from rise(), which only runs while the slide is on screen.
+       He is clamped fully inside the slide because overflow-x:auto would otherwise
+       turn an overhanging elbow into a horizontal scrollbar. */
+    function place(){
+      var w=box.offsetWidth||140, room=slide.clientWidth-w-32;
+      box.style.left=(room>0 ? 16+Math.random()*room : 16)+'px';
+      box.style.setProperty('--lean',(Math.random()<.5?-1:1)*rnd(1.6,4.2)+'deg');
+    }
+    function rise(){
+      if(!alive) return;
+      place(); box.classList.add('up');
+      upT=setTimeout(sink, rnd(1900,3600));
+    }
+    function sink(){
+      if(!alive) return;
+      box.classList.remove('up');
+      downT=setTimeout(rise, rnd(2400,5600));
+    }
+    function start(){
+      if(alive||reduce.matches) return;
+      alive=true;
+      downT=setTimeout(rise, rnd(1000,2200));
+    }
+    function stop(){
+      alive=false; clearTimeout(upT); clearTimeout(downT);
+      box.classList.remove('up');
+      /* kill the transition so he is already gone next time the slide opens,
+         instead of visibly sliding away in front of the audience */
+      var t=lift.style.transition; lift.style.transition='none'; box.offsetHeight; lift.style.transition=t;
+    }
+    new MutationObserver(function(){slide.classList.contains('active')?start():stop();})
+      .observe(slide,{attributes:true,attributeFilter:['class']});
+    /* His left is an absolute pixel value from the width at rise() time, but he holds
+       it for up to ~9s. Narrowing the window (or exiting fullscreen) mid-slide would
+       leave that stale left overhanging the right edge and grow a horizontal scrollbar.
+       Re-clamp in place (don't re-randomise, which would teleport him sideways in view)
+       so he can only move inward, never off the edge. */
+    addEventListener('resize',function(){
+      if(!alive) return;
+      var w=box.offsetWidth||140, maxL=slide.clientWidth-w-16;
+      var cur=parseFloat(box.style.left); if(cur!==cur) return;
+      box.style.left=Math.max(16,Math.min(cur,maxL))+'px';
+    });
+    if(slide.classList.contains('active')) start();
+  })();
+  </script>
 
   <!-- NEW: the 5 prompts to steal + prompt glow-up slider -->
   <section class="slide sFive">
