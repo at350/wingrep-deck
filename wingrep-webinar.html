@@ -1118,8 +1118,12 @@ objection handling, and next-step.</div>
        this is a boundary, not a bug. */
     .sShort h1{max-width:19ch}
     /* height is reserved for all 9 lines up front, otherwise the panel grows as it
-       types and shoves the line underneath it down the screen. */
-    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:13.5px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.02em + 2.3rem)}
+       types and shoves the line underneath it down the screen. 9 lines x 1.78 =
+       16.02em, plus headroom for the caret: it is an inline-block taller than the
+       text it sits next to, so the final line box outgrows a plain one and the
+       panel would still tick down ~2px right as the run lands. Reserved in em so
+       it also holds at the 880px breakpoint's smaller type. */
+    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:13.5px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.2em + 2.3rem)}
     .sShort .typer .n{color:#a68b80}
     .sShort .s10-cap{margin-top:1.15rem;font-size:clamp(15px,1.6vw,19px);line-height:1.4;font-weight:600;color:var(--ink-soft);max-width:48ch}
     .sShort .s10-cap b{color:var(--green);font-weight:700}
@@ -1453,11 +1457,11 @@ objection handling, and next-step.</div>
     var el=document.getElementById('typer'); if(!el)return;
     // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
     var lines=[
-      {t:'> here is the rep log. here is today’s call. update it.'},
+      {t:'> here is the rep log. here is today\'s call. update it.'},
       {t:'✓ done. she asked for the budget at 4:12. it stuck.', g:true},
       {t:'> now put it in the CRM.'},
       {t:'✗ I have no hands. paste it in yourself.', n:true},
-      {t:'> remind me before Thursday’s call.'},
+      {t:'> remind me before Thursday\'s call.'},
       {t:'✗ I have no clock. I only run when you type.', n:true},
       {t:'> did she actually say it, or did the transcript miss it?'},
       {t:'✗ I have no ears. I only know what you pasted.', n:true}
