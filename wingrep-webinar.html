@@ -35,6 +35,25 @@
 
   .slide{position:absolute;inset:0;display:none;padding:6.5vh clamp(20px,6vw,104px) 8.5vh;flex-direction:column;justify-content:center;overflow-y:auto;z-index:3}
   .slide.active{display:flex}
+  /* 1280x720 is a real laptop and two slides (the five prompts, and the trial) ran
+     about 85px past their content box there, so they scrolled and slid under the top
+     bar. Reclaim the height at short viewports. Padding-top is left alone on purpose:
+     it is what clears the fixed top bar. */
+  @media (max-height:800px){
+    .slide{padding-bottom:3.5vh}
+    .sFive h1,.slide#trial h1{font-size:clamp(26px,3.5vw,42px)}
+    .sFive .prompts5{margin-top:.7rem}
+    .sFive .prompts5 li{padding-top:.42rem;padding-bottom:.42rem}
+    .sFive .glow{margin-top:.75rem}
+    .sFive .os-cap{margin-top:.4rem}
+    /* .slide#trial, not #trial: the trial slide ships its own <style> block further
+       down the file, and at equal specificity that later block would win. */
+    .slide#trial .body{margin-top:.6rem}
+    .slide#trial .tarc{max-width:730px;margin-top:.2rem}
+    .slide#trial .tweeks{max-width:730px;margin-top:.3rem}
+    .slide#trial .cta-row{margin-top:.4rem}
+    .slide#trial .logobanner{margin-top:.25rem}
+  }
   .wrap{width:100%;max-width:1100px;margin:0 auto;position:relative}
 
   /* (formerly the dark-green slide treatment) these slides now use the same
@@ -92,16 +111,6 @@
   .ballwrap{margin-top:1.2rem;display:flex;justify-content:center}
   canvas.ball{width:min(360px,72vw);height:min(360px,72vw);background:radial-gradient(120% 120% at 50% 30%,#35190f,#1b0d08);border-radius:24px;box-shadow:var(--shadow);border:1px solid #45281d}
 
-  /* testimonial slider */
-  .tl-stage{position:relative;margin-top:1.3rem;min-height:228px}
-  .tl-set{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;transition:opacity .35s}
-  .q{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.95rem 1.1rem;box-shadow:var(--shadow)}
-  .q p{font-size:clamp(14px,1.45vw,17px);font-weight:600;line-height:1.32}
-  .q .by{font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-top:.45rem}
-  .q.bad{border-color:var(--rust-soft)} .q.bad p{color:var(--rust)}
-  .tl-ctrl{margin-top:1.2rem;display:flex;align-items:center;gap:1rem;max-width:560px}
-  .tl-ctrl .face{flex:0 0 auto}
-  .tl-ctrl .wk{font-family:var(--display);font-weight:800;font-size:14px;white-space:nowrap;min-width:5em}
   input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--rust));outline:none;flex:1}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:grab;box-shadow:var(--shadow)}
   input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:grab}
@@ -371,6 +380,13 @@
   .topbar{position:fixed;top:16px;left:clamp(20px,6vw,104px);right:clamp(20px,6vw,104px);z-index:40;display:flex;align-items:center;justify-content:space-between;transition:opacity .4s}
   .topbar.hide{opacity:0}
   .brand img{height:30px;width:auto;max-width:170px;display:block}
+  /* The deck is a teaching deck first: WingRep does not appear anywhere until
+     the reveal slide (#wingrepReveal). Before it, the brand mark is not rendered
+     at all; from the reveal onward it fades in. Scoped to .topbar on purpose:
+     the logo chips also carry an <img class="brand">, and an unscoped rule here
+     hides every competitor and customer logo in the deck. */
+  .topbar .brand{opacity:0;visibility:hidden;transition:opacity .5s ease}
+  .topbar .brand.on{opacity:1;visibility:visible}
   .counter{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
   .chrome{position:fixed;bottom:18px;right:clamp(20px,6vw,104px);z-index:40;display:flex;gap:.5rem;align-items:center;transition:opacity .4s,transform .4s}
   .chrome.hide{opacity:0;transform:translateY(8px);pointer-events:none}
@@ -385,7 +401,7 @@
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:45;background:var(--ink);color:var(--paper);font-size:13px;font-weight:500;padding:.6rem 1.1rem;border-radius:999px;display:flex;gap:.8rem;transition:opacity .5s,transform .5s} .toast.gone{opacity:0;transform:translateX(-50%) translateY(10px);pointer-events:none}
   .toast kbd{font-family:var(--mono);background:#2c2920;border-radius:5px;padding:.05rem .4rem;font-size:11.5px}
 
-  @media (max-width:680px){.cols,.three,.tl-set,.roi .out{grid-template-columns:1fr} .chrome button{width:42px;height:42px} .os .tabs button{font-size:11px}}
+  @media (max-width:680px){.cols,.three,.roi .out{grid-template-columns:1fr} .chrome button{width:42px;height:42px} .os .tabs button{font-size:11px}}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important}.slide.active .wrap>*,.slide.active h1 .ln{opacity:1}}
 
 /* ===== slide 3 redesign ===== */
@@ -495,39 +511,6 @@
   }
 
 
-/* ===== slide 7: the coaching loop (film-room hero) ===== */
-  .s7-slide{
-    position:relative;width:100%;max-width:1180px;aspect-ratio:16/9;
-    background:linear-gradient(180deg,var(--card),var(--paper-2));
-    border:1px solid var(--line);border-radius:18px;overflow:hidden;
-    display:grid;grid-template-columns:1fr .8fr;align-items:center;
-    gap:clamp(24px,4vw,56px);
-    padding:clamp(28px,4.4vw,60px);box-shadow:var(--shadow);
-  }
-  .s7-copy{position:relative;z-index:2;max-width:560px;}
-  .s7-eyebrow{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;color:var(--green);font-family:var(--mono);margin-bottom:22px;}
-  .s7-eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright);flex:none;border-radius:2px;}
-  .s7-headline{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.2vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin-bottom:22px;}
-  .s7-headline .s7-loopword{color:var(--green);}
-  .s7-body{font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:var(--ink-soft);max-width:460px;}
-  .s7-body b{color:var(--ink);font-weight:600;}
-
-  .s7-stage{position:relative;z-index:2;justify-self:center;width:100%;max-width:400px;}
-  .s7-frame{position:relative;margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;border:1px solid rgba(177,74,44,.28);box-shadow:0 30px 70px -30px rgba(20,18,13,.55);}
-  .s7-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;}
-  .s7-tape{position:absolute;inset:0;z-index:2;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;pointer-events:none;}
-  @keyframes s7pan{from{transform:scale(1.04)}to{transform:scale(1.13) translate(-1.5%,-2%)}}
-  .s7-markup{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 3px rgba(20,10,6,.5));}
-  .s7-note{position:absolute;top:5%;right:6%;font-family:var(--hand);font-weight:700;color:#F7E9DF;font-size:clamp(17px,2vw,25px);line-height:.98;text-align:right;transform:rotate(-5deg);filter:drop-shadow(0 1px 4px rgba(20,10,6,.6));}
-
-  @media (max-width:720px){
-    .s7-slide{grid-template-columns:1fr;aspect-ratio:auto;gap:14px;}
-    .s7-stage{max-width:300px;margin:0 auto;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .s7-photo,.s7-tape{animation:none;transform:scale(1.04);}
-  }
-
 /* ===== slide 12 redesign ===== */
 
   
@@ -636,39 +619,8 @@
   }
 
 
-.slide>.s3-card,.slide>.s7-slide,.slide>.s12-slide{margin-left:auto;margin-right:auto}
+.slide>.s3-card,.slide>.s12-slide{margin-left:auto;margin-right:auto}
 
-/* ===== slide 4 redesign: the observation room (image-led) ===== */
-  /* A real, branded-treated scene carries the problem: a rep on a call, watched from
-     behind a one-way mirror by the tools, whose faces are their own logos. */
-
-  .oroom-wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(12px,2.4vh,24px)}
-  .oroom-head{display:flex;flex-direction:column;gap:.7rem;padding:0 4px}
-  .oroom-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--rust-deep)}
-  .oroom-eyebrow::before{content:"";width:30px;height:3px;background:var(--rust);border-radius:2px;flex:none}
-  .oroom-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.9vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin:0}
-  .oroom-title em{font-style:normal;color:var(--rust-deep)}
-
-  /* cinematic image band, locked to 16:9 so the logo positions stay put */
-  .oroom-frame{position:relative;margin:0 auto;width:100%;max-width:min(1180px,calc(58vh * 16 / 9));aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#160a05}
-  .oroom-stage{position:absolute;inset:0;transform-origin:center 42%}
-  .slide.active .oroom-stage{animation:oromKen 22s ease-out both}
-  @keyframes oromKen{from{transform:scale(1.004)}to{transform:scale(1.05)}}
-  .oroom-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 46%}
-
-  /* each shadow-watcher's face is the tool's logo, glowing like a lit screen */
-  .oroom-mark{position:absolute;transform:translate(-50%,-50%);width:clamp(26px,3.1vw,44px);aspect-ratio:1;border-radius:26%;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.6),0 0 15px 3px rgba(224,160,90,.3),0 0 4px rgba(0,0,0,.5)}
-  .oroom-mark img{width:100%;height:100%;object-fit:cover;display:block}
-
-  @media (max-width:880px){
-    .oroom-frame{max-width:100%}
-    .oroom-title{font-size:clamp(26px,7vw,40px)}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .slide.active .oroom-stage{animation:none}
-  }
-
-  .slide>.oroom-wrap{margin-left:auto;margin-right:auto}
   /* ============================== WAVE 1 ============================== */
   /* treated real imagery: fade in once src is set by the IMG loader */
   img[data-img]{opacity:0;transition:opacity .5s ease} img[data-img].imgon{opacity:1}
@@ -736,18 +688,6 @@
 
   /* (the observation-room slide 4 is image-led; no sticker) */
 
-  /* slide 6: meme chat cards that swap on the slider */
-  .tl-stage{display:grid;grid-template-columns:clamp(240px,30%,310px) 1fr;gap:clamp(18px,3vw,36px);min-height:300px;align-items:stretch}
-  .tl-imgwrap{position:relative;min-height:290px}
-  .tl-quotes{position:relative;min-height:290px}
-  .tl-chat{position:absolute;inset:0;height:max-content;display:flex;flex-direction:column;gap:.5rem;transition:opacity .35s;background:var(--card);border:1.5px solid var(--line);border-radius:16px 16px 16px 5px;padding:13px;box-shadow:var(--shadow)}
-  .tl-chat-r{border-color:var(--rust-soft)}
-  .tl-who{font-family:var(--body);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
-  .tl-chat-r .tl-who{color:var(--rust)}
-  .tl-chat img{width:100%;border-radius:10px;display:block;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2)}
-  .tl-said{font-family:var(--hand);font-size:20px;font-weight:700;color:var(--ink);line-height:1.08}
-  .tl-chat-r .tl-said{color:var(--rust)}
-  @media (max-width:760px){.tl-stage{grid-template-columns:1fr;min-height:0} .tl-imgwrap{min-height:320px;margin-bottom:1rem} .tl-quotes{display:none}}
   @media (prefers-reduced-motion:reduce){.s2-polaroid{transition:none} .s2-polaroid:hover{transform:rotate(2.3deg) scale(1)} .tl-chat{transition:none} .s1-tick{transition:none} .ans{transition:none} .pl{transition:none} .s20-photo img{transition:none} .s14-opt{transition:none} .faqrow{transition:none}}
 
   /* ============================== WAVE 3 ============================== */
@@ -890,7 +830,7 @@
     <div class="wrap">
       <div class="s2-grid">
         <div class="s2-copy">
-          <div class="eyebrow">WingRep workshop · 20 minutes</div>
+          <div class="eyebrow">Live workshop · 45 minutes</div>
           <h1><span class="ln">The after&#8209;call work,</span><br><span class="ln">done by <span class="hl">Claude.</span></span></h1>
           <p class="sub">A real coaching workflow you can keep, with the exact prompts to run it. Steal all of it.</p>
           <div class="scribble" style="margin-top:1.2rem">copy-paste ready ↗</div>
@@ -913,31 +853,101 @@
   <section class="slide s3c">
     <div class="wrap">
       <div class="eyebrow">Here's the deal</div>
-      <h1><span class="ln">In twenty minutes, you</span><br><span class="ln">build a sales assistant</span><br><span class="ln"><span class="hl">you keep.</span></span></h1>
+      <h1><span class="ln">In forty-five minutes,</span><br><span class="ln">you build a sales</span><br><span class="ln">assistant <span class="hl">you keep.</span></span></h1>
       <ul class="checks" aria-label="What you will be able to do tonight">
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Run a coaching loop that sticks.</b> Coach one thing, then check the next call to see if it landed.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Write prompts Claude takes seriously.</b> The four moves that separate junk from gold.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Give Claude memory.</b> One running file per rep, so nothing resets every Monday.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Prep and drill before the call</b>, not scramble after it.</span></li>
       </ul>
-      <p class="sub" style="max-width:62ch">Everything we build in the next twenty minutes is yours to keep — whether or not we ever talk again.</p>
+      <p class="sub" style="max-width:62ch">Everything we build in the next forty-five minutes is yours to keep, whether or not we ever talk again.</p>
     </div>
   </section>
 
   <!-- 4 about Alan: LEGO brick + bouncing headshot + photo placeholders -->
+  <style>
+  /* ===== slide 4 overrides (kept out of the shared block so parallel edits merge clean) =====
+     Two problems fixed here:
+     1. The left column used to be a 1.14fr grid track carrying only ~280px of content, so
+        Alan's name floated in a field of nothing. Now the track is exactly as wide as the
+        widest nameplate (--stackW), the guide is a full-height column, and the brick stack
+        is pushed to the floor with margin-top:auto so it bottoms out level with the photo
+        wall. The two columns become one composition instead of a block and a void.
+     2. The nameplates are one LEGO mould now (same brick height, same stud size), so they
+        are sized by HEIGHT and let their own length vary, the way real bricks do. A longer
+        wordmark is simply a longer brick, and the stack widens toward its base. */
+  .slide.sAlan{
+    --brickH:clamp(84px,15.2vh,124px);
+    --stackW:calc(var(--brickH) * 3.084);   /* the UChicago plate is the widest: 515/167 */
+    --dvdSZ:clamp(132px,27.5vh,220px);      /* Alan wanted the bouncing headshot twice as big */
+  }
+  .sAlan-wrap{max-width:1010px}
+  .sAlan h1{margin-bottom:0}
+  .sAlan-grid{grid-template-columns:var(--stackW) 1fr;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
+  @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
+
+  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;height:100%}
+  .sAlan .s3-head{display:flex;align-items:center;gap:.8rem;width:100%}
+  .sAlan .s3-ava{width:74px;height:74px}
+  .sAlan .s3-name{font-size:clamp(20px,1.95vw,26px);line-height:1.18}
+  .sAlan .s3-name .role{display:block;font-size:.63em;margin-top:.1rem}
+  .sAlan .s3-tie{margin-top:.9rem;max-width:none;font-size:clamp(14px,1.35vw,16.5px);line-height:1.45}
+  /* A veil of paper, not a card. At 2x the bouncing headshot is wide enough to sit right
+     on top of this text, so the bio floats on a soft wash that fades to nothing at its
+     edges: the ball still glides visibly behind it, but the words never lose contrast.
+     No border, no shadow, no z-index on .s3-guide (that would trap the wash below it). */
+  .sAlan .s3-bio{position:relative}
+  .sAlan .s3-bio::before{content:"";position:absolute;z-index:-1;pointer-events:none;
+    left:-22px;right:-18px;top:-20px;bottom:-16px;
+    background:rgba(242,238,226,.9);border-radius:30px;filter:blur(15px)}
+
+  /* the shelf: three plates of one mould, stacked, widening to the base */
+  .sAlan .s3-marks{width:auto;margin-top:auto;padding-top:1.2rem;border-top:none;gap:5px}
+  .sAlan .s3-marks::before{content:none}   /* "Hackathon wins" only restated the line above it */
+  .sAlan .s3-marks img.mk{width:auto;height:var(--brickH);
+    filter:drop-shadow(0 3px 0 rgba(31,28,22,.10)) drop-shadow(0 9px 13px rgba(31,28,22,.16))}
+  .sAlan .s3-marks img.mk:nth-of-type(1){transform:translateX(9px) rotate(-.5deg)}
+  .sAlan .s3-marks img.mk:nth-of-type(2){transform:translateX(3px) rotate(.35deg)}
+
+  /* ---- the bouncing headshot, now 2x, with a comet tail ----
+     The tail is not a smear: each ghost is a real past position of the ball, carrying the
+     ring colour it had at that moment. So after a wall hit the tail still shows the old
+     colour behind it and you can read the bounce out of the trail. */
+  /* The ball flies OVER the slide, it does not hide behind it. .sAlan-wrap is a
+     z-index:2 stacking context, so at the old z-index of 1 the doubled ball spent
+     most of its orbit occluded by the polaroids and the brick shelf, which is worse
+     than not enlarging it at all. Both layers are pointer-events:none, so nothing
+     on the slide becomes unclickable. */
+  .sAlan .s3-dvd{width:var(--dvdSZ);height:var(--dvdSZ);z-index:6}
+  .sAlan .s3-trail{z-index:5}
+  .sAlan .s3-dvd-in{width:var(--dvdSZ);height:var(--dvdSZ);
+    box-shadow:0 0 0 5px var(--dvdc,#D97757),0 26px 46px -24px rgba(20,18,13,.55)}
+  .s3-trail{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
+  .s3-trail.on{display:block}
+  .s3-ghost{position:absolute;top:0;left:0;width:var(--dvdSZ);height:var(--dvdSZ);border-radius:50%;
+    background:currentColor;box-shadow:0 0 0 5px currentColor;opacity:0;
+    transform:translate(-999px,-999px);will-change:transform,opacity}
+  /* reduced motion: nothing moves, nothing trails, the static avatar simply stays put */
+  @media (prefers-reduced-motion:reduce){.s3-trail{display:none!important}}
+  </style>
   <section class="slide sAlan">
+    <div class="s3-trail" id="s3trail" aria-hidden="true"></div>
     <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap sAlan-wrap">
       <div class="eyebrow">Your guide tonight</div>
       <h1><span class="ln">Hi, I'm <span class="hl">Alan.</span></span></h1>
       <div class="sAlan-grid">
         <div class="s3-guide">
-          <div class="s3-ava">
-            <span class="fallback" aria-hidden="true">AT</span>
-            <img data-img="alan_headshot" alt="Alan Tai">
-          </div>
-          <div class="s3-id">
-            <div class="s3-name">Alan Tai <span class="role">· builder, not a pitch guy</span></div>
+          <div class="s3-bio">
+            <div class="s3-head">
+              <div class="s3-ava">
+                <span class="fallback" aria-hidden="true">AT</span>
+                <img data-img="alan_headshot" alt="Alan Tai">
+              </div>
+              <div class="s3-id">
+                <div class="s3-name">Alan Tai <span class="role">· builder, not a pitch guy</span></div>
+              </div>
+            </div>
             <p class="s3-tie"><b>5x hackathon winner.</b> Winning a hackathon is 24 hours to make a stranger care. Same skill as the cold email you'll write tonight.</p>
           </div>
           <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
@@ -964,101 +974,6 @@
             <figcaption>stack 'em</figcaption>
           </figure>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 the observation room: tools watch behind glass, their faces are their logos -->
-  <section class="slide">
-    <div class="oroom-wrap">
-      <header class="oroom-head">
-        <div class="oroom-eyebrow">The thing nobody fixes</div>
-        <h1 class="oroom-title">They see everything. <em>They change nothing.</em></h1>
-      </header>
-      <figure class="oroom-frame">
-        <div class="oroom-stage">
-          <img data-img="slide4_mirror.clay" alt="A sales rep on a call, watched from behind a one-way mirror by four faceless observers whose faces are the logos of the revenue tools Gong, Otter, Fireflies and Fathom.">
-          <span class="oroom-mark" data-domain="gong.io" style="left:44%;top:27.5%"><img alt="Gong"></span>
-          <span class="oroom-mark" data-domain="otter.ai" style="left:57.3%;top:27.5%"><img alt="Otter"></span>
-          <span class="oroom-mark" data-domain="fireflies.ai" style="left:71.6%;top:27.5%"><img alt="Fireflies"></span>
-          <span class="oroom-mark" data-domain="fathom.video" style="left:85.2%;top:27.5%"><img alt="Fathom"></span>
-        </div>
-      </figure>
-    </div>
-  </section>
-
-  <!-- 6 testimonial slider + face -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Drag from week 1 to week 3 →</div>
-      <h1>Every new sales tool<br>follows the <span id="tlWord" class="hl">honeymoon.</span></h1>
-      <div class="tl-stage">
-        <div class="tl-imgwrap">
-          <figure class="tl-chat tl-chat-h" id="tlImgH">
-            <figcaption class="tl-who">week 1 · the honeymoon</figcaption>
-            <img data-img="slide6_honeymoon.green" alt="Success Kid clenching a fist: I love logging calls">
-            <div class="tl-said">"i LOVE logging calls."</div>
-          </figure>
-          <figure class="tl-chat tl-chat-r" id="tlImgR" style="opacity:0">
-            <figcaption class="tl-who">week 3 · the reckoning</figcaption>
-            <img data-img="slide6_reckoning.clay" alt="This Is Fine dog calmly sitting in a burning room">
-            <div class="tl-said">"this is fine. it's fine."</div>
-          </figure>
-        </div>
-        <div class="tl-quotes">
-          <div class="tl-set" id="tlHoney">
-            <div class="q"><p>"I LOVE logging calls. Best part of my day."</p><div class="by">Jordan, AE</div></div>
-            <div class="q"><p>"Updated all 14 fields. Felt amazing."</p><div class="by">Priya, AE</div></div>
-            <div class="q"><p>"Can't wait to write follow-ups at 9pm!"</p><div class="by">Marcus, SDR</div></div>
-            <div class="q"><p>"Finally. More forms."</p><div class="by">Dana, AE</div></div>
-          </div>
-          <div class="tl-set" id="tlReck" style="opacity:0">
-            <div class="q bad"><p>"I spend more time reporting the work than doing it."</p><div class="by">Jordan, AE</div></div>
-            <div class="q bad"><p>"Pipeline's a fantasy. Untouched since Tuesday."</p><div class="by">Priya, AE</div></div>
-            <div class="q bad"><p>"I coach the same thing weekly. Nothing changes."</p><div class="by">You, the manager</div></div>
-            <div class="q bad"><p>"Forecast call again? Cool. Guessing again."</p><div class="by">Marcus, SDR</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="tl-ctrl">
-        <svg class="face" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--green)" stroke-width="2.5" id="faceRing"/><circle cx="14" cy="16" r="2.4" fill="var(--green)" id="eyeL"/><circle cx="26" cy="16" r="2.4" fill="var(--green)" id="eyeR"/><path id="mouth" d="M13 25 Q20 30 27 25" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"/></svg>
-        <span class="wk" id="tlLabel">Week 1</span><input type="range" id="tlRange" min="0" max="100" value="0">
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 two options -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">So you're stuck with</div>
-      <h1>Flying blind, or playing nag.</h1>
-      <div class="cols">
-        <div class="ocard"><div class="art"><img class="ill" data-asset="ui_ocard1" alt="blindfolded manager"></div><h3>Blind</h3><p>You coach in the 1:1. You hope it sticks. You find out on the forecast, too late.</p></div>
-        <div class="ocard"><div class="art"><img class="ill" data-asset="ui_ocard2" alt="manager nagging reps"></div><h3>Nag</h3><p>You chase reps to update the CRM. Every week. Forever. They still don't.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 the coaching loop: film-room hero -->
-  <section class="slide">
-    <div class="s7-slide">
-      <div class="s7-copy">
-        <div class="s7-eyebrow">The framework</div>
-        <h1 class="s7-headline">The coaching loop:<br><span class="s7-loopword">coach, check, adjust.</span></h1>
-        <p class="s7-body">Most coaching dies because nobody checks the <b>next</b> call. The whole method is four turns: coach one thing, watch the next call, ask <b>did it stick?</b>, then adjust. It only compounds if you close the loop.</p>
-      </div>
-      <div class="s7-stage">
-        <figure class="s7-frame">
-          <img class="s7-photo" data-img="slide7_filmroom.clay" alt="A sales manager and rep reviewing a recorded call together, one pointing at the screen, the other taking notes">
-          <div class="s7-tape">
-            <svg class="s7-markup" viewBox="0 0 400 500" fill="none" aria-hidden="true" preserveAspectRatio="none">
-              <path class="s7-ring" d="M212 140 C250 137 296 156 296 200 C297 242 260 268 210 269 C158 270 130 245 131 199 C132 155 172 137 230 139" stroke="#F7E9DF" stroke-width="5" stroke-linecap="round"/>
-              <path class="s7-arr" d="M336 92 C322 120 306 154 290 191" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round"/>
-              <path class="s7-arrhead" d="M280 175 L290 191 L273 194" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="s7-note">there<br>it is</span>
-          </div>
-        </figure>
       </div>
     </div>
   </section>
@@ -1101,7 +1016,10 @@
      screen edge, and let the grid span the full width (no centering) so the left
      column keeps enough room for the cards. Falls back to the plain single-column
      slide with no asset. */
-  .s9lit.has-fable{padding-right:clamp(16px,2.6vw,40px)}
+  /* the scribble now sits lower (it was crowding the cards), which pushed a 720px
+     laptop into scroll. This slide has no footer, so buy the room back from the
+     deck's generous bottom padding instead of squeezing the gap shut again. */
+  .s9lit.has-fable{padding-right:clamp(16px,2.6vw,40px);padding-bottom:6vh}
   .s9lit.has-fable .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:clamp(18px,2.8vw,48px);max-width:none;margin:0}
   .s9lit .s9-main{min-width:0}
   .s9lit .ailit{margin-top:.9rem;gap:.6rem}
@@ -1112,6 +1030,9 @@
   .s9lit .ailit .term{font-size:clamp(17px,1.9vw,24px)}
   .s9lit .ailit .def{font-size:clamp(13px,1.4vw,15.5px);line-height:1.38}
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
+  /* the payoff line was crowding the last card; give it room to breathe, but scale
+     the gap with viewport height so a 720px laptop still fits the whole slide */
+  .s9lit .scribble{margin-top:clamp(1.1rem,3.2vh,1.9rem)}
   /* Fable 5 numeral: an oversized butterfly "5" (transparent WebP cutout, so it
      floats straight on the cream slide with no box) anchored large in the right
      column. Hidden until window.ASSETS.slide9_fable exists, so the deck ships
@@ -1119,20 +1040,37 @@
   .s9-fable{display:none;margin:0;justify-self:end;position:relative}
   .s9lit.has-fable .s9-fable{display:block}
   .s9-num{width:clamp(240px,27vw,420px);height:auto;display:block;filter:drop-shadow(0 20px 34px rgba(20,18,13,.14))}
-  /* a few real butterflies flapping and drifting near the numeral. Each is an
-     animated transparent WebP (the wing-flap is baked into the frames); CSS only
-     adds a slow drift so they wander. Positions are % of the numeral box, so
-     they track the "5" at any size. */
+  /* A few loose butterflies drifting around the numeral, cut from the same kind of
+     vintage plate as the specimens that build the "5".
+     NOTE ON THE ARTWORK: these two WebPs shipped as animated wing-flaps, but the
+     flap was unrecoverable. Every frame after the first had earlier wing positions
+     composited into its own pixels (not a container/disposal bug: the ghosting is
+     baked into each frame's encoded bitstream, so no re-encode can undo it), which
+     is why the deck showed a butterfly with five overlapping sets of wings. Frame 1
+     is the only clean pose in either file, so each asset is now that single clean
+     frame and the life comes from CSS drift instead of a baked-in flap. A pinned
+     specimen coming loose from the "5" does not flap anyway. Do not "restore" the
+     animation from the old base64: it is the broken artwork. */
   .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,7s) ease-in-out infinite}
   .s9-bf>img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 11px rgba(20,18,13,.2))}
   .s9-bf>img.flip{transform:scaleX(-1)}
-  .s9-bf1{width:30%;top:-7%;left:-20%}
-  .s9-bf2{width:23%;top:41%;left:-17%}
-  .s9-bf3{width:17%;bottom:1%;left:-3%}
-  .s9-bf4{width:19%;top:-3%;right:7%}
-  @keyframes s9float{0%,100%{translate:0 0;rotate:-5deg}50%{translate:5px -11px;rotate:6deg}}
-  /* house rule: reduced-motion gets a still slide, so drop the flutter entirely */
-  @media (prefers-reduced-motion:reduce){.s9-bf{display:none}}
+  /* Composition: the "5" is built from pinned specimens, so the live ones read as
+     the few that came loose and are scattering off it. Every one sits in real
+     negative space, checked against the numeral's own alpha rather than eyeballed:
+     the counter of the 5, the air right of its stroke, the headroom off its
+     shoulder, the space under its tail. Nothing overlaps the numeral, each other,
+     the text column, or the slide edges; the only overhangs are a few px into the
+     column gap and the slide's right padding. They shrink as they get further from
+     the glyph, so the group reads as a scatter with a direction, not four stickers. */
+  .s9-bf1{width:13%;top:59%;left:25%}    /* biggest, just come loose, still in the crook of the 5 */
+  .s9-bf2{width:13%;top:27%;right:-2%}   /* slipping out past the stroke, off to the right */
+  .s9-bf3{width:9%;bottom:-5%;right:4%}  /* small, drifting out from under the tail */
+  .s9-bf4{width:8%;top:-4%;left:-2%}     /* smallest and furthest off, clear of the shoulder */
+  /* each one drifts its own way, so they never move in lockstep */
+  @keyframes s9float{0%,100%{translate:0 0;rotate:var(--r0,-5deg)}50%{translate:var(--tx,5px) var(--ty,-11px);rotate:var(--r1,6deg)}}
+  /* house rule: reduced-motion gets a still slide. The butterflies are plain stills
+     now, so they no longer have to be hidden to hold still; just stop the drift. */
+  @media (prefers-reduced-motion:reduce){.s9-bf{animation:none}}
   /* narrow tablets/phones read the slide as a tall scroll and the two-zone grid
      starves the cards, so below 820px drop the numeral, collapse to one column and
      restore the slide's symmetric side padding */
@@ -1143,7 +1081,7 @@
      <div class="s9-main">
       <div class="eyebrow">AI, minus the jargon</div>
       <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
-      <p class="sub">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
+      <p class="sub">You can use Claude Fable 5 today, Anthropic's newest and most capable model. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
       <ul class="ailit">
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><rect x="5" y="9" width="56" height="41" rx="7" stroke="var(--green)" stroke-width="2.2"/><line x1="5" y1="18" x2="61" y2="18" stroke="var(--green)" stroke-width="1.3" opacity=".45"/><circle cx="11" cy="13.5" r="1.4" fill="var(--rust)"/><circle cx="16.5" cy="13.5" r="1.4" fill="var(--green-bright)" opacity=".75"/><rect x="11" y="24" width="40" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="31" width="44" height="3.2" rx="1.6" fill="var(--rust)" opacity=".7"/><rect x="11" y="38" width="33" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="45" width="41" height="3.2" rx="1.6" fill="var(--green-bright)" opacity=".55"/></svg></span>
@@ -1161,16 +1099,19 @@
           <span class="def">AI that does a task, not just answers a question. It plans, uses tools, and checks its own work across many steps. The longer the task, the more this matters. <b>Fable 5 can run for days and validate what it did.</b></span>
         </li>
       </ul>
-      <div class="scribble" style="margin-top:.7rem">now you're the one explaining it at the next meeting.</div>
+      <div class="scribble">now you're the one explaining it at the next meeting.</div>
      </div>
-     <!-- Fluttering butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
+     <!-- Drifting butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
           Wikimedia Commons, CC BY-SA 4.0, attribution required); s9_bf2 = a
-          user-supplied blue-admiral GIF. Both re-encoded to animated WebP. -->
+          user-supplied blue-admiral GIF. Both are now single clean stills, not
+          animations: every frame past the first had earlier wing positions baked
+          into its pixels, which is what put five sets of wings on one butterfly.
+          See the note by .s9-bf in the style block above. -->
      <figure class="s9-fable" aria-hidden="true"><img class="s9-num" data-asset="slide9_fable" alt="The Fable 5 wordmark: a numeral 5 formed from vintage butterfly illustrations">
-       <span class="s9-bf s9-bf1" style="--d:7.5s"><img data-asset="s9_bf1" alt=""></span>
-       <span class="s9-bf s9-bf2" style="--d:6.4s"><img data-asset="s9_bf2" alt=""></span>
-       <span class="s9-bf s9-bf3" style="--d:8.2s"><img class="flip" data-asset="s9_bf2" alt=""></span>
-       <span class="s9-bf s9-bf4" style="--d:6.9s"><img class="flip" data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf1" style="--d:7.5s;--tx:-9px;--ty:-14px;--r0:-6deg;--r1:4deg"><img data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf2" style="--d:6.4s;--tx:10px;--ty:-8px;--r0:4deg;--r1:-5deg"><img data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf3" style="--d:8.2s;--tx:6px;--ty:-13px;--r0:-3deg;--r1:7deg"><img class="flip" data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf4" style="--d:6.9s;--tx:8px;--ty:-10px;--r0:5deg;--r1:-4deg"><img class="flip" data-asset="s9_bf1" alt=""></span>
      </figure>
     </div>
   </section>
@@ -1194,10 +1135,10 @@
   </section>
 
   <!-- NEW: the 5 prompts to steal + prompt glow-up slider -->
-  <section class="slide">
+  <section class="slide sFive">
     <div class="wrap">
-      <div class="eyebrow">Your takeaway</div>
-      <h1>Five prompts. <span class="hl">Copy them all.</span></h1>
+      <div class="eyebrow">Five prompts to steal</div>
+      <h1>Claude writes up the call, <span class="hl">then coaches the rep.</span></h1>
       <ol class="prompts5">
         <li><b>Capture</b> a call into the rep's running file.</li>
         <li><b>Coaching ledger</b>, did last call's focus stick?</li>
@@ -1286,74 +1227,447 @@ objection handling, and next-step.</div>
     </div>
   </section>
 
-  <!-- 10 dark oneliner + self-typing ledger -->
-  <section class="slide" data-animate="type">
+  <!-- 10 where Claude falls short. Scoped styles only, nothing outside .sShort. -->
+  <style>
+    /* Slide 10. The terminal does the hard part well, then hits three walls it
+       cannot get past, and just sits there blinking. The stall is the argument,
+       so the caret never goes away. Refusals are dimmed rather than alarmed:
+       this is a boundary, not a bug. */
+    .sShort h1{max-width:19ch}
+    /* height is reserved for all 9 lines up front, otherwise the panel grows as it
+       types and shoves the line underneath it down the screen. 9 lines x 1.78 =
+       16.02em, plus headroom for the caret: it is an inline-block taller than the
+       text it sits next to, so the final line box outgrows a plain one and the
+       panel would still tick down ~2px right as the run lands. Reserved in em so
+       it also holds at the 880px breakpoint's smaller type. */
+    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:13.5px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.2em + 2.3rem)}
+    .sShort .typer .n{color:#a68b80}
+    .sShort .s10-cap{margin-top:1.15rem;font-size:clamp(15px,1.6vw,19px);line-height:1.4;font-weight:600;color:var(--ink-soft);max-width:48ch}
+    .sShort .s10-cap b{color:var(--green);font-weight:700}
+    @media (max-width:880px){.sShort .typer{font-size:12px;line-height:1.7}}
+    @media (prefers-reduced-motion:reduce){.sShort .typer .cr{animation:none;opacity:1}}
+  </style>
+  <section class="slide sShort" data-animate="type">
     <div class="wrap">
-      <div class="eyebrow">The obvious question</div>
-      <h1>What if it ran itself, <br>and <span class="hl">remembered?</span></h1>
-      <div class="typer" id="typer"></div>
+      <div class="eyebrow">Where Claude falls short</div>
+      <h1>Claude does the thinking.<br>You're still the <span class="hl">plumbing.</span></h1>
+      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: it updates the coaching log correctly, then answers three follow-ups with I have no hands, I have no clock, I have no ears. The cursor sits waiting."></div>
+      <p class="s10-cap">The thinking was never the bottleneck. <b>Everything around it is.</b></p>
     </div>
   </section>
 
-  <!-- 11 reveal dark -->
-  <section class="slide" data-animate="app">
+  <!-- 11 reveal.
+       Two things happen on this slide and nowhere else in the deck.
+       1. WingRep's real brand green (#009443) arrives. Everything before this is
+          Claude clay on purpose, so the green has to mean something when it lands.
+          It is used only for WingRep's own presence inside the product: the mark,
+          the live indicator, the nudge, the work it finished. Not a repaint.
+       2. The set-piece runs on a time axis, left to right. The left column is the
+          call still happening, WingRep listening and nudging the rep mid-sentence.
+          The right column is the after-call work, which is the consequence. The
+          live column is the payoff: it is the one thing the Claude workflow on
+          slide 9 structurally cannot do, because Claude never hears the call. -->
+  <style>
+  #wingrepReveal{--wr:#009443;--wr-lit:#22c06d;--wr-dim:rgba(0,148,67,.34)}
+  #wingrepReveal .app{max-width:1000px;margin-top:1rem}
+  #wingrepReveal .bar .wm{color:var(--wr-lit)}
+  #wingrepReveal .bar .status{color:#9d8279;font-variant-numeric:tabular-nums}
+  #wingrepReveal .bar .status::before{background:#553529;animation:none;transition:background .4s}
+  #wingrepReveal .bar .status.on{color:var(--wr-lit)}
+  #wingrepReveal .bar .status.on::before{background:var(--wr);animation:wrPulse 1.5s infinite}
+  @keyframes wrPulse{0%{box-shadow:0 0 0 0 rgba(0,148,67,.55)}70%{box-shadow:0 0 0 8px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
+
+  /* the time axis: during the call | the call ends | after the call */
+  #wingrepReveal .stage{display:grid;grid-template-columns:minmax(0,.94fr) 26px minmax(0,1fr);gap:.15rem;padding:.9rem}
+  #wingrepReveal .panes{padding:0;align-content:start;gap:.5rem}
+  #wingrepReveal .divide{position:relative;align-self:stretch}
+  #wingrepReveal .divide::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;margin-left:-.5px;background:#45281d}
+  #wingrepReveal .divide span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6355;background:#23130d;padding:.45rem 0;opacity:0;transition:opacity .6s}
+  #wingrepReveal .divide span.on{opacity:1}
+
+  /* left: the call, still running */
+  #wingrepReveal .lv{display:flex;flex-direction:column;gap:.58rem;background:#2a1811;border:1.5px solid var(--wr-dim);border-radius:12px;padding:.75rem .85rem;opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .6s}
+  #wingrepReveal .lv.show{opacity:1;transform:none}
+  #wingrepReveal .lv.ended{border-color:#45281d}
+  #wingrepReveal .lvtop{display:flex;align-items:center;gap:.5rem}
+  #wingrepReveal .lvbadge{display:inline-flex;align-items:center;gap:.34rem;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--wr);border-radius:4px;padding:.2rem .4rem;transition:background .4s,color .4s}
+  #wingrepReveal .lvbadge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:wrBlink 1.2s infinite}
+  @keyframes wrBlink{0%,100%{opacity:1}50%{opacity:.2}}
+  #wingrepReveal .lv.ended .lvbadge{background:#45281d;color:#b08d80}
+  #wingrepReveal .lv.ended .lvbadge::before{animation:none;background:#8a6355}
+  #wingrepReveal .lvwho{font-size:12.5px;font-weight:600;color:#d9c8c1}
+  #wingrepReveal .lvclock{margin-left:auto;font-family:var(--mono);font-size:12px;color:#de9a81;font-variant-numeric:tabular-nums}
+  /* WingRep is hearing it. the bars are the whole argument, so they are green. */
+  #wingrepReveal .wave{display:flex;align-items:center;gap:3px;height:26px}
+  #wingrepReveal .wave i{flex:1 1 0;min-width:0;height:100%;border-radius:1.5px;background:var(--wr);opacity:.85;transform:scaleY(.12);transform-origin:center;animation:wrWave 1s ease-in-out infinite;transition:transform .35s ease,background .5s ease}
+  @keyframes wrWave{0%,100%{transform:scaleY(.1)}50%{transform:scaleY(var(--a,1))}}
+  #wingrepReveal .lv.ended .wave i{animation:none;transform:scaleY(.07);background:#45281d;opacity:1}
+  /* a live transcript: newest line sits against the nudge, older ones scroll up
+     under the fade. the fade is what makes the pane read as still running. */
+  #wingrepReveal .lvtx{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-end;gap:.24rem;overflow:hidden;min-height:0;max-height:170px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%)}
+  #wingrepReveal .lvtx p{font-size:12.5px;line-height:1.42;font-weight:500;color:#b8a49c}
+  #wingrepReveal .lvtx p{padding-left:46px;text-indent:-46px}
+  #wingrepReveal .lvtx p b{display:inline-block;width:40px;margin-right:6px;text-indent:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#8a6355}
+  #wingrepReveal .lvtx p.now{color:#f4edea;font-size:13.5px}
+  #wingrepReveal .car{display:inline-block;width:2px;height:.95em;margin-left:2px;vertical-align:-1px;background:var(--wr);animation:wrBlink 1s step-end infinite}
+  #wingrepReveal .lv.ended .car{display:none}
+  /* the nudge lands from the right, while she is still mid-sentence */
+  #wingrepReveal .nudge{margin-top:auto;background:linear-gradient(180deg,rgba(0,148,67,.16),rgba(0,148,67,.05));border:1.5px solid var(--wr);border-radius:10px;padding:.62rem .72rem;opacity:0;transform:translateX(18px) scale(.97);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1)}
+  #wingrepReveal .nudge.show{opacity:1;transform:none;animation:wrLand .9s ease-out}
+  @keyframes wrLand{0%{box-shadow:0 0 0 0 rgba(0,148,67,.45)}60%{box-shadow:0 0 0 11px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
+  #wingrepReveal .nudge .nh{display:flex;align-items:center;gap:.35rem;margin-bottom:.36rem;font-family:var(--body);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--wr-lit)}
+  #wingrepReveal .nudge .nh img{height:12px}
+  #wingrepReveal .nudge p{font-size:13.5px;line-height:1.42;font-weight:500;color:#f4edea}
+  #wingrepReveal .nudge p b{color:#fff;font-weight:800}
+  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:11.5px;font-weight:600;color:#b79b91}
+  #wingrepReveal .nok{margin-left:auto;font-size:11px;text-transform:none;letter-spacing:0;color:var(--wr-lit);opacity:0;transition:opacity .55s}
+  #wingrepReveal .nok.on{opacity:1}
+
+  /* right: what it did about it. green marks the work WingRep finished. */
+  #wingrepReveal .pane2{padding:.62rem .8rem}
+  #wingrepReveal .pane2 .row{padding:.28rem 0}
+  #wingrepReveal .pane2 .h .ok{color:var(--wr-lit)}
+  #wingrepReveal .pane2.coach{background:linear-gradient(180deg,rgba(0,148,67,.12),rgba(0,148,67,.03)),#2a1811;border-color:rgba(0,148,67,.6)}
+  #wingrepReveal .pane2.coach .h{color:var(--wr-lit)}
+  #wingrepReveal .pane2.coach .stuck{color:var(--wr-lit);font-weight:800}
+
+  /* The caption is the last beat, so it has to arrive last. The deck's entry
+     animation (.slide.active .wrap>* runs `rev` with fill forwards) otherwise wins
+     the cascade over .caption{opacity:0} and puts "it just happened" on screen
+     before anything has happened. Opting this one caption out of `rev` hands the
+     timing back to the .show class runApp() already toggles. */
+  #wingrepReveal .caption{animation:none;opacity:0}
+  #wingrepReveal .caption.show{opacity:1}
+
+  /* A 1280x720 laptop is 80px shorter than the design target, and this set-piece is
+     the tallest thing in the deck: at that height the headline and eyebrow ride up
+     under the fixed top-bar mark, which lands on exactly the slide where that mark
+     first appears. Tighten the whole column on short viewports. Nothing is dropped,
+     it just gets closer together. Untouched at 800px and above. */
+  @media (max-height:780px){
+    #wingrepReveal h1{font-size:clamp(30px,4.2vw,56px)}
+    #wingrepReveal .app{margin-top:.55rem}
+    #wingrepReveal .stage{padding:.6rem}
+    #wingrepReveal .panes{gap:.42rem}
+    #wingrepReveal .pane2{padding:.48rem .75rem}
+    #wingrepReveal .pane2 .row{padding:.2rem 0}
+    #wingrepReveal .lvtx{max-height:116px}
+    #wingrepReveal .caption{margin-top:.55rem;font-size:16px}
+    #wingrepReveal .replay{margin-top:.4rem}
+  }
+
+  @media (max-width:900px){#wingrepReveal .stage{grid-template-columns:1fr;gap:.6rem}#wingrepReveal .divide{display:none}}
+  @media (prefers-reduced-motion:reduce){
+    #wingrepReveal .wave i,#wingrepReveal .lvbadge::before,#wingrepReveal .nudge.show{animation:none}
+    #wingrepReveal .car{display:none}
+  }
+  </style>
+  <section class="slide" id="wingrepReveal" data-animate="app">
     <div class="wrap">
       <div class="eyebrow">This is the part we built</div>
       <h1>Same loop. No files. <span class="hl">No pasting.</span></h1>
       <div class="app">
-        <div class="bar"><span class="wm"><img data-asset="ui_barwm" alt="">WingRep</span><span class="status">live on the call</span></div>
-        <div class="panes">
-          <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Jordan @ Northwind, 32 min. The rep took the call. Did nothing else.</p></div>
-          <div class="pane2" data-step="2"><div class="h">Follow-up <span class="ok">· drafted &amp; queued ✓</span></div><p>Thanks Dana, sending the 2-week rollout plan, looping in security before the 24th…</p></div>
-          <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Security review · Apr 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
-          <div class="pane2 coach" data-step="4"><div class="h">Coaching · checked vs last call, automatically</div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did. ✓</span> The log updated itself.</p></div>
+        <div class="bar"><span class="wm"><img data-asset="ui_barwm" alt="">WingRep</span><span class="status on" id="appStatus">listening, live</span></div>
+        <div class="stage">
+          <div class="lv" id="wrLive">
+            <div class="lvtop">
+              <span class="lvbadge" id="wrBadge">LIVE</span>
+              <span class="lvwho">Dana · Northwind</span>
+              <span class="lvclock" id="wrClock">29:41</span>
+            </div>
+            <div class="wave" id="wrWave" aria-hidden="true"></div>
+            <div class="lvtx">
+              <p><b>Dana</b>We have been burned by a rollout before, so.</p>
+              <p><b>Rep</b>Understood. What went wrong last time?</p>
+              <p><b>Dana</b>Nobody owned it once the pilot finished.</p>
+              <p><b>Rep</b>And the team you'd roll this out to, how big is that?</p>
+              <p><b>Dana</b>Forty-odd. Maybe sixty by the autumn.</p>
+              <p><b>Rep</b>So if the pilot lands, what happens after?</p>
+              <p><b>Dana</b>Depends who else is asking for budget this quarter.</p>
+              <p><b>Rep</b>Fair.</p>
+              <p><b>Dana</b>Honestly, the pilot itself looks fine to me.</p>
+              <p class="now" id="wrLine"><b>Dana</b><span id="wrType"></span><i class="car"></i></p>
+            </div>
+            <div class="nudge" id="wrNudge">
+              <div class="nh"><img data-asset="ui_barwm" alt="">nudge<span class="nok" id="wrNok">she asked ✓</span></div>
+              <p><b>Ask who signs off on the budget.</b> Now, while Dana is still on it.</p>
+              <div class="nf">your coached focus from last call</div>
+            </div>
+          </div>
+          <div class="divide"><span id="wrPivot">call ends</span></div>
+          <div class="panes">
+            <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Dana @ Northwind, 32 min. The rep took the call. Did nothing else.</p></div>
+            <div class="pane2" data-step="2"><div class="h">Follow-up <span class="ok">· drafted &amp; queued ✓</span></div><p>Thanks Dana, sending the 2-week rollout plan, looping in security before the 24th…</p></div>
+            <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Security review · Apr 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
+            <div class="pane2 coach" data-step="4"><div class="h">Coaching <span class="ok">· checked vs last call ✓</span></div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did.</span> The log updated itself.</p></div>
+          </div>
         </div>
       </div>
       <p class="caption" id="appCaption">No file to keep. No prompt to run. <span class="scribble">it just happened.</span></p>
       <button class="replay" id="appReplay">↺ replay</button>
     </div>
   </section>
+  <script>
+  // Build the live waveform. Every bar gets its own amplitude, phase and speed:
+  // a single shared sine reads as a loading spinner, and audio does not march in
+  // step. Deterministic offsets, so the bars look the same on every replay.
+  document.addEventListener('DOMContentLoaded',function(){
+    var wave=document.getElementById('wrWave');
+    if(!wave) return;
+    for(var n=0;n<64;n++){
+      var b=document.createElement('i');
+      b.style.setProperty('--a',(0.34+((n*29)%67)/100).toFixed(2));
+      b.style.animationDuration=(0.66+((n*37)%9)/10).toFixed(2)+'s';
+      b.style.animationDelay=(-((n*53)%97)/100).toFixed(2)+'s';
+      wave.appendChild(b);
+    }
+  });
+  </script>
 
-  <!-- 15 CTA + 3-week bar -->
+  <!-- 15 CTA: free 3-week trial. Two arcs: every other tool decays, this one climbs. -->
+  <style>
+  /* ===== slide 15 (#trial): the two-arc trial ===== */
+  #trial .wrap>*:nth-child(7){animation-delay:.52s}
+  #trial .tarc{position:relative;max-width:830px;margin-top:.55rem}
+  #trial .tarc svg{width:100%;height:auto;display:block;overflow:visible}
+  #trial .tline{fill:none;stroke-linecap:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1}
+  #trial .tline-old{stroke:var(--ink-soft);stroke-width:2.5;opacity:.42}
+  #trial .tline-new{stroke:var(--green-bright);stroke-width:4}
+  #trial .tdot{fill:var(--green-bright);stroke:var(--paper);stroke-width:2.5;opacity:0}
+  #trial .tface,#trial .tring,#trial .tsaid{opacity:0}
+  /* both memes belong to the greyed-out "every other tool" line. the honeymoon art is
+     duotone WingRep green, which would misread now that the green mark is on screen, so
+     it gets pulled back to neutral. */
+  #trial .tface-h{filter:grayscale(.78) contrast(1.04)}
+  #trial .tface-r{filter:grayscale(.18)}
+  #trial .tring{fill:none;stroke:var(--line);stroke-width:2.5}
+  #trial .tsaid{font-family:var(--hand);font-size:18px;fill:var(--ink-soft)}
+  #trial .tlab{opacity:0;font-family:var(--mono);font-size:12.5px;fill:var(--ink-soft);letter-spacing:.02em}
+  #trial .tlab-new{font-family:var(--display);font-weight:800;font-size:16px;fill:var(--green-bright);letter-spacing:0}
+  /* the lines draw at the same time, so the audience watches them cross */
+  #trial.active .tline{animation:tdraw 1.5s cubic-bezier(.4,0,.25,1) .35s forwards}
+  #trial.active .tdot{animation:tpop .45s cubic-bezier(.2,.85,.25,1) forwards}
+  #trial.active .tdot:nth-of-type(1){animation-delay:.5s}
+  #trial.active .tdot:nth-of-type(2){animation-delay:1.05s}
+  #trial.active .tdot:nth-of-type(3){animation-delay:1.6s}
+  #trial.active .tface-h,#trial.active .tring-h,#trial.active .tsaid-h{animation:tfade .6s ease .15s forwards}
+  /* the reckoning only lands once the old tool's line has finished falling */
+  #trial.active .tface-r,#trial.active .tring-r,#trial.active .tsaid-r{animation:tfade .6s ease 1.7s forwards}
+  #trial.active .tlab-old{animation:tfade .6s ease .9s forwards}
+  #trial.active .tlab-new{animation:tfade .6s ease 1.6s forwards}
+  @keyframes tdraw{to{stroke-dashoffset:0}}
+  @keyframes tpop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+  @keyframes tfade{to{opacity:1}}
+  #trial .tdot{transform-box:fill-box;transform-origin:center}
+  /* week columns align exactly under the three dots on the climbing line */
+  #trial .tweeks{max-width:830px;display:grid;grid-template-columns:repeat(3,1fr);margin-top:.75rem}
+  #trial .tweeks>div{text-align:center;padding:0 1.1rem}
+  #trial .tweeks .wk{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;color:var(--ink-soft);display:block;margin-bottom:.18rem}
+  #trial .tweeks .wh{font-family:var(--display);font-weight:800;font-size:clamp(15px,1.5vw,18px);color:var(--ink);display:block;margin-bottom:.22rem}
+  #trial .tweeks .ws{font-size:13.5px;line-height:1.35;color:var(--ink-soft);font-weight:500;display:block}
+  #trial .cta-row{margin-top:.7rem}
+  #trial .cta-note{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  #trial .logobanner{margin-top:.35rem}
+  @media(max-width:820px){
+    #trial .tweeks{grid-template-columns:1fr;gap:.6rem;margin-top:1rem}
+    #trial .tweeks>div{text-align:left;padding:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #trial .tline{stroke-dashoffset:0}
+    #trial .tdot,#trial .tface,#trial .tring,#trial .tsaid,#trial .tlab{opacity:1}
+    #trial.active .tline,#trial.active .tdot,#trial.active .tface,#trial.active .tring,#trial.active .tsaid,#trial.active .tlab{animation:none}
+  }
+  </style>
   <section class="slide" id="trial">
     <div class="wrap">
       <div class="eyebrow">How to start</div>
-      <h1>Run it on your own<br>calls for three weeks.</h1>
-      <p class="body">Not a demo. A real trial with a few reps. We set it up, it works your actual calls, you decide.</p>
-      <div class="trial-cols">
-        <div class="trial-plan">
-          <div class="flightplan" aria-hidden="true">
-            <svg viewBox="0 0 580 110" preserveAspectRatio="xMidYMid meet">
-              <path id="fpath" d="M24 86 C120 86 150 56 290 52 C430 48 470 34 556 22" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"/>
-              <circle class="wp" cx="24" cy="86" r="6"/><circle class="wp" cx="290" cy="52" r="6"/><circle class="wp" cx="556" cy="22" r="6"/>
-              <text class="wplab" x="24" y="106" text-anchor="middle">Week 1</text>
-              <text class="wplab" x="290" y="72" text-anchor="middle">Week 2</text>
-              <text class="wplab" x="556" y="42" text-anchor="end">Week 3</text>
-              <g class="fp-plane">
-                <path d="M-3 -6 L14 0 L-3 6 L2 0 Z"/>
-                <animateMotion dur="7s" repeatCount="indefinite" rotate="auto" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.82;1"><mpath href="#fpath"/></animateMotion>
-              </g>
-            </svg>
-          </div>
-          <div class="how">
-            <div><b>WEEK 1</b><span>We set it up and it shadows your real calls.</span></div>
-            <div><b>WEEK 2</b><span>It preps reps, drafts follow-ups, writes the CRM.</span></div>
-            <div><b>WEEK 3</b><span>You look at whether coaching stuck, and decide.</span></div>
-          </div>
-          <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a></div>
-        </div>
-        <div class="trial-faq">
-          <div class="faq-label">Common questions</div>
-          <div id="faq" style="max-width:100%;display:grid;gap:.6rem"></div>
-        </div>
+      <h1>Free for three weeks,<br>on your <span class="hl">actual calls.</span></h1>
+      <p class="body">Not a demo. A real trial with a few reps. If you're on Google Workspace, setup is a Chrome extension. That's the whole install.</p>
+
+      <div class="tarc">
+        <svg viewBox="0 0 1000 236" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Every other sales tool starts at the week-one honeymoon and falls to the week-three reckoning. WingRep's three weeks climb the other way.">
+          <defs>
+            <clipPath id="tclipH"><rect x="26" y="6" width="128" height="96" rx="11"/></clipPath>
+            <clipPath id="tclipR"><rect x="842" y="122" width="128" height="96" rx="11"/></clipPath>
+          </defs>
+
+          <!-- every other tool: honeymoon, then the long slide into the reckoning -->
+          <path class="tline tline-old" d="M167 58 C 280 64, 370 92, 500 118 C 640 146, 720 164, 833 188"/>
+          <!-- your three weeks: the other direction -->
+          <path class="tline tline-new" d="M167 188 C 290 184, 370 158, 500 132 C 640 106, 720 82, 833 50"/>
+
+          <image class="tface tface-h" data-simg="slide6_honeymoon.green" x="26" y="6" width="128" height="96" clip-path="url(#tclipH)" preserveAspectRatio="xMidYMid slice"/>
+          <rect class="tring tring-h" x="26" y="6" width="128" height="96" rx="11"/>
+          <text class="tsaid tsaid-h" x="90" y="126" text-anchor="middle">"i LOVE logging calls."</text>
+
+          <!-- the reckoning sits above its panel, so it cannot be mistaken for a caption on WEEK 3 -->
+          <text class="tsaid tsaid-r" x="970" y="110" text-anchor="end">"this is fine. it's fine."</text>
+          <image class="tface tface-r" data-simg="slide6_reckoning.clay" x="842" y="122" width="128" height="96" clip-path="url(#tclipR)" preserveAspectRatio="xMidYMid slice"/>
+          <rect class="tring tring-r" x="842" y="122" width="128" height="96" rx="11"/>
+
+          <!-- the label rides above the falling line: on it, the line strikes the words through -->
+          <text class="tlab tlab-old" x="188" y="42">every other tool</text>
+          <text class="tlab tlab-new" x="826" y="30" text-anchor="end">WingRep</text>
+
+          <circle class="tdot" cx="167" cy="188" r="7"/>
+          <circle class="tdot" cx="500" cy="132" r="7"/>
+          <circle class="tdot" cx="833" cy="50" r="7"/>
+        </svg>
       </div>
-      <div class="logobanner" style="margin-top:.85rem"><div class="bandstrip">
+
+      <div class="tweeks">
+        <div><span class="wk">WEEK 1</span><span class="wh">Get set up.</span><span class="ws">Twenty minutes of setup. Then it's on your real calls.</span></div>
+        <div><span class="wk">WEEK 2</span><span class="wh">See the value.</span><span class="ws">Follow-ups drafted. CRM written. Reps prepped before they walk in.</span></div>
+        <div><span class="wk">WEEK 3</span><span class="wh">Hate to see it go away.</span><span class="ws">Now try taking it back off your reps. That's the actual test.</span></div>
+      </div>
+
+      <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a><span class="cta-note">Free. No card.</span></div>
+      <div class="logobanner"><div class="bandstrip">
         <img class="np" data-client="client-2" alt="Rho">
         <img class="np" data-client="client-8" alt="Uber">
         <img class="np" data-client="client-4" alt="TBConsulting">
         <img class="np" data-client="client-6" alt="RapidFort">
         <img class="np" data-client="client-10" alt="Salesforce">
       </div></div>
+    </div>
+  </section>
+  <script>
+  /* #trial: the two meme endpoints live inside the SVG, so wire their hrefs by hand
+     (the global img[data-img] loader only walks HTML <img> elements). */
+  document.addEventListener('DOMContentLoaded', function(){
+    if(!window.IMG) return;
+    document.querySelectorAll('#trial image[data-simg]').forEach(function(el){
+      var k = el.dataset.simg;
+      if(window.IMG[k]) el.setAttribute('href', window.IMG[k]);
+    });
+  });
+  </script>
+
+  <!-- 16 competitors + common questions.
+       Two jobs on one slide. Left: the argument from the archived one-way-mirror
+       slide, without the photo scene, the incumbents' own logos sit behind a pane
+       of glass and a glare crosses it on a loop. They watch. Nothing moves.
+       Right: the FAQ accordion, moved off the trial slide and grown to the real set.
+       All CSS is scoped to .sFaq so nothing here touches another slide. -->
+  <style>
+  .sFaq .eyebrow{margin-bottom:.75rem}
+  .sFaq h1{font-size:clamp(26px,4.1vw,50px);line-height:1.03}
+  .sFaq .faqcols{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(1.3rem,3.2vw,3rem);align-items:start;margin-top:clamp(.9rem,2.4vh,1.6rem)}
+
+  /* shared label rule for both columns */
+  .sFaq .lab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--ink-soft);margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
+  .sFaq .lab::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--line);flex:none}
+  .sFaq .lab.we{color:var(--green)}
+  .sFaq .lab.we::before{background:var(--green-bright)}
+
+  /* the competitor card */
+  .sFaq .cmp{border:1.5px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+  /* the pane they sit behind: a cool wash over the warm card, plus a slow glare.
+     This is the one-way mirror reduced to the only thing it needed to say. */
+  .sFaq .cmp-they{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem);border-bottom:1.5px solid var(--line);background:linear-gradient(180deg,rgba(20,18,13,.055),rgba(20,18,13,.012))}
+  /* the pane the logos sit behind. A glare crosses it on a slow loop and nothing
+     under it moves. It stays off the copy so it can never wash out the reading. */
+  .sFaq .pane{position:relative;overflow:hidden;border-radius:14px;margin:0 -.4rem;padding:.4rem}
+  .sFaq .pane::after{content:"";position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.55) 50%,transparent 58%)}
+  .sFaq.active .pane::after{animation:cmpGlare 8s ease-in-out 1.2s infinite}
+  @keyframes cmpGlare{0%{transform:translateX(-130%)}55%,100%{transform:translateX(130%)}}
+
+  /* all four watchers sit on ONE row at 1280: the lineup is the point, a lone
+     Fathom orphaned onto a second row reads as an accident. The chip padding below
+     is tuned so the four fit the card with room to spare; it still wraps gracefully
+     if the column ever gets narrower. */
+  .sFaq .watchrow{display:flex;flex-wrap:wrap;gap:.42rem}
+  .sFaq .watchrow .lchip{height:auto}
+  .sFaq .watchrow .lchip:hover{transform:none} /* they do not move. that is the point. */
+  .sFaq .watchrow .lchip b{font-size:12.5px;padding:.34rem .8rem}
+  .sFaq .watchrow .lchip.hasimg{gap:.42rem;padding:.36rem .62rem .36rem .42rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
+  .sFaq .watchrow .lchip.hasimg img.brand{height:24px;width:24px;max-width:24px;border-radius:7px}
+  .sFaq .watchrow .lchip.hasimg b{font-size:14.5px}
+  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(13.5px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
+  .sFaq .cmp-line b{color:var(--ink);font-weight:700}
+
+  .sFaq .cmp-we{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem)}
+  .sFaq .cmp-do{list-style:none;display:grid;gap:.52rem;margin:0}
+  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(13.5px,1.4vw,16px);line-height:1.42;font-weight:500}
+  .sFaq .cmp-do .n{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:var(--green-wash);margin-top:.06rem}
+  .sFaq .cmp-do li.loop{font-weight:700}
+  .sFaq .cmp-do li.loop .n{background:var(--green);color:#fff}
+  /* the closed loop, drawn. the only claim on this slide nobody else can make. */
+  .sFaq .nloop svg{width:15px;height:15px;overflow:visible}
+  .sFaq .nloop path{fill:none;stroke:#fff;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+  .sFaq .nloop .lp{stroke-dasharray:44;stroke-dashoffset:44}
+  .sFaq .nloop .lph{opacity:0}
+  .sFaq.active .nloop .lp{animation:lpDraw .95s cubic-bezier(.5,0,.2,1) .75s forwards}
+  .sFaq.active .nloop .lph{animation:lpTip .3s ease 1.6s forwards}
+  @keyframes lpDraw{to{stroke-dashoffset:0}}
+  @keyframes lpTip{to{opacity:1}}
+  .sFaq .cmp-scrib{margin-top:.7rem;font-size:clamp(18px,2vw,25px)}
+
+  /* the accordion. The shared rules for it are scoped to #trial, so they do not
+     reach this slide. Re-declared here, scoped to .sFaq. The row chrome itself is
+     inline-styled by the FAQ script, so this only re-sizes it for a narrower column. */
+  .sFaq #faq{display:grid;gap:.5rem;max-width:100%}
+  .sFaq .faqrow button{font-size:clamp(14px,1.35vw,17px)!important;padding:.72rem .95rem!important;gap:.8rem!important}
+  .sFaq .faqrow .ans p{font-size:14px!important;line-height:1.5!important;padding:0 .95rem .85rem!important}
+
+  @media (max-width:900px){ .sFaq .faqcols{grid-template-columns:1fr;gap:1.2rem} }
+  /* This is a two-job slide, so it runs tall. On a 720p projector it has to fit with an
+     answer open AND stay clear of the top bar, so compact it on short viewports. */
+  @media (max-height:780px){
+    .sFaq .eyebrow{margin-bottom:.45rem}
+    .sFaq h1{font-size:clamp(26px,3.3vw,42px)}
+    .sFaq .faqcols{margin-top:.55rem}
+    .sFaq .lab{margin-bottom:.5rem}
+    .sFaq .cmp-they,.sFaq .cmp-we{padding-top:.6rem;padding-bottom:.6rem}
+    .sFaq .cmp-line{margin-top:.55rem}
+    .sFaq .cmp-do{gap:.38rem}
+    .sFaq .cmp-scrib{margin-top:.45rem;font-size:21px}
+    .sFaq .faqrow button{padding:.62rem .95rem!important}
+  }
+  /* house rule: reduced motion gets a sane still slide. No glare, loop already closed. */
+  @media (prefers-reduced-motion:reduce){
+    .sFaq.active .pane::after{animation:none}
+    .sFaq .pane::after{display:none}
+    .sFaq .nloop .lp{stroke-dashoffset:0} .sFaq .nloop .lph{opacity:1}
+    .sFaq.active .nloop .lp,.sFaq.active .nloop .lph{animation:none}
+  }
+  </style>
+  <section class="slide sFaq">
+    <div class="wrap">
+      <div class="eyebrow">The question you're about to ask</div>
+      <h1><span class="ln">They see everything.</span><br><span class="ln"><span class="hl">They change nothing.</span></span></h1>
+      <div class="faqcols">
+
+        <div class="cmp">
+          <div class="cmp-they">
+            <div class="lab">The ones you already pay for</div>
+            <div class="pane">
+              <div class="watchrow">
+                <span class="lchip" data-domain="gong.io"><img class="brand" alt="Gong"><b>Gong</b></span>
+                <span class="lchip" data-domain="otter.ai"><img class="brand" alt="Otter"><b>Otter</b></span>
+                <span class="lchip" data-domain="fireflies.ai"><img class="brand" alt="Fireflies"><b>Fireflies</b></span>
+                <span class="lchip" data-domain="fathom.video"><img class="brand" alt="Fathom"><b>Fathom</b></span>
+              </div>
+            </div>
+            <p class="cmp-line">They record the call, transcribe it, summarize it. <b>Then they hand the rep one more thing to read</b>, and the next call sounds exactly like the last one.</p>
+          </div>
+          <div class="cmp-we">
+            <div class="lab we">What WingRep does instead</div>
+            <ul class="cmp-do">
+              <li><span class="n">1</span><span>Writes the CRM in your team's framework, three minutes after the call.</span></li>
+              <li><span class="n">2</span><span>Drafts the follow-up. Reps at Rho send it unedited nine times out of ten.</span></li>
+              <li class="loop"><span class="n nloop"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="lp" d="M12 5a7 7 0 1 1-4.95 2.05"/><path class="lph" d="M9.5 2.9 L13.1 5 L9.5 7.1"/></svg></span><span>Grades whether last call's coaching showed up on this one.</span></li>
+            </ul>
+            <div class="scribble cmp-scrib">only the third one is hard to copy.</div>
+          </div>
+        </div>
+
+        <div class="faqcol">
+          <div class="lab">Common questions</div>
+          <div id="faq"></div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1400,14 +1714,56 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 21 thank you + confetti (finale) -->
-  <section class="slide" data-animate="confetti">
+  <style>
+  /* Finale contact block. This slide is what the room stares at for the whole
+     Q&A, so Alan's address has to be readable from the back row and typable
+     from a screenshot: real text, mono, link-sized, not a footer. The old
+     "Reply to whoever invited you" ghost button pointed at a dead href="#" and
+     is dropped, the mailto below does that job directly and better. */
+  .s19 h1{font-size:clamp(30px,4.7vw,58px)}
+  .s19 p.body{margin-top:.9rem;max-width:44ch;font-size:clamp(15px,1.5vw,18px)}
+  .s19 .cta-row{margin-top:1.2rem}
+  .s19-contact{margin-top:1.45rem;padding-top:1.2rem;border-top:1px dashed var(--line)}
+  .s19-hand{font-family:var(--hand);color:var(--green);font-weight:700;font-size:clamp(18px,2vw,24px);display:inline-block;transform:rotate(-1.2deg);margin-bottom:.5rem}
+  .s19-links{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
+  .s19-cx{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--ink);padding:.3rem .7rem .3rem .3rem;border-radius:14px;transition:transform .16s,background .16s}
+  .s19-cx:hover,.s19-cx:focus-visible{background:var(--green-wash);transform:translateX(4px)}
+  .s19-ci{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);border:1px solid #e9d4c8;transition:background .16s,color .16s}
+  .s19-cx:hover .s19-ci,.s19-cx:focus-visible .s19-ci{background:var(--green);color:#fff}
+  .s19-ci svg{width:21px;height:21px;display:block}
+  .s19-ct{font-family:var(--mono);font-weight:600;font-size:clamp(17px,1.95vw,25px);line-height:1.1;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:rgba(177,74,44,.35);transition:text-decoration-color .16s}
+  .s19-cx:hover .s19-ct,.s19-cx:focus-visible .s19-ct{text-decoration-color:var(--green)}
+  /* the details arrive a beat after the headline, so the eye lands on the thank
+     you first and the contact is what it settles on. translate (not transform)
+     so the hover transform stays free. */
+  @keyframes s19rise{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+  .s19.active .s19-hand{animation:s19rise .5s .30s both cubic-bezier(.22,1,.36,1)}
+  .s19.active .s19-cx:nth-of-type(1){animation:s19rise .5s .44s both cubic-bezier(.22,1,.36,1)}
+  .s19.active .s19-cx:nth-of-type(2){animation:s19rise .5s .56s both cubic-bezier(.22,1,.36,1)}
+  @media (prefers-reduced-motion:reduce){.s19.active .s19-hand,.s19.active .s19-cx{animation:none}}
+  @media (max-width:760px){.s19-contact{margin-top:1.2rem}}
+  </style>
+  <section class="slide s19" data-animate="confetti">
     <canvas id="confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <div class="wrap" style="z-index:1">
       <div class="s19-grid">
         <div>
           <h1>Thanks for staying<br>to the end.</h1>
           <p class="body">Take the SalesOS workflow, it's yours, no strings. And if you'd rather have the version that runs itself, start a trial.</p>
-          <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a><a class="btn btn-ghost" href="#">Reply to whoever invited you</a></div>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a></div>
+          <div class="s19-contact">
+            <span class="s19-hand">questions later? come find me.</span>
+            <div class="s19-links">
+              <a class="s19-cx" href="mailto:alan@wingrep.ai">
+                <span class="s19-ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6"/><path d="M3.4 7.4l8.6 5.8 8.6-5.8"/></svg></span>
+                <span class="s19-ct">alan@wingrep.ai</span>
+              </a>
+              <a class="s19-cx" href="https://www.linkedin.com/in/alan-tai-nu" target="_blank" rel="noopener">
+                <span class="s19-ci"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+                <span class="s19-ct">linkedin.com/in/alan-tai-nu</span>
+              </a>
+            </div>
+          </div>
         </div>
         <figure class="s19-cheers">
           <img data-img="slide19_finale.green" data-img-reduced="slide19_finale_static.green" alt="A celebratory toast to the audience">
@@ -1432,10 +1788,27 @@ objection handling, and next-step.</div>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
+  var trail=document.getElementById('s3trail'), h1=slide.querySelector('h1');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=10;
-  function measure(){var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;}
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=14,TOP=14;
+  // comet tail: GN ghosts, each parked at a real past position of the ball and holding the
+  // ring colour the ball wore at that moment, so a bounce stays legible in the trail
+  var GN=8,ghosts=[],trace=[];
+  function ghost(i){
+    if(!ghosts[i]){var g=document.createElement('div');g.className='s3-ghost';trail.appendChild(g);ghosts[i]=g;}
+    return ghosts[i];
+  }
+  function measure(){
+    var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;
+    // the ball is twice the size it used to be, so it can no longer be allowed into the
+    // headline's band: floor it just under the h1 rather than at the slide's top edge
+    TOP=M;
+    if(h1){var hr=h1.getBoundingClientRect();TOP=Math.max(M,hr.bottom-r.top+14);}
+    if(TOP>H-SZ-M)TOP=M;                    // pathological viewport: fall back to the old box
+  }
+  function bx(){return Math.max(M,W-SZ-M);} // right limit
+  function by(){return Math.max(TOP,H-SZ-M);} // bottom limit
   function loop(ts){
     if(!running)return;
     measure(); // re-measure each frame: the start-time size can be stale (reflow during the slide's entrance), which let the ball run past the real edge
@@ -1443,24 +1816,44 @@ objection handling, and next-step.</div>
     x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
     // bounce a small margin (M) early so the ring/glow around the ball kisses the
     // edge instead of poking off-screen (SZ is the box; the visible ring sits outside it)
-    var hx='',hy='';
-    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=W-SZ-M){x=W-SZ-M;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
-    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=H-SZ-M){y=H-SZ-M;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
+    var hx='',hy='',R=bx(),B=by();
+    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=R){x=R;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
+    if(y<=TOP){y=TOP;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=B){y=B;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
     if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
       // on a corner hit, grow the pop away from the touched corner so it never bulges off-screen
       if(edges>=2){inner.style.transformOrigin=hx+' '+hy;inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
     dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+    // sample by distance, not by frame, so the tail is the same length on a 60Hz and a 120Hz screen
+    var gap=SZ*0.30;
+    if(!trace.length||Math.hypot(x-trace[0].x,y-trace[0].y)>=gap){
+      trace.unshift({x:x,y:y,c:COLORS[ci]});
+      if(trace.length>GN)trace.length=GN;
+    }
+    for(var i=0;i<GN;i++){
+      var g=ghost(i),s=trace[i];
+      if(!s){g.style.opacity=0;continue;}
+      var f=1-i/GN;
+      g.style.color=s.c;
+      g.style.opacity=(0.30*Math.pow(f,1.5)).toFixed(3);
+      g.style.transform='translate('+s.x.toFixed(1)+'px,'+s.y.toFixed(1)+'px) scale('+(1-0.075*i).toFixed(3)+')';
+    }
     raf=requestAnimationFrame(loop);
   }
   function start(){
     if(reduce||running)return;
     measure();if(W<20){setTimeout(start,80);return;}
     var spd=472,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
-    x=Math.min(x,W-SZ-M);y=Math.min(y,H-SZ-M);
+    x=Math.max(M,Math.min(x,bx()));y=Math.max(TOP,Math.min(y,by()));
+    trace.length=0;
     if(ava)ava.style.display='none';
-    dvd.style.display='block';running=true;last=0;raf=requestAnimationFrame(loop);
+    dvd.style.display='block';if(trail)trail.classList.add('on');
+    running=true;last=0;raf=requestAnimationFrame(loop);
   }
-  function stop(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;dvd.style.display='none';if(ava)ava.style.display='';}
+  function stop(){
+    running=false;if(raf)cancelAnimationFrame(raf);raf=0;
+    dvd.style.display='none';if(trail)trail.classList.remove('on');
+    trace.length=0;if(ava)ava.style.display='';
+  }
   new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
   addEventListener('resize',function(){if(running)measure();});
   if(slide.classList.contains('active'))start();
@@ -1482,12 +1875,6 @@ objection handling, and next-step.</div>
     img.onload=function(){c.classList.add('hasimg');}; img.src=EMBED[d];
   });
 
-  // slide 4: the shadow-watchers' faces are the incumbent logos
-  document.querySelectorAll('.oroom-mark[data-domain]').forEach(function(m){
-    var d=m.dataset.domain, img=m.querySelector('img'); if(!d||!img||!EMBED[d])return;
-    img.src=EMBED[d];
-  });
-
   // customer wordmark nameplates (pulled from wingrep.ai), CLIENTS map populated inline below
   var CLIENTS=window.CLIENTS;
   document.querySelectorAll('img[data-client]').forEach(function(im){ var k=im.dataset.client; if(CLIENTS[k]) im.src=CLIENTS[k]; });
@@ -1501,13 +1888,19 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","One-way mirror","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
+  // WingRep stays invisible until the reveal slide, so the first two thirds of the
+  // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
+  // survives any reordering.
+  var brand=document.querySelector('.topbar .brand');
+  var revealAt=slides.indexOf(document.getElementById('wingrepReveal'));
 
   function show(n){
     n=Math.max(0,Math.min(total-1,n)); stopGame(); stopBall(); stopConfetti();
     slides[i].classList.remove('active'); i=n; slides[i].classList.add('active');
     counter.textContent=pad(i+1)+' / '+pad(total);
+    if(brand) brand.classList.toggle('on', revealAt>=0 && i>=revealAt);
     progress.style.width=((i+1)/total*100)+'%';
     prevB.disabled=i===0; nextB.disabled=i===total-1; slides[i].scrollTop=0;
     var a=slides[i].dataset.animate;
@@ -1584,23 +1977,6 @@ objection handling, and next-step.</div>
   }
   function stopBall(){if(ballRAF)cancelAnimationFrame(ballRAF);ballRAF=null;}
 
-  /* testimonial slider + face */
-  (function(){
-    var r=document.getElementById('tlRange'),h=document.getElementById('tlHoney'),k=document.getElementById('tlReck'),lab=document.getElementById('tlLabel'),word=document.getElementById('tlWord'),mouth=document.getElementById('mouth'),ring=document.getElementById('faceRing'),eL=document.getElementById('eyeL'),eR=document.getElementById('eyeR');
-    function upd(){var v=+r.value/100; var hon=v<.5;
-      // hard threshold so the two layered (absolute) text/image cards never sit muddy at ~50% each;
-      // the CSS opacity transition still gives a smooth crossfade as it flips across the midpoint.
-      h.style.opacity=hon?1:0; k.style.opacity=hon?0:1;
-      var ih=document.getElementById('tlImgH'),ir=document.getElementById('tlImgR'); if(ih)ih.style.opacity=hon?1:0; if(ir)ir.style.opacity=hon?0:1;
-      lab.textContent= v<.5?'Week 1':(v<.95?'Week 2':'Week 3');
-      word.textContent= v<.5?'honeymoon.':'reckoning.'; word.style.color= v<.5?'var(--green)':'var(--rust)';
-      var col=v<.5?'#6e311a':'#C84026'; ring.setAttribute('stroke',col);[eL,eR].forEach(function(e){e.setAttribute('fill',col);});mouth.setAttribute('stroke',col);
-      // smile -> frown
-      var endY=22+6*v, ctrlY=31-12*v; mouth.setAttribute('d','M13 '+endY.toFixed(0)+' Q20 '+ctrlY.toFixed(0)+' 27 '+endY.toFixed(0));
-    }
-    r.oninput=upd; upd();
-  })();
-
   /* SalesOS */
   document.querySelectorAll('.os .tabs button').forEach(function(b){b.onclick=function(){
     document.querySelectorAll('.os .tabs button').forEach(function(x){x.classList.remove('on');});
@@ -1618,34 +1994,41 @@ objection handling, and next-step.</div>
     navigator.clipboard&&navigator.clipboard.writeText(t).then(function(){var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
   };});
 
-  /* self-typing ledger, types PLAIN text per line, colorizes only once a line is done */
+  /* slide 10, "where Claude falls short". Types PLAIN text per line, colorizes
+     only once a line is done. Claude nails the coaching update, then answers the
+     next three asks with an honest no. The run ends on a live prompt that never
+     goes anywhere: the waiting IS the point, so the caret stays. */
   var typeTimer;
+  var TYPER_TAIL='> ';
   function runTyper(){
     var el=document.getElementById('typer'); if(!el)return;
-    // {t: plain text, g: true => render green after the line finishes}
+    // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
     var lines=[
-      {t:'> new call: Jordan @ Northwind'},
-      {t:'> checking last focus… "ask budget early"'},
-      {t:'✓ she asked at 4:12, it stuck', g:true},
-      {t:'> next focus: name a number first'},
-      {t:'✓ ledger updated. nothing for you to do.', g:true}
+      {t:'> here is the rep log. here is today\'s call. update it.'},
+      {t:'✓ done. she asked for the budget at 4:12. it stuck.', g:true},
+      {t:'> now put it in the CRM.'},
+      {t:'✗ I have no hands. paste it in yourself.', n:true},
+      {t:'> remind me before Thursday\'s call.'},
+      {t:'✗ I have no clock. I only run when you type.', n:true},
+      {t:'> did she actually say it, or did the transcript miss it?'},
+      {t:'✗ I have no ears. I only know what you pasted.', n:true}
     ];
     function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    function line(l){return l.g ? '<span class="g">'+esc(l.t)+'</span>' : esc(l.t);}
+    function line(l){var c=l.g?'g':(l.n?'n':''); return c ? '<span class="'+c+'">'+esc(l.t)+'</span>' : esc(l.t);}
     function render(done,cur,caret){
       var html=done.map(line).join('<br>');
       if(cur!==null){ if(done.length) html+='<br>'; html+=esc(cur)+(caret?'<span class="cr"></span>':''); }
       return html;
     }
     clearTimeout(typeTimer);
-    if(reduce){ el.innerHTML=lines.map(line).join('<br>'); return; }
+    if(reduce){ el.innerHTML=lines.map(line).join('<br>')+'<br>'+esc(TYPER_TAIL)+'<span class="cr"></span>'; return; }
     var li=0,ch=0,done=[]; el.innerHTML='';
     function tick(){
-      if(li>=lines.length){ el.innerHTML=render(done,null,false); return; }
+      if(li>=lines.length){ el.innerHTML=render(done,TYPER_TAIL,true); return; }
       var full=lines[li].t; ch++;
       el.innerHTML=render(done, full.slice(0,ch), true);
-      if(ch>=full.length){ done.push(lines[li]); li++; ch=0; typeTimer=setTimeout(tick,520); }
-      else{ typeTimer=setTimeout(tick,30); }
+      if(ch>=full.length){ done.push(lines[li]); li++; ch=0; typeTimer=setTimeout(tick,lines[li]&&lines[li].n?420:300); }
+      else{ typeTimer=setTimeout(tick,22); }
     }
     tick();
   }
@@ -1671,28 +2054,90 @@ objection handling, and next-step.</div>
   })();
 
   /* reveal */
-  var appTimers=[];
+  // The reveal runs on a time axis. First the call itself, with WingRep listening
+  // and nudging the rep while the prospect is still mid-sentence. Then the call
+  // ends, and only then does the after-call work land. The live beat has to come
+  // first, because it is the thing the hand-rolled Claude workflow cannot do.
+  var appTimers=[],appClock=null,appType=null;
+  var APP_LINE="…we'd want to run the numbers past someone on our side first.";
+  var APP_T0="32:00", APP_TEND="32:04";
   function runApp(){var slide=slides[i],panes=slide.querySelectorAll('.pane2'),cap=slide.querySelector('#appCaption');
+    var live=slide.querySelector('#wrLive'),nudge=slide.querySelector('#wrNudge'),typeEl=slide.querySelector('#wrType'),
+        clock=slide.querySelector('#wrClock'),badge=slide.querySelector('#wrBadge'),status=slide.querySelector('#appStatus'),
+        pivot=slide.querySelector('#wrPivot'),nok=slide.querySelector('#wrNok');
     appTimers.forEach(clearTimeout);appTimers=[];
+    if(appClock){clearInterval(appClock);appClock=null;}
+    if(appType){clearInterval(appType);appType=null;}
+    var T=function(fn,ms){appTimers.push(setTimeout(fn,ms));};
     [].forEach.call(panes,function(p){p.classList.remove('show');});cap.classList.remove('show');
-    if(reduce){[].forEach.call(panes,function(p){p.classList.add('show');});cap.classList.add('show');return;}
-    [].forEach.call(panes,function(p,idx){appTimers.push(setTimeout(function(){p.classList.add('show');},450+idx*820));});
-    appTimers.push(setTimeout(function(){cap.classList.add('show');},450+panes.length*820+250));
+    live.classList.remove('show','ended');nudge.classList.remove('show');
+    nok.classList.remove('on');pivot.classList.remove('on');
+    status.classList.add('on');status.textContent='listening, live';
+    badge.textContent='LIVE';typeEl.textContent='';clock.textContent=APP_T0;
+
+    // The call is a 32-minute call: the bar and the first after-call pane both say so.
+    // So the clock has to be running out the end of those 32 minutes while we watch,
+    // and it has to land on APP_TEND exactly, which is also where the reduced-motion
+    // end state puts it. Pinning it in endCall keeps the two paths identical even if
+    // a throttled tab drops an interval tick.
+    var secs=32*60;
+    var fmt=function(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60);};
+    function endCall(){
+      if(appClock){clearInterval(appClock);appClock=null;}
+      if(appType){clearInterval(appType);appType=null;}
+      typeEl.textContent=APP_LINE;clock.textContent=APP_TEND;
+      live.classList.add('ended');badge.textContent='ENDED';
+      status.classList.remove('on');status.textContent='call ended · 32 min';
+      nok.classList.add('on');pivot.classList.add('on');
+    }
+    if(reduce){
+      live.classList.add('show');typeEl.textContent=APP_LINE;nudge.classList.add('show');
+      endCall();
+      [].forEach.call(panes,function(p){p.classList.add('show');});cap.classList.add('show');return;
+    }
+    T(function(){live.classList.add('show');},250);
+    appClock=setInterval(function(){secs++;clock.textContent=fmt(secs);},1000);
+    // She keeps talking. Driven off elapsed time rather than a chain of timeouts,
+    // so a throttled tab cannot let the typing drift out of step with the panes.
+    var t0=Date.now();
+    appType=setInterval(function(){
+      var n=Math.round((Date.now()-t0-750)/38);
+      if(n<0) n=0; if(n>APP_LINE.length) n=APP_LINE.length;
+      typeEl.textContent=APP_LINE.slice(0,n);
+      if(n===APP_LINE.length){clearInterval(appType);appType=null;}
+    },40);
+    T(function(){nudge.classList.add('show');},2050);   // lands while she is still talking
+    T(endCall,4100);
+    [].forEach.call(panes,function(p,idx){T(function(){p.classList.add('show');},4550+idx*580);});
+    T(function(){cap.classList.add('show');},4550+panes.length*580+250);
   }
   document.getElementById('appReplay').onclick=runApp;
 
   /* FAQ: grid-template-rows accordion (smooth, no layout thrash), rotating +/x, active border */
   (function(){
+    /* Lives on the competitors slide (.sFaq) now, not the trial slide. A third
+       element on a row appends the Uber mark inline, used once, on the security
+       answer, where the receipt is the whole point. */
     var faqs=[
       ["Do you replace Gong?","No, we plug into it. Gong watches the call; WingRep does the work after. (One CRO did tell us we're \"a thousand percent more useful,\" but we'll let you be the judge.)"],
-      ["Is my call data safe?","ISO 27001 certified. We cleared Uber's security review. SOC 2 in flight. Your calls don't train anyone else's model."]
+      ["Isn't this just another AI note-taker?","Note-takers watch and transcribe. WingRep writes the CRM, drafts the follow-up, preps the next call, and checks whether the coaching stuck. Quickest way to settle it: run one of your reps' recent calls through both, side by side."],
+      ["Couldn't we just build this ourselves?","The summary and the email, yes, in a weekend. What takes quarters is everything under them: CRM, calendar and dialer plumbing, prompts that hold up across every rep, the coaching loop, and a security packet your CISO will actually sign."],
+      ["Will my reps actually use it?","There is nothing for them to open. The CRM gets written, the follow-up gets drafted, the game plan is in their inbox before the meeting. Tools die when they add work. This one subtracts it, five to ten hours a week per rep."],
+      ["Is my call data safe?","ISO 27001 certified, SOC 2 in flight, and your calls never train anyone else's model. We also cleared the security review at",1]
     ];
-    var box=document.getElementById('faq');
+    /* scoped to this slide on purpose: the accordion now belongs to .sFaq, and
+       scoping it means it cannot latch onto a stale #faq left anywhere else. */
+    var box=document.querySelector('.sFaq #faq');
     if(!box) return;
     faqs.forEach(function(f,idx){
       var d=document.createElement('div'); d.className='faqrow';
       d.style.cssText='background:var(--card);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .25s';
-      var uber = (idx===2)? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:15px;vertical-align:middle;margin-left:6px;opacity:.85">' : '';
+      /* The Uber mark is a 24x24 icon-box SVG: the wordmark only occupies the middle
+         third of it, so a 17px box renders the letters ~6px tall, smaller than the
+         body text and unreadable on a projector. Size the box so the wordmark matches
+         the text, sit it on the baseline, and use negative vertical margins so the
+         taller box does not open up the line it sits on. */
+      var uber = f[2] ? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:30px;width:30px;vertical-align:-2px;margin:-8px 0 -8px 3px;opacity:.92">.' : '';
       d.innerHTML='<button style="width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:var(--display);font-weight:800;font-size:clamp(15px,1.7vw,20px);color:var(--ink);padding:.9rem 1.1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center">'+f[0]+'<span class="pl" style="color:var(--green);font-size:1.35em;line-height:1;flex:0 0 auto;transition:transform .3s cubic-bezier(.2,.8,.2,1)">+</span></button><div class="ans" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)"><div style="overflow:hidden"><p style="padding:0 1.1rem 1rem;font-size:15px;line-height:1.5;color:var(--ink-soft);font-weight:500">'+f[1]+uber+'</p></div></div>';
       var btn=d.querySelector('button'),ans=d.querySelector('.ans'),pl=d.querySelector('.pl');
       btn.onclick=function(){
@@ -1832,7 +2277,7 @@ objection handling, and next-step.</div>
     for(var i=0;i<rings.length;i++) if(rings[i].alive) rings[i].gap+=rings[i].spin*dt;
 
     if(mode==='play'){
-      // no gravity on the ball — it bounces weightlessly, pinballing off the rings
+      // no gravity on the ball, it bounces weightlessly, pinballing off the rings
       ball.x+=ball.vx*dt; ball.y+=ball.vy*dt;
 
       var ring=activeRing();
@@ -1963,12 +2408,6 @@ objection handling, and next-step.</div>
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
-
-
-/* slide 8 */
-
-  /* slide 7 is now a static film-room hero image (.s7-slide); the old
-     coaching-loop flywheel animation was removed in favor of real imagery. */
 
 
 /* slide 12 */
