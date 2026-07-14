@@ -1058,18 +1058,18 @@
   .s9-fable{display:none;margin:0;justify-self:end;position:relative}
   .s9lit.has-fable .s9-fable{display:block}
   .s9-num{width:clamp(240px,27vw,420px);height:auto;display:block;filter:drop-shadow(0 20px 34px rgba(20,18,13,.14))}
-  /* a few butterflies breaking off the numeral, gently flapping and drifting
-     nearby (positions are % of the numeral box, so they track the "5" at any
-     size). Each is a transparent cutout of one butterfly from the same plate. */
-  .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,6s) ease-in-out infinite}
-  .s9-bf>img{display:block;width:100%;height:auto;transform-origin:50% 45%;filter:drop-shadow(0 6px 10px rgba(20,18,13,.16));animation:s9flap var(--f,.7s) ease-in-out infinite}
-  .s9-bf1{width:20%;top:-2%;left:-15%}
-  .s9-bf2{width:19%;top:45%;left:-15%}
-  .s9-bf3{width:16%;bottom:9%;left:-6%}
-  .s9-bf4{width:14%;top:-4%;right:15%}
-  .s9-bf5{width:13%;bottom:-5%;right:25%}
-  @keyframes s9flap{0%,100%{transform:scaleX(1) scaleY(1)}50%{transform:scaleX(.66) scaleY(1.05)}}
-  @keyframes s9float{0%,100%{translate:0 0;rotate:-6deg}50%{translate:6px -12px;rotate:7deg}}
+  /* a few real butterflies flapping and drifting near the numeral. Each is an
+     animated transparent WebP (the wing-flap is baked into the frames); CSS only
+     adds a slow drift so they wander. Positions are % of the numeral box, so
+     they track the "5" at any size. */
+  .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,7s) ease-in-out infinite}
+  .s9-bf>img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 11px rgba(20,18,13,.2))}
+  .s9-bf>img.flip{transform:scaleX(-1)}
+  .s9-bf1{width:30%;top:-7%;left:-20%}
+  .s9-bf2{width:23%;top:41%;left:-17%}
+  .s9-bf3{width:17%;bottom:1%;left:-3%}
+  .s9-bf4{width:19%;top:-3%;right:7%}
+  @keyframes s9float{0%,100%{translate:0 0;rotate:-5deg}50%{translate:5px -11px;rotate:6deg}}
   /* house rule: reduced-motion gets a still slide, so drop the flutter entirely */
   @media (prefers-reduced-motion:reduce){.s9-bf{display:none}}
   /* narrow tablets/phones read the slide as a tall scroll and the two-zone grid
@@ -1102,12 +1102,14 @@
       </ul>
       <div class="scribble" style="margin-top:.7rem">now you're the one explaining it at the next meeting.</div>
      </div>
+     <!-- Fluttering butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
+          Wikimedia Commons, CC BY-SA 4.0, attribution required); s9_bf2 = a
+          user-supplied blue-admiral GIF. Both re-encoded to animated WebP. -->
      <figure class="s9-fable" aria-hidden="true"><img class="s9-num" data-asset="slide9_fable" alt="The Fable 5 wordmark: a numeral 5 formed from vintage butterfly illustrations">
-       <span class="s9-bf s9-bf1" style="--f:.95s;--d:6.6s"><img data-asset="s9_bf1" alt=""></span>
-       <span class="s9-bf s9-bf2" style="--f:1.05s;--d:7.6s"><img data-asset="s9_bf2" alt=""></span>
-       <span class="s9-bf s9-bf3" style="--f:.88s;--d:5.9s"><img data-asset="s9_bf3" alt=""></span>
-       <span class="s9-bf s9-bf4" style="--f:.78s;--d:5.3s"><img data-asset="s9_bf4" alt=""></span>
-       <span class="s9-bf s9-bf5" style="--f:.82s;--d:7.1s"><img data-asset="s9_bf5" alt=""></span>
+       <span class="s9-bf s9-bf1" style="--d:7.5s"><img data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf2" style="--d:6.4s"><img data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf3" style="--d:8.2s"><img class="flip" data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf4" style="--d:6.9s"><img class="flip" data-asset="s9_bf1" alt=""></span>
      </figure>
     </div>
   </section>
