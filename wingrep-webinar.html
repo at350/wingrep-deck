@@ -92,16 +92,6 @@
   .ballwrap{margin-top:1.2rem;display:flex;justify-content:center}
   canvas.ball{width:min(360px,72vw);height:min(360px,72vw);background:radial-gradient(120% 120% at 50% 30%,#35190f,#1b0d08);border-radius:24px;box-shadow:var(--shadow);border:1px solid #45281d}
 
-  /* testimonial slider */
-  .tl-stage{position:relative;margin-top:1.3rem;min-height:228px}
-  .tl-set{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;transition:opacity .35s}
-  .q{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:.95rem 1.1rem;box-shadow:var(--shadow)}
-  .q p{font-size:clamp(14px,1.45vw,17px);font-weight:600;line-height:1.32}
-  .q .by{font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-top:.45rem}
-  .q.bad{border-color:var(--rust-soft)} .q.bad p{color:var(--rust)}
-  .tl-ctrl{margin-top:1.2rem;display:flex;align-items:center;gap:1rem;max-width:560px}
-  .tl-ctrl .face{flex:0 0 auto}
-  .tl-ctrl .wk{font-family:var(--display);font-weight:800;font-size:14px;white-space:nowrap;min-width:5em}
   input[type=range]{-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--rust));outline:none;flex:1}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:grab;box-shadow:var(--shadow)}
   input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:grab}
@@ -371,6 +361,11 @@
   .topbar{position:fixed;top:16px;left:clamp(20px,6vw,104px);right:clamp(20px,6vw,104px);z-index:40;display:flex;align-items:center;justify-content:space-between;transition:opacity .4s}
   .topbar.hide{opacity:0}
   .brand img{height:30px;width:auto;max-width:170px;display:block}
+  /* The deck is a teaching deck first: WingRep does not appear anywhere until
+     the reveal slide (#wingrepReveal). Before it, the brand mark is not rendered
+     at all; from the reveal onward it fades in. */
+  .brand{opacity:0;visibility:hidden;transition:opacity .5s ease}
+  .brand.on{opacity:1;visibility:visible}
   .counter{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
   .chrome{position:fixed;bottom:18px;right:clamp(20px,6vw,104px);z-index:40;display:flex;gap:.5rem;align-items:center;transition:opacity .4s,transform .4s}
   .chrome.hide{opacity:0;transform:translateY(8px);pointer-events:none}
@@ -385,7 +380,7 @@
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:45;background:var(--ink);color:var(--paper);font-size:13px;font-weight:500;padding:.6rem 1.1rem;border-radius:999px;display:flex;gap:.8rem;transition:opacity .5s,transform .5s} .toast.gone{opacity:0;transform:translateX(-50%) translateY(10px);pointer-events:none}
   .toast kbd{font-family:var(--mono);background:#2c2920;border-radius:5px;padding:.05rem .4rem;font-size:11.5px}
 
-  @media (max-width:680px){.cols,.three,.tl-set,.roi .out{grid-template-columns:1fr} .chrome button{width:42px;height:42px} .os .tabs button{font-size:11px}}
+  @media (max-width:680px){.cols,.three,.roi .out{grid-template-columns:1fr} .chrome button{width:42px;height:42px} .os .tabs button{font-size:11px}}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important}.slide.active .wrap>*,.slide.active h1 .ln{opacity:1}}
 
 /* ===== slide 3 redesign ===== */
@@ -495,39 +490,6 @@
   }
 
 
-/* ===== slide 7: the coaching loop (film-room hero) ===== */
-  .s7-slide{
-    position:relative;width:100%;max-width:1180px;aspect-ratio:16/9;
-    background:linear-gradient(180deg,var(--card),var(--paper-2));
-    border:1px solid var(--line);border-radius:18px;overflow:hidden;
-    display:grid;grid-template-columns:1fr .8fr;align-items:center;
-    gap:clamp(24px,4vw,56px);
-    padding:clamp(28px,4.4vw,60px);box-shadow:var(--shadow);
-  }
-  .s7-copy{position:relative;z-index:2;max-width:560px;}
-  .s7-eyebrow{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;color:var(--green);font-family:var(--mono);margin-bottom:22px;}
-  .s7-eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright);flex:none;border-radius:2px;}
-  .s7-headline{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.2vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin-bottom:22px;}
-  .s7-headline .s7-loopword{color:var(--green);}
-  .s7-body{font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:var(--ink-soft);max-width:460px;}
-  .s7-body b{color:var(--ink);font-weight:600;}
-
-  .s7-stage{position:relative;z-index:2;justify-self:center;width:100%;max-width:400px;}
-  .s7-frame{position:relative;margin:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;border:1px solid rgba(177,74,44,.28);box-shadow:0 30px 70px -30px rgba(20,18,13,.55);}
-  .s7-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;}
-  .s7-tape{position:absolute;inset:0;z-index:2;transform:scale(1.05);animation:s7pan 26s ease-in-out infinite alternate;pointer-events:none;}
-  @keyframes s7pan{from{transform:scale(1.04)}to{transform:scale(1.13) translate(-1.5%,-2%)}}
-  .s7-markup{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 3px rgba(20,10,6,.5));}
-  .s7-note{position:absolute;top:5%;right:6%;font-family:var(--hand);font-weight:700;color:#F7E9DF;font-size:clamp(17px,2vw,25px);line-height:.98;text-align:right;transform:rotate(-5deg);filter:drop-shadow(0 1px 4px rgba(20,10,6,.6));}
-
-  @media (max-width:720px){
-    .s7-slide{grid-template-columns:1fr;aspect-ratio:auto;gap:14px;}
-    .s7-stage{max-width:300px;margin:0 auto;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .s7-photo,.s7-tape{animation:none;transform:scale(1.04);}
-  }
-
 /* ===== slide 12 redesign ===== */
 
   
@@ -636,39 +598,8 @@
   }
 
 
-.slide>.s3-card,.slide>.s7-slide,.slide>.s12-slide{margin-left:auto;margin-right:auto}
+.slide>.s3-card,.slide>.s12-slide{margin-left:auto;margin-right:auto}
 
-/* ===== slide 4 redesign: the observation room (image-led) ===== */
-  /* A real, branded-treated scene carries the problem: a rep on a call, watched from
-     behind a one-way mirror by the tools, whose faces are their own logos. */
-
-  .oroom-wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(12px,2.4vh,24px)}
-  .oroom-head{display:flex;flex-direction:column;gap:.7rem;padding:0 4px}
-  .oroom-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--rust-deep)}
-  .oroom-eyebrow::before{content:"";width:30px;height:3px;background:var(--rust);border-radius:2px;flex:none}
-  .oroom-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.9vw,58px);line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin:0}
-  .oroom-title em{font-style:normal;color:var(--rust-deep)}
-
-  /* cinematic image band, locked to 16:9 so the logo positions stay put */
-  .oroom-frame{position:relative;margin:0 auto;width:100%;max-width:min(1180px,calc(58vh * 16 / 9));aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#160a05}
-  .oroom-stage{position:absolute;inset:0;transform-origin:center 42%}
-  .slide.active .oroom-stage{animation:oromKen 22s ease-out both}
-  @keyframes oromKen{from{transform:scale(1.004)}to{transform:scale(1.05)}}
-  .oroom-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 46%}
-
-  /* each shadow-watcher's face is the tool's logo, glowing like a lit screen */
-  .oroom-mark{position:absolute;transform:translate(-50%,-50%);width:clamp(26px,3.1vw,44px);aspect-ratio:1;border-radius:26%;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.6),0 0 15px 3px rgba(224,160,90,.3),0 0 4px rgba(0,0,0,.5)}
-  .oroom-mark img{width:100%;height:100%;object-fit:cover;display:block}
-
-  @media (max-width:880px){
-    .oroom-frame{max-width:100%}
-    .oroom-title{font-size:clamp(26px,7vw,40px)}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .slide.active .oroom-stage{animation:none}
-  }
-
-  .slide>.oroom-wrap{margin-left:auto;margin-right:auto}
   /* ============================== WAVE 1 ============================== */
   /* treated real imagery: fade in once src is set by the IMG loader */
   img[data-img]{opacity:0;transition:opacity .5s ease} img[data-img].imgon{opacity:1}
@@ -736,18 +667,6 @@
 
   /* (the observation-room slide 4 is image-led; no sticker) */
 
-  /* slide 6: meme chat cards that swap on the slider */
-  .tl-stage{display:grid;grid-template-columns:clamp(240px,30%,310px) 1fr;gap:clamp(18px,3vw,36px);min-height:300px;align-items:stretch}
-  .tl-imgwrap{position:relative;min-height:290px}
-  .tl-quotes{position:relative;min-height:290px}
-  .tl-chat{position:absolute;inset:0;height:max-content;display:flex;flex-direction:column;gap:.5rem;transition:opacity .35s;background:var(--card);border:1.5px solid var(--line);border-radius:16px 16px 16px 5px;padding:13px;box-shadow:var(--shadow)}
-  .tl-chat-r{border-color:var(--rust-soft)}
-  .tl-who{font-family:var(--body);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
-  .tl-chat-r .tl-who{color:var(--rust)}
-  .tl-chat img{width:100%;border-radius:10px;display:block;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2)}
-  .tl-said{font-family:var(--hand);font-size:20px;font-weight:700;color:var(--ink);line-height:1.08}
-  .tl-chat-r .tl-said{color:var(--rust)}
-  @media (max-width:760px){.tl-stage{grid-template-columns:1fr;min-height:0} .tl-imgwrap{min-height:320px;margin-bottom:1rem} .tl-quotes{display:none}}
   @media (prefers-reduced-motion:reduce){.s2-polaroid{transition:none} .s2-polaroid:hover{transform:rotate(2.3deg) scale(1)} .tl-chat{transition:none} .s1-tick{transition:none} .ans{transition:none} .pl{transition:none} .s20-photo img{transition:none} .s14-opt{transition:none} .faqrow{transition:none}}
 
   /* ============================== WAVE 3 ============================== */
@@ -890,7 +809,7 @@
     <div class="wrap">
       <div class="s2-grid">
         <div class="s2-copy">
-          <div class="eyebrow">WingRep workshop · 20 minutes</div>
+          <div class="eyebrow">Live workshop · 45 minutes</div>
           <h1><span class="ln">The after&#8209;call work,</span><br><span class="ln">done by <span class="hl">Claude.</span></span></h1>
           <p class="sub">A real coaching workflow you can keep, with the exact prompts to run it. Steal all of it.</p>
           <div class="scribble" style="margin-top:1.2rem">copy-paste ready ↗</div>
@@ -913,14 +832,14 @@
   <section class="slide s3c">
     <div class="wrap">
       <div class="eyebrow">Here's the deal</div>
-      <h1><span class="ln">In twenty minutes, you</span><br><span class="ln">build a sales assistant</span><br><span class="ln"><span class="hl">you keep.</span></span></h1>
+      <h1><span class="ln">In forty-five minutes,</span><br><span class="ln">you build a sales</span><br><span class="ln">assistant <span class="hl">you keep.</span></span></h1>
       <ul class="checks" aria-label="What you will be able to do tonight">
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Run a coaching loop that sticks.</b> Coach one thing, then check the next call to see if it landed.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Write prompts Claude takes seriously.</b> The four moves that separate junk from gold.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Give Claude memory.</b> One running file per rep, so nothing resets every Monday.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Prep and drill before the call</b>, not scramble after it.</span></li>
       </ul>
-      <p class="sub" style="max-width:62ch">Everything we build in the next twenty minutes is yours to keep — whether or not we ever talk again.</p>
+      <p class="sub" style="max-width:62ch">Everything we build in the next forty-five minutes is yours to keep, whether or not we ever talk again.</p>
     </div>
   </section>
 
@@ -964,101 +883,6 @@
             <figcaption>stack 'em</figcaption>
           </figure>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 the observation room: tools watch behind glass, their faces are their logos -->
-  <section class="slide">
-    <div class="oroom-wrap">
-      <header class="oroom-head">
-        <div class="oroom-eyebrow">The thing nobody fixes</div>
-        <h1 class="oroom-title">They see everything. <em>They change nothing.</em></h1>
-      </header>
-      <figure class="oroom-frame">
-        <div class="oroom-stage">
-          <img data-img="slide4_mirror.clay" alt="A sales rep on a call, watched from behind a one-way mirror by four faceless observers whose faces are the logos of the revenue tools Gong, Otter, Fireflies and Fathom.">
-          <span class="oroom-mark" data-domain="gong.io" style="left:44%;top:27.5%"><img alt="Gong"></span>
-          <span class="oroom-mark" data-domain="otter.ai" style="left:57.3%;top:27.5%"><img alt="Otter"></span>
-          <span class="oroom-mark" data-domain="fireflies.ai" style="left:71.6%;top:27.5%"><img alt="Fireflies"></span>
-          <span class="oroom-mark" data-domain="fathom.video" style="left:85.2%;top:27.5%"><img alt="Fathom"></span>
-        </div>
-      </figure>
-    </div>
-  </section>
-
-  <!-- 6 testimonial slider + face -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">Drag from week 1 to week 3 →</div>
-      <h1>Every new sales tool<br>follows the <span id="tlWord" class="hl">honeymoon.</span></h1>
-      <div class="tl-stage">
-        <div class="tl-imgwrap">
-          <figure class="tl-chat tl-chat-h" id="tlImgH">
-            <figcaption class="tl-who">week 1 · the honeymoon</figcaption>
-            <img data-img="slide6_honeymoon.green" alt="Success Kid clenching a fist: I love logging calls">
-            <div class="tl-said">"i LOVE logging calls."</div>
-          </figure>
-          <figure class="tl-chat tl-chat-r" id="tlImgR" style="opacity:0">
-            <figcaption class="tl-who">week 3 · the reckoning</figcaption>
-            <img data-img="slide6_reckoning.clay" alt="This Is Fine dog calmly sitting in a burning room">
-            <div class="tl-said">"this is fine. it's fine."</div>
-          </figure>
-        </div>
-        <div class="tl-quotes">
-          <div class="tl-set" id="tlHoney">
-            <div class="q"><p>"I LOVE logging calls. Best part of my day."</p><div class="by">Jordan, AE</div></div>
-            <div class="q"><p>"Updated all 14 fields. Felt amazing."</p><div class="by">Priya, AE</div></div>
-            <div class="q"><p>"Can't wait to write follow-ups at 9pm!"</p><div class="by">Marcus, SDR</div></div>
-            <div class="q"><p>"Finally. More forms."</p><div class="by">Dana, AE</div></div>
-          </div>
-          <div class="tl-set" id="tlReck" style="opacity:0">
-            <div class="q bad"><p>"I spend more time reporting the work than doing it."</p><div class="by">Jordan, AE</div></div>
-            <div class="q bad"><p>"Pipeline's a fantasy. Untouched since Tuesday."</p><div class="by">Priya, AE</div></div>
-            <div class="q bad"><p>"I coach the same thing weekly. Nothing changes."</p><div class="by">You, the manager</div></div>
-            <div class="q bad"><p>"Forecast call again? Cool. Guessing again."</p><div class="by">Marcus, SDR</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="tl-ctrl">
-        <svg class="face" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--green)" stroke-width="2.5" id="faceRing"/><circle cx="14" cy="16" r="2.4" fill="var(--green)" id="eyeL"/><circle cx="26" cy="16" r="2.4" fill="var(--green)" id="eyeR"/><path id="mouth" d="M13 25 Q20 30 27 25" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"/></svg>
-        <span class="wk" id="tlLabel">Week 1</span><input type="range" id="tlRange" min="0" max="100" value="0">
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 two options -->
-  <section class="slide">
-    <div class="wrap">
-      <div class="eyebrow">So you're stuck with</div>
-      <h1>Flying blind, or playing nag.</h1>
-      <div class="cols">
-        <div class="ocard"><div class="art"><img class="ill" data-asset="ui_ocard1" alt="blindfolded manager"></div><h3>Blind</h3><p>You coach in the 1:1. You hope it sticks. You find out on the forecast, too late.</p></div>
-        <div class="ocard"><div class="art"><img class="ill" data-asset="ui_ocard2" alt="manager nagging reps"></div><h3>Nag</h3><p>You chase reps to update the CRM. Every week. Forever. They still don't.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 the coaching loop: film-room hero -->
-  <section class="slide">
-    <div class="s7-slide">
-      <div class="s7-copy">
-        <div class="s7-eyebrow">The framework</div>
-        <h1 class="s7-headline">The coaching loop:<br><span class="s7-loopword">coach, check, adjust.</span></h1>
-        <p class="s7-body">Most coaching dies because nobody checks the <b>next</b> call. The whole method is four turns: coach one thing, watch the next call, ask <b>did it stick?</b>, then adjust. It only compounds if you close the loop.</p>
-      </div>
-      <div class="s7-stage">
-        <figure class="s7-frame">
-          <img class="s7-photo" data-img="slide7_filmroom.clay" alt="A sales manager and rep reviewing a recorded call together, one pointing at the screen, the other taking notes">
-          <div class="s7-tape">
-            <svg class="s7-markup" viewBox="0 0 400 500" fill="none" aria-hidden="true" preserveAspectRatio="none">
-              <path class="s7-ring" d="M212 140 C250 137 296 156 296 200 C297 242 260 268 210 269 C158 270 130 245 131 199 C132 155 172 137 230 139" stroke="#F7E9DF" stroke-width="5" stroke-linecap="round"/>
-              <path class="s7-arr" d="M336 92 C322 120 306 154 290 191" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round"/>
-              <path class="s7-arrhead" d="M280 175 L290 191 L273 194" stroke="#F7E9DF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="s7-note">there<br>it is</span>
-          </div>
-        </figure>
       </div>
     </div>
   </section>
@@ -1296,7 +1120,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 11 reveal dark -->
-  <section class="slide" data-animate="app">
+  <section class="slide" id="wingrepReveal" data-animate="app">
     <div class="wrap">
       <div class="eyebrow">This is the part we built</div>
       <h1>Same loop. No files. <span class="hl">No pasting.</span></h1>
@@ -1356,6 +1180,8 @@ objection handling, and next-step.</div>
       </div></div>
     </div>
   </section>
+
+  <!-- SLOT:faq-competitors -->
 
   <!-- 17 walk away dark + animated checks -->
   <section class="slide">
@@ -1482,12 +1308,6 @@ objection handling, and next-step.</div>
     img.onload=function(){c.classList.add('hasimg');}; img.src=EMBED[d];
   });
 
-  // slide 4: the shadow-watchers' faces are the incumbent logos
-  document.querySelectorAll('.oroom-mark[data-domain]').forEach(function(m){
-    var d=m.dataset.domain, img=m.querySelector('img'); if(!d||!img||!EMBED[d])return;
-    img.src=EMBED[d];
-  });
-
   // customer wordmark nameplates (pulled from wingrep.ai), CLIENTS map populated inline below
   var CLIENTS=window.CLIENTS;
   document.querySelectorAll('img[data-client]').forEach(function(im){ var k=im.dataset.client; if(CLIENTS[k]) im.src=CLIENTS[k]; });
@@ -1501,13 +1321,19 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","One-way mirror","Honeymoon → reckoning","Two bad options","The coaching loop","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
+  // WingRep stays invisible until the reveal slide, so the first two thirds of the
+  // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
+  // survives any reordering.
+  var brand=document.querySelector('.brand');
+  var revealAt=slides.indexOf(document.getElementById('wingrepReveal'));
 
   function show(n){
     n=Math.max(0,Math.min(total-1,n)); stopGame(); stopBall(); stopConfetti();
     slides[i].classList.remove('active'); i=n; slides[i].classList.add('active');
     counter.textContent=pad(i+1)+' / '+pad(total);
+    if(brand) brand.classList.toggle('on', revealAt>=0 && i>=revealAt);
     progress.style.width=((i+1)/total*100)+'%';
     prevB.disabled=i===0; nextB.disabled=i===total-1; slides[i].scrollTop=0;
     var a=slides[i].dataset.animate;
@@ -1583,23 +1409,6 @@ objection handling, and next-step.</div>
     stopBall(); loop();
   }
   function stopBall(){if(ballRAF)cancelAnimationFrame(ballRAF);ballRAF=null;}
-
-  /* testimonial slider + face */
-  (function(){
-    var r=document.getElementById('tlRange'),h=document.getElementById('tlHoney'),k=document.getElementById('tlReck'),lab=document.getElementById('tlLabel'),word=document.getElementById('tlWord'),mouth=document.getElementById('mouth'),ring=document.getElementById('faceRing'),eL=document.getElementById('eyeL'),eR=document.getElementById('eyeR');
-    function upd(){var v=+r.value/100; var hon=v<.5;
-      // hard threshold so the two layered (absolute) text/image cards never sit muddy at ~50% each;
-      // the CSS opacity transition still gives a smooth crossfade as it flips across the midpoint.
-      h.style.opacity=hon?1:0; k.style.opacity=hon?0:1;
-      var ih=document.getElementById('tlImgH'),ir=document.getElementById('tlImgR'); if(ih)ih.style.opacity=hon?1:0; if(ir)ir.style.opacity=hon?0:1;
-      lab.textContent= v<.5?'Week 1':(v<.95?'Week 2':'Week 3');
-      word.textContent= v<.5?'honeymoon.':'reckoning.'; word.style.color= v<.5?'var(--green)':'var(--rust)';
-      var col=v<.5?'#6e311a':'#C84026'; ring.setAttribute('stroke',col);[eL,eR].forEach(function(e){e.setAttribute('fill',col);});mouth.setAttribute('stroke',col);
-      // smile -> frown
-      var endY=22+6*v, ctrlY=31-12*v; mouth.setAttribute('d','M13 '+endY.toFixed(0)+' Q20 '+ctrlY.toFixed(0)+' 27 '+endY.toFixed(0));
-    }
-    r.oninput=upd; upd();
-  })();
 
   /* SalesOS */
   document.querySelectorAll('.os .tabs button').forEach(function(b){b.onclick=function(){
@@ -1832,7 +1641,7 @@ objection handling, and next-step.</div>
     for(var i=0;i<rings.length;i++) if(rings[i].alive) rings[i].gap+=rings[i].spin*dt;
 
     if(mode==='play'){
-      // no gravity on the ball — it bounces weightlessly, pinballing off the rings
+      // no gravity on the ball, it bounces weightlessly, pinballing off the rings
       ball.x+=ball.vx*dt; ball.y+=ball.vy*dt;
 
       var ring=activeRing();
@@ -1963,12 +1772,6 @@ objection handling, and next-step.</div>
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
-
-
-/* slide 8 */
-
-  /* slide 7 is now a static film-room hero image (.s7-slide); the old
-     coaching-loop flywheel animation was removed in favor of real imagery. */
 
 
 /* slide 12 */
