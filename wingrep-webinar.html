@@ -35,6 +35,25 @@
 
   .slide{position:absolute;inset:0;display:none;padding:6.5vh clamp(20px,6vw,104px) 8.5vh;flex-direction:column;justify-content:center;overflow-y:auto;z-index:3}
   .slide.active{display:flex}
+  /* 1280x720 is a real laptop and two slides (the five prompts, and the trial) ran
+     about 85px past their content box there, so they scrolled and slid under the top
+     bar. Reclaim the height at short viewports. Padding-top is left alone on purpose:
+     it is what clears the fixed top bar. */
+  @media (max-height:800px){
+    .slide{padding-bottom:3.5vh}
+    .sFive h1,.slide#trial h1{font-size:clamp(26px,3.5vw,42px)}
+    .sFive .prompts5{margin-top:.7rem}
+    .sFive .prompts5 li{padding-top:.42rem;padding-bottom:.42rem}
+    .sFive .glow{margin-top:.75rem}
+    .sFive .os-cap{margin-top:.4rem}
+    /* .slide#trial, not #trial: the trial slide ships its own <style> block further
+       down the file, and at equal specificity that later block would win. */
+    .slide#trial .body{margin-top:.6rem}
+    .slide#trial .tarc{max-width:730px;margin-top:.2rem}
+    .slide#trial .tweeks{max-width:730px;margin-top:.3rem}
+    .slide#trial .cta-row{margin-top:.4rem}
+    .slide#trial .logobanner{margin-top:.25rem}
+  }
   .wrap{width:100%;max-width:1100px;margin:0 auto;position:relative}
 
   /* (formerly the dark-green slide treatment) these slides now use the same
@@ -1116,7 +1135,7 @@
   </section>
 
   <!-- NEW: the 5 prompts to steal + prompt glow-up slider -->
-  <section class="slide">
+  <section class="slide sFive">
     <div class="wrap">
       <div class="eyebrow">Five prompts to steal</div>
       <h1>Claude writes up the call, <span class="hl">then coaches the rep.</span></h1>
