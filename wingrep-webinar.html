@@ -1873,13 +1873,13 @@ objection handling, and next-step.</div>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
-  var trail=document.getElementById('s3trail'), bitsC=document.getElementById('s3bits'), h1=slide.querySelector('h1');
+  var trail=document.getElementById('s3trail'), bitsC=document.getElementById('s3bits');
   var tctx=trail.getContext('2d'), bctx=bitsC.getContext('2d');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var TAU=Math.PI*2;
   // classic LEGO, led by the deck's coral. No pure yellow: it vanishes on the ivory paper.
   var COLORS=['#D97757','#0056BF','#D01A20','#34964E','#E8A317'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=14,TOP=14,dpr=1;
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,paused=false,W=0,H=0,SZ=56,M=14,dpr=1;
   var px=44,py=40,sinceLay=1e9,laid=[],bits=[];
   var LAY_TTL=1.3;      // a brick's life, so the track runs ~600px behind the ball at 472px/s
   var GRAV=980, MAXBITS=90;
@@ -1915,22 +1915,21 @@ objection handling, and next-step.</div>
   // Kept in the loop on purpose. It costs ~1.7us (0.01% of a frame) and it is load-bearing:
   // .s3-dvd starts display:none, so dvd.offsetWidth is 0 on the first measure and SZ would
   // stick at its 56px fallback, running the 198px ball clean off the right and bottom edges.
-  // The h1 also drifts during the slide's entrance, and that entrance animates a TRANSFORM,
-  // so a ResizeObserver would never fire for it.
   function measure(){
     var r=slide.getBoundingClientRect();
     var w=r.width,h=r.height,d=Math.min(2,window.devicePixelRatio||1);
     if(w!==W||h!==H||d!==dpr){W=w;H=h;dpr=d;sizeCanvas(trail,tctx);sizeCanvas(bitsC,bctx);}
     SZ=dvd.offsetWidth||56;
-    TOP=M;
-    if(h1){var hr=h1.getBoundingClientRect();TOP=Math.max(M,hr.bottom-r.top+14);}
-    if(TOP>H-SZ-M)TOP=M;                    // pathological viewport: fall back to the old box
   }
+  // One box: the slide, inset by M on all four sides. The ceiling used to be the h1's bottom
+  // edge, which put an invisible floor ~180px down the slide and meant the ball never went
+  // anywhere near the top of the page. It already flies OVER the polaroids and the brick
+  // shelf, so there was no reason for the headline alone to be a wall.
   function bx(){return Math.max(M,W-SZ-M);} // right limit
-  function by(){return Math.max(TOP,H-SZ-M);} // bottom limit
+  function by(){return Math.max(M,H-SZ-M);} // bottom limit
 
   function loop(ts){
-    if(!running)return;
+    if(!running||paused)return;
     measure();
     if(!last)last=ts;var dt=Math.min(.05,(ts-last)/1000);last=ts;
     px=x;py=y;
@@ -1940,7 +1939,7 @@ objection handling, and next-step.</div>
     var hx='',hy='',R=bx(),B=by();
     if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';nx=1;}
     else if(x>=R){x=R;dx=-Math.abs(dx);hit=true;edges++;hx='right';nx=-1;}
-    if(y<=TOP){y=TOP;dy=Math.abs(dy);hit=true;edges++;hy='top';ny=1;}
+    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;hy='top';ny=1;}
     else if(y>=B){y=B;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';ny=-1;}
 
     var cx=x+SZ/2, cy=y+SZ/2, col=COLORS[ci];
@@ -1967,17 +1966,25 @@ objection handling, and next-step.</div>
     // is heading, so the track turns at every bounce and changes colour with the ring.
     // A brick never moves once it is down, and the whole track is redrawn from scratch each
     // frame, so there is nothing that can freeze and teleport the way the old ghosts did.
-    col=COLORS[ci];
-    var pcx=px+SZ/2, pcy=py+SZ/2, LW=SZ*.42, LAY_GAP=SZ*.30;
+    var pcx=px+SZ/2, pcy=py+SZ/2, LAY_GAP=SZ*.30;
     sinceLay+=Math.hypot(cx-pcx,cy-pcy);
     if(sinceLay>=LAY_GAP){
       sinceLay=0;
-      laid.push({x:cx,y:cy,rot:Math.atan2(cy-pcy,cx-pcx)+(Math.random()-.5)*.16,c:col,t:0});
+      laid.push({x:cx,y:cy,rot:Math.atan2(cy-pcy,cx-pcx)+(Math.random()-.5)*.16,c:COLORS[ci],t:0});
       if(laid.length>40)laid.shift();
     }
+    paint(dt);
+    raf=requestAnimationFrame(loop);
+  }
+  // Both canvases, redrawn from scratch. Split out of loop() because sizeCanvas() wipes a
+  // canvas whenever the box changes, and while P has the loop parked there is no next frame
+  // to put the track back: pause, then hit F for fullscreen, and the bricks would vanish.
+  // paint(0) advances nothing, so the resize handler can repaint the frozen frame as it is.
+  function paint(dt){
     // Laid slightly closer together than they are wide, so they interlock into a chain
     // rather than reading as breadcrumbs. Peak alpha stays under 1: the track crosses the
     // bio copy, and the words have to win.
+    var LW=SZ*.42;
     tctx.clearRect(0,0,W,H);
     for(var j=0;j<laid.length;j++){
       var L=laid[j];L.t+=dt;
@@ -1991,7 +1998,6 @@ objection handling, and next-step.</div>
       brick(tctx,LW,L.c);
       tctx.restore();
     }
-
     // ---- the loose bricks, on their own layer so they tumble instead of smearing
     bctx.clearRect(0,0,W,H);
     for(var i=bits.length-1;i>=0;i--){
@@ -2004,7 +2010,6 @@ objection handling, and next-step.</div>
       brick(bctx,p.w,p.c);
       bctx.restore();
     }
-    raf=requestAnimationFrame(loop);
   }
   function start(){
     if(reduce||running)return;
@@ -2013,22 +2018,35 @@ objection handling, and next-step.</div>
     trail.classList.add('on');bitsC.classList.add('on');
     measure();if(W<20){setTimeout(start,80);return;}
     var spd=472,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
-    x=Math.max(M,Math.min(x,bx()));y=Math.max(TOP,Math.min(y,by()));
+    x=Math.max(M,Math.min(x,bx()));y=Math.max(M,Math.min(y,by()));
     px=x;py=y;sinceLay=1e9;laid.length=0;bits.length=0;
     tctx.clearRect(0,0,W,H);bctx.clearRect(0,0,W,H);
-    running=true;last=0;raf=requestAnimationFrame(loop);
+    running=true;paused=false;last=0;raf=requestAnimationFrame(loop);
   }
   function stop(){
-    running=false;if(raf)cancelAnimationFrame(raf);raf=0;
+    running=false;paused=false;if(raf)cancelAnimationFrame(raf);raf=0;
     dvd.style.display='none';
     trail.classList.remove('on');bitsC.classList.remove('on');
     if(W>0){tctx.clearRect(0,0,W,H);bctx.clearRect(0,0,W,H);}
     laid.length=0;bits.length=0;if(ava)ava.style.display='';
   }
+  // P freezes the whole system, not just the ball: the rAF stops, so the track stops
+  // decaying and the loose bricks hang in mid-air exactly where they were. On resume,
+  // last=0 so the frozen seconds are not integrated as one giant dt and teleported through.
+  function togglePause(){
+    if(!running)return;
+    paused=!paused;
+    if(paused){if(raf)cancelAnimationFrame(raf);raf=0;}
+    else{last=0;raf=requestAnimationFrame(loop);}
+  }
   new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
-  addEventListener('resize',function(){if(running)measure();});
+  addEventListener('resize',function(){if(!running)return;measure();if(paused)paint(0);});
   // rAF is parked while the tab is hidden; don't integrate the whole gap on the way back
   addEventListener('visibilitychange',function(){last=0;});
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;   // leave Cmd/Ctrl+P (print) alone
+    if(e.key.toLowerCase()==='p'){e.preventDefault();togglePause();}
+  });
   if(slide.classList.contains('active'))start();
 })();
 </script>
