@@ -363,9 +363,11 @@
   .brand img{height:30px;width:auto;max-width:170px;display:block}
   /* The deck is a teaching deck first: WingRep does not appear anywhere until
      the reveal slide (#wingrepReveal). Before it, the brand mark is not rendered
-     at all; from the reveal onward it fades in. */
-  .brand{opacity:0;visibility:hidden;transition:opacity .5s ease}
-  .brand.on{opacity:1;visibility:visible}
+     at all; from the reveal onward it fades in. Scoped to .topbar on purpose:
+     the logo chips also carry an <img class="brand">, and an unscoped rule here
+     hides every competitor and customer logo in the deck. */
+  .topbar .brand{opacity:0;visibility:hidden;transition:opacity .5s ease}
+  .topbar .brand.on{opacity:1;visibility:visible}
   .counter{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
   .chrome{position:fixed;bottom:18px;right:clamp(20px,6vw,104px);z-index:40;display:flex;gap:.5rem;align-items:center;transition:opacity .4s,transform .4s}
   .chrome.hide{opacity:0;transform:translateY(8px);pointer-events:none}
@@ -892,7 +894,13 @@
      The tail is not a smear: each ghost is a real past position of the ball, carrying the
      ring colour it had at that moment. So after a wall hit the tail still shows the old
      colour behind it and you can read the bounce out of the trail. */
-  .sAlan .s3-dvd{width:var(--dvdSZ);height:var(--dvdSZ)}
+  /* The ball flies OVER the slide, it does not hide behind it. .sAlan-wrap is a
+     z-index:2 stacking context, so at the old z-index of 1 the doubled ball spent
+     most of its orbit occluded by the polaroids and the brick shelf, which is worse
+     than not enlarging it at all. Both layers are pointer-events:none, so nothing
+     on the slide becomes unclickable. */
+  .sAlan .s3-dvd{width:var(--dvdSZ);height:var(--dvdSZ);z-index:6}
+  .sAlan .s3-trail{z-index:5}
   .sAlan .s3-dvd-in{width:var(--dvdSZ);height:var(--dvdSZ);
     box-shadow:0 0 0 5px var(--dvdc,#D97757),0 26px 46px -24px rgba(20,18,13,.55)}
   .s3-trail{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
@@ -1550,9 +1558,6 @@ objection handling, and next-step.</div>
      is tuned so the four fit the card with room to spare; it still wraps gracefully
      if the column ever gets narrower. */
   .sFaq .watchrow{display:flex;flex-wrap:wrap;gap:.42rem}
-  /* the deck-wide .brand rule hides the WingRep top-bar mark until the reveal, and it
-     also catches the logo <img class="brand"> inside a chip. Undo that here only. */
-  .sFaq .watchrow .lchip img.brand{opacity:1;visibility:visible}
   .sFaq .watchrow .lchip{height:auto}
   .sFaq .watchrow .lchip:hover{transform:none} /* they do not move. that is the point. */
   .sFaq .watchrow .lchip b{font-size:12.5px;padding:.34rem .8rem}
@@ -1864,12 +1869,12 @@ objection handling, and next-step.</div>
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","What if it remembered","The reveal","The 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
   // survives any reordering.
-  var brand=document.querySelector('.brand');
+  var brand=document.querySelector('.topbar .brand');
   var revealAt=slides.indexOf(document.getElementById('wingrepReveal'));
 
   function show(n){
