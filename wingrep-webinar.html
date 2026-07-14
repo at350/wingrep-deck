@@ -850,6 +850,65 @@
   </section>
 
   <!-- 3 agenda (the teaching contract) -->
+  <style>
+  /* ===== slide 3: the Claude Code critter, dancing next to the promise =====
+     The thing you are about to build, standing right there while you read what it
+     will do. Kept in its own style block (not the shared one) so parallel edits to
+     other slides merge clean.
+
+     Layout: the agenda text stays a single column of .wrap children (so the deck's
+     staggered .wrap>* entrance still runs item by item) and the critter is dropped
+     into a second grid column spanning every row. No asset, no second column: the
+     .has-claude class is only added when window.ASSETS.s3_claude exists, so the
+     slide falls back to exactly what it was.
+
+     The dance is three layers, not one canned bounce, because a logo that merely
+     floats reads as decoration:
+       .s3c-floor  the contact shadow, tight and dark on the beat, wide and faint at
+                   the apex. This is what gives the hop weight; without it the sprite
+                   just slides up and down in space.
+       .s3c-dancer the hop itself, with squash on the landing and stretch on the push
+                   off (transform-origin at the feet, so it compresses into the floor).
+       .s3c-sway   a lean that runs at exactly twice the hop period, so the critter
+                   tips left on one beat and right on the next: a two-step, not a jitter. */
+  .s3c-claude{display:none;margin:0;position:relative;padding-bottom:16px;justify-self:end}
+  /* The four text blocks stay one per row in column 1; the critter is column 2,
+     spanning them all so it centres on the whole block. The rows are declared
+     explicitly because `grid-row:1 / -1` only spans the EXPLICIT grid: with
+     auto-placed rows, -1 resolves back to line 1 and the critter lands in the
+     eyebrow's row, clipped against the top of the slide. */
+  .s3c.has-claude .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:repeat(4,auto);column-gap:clamp(20px,3.2vw,56px);align-items:center}
+  .s3c.has-claude .wrap>*{grid-column:1}
+  .s3c.has-claude .s3c-claude{display:block;grid-column:2;grid-row:1 / -1;align-self:center}
+  .s3c-sway{display:block;transform-origin:50% 92%;will-change:transform;
+    animation:s3cSway 1.24s ease-in-out infinite}
+  .s3c-dancer{display:block;width:clamp(180px,20.5vw,286px);height:auto;
+    transform-origin:50% 100%;will-change:transform;
+    animation:s3cHop .62s ease-in-out infinite}
+  .s3c-floor{position:absolute;left:50%;bottom:0;width:52%;height:13px;margin-left:-26%;
+    border-radius:50%;background:rgba(31,28,22,.5);filter:blur(6px);will-change:transform,opacity;
+    animation:s3cFloor .62s ease-in-out infinite}
+  @keyframes s3cHop{
+    0%,100%{transform:translateY(0) scale(1.07,.93)}   /* landed: squashed into the floor */
+    16%{transform:translateY(-9%) scale(.97,1.05)}     /* push off: stretched */
+    48%{transform:translateY(-15%) scale(1,1)}         /* apex */
+    80%{transform:translateY(-4%) scale(1.03,.98)}     /* on the way down */
+  }
+  @keyframes s3cSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  @keyframes s3cFloor{0%,100%{transform:scale(1);opacity:.26}48%{transform:scale(.68);opacity:.09}}
+  /* house rule: reduced motion gets a still slide. The critter stays, it just stands
+     there (mid-stride, shadow under its feet) instead of dancing. */
+  @media (prefers-reduced-motion:reduce){
+    .s3c-sway,.s3c-dancer,.s3c-floor{animation:none}
+    .s3c-floor{opacity:.2}
+  }
+  /* below 820px the two-zone grid starves the checklist, so drop the critter and
+     collapse back to the single column (same call as the slide 9 numeral) */
+  @media (max-width:820px){
+    .s3c.has-claude .wrap{display:block}
+    .s3c.has-claude .s3c-claude{display:none}
+  }
+  </style>
   <section class="slide s3c">
     <div class="wrap">
       <div class="eyebrow">Here's the deal</div>
@@ -861,6 +920,10 @@
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Prep and drill before the call</b>, not scramble after it.</span></li>
       </ul>
       <p class="sub" style="max-width:62ch">Everything we build in the next forty-five minutes is yours to keep, whether or not we ever talk again.</p>
+      <figure class="s3c-claude" aria-hidden="true">
+        <span class="s3c-sway"><img class="s3c-dancer" data-asset="s3_claude" alt=""></span>
+        <span class="s3c-floor"></span>
+      </figure>
     </div>
   </section>
 
@@ -1992,6 +2055,9 @@ objection handling, and next-step.</div>
   if(window.ASSETS){document.querySelectorAll('img[data-asset]').forEach(function(im){var k=im.dataset.asset;if(window.ASSETS[k])im.src=window.ASSETS[k];});}
   // slide 9: only reveal the Fable 5 image (and its two-up layout) when the asset is actually present
   if(window.ASSETS&&window.ASSETS['slide9_fable']){var s9=document.querySelector('.s9lit');if(s9)s9.classList.add('has-fable');}
+  // slide 3: same deal for the dancing Claude Code critter, so the agenda slide stays
+  // a clean single column if the asset is ever pulled
+  if(window.ASSETS&&window.ASSETS['s3_claude']){var s3=document.querySelector('.s3c');if(s3)s3.classList.add('has-claude');}
   if(window.IMG){var _rm=matchMedia('(prefers-reduced-motion: reduce)').matches;document.querySelectorAll('img[data-img]').forEach(function(im){ var k=im.dataset.img; if(_rm && im.dataset.imgReduced && window.IMG[im.dataset.imgReduced]) k=im.dataset.imgReduced; if(window.IMG[k]){ im.src=window.IMG[k]; im.classList.add('imgon'); } });}
 
   var slides=[].slice.call(document.querySelectorAll('.slide')), total=slides.length, i=0;
