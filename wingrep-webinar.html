@@ -1203,31 +1203,31 @@
 
   <!-- NEW: Drake, bad prompt vs good prompt (teaching meme) -->
   <style>
-  /* Oscar lives in the trash, and this is the garbage-in-garbage-out slide, so he
-     surfaces at a random spot along the bottom edge, hangs around a beat, and sinks
-     back down. No caption, no chip: it's a sight gag or it's nothing.
+  /* Oscar lives in the trash, and this is the garbage-in-garbage-out slide, so his can
+     trundles back and forth along the bottom edge: he scurries to one side, stands there
+     a grouchy beat, then paces back. No caption, no chip: it's a sight gag or it's nothing.
 
-     .gio-oscar is its own clipping window rather than leaning on the slide's overflow:
-     .slide is overflow-y:auto (which forces overflow-x to auto too), so a sprite parked
-     below the bottom edge would grow scrollbars. Three nested elements because three
-     transforms have to not fight each other: the window clips, .gio-lift slides him up
-     and down, and the <img> carries the per-appearance lean plus the idle bob. */
-  .gio-oscar{position:absolute;bottom:0;left:6%;width:clamp(104px,12.5vw,164px);overflow:hidden;pointer-events:none;z-index:6;line-height:0}
-  /* down: quick, ease-in, he drops. up: slower, with overshoot, so he pops.
-     The overshoot rises past the rest position; the cutout carries transparent
-     headroom above his lid so the window never guillotines it. */
-  .gio-lift{display:block;transform:translateY(101%);transition:transform .40s cubic-bezier(.5,0,.75,0)}
-  .gio-oscar.up .gio-lift{transform:translateY(0);transition:transform .82s cubic-bezier(.2,1.4,.45,1)}
-  .gio-oscar img{display:block;width:100%;height:auto;transform:rotate(var(--lean,0deg))}
-  .gio-oscar.up img{animation:gioBob 2.7s ease-in-out infinite}
-  @keyframes gioBob{
-    0%,100%{transform:rotate(var(--lean,0deg)) translateY(0)}
-    50%{transform:rotate(calc(var(--lean,0deg) * -1)) translateY(-4px)}
+     .gio-oscar is a full-width, bottom-anchored track that clips its own overflow rather
+     than leaning on the slide's: .slide is overflow-y:auto (which forces overflow-x to auto
+     too), so a sprite whose transform overhangs an edge would grow scrollbars. Three nested
+     elements so three transforms don't fight: .gio-runner carries the horizontal travel,
+     .gio-lean tips the can into its direction of travel, and the <img> does the waddle-rock
+     gait (a legless can has to *look* like it's working to move). padding-top is headroom so
+     overflow:hidden never guillotines his lid at the top of a hop. */
+  .gio-oscar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;padding-top:18px;overflow:hidden;pointer-events:none;z-index:6;line-height:0}
+  .gio-runner{display:block;flex:0 0 auto;will-change:transform;transform:translateX(0)}
+  /* he leans from the base of the can, so tipping reads as trundling, not spinning */
+  .gio-lean{display:block;transform:rotate(var(--lean,0deg));transform-origin:50% 90%;transition:transform .5s ease}
+  .gio-oscar img{display:block;width:clamp(104px,12.5vw,164px);height:auto;transform-origin:50% 94%}
+  /* the gait: rock side to side and bob, only while he's actually crossing */
+  .gio-oscar.running img{animation:gioWaddle .34s ease-in-out infinite}
+  @keyframes gioWaddle{
+    0%,100%{transform:rotate(-2.6deg) translateY(0)}
+    50%{transform:rotate(2.6deg) translateY(-5px)}
   }
-  /* reduced motion: he just sits there, permanently grouchy. The JS never starts, so
-     `left` keeps its CSS default instead of a random one. */
+  /* reduced motion: he just sits there at rest, permanently grouchy. The JS never starts. */
   @media (prefers-reduced-motion:reduce){
-    .gio-lift{transform:translateY(0);transition:none}
+    .gio-lean{transform:none}
     .gio-oscar img{animation:none}
   }
   </style>
@@ -1246,61 +1246,78 @@
         </div>
       </div>
     </div>
-    <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-lift"><img data-asset="oscar_grouch" alt=""></span></div>
+    <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
   <script>
   (function(){
     var box=document.getElementById('gioOscar'); if(!box) return;
     var slide=box.closest('.slide');
-    var lift=box.querySelector('.gio-lift');
+    var runner=box.querySelector('.gio-runner');
+    var lean=box.querySelector('.gio-lean');
     var reduce=matchMedia('(prefers-reduced-motion: reduce)');
-    var upT=0,downT=0,alive=false;
+    var alive=false, turnT=0, dir=1, x=0;
     function rnd(a,b){return a+Math.random()*(b-a);}
 
-    /* Pick a fresh spot every time he surfaces. Measured, never guessed: .slide is
-       display:none until it's active, so offsetWidth here only reads true because
-       place() is called from rise(), which only runs while the slide is on screen.
-       He is clamped fully inside the slide because overflow-x:auto would otherwise
-       turn an overhanging elbow into a horizontal scrollbar. */
-    function place(){
-      var w=box.offsetWidth||140, room=slide.clientWidth-w-32;
-      box.style.left=(room>0 ? 16+Math.random()*room : 16)+'px';
-      box.style.setProperty('--lean',(Math.random()<.5?-1:1)*rnd(1.6,4.2)+'deg');
-    }
-    function rise(){
+    /* How far he can travel: the track is full width, so his run spans the slide minus
+       his own width. Measured, never guessed — the slide is display:none until active,
+       so this only reads true because it's called while the slide is on screen. */
+    function span(){ return Math.max(0, box.clientWidth - runner.offsetWidth); }
+    /* snap him somewhere with no glide (used on entry / resize) */
+    function place(px){ x=px; runner.style.transition='none'; runner.style.transform='translateX('+px+'px)'; }
+    /* tip the can into the way he's headed — the lean eases as he takes off */
+    function face(d){ dir=d; lean.style.setProperty('--lean',(d>0?6:-6)+'deg'); }
+
+    /* One leg of the pace. A CSS transition does the actual gliding — it's GPU-composited
+       and runs off the wall clock, so it stays smooth regardless of rAF throttling — while a
+       setTimeout sized to the same duration sequences the turnaround (transitionend proved
+       unreliable when the tab is backgrounded). Constant px/sec, so every leg moves at the
+       same speed no matter its length. The transition-none + reflow + transition dance is
+       what makes the glide actually start from the current spot instead of stalling. */
+    function run(){
       if(!alive) return;
-      place(); box.classList.add('up');
-      upT=setTimeout(sink, rnd(1900,3600));
+      var max=span(); if(max<8) return;               // no room to pace
+      var to=dir>0?max:0, dist=Math.abs(to-x);
+      if(dist<4){ face(-dir); return run(); }          // already at that edge, turn around
+      face(dir); box.classList.add('running');
+      var dur=dist/rnd(250,320);                       // seconds
+      runner.style.transition='none';
+      runner.style.transform='translateX('+x+'px)';
+      void runner.offsetWidth;                          // commit the 'from' so the transition takes
+      runner.style.transition='transform '+dur+'s linear';
+      runner.style.transform='translateX('+to+'px)';
+      x=to;
+      clearTimeout(turnT);
+      turnT=setTimeout(function(){                      // arrived: stop the gait, stand a beat, pace back
+        box.classList.remove('running');
+        dir=-dir;
+        turnT=setTimeout(run, rnd(280,950));
+      }, dur*1000);
     }
-    function sink(){
-      if(!alive) return;
-      box.classList.remove('up');
-      downT=setTimeout(rise, rnd(2400,5600));
-    }
+
     function start(){
       if(alive||reduce.matches) return;
       alive=true;
-      downT=setTimeout(rise, rnd(1000,2200));
+      var max=span();
+      x=rnd(0,max); dir=Math.random()<.5?-1:1;        // fresh spot + heading each entry
+      place(x); face(dir);
+      turnT=setTimeout(run, rnd(300,900));
     }
     function stop(){
-      alive=false; clearTimeout(upT); clearTimeout(downT);
-      box.classList.remove('up');
-      /* kill the transition so he is already gone next time the slide opens,
-         instead of visibly sliding away in front of the audience */
-      var t=lift.style.transition; lift.style.transition='none'; box.offsetHeight; lift.style.transition=t;
+      alive=false; clearTimeout(turnT);
+      box.classList.remove('running');
+      place(x);                                        // freeze in place; nothing glides on exit
     }
     new MutationObserver(function(){slide.classList.contains('active')?start():stop();})
       .observe(slide,{attributes:true,attributeFilter:['class']});
-    /* His left is an absolute pixel value from the width at rise() time, but he holds
-       it for up to ~9s. Narrowing the window (or exiting fullscreen) mid-slide would
-       leave that stale left overhanging the right edge and grow a horizontal scrollbar.
-       Re-clamp in place (don't re-randomise, which would teleport him sideways in view)
-       so he can only move inward, never off the edge. */
+    /* His translate is an absolute pixel value; narrowing the window mid-slide could leave
+       him past the new right edge and grow a scrollbar. Re-clamp and restart the leg so he
+       can only move inward, never off the edge. */
     addEventListener('resize',function(){
       if(!alive) return;
-      var w=box.offsetWidth||140, maxL=slide.clientWidth-w-16;
-      var cur=parseFloat(box.style.left); if(cur!==cur) return;
-      box.style.left=Math.max(16,Math.min(cur,maxL))+'px';
+      clearTimeout(turnT);
+      box.classList.remove('running');
+      place(Math.max(0,Math.min(x,span())));
+      turnT=setTimeout(run,140);
     });
     if(slide.classList.contains('active')) start();
   })();
