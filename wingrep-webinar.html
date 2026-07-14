@@ -949,27 +949,37 @@
   .s9-fable{display:none;margin:0;justify-self:end;position:relative}
   .s9lit.has-fable .s9-fable{display:block}
   .s9-num{width:clamp(240px,27vw,420px);height:auto;display:block;filter:drop-shadow(0 20px 34px rgba(20,18,13,.14))}
-  /* a few real butterflies flapping and drifting near the numeral. Each is an
-     animated transparent WebP (the wing-flap is baked into the frames); CSS only
-     adds a slow drift so they wander. Positions are % of the numeral box, so
-     they track the "5" at any size. */
+  /* A few loose butterflies drifting around the numeral, cut from the same kind of
+     vintage plate as the specimens that build the "5".
+     NOTE ON THE ARTWORK: these two WebPs shipped as animated wing-flaps, but the
+     flap was unrecoverable. Every frame after the first had earlier wing positions
+     composited into its own pixels (not a container/disposal bug: the ghosting is
+     baked into each frame's encoded bitstream, so no re-encode can undo it), which
+     is why the deck showed a butterfly with five overlapping sets of wings. Frame 1
+     is the only clean pose in either file, so each asset is now that single clean
+     frame and the life comes from CSS drift instead of a baked-in flap. A pinned
+     specimen coming loose from the "5" does not flap anyway. Do not "restore" the
+     animation from the old base64: it is the broken artwork. */
   .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,7s) ease-in-out infinite}
   .s9-bf>img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 11px rgba(20,18,13,.2))}
   .s9-bf>img.flip{transform:scaleX(-1)}
   /* Composition: the "5" is built from pinned specimens, so the live ones read as
-     the few that came loose and are drifting off it. They sit in real negative
-     space only, never on the artwork: the numeral's empty left shoulder and crook,
-     the headroom above it, and the air below its tail. Nothing crosses the column
-     gap into the text, and nothing runs past the slide's right edge. Sizes shrink
-     as they climb, so the group reads as one rising trail rather than four stickers. */
-  .s9-bf1{width:29%;top:-13%;left:-3%}   /* biggest, just lifting off the top-left shoulder */
-  .s9-bf4{width:18%;top:-15%;left:41%}   /* smaller and higher, further along the same drift */
-  .s9-bf2{width:22%;top:25%;right:-4%}   /* slipping out of the crook of the 5, off to the right */
-  .s9-bf3{width:16%;bottom:-9%;right:7%} /* one still climbing out from under the tail */
-  /* each one drifts its own way, so they never flutter in lockstep */
+     the few that came loose and are scattering off it. Every one sits in real
+     negative space, checked against the numeral's own alpha rather than eyeballed:
+     the counter of the 5, the air right of its stroke, the headroom off its
+     shoulder, the space under its tail. Nothing overlaps the numeral, each other,
+     the text column, or the slide edges; the only overhangs are a few px into the
+     column gap and the slide's right padding. They shrink as they get further from
+     the glyph, so the group reads as a scatter with a direction, not four stickers. */
+  .s9-bf1{width:13%;top:59%;left:25%}    /* biggest, just come loose, still in the crook of the 5 */
+  .s9-bf2{width:13%;top:27%;right:-2%}   /* slipping out past the stroke, off to the right */
+  .s9-bf3{width:9%;bottom:-5%;right:4%}  /* small, drifting out from under the tail */
+  .s9-bf4{width:8%;top:-4%;left:-2%}     /* smallest and furthest off, clear of the shoulder */
+  /* each one drifts its own way, so they never move in lockstep */
   @keyframes s9float{0%,100%{translate:0 0;rotate:var(--r0,-5deg)}50%{translate:var(--tx,5px) var(--ty,-11px);rotate:var(--r1,6deg)}}
-  /* house rule: reduced-motion gets a still slide, so drop the flutter entirely */
-  @media (prefers-reduced-motion:reduce){.s9-bf{display:none}}
+  /* house rule: reduced-motion gets a still slide. The butterflies are plain stills
+     now, so they no longer have to be hidden to hold still; just stop the drift. */
+  @media (prefers-reduced-motion:reduce){.s9-bf{animation:none}}
   /* narrow tablets/phones read the slide as a tall scroll and the two-zone grid
      starves the cards, so below 820px drop the numeral, collapse to one column and
      restore the slide's symmetric side padding */
@@ -1000,9 +1010,12 @@
       </ul>
       <div class="scribble">now you're the one explaining it at the next meeting.</div>
      </div>
-     <!-- Fluttering butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
+     <!-- Drifting butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
           Wikimedia Commons, CC BY-SA 4.0, attribution required); s9_bf2 = a
-          user-supplied blue-admiral GIF. Both re-encoded to animated WebP. -->
+          user-supplied blue-admiral GIF. Both are now single clean stills, not
+          animations: every frame past the first had earlier wing positions baked
+          into its pixels, which is what put five sets of wings on one butterfly.
+          See the note by .s9-bf in the style block above. -->
      <figure class="s9-fable" aria-hidden="true"><img class="s9-num" data-asset="slide9_fable" alt="The Fable 5 wordmark: a numeral 5 formed from vintage butterfly illustrations">
        <span class="s9-bf s9-bf1" style="--d:7.5s;--tx:-9px;--ty:-14px;--r0:-6deg;--r1:4deg"><img data-asset="s9_bf1" alt=""></span>
        <span class="s9-bf s9-bf2" style="--d:6.4s;--tx:10px;--ty:-8px;--r0:4deg;--r1:-5deg"><img data-asset="s9_bf2" alt=""></span>
