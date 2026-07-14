@@ -925,7 +925,10 @@
      screen edge, and let the grid span the full width (no centering) so the left
      column keeps enough room for the cards. Falls back to the plain single-column
      slide with no asset. */
-  .s9lit.has-fable{padding-right:clamp(16px,2.6vw,40px)}
+  /* the scribble now sits lower (it was crowding the cards), which pushed a 720px
+     laptop into scroll. This slide has no footer, so buy the room back from the
+     deck's generous bottom padding instead of squeezing the gap shut again. */
+  .s9lit.has-fable{padding-right:clamp(16px,2.6vw,40px);padding-bottom:6vh}
   .s9lit.has-fable .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:clamp(18px,2.8vw,48px);max-width:none;margin:0}
   .s9lit .s9-main{min-width:0}
   .s9lit .ailit{margin-top:.9rem;gap:.6rem}
@@ -936,6 +939,9 @@
   .s9lit .ailit .term{font-size:clamp(17px,1.9vw,24px)}
   .s9lit .ailit .def{font-size:clamp(13px,1.4vw,15.5px);line-height:1.38}
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
+  /* the payoff line was crowding the last card; give it room to breathe, but scale
+     the gap with viewport height so a 720px laptop still fits the whole slide */
+  .s9lit .scribble{margin-top:clamp(1.1rem,3.2vh,1.9rem)}
   /* Fable 5 numeral: an oversized butterfly "5" (transparent WebP cutout, so it
      floats straight on the cream slide with no box) anchored large in the right
      column. Hidden until window.ASSETS.slide9_fable exists, so the deck ships
@@ -950,11 +956,18 @@
   .s9-bf{position:absolute;pointer-events:none;will-change:transform;animation:s9float var(--d,7s) ease-in-out infinite}
   .s9-bf>img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 11px rgba(20,18,13,.2))}
   .s9-bf>img.flip{transform:scaleX(-1)}
-  .s9-bf1{width:30%;top:-7%;left:-20%}
-  .s9-bf2{width:23%;top:41%;left:-17%}
-  .s9-bf3{width:17%;bottom:1%;left:-3%}
-  .s9-bf4{width:19%;top:-3%;right:7%}
-  @keyframes s9float{0%,100%{translate:0 0;rotate:-5deg}50%{translate:5px -11px;rotate:6deg}}
+  /* Composition: the "5" is built from pinned specimens, so the live ones read as
+     the few that came loose and are drifting off it. They sit in real negative
+     space only, never on the artwork: the numeral's empty left shoulder and crook,
+     the headroom above it, and the air below its tail. Nothing crosses the column
+     gap into the text, and nothing runs past the slide's right edge. Sizes shrink
+     as they climb, so the group reads as one rising trail rather than four stickers. */
+  .s9-bf1{width:29%;top:-13%;left:-3%}   /* biggest, just lifting off the top-left shoulder */
+  .s9-bf4{width:18%;top:-15%;left:41%}   /* smaller and higher, further along the same drift */
+  .s9-bf2{width:22%;top:25%;right:-4%}   /* slipping out of the crook of the 5, off to the right */
+  .s9-bf3{width:16%;bottom:-9%;right:7%} /* one still climbing out from under the tail */
+  /* each one drifts its own way, so they never flutter in lockstep */
+  @keyframes s9float{0%,100%{translate:0 0;rotate:var(--r0,-5deg)}50%{translate:var(--tx,5px) var(--ty,-11px);rotate:var(--r1,6deg)}}
   /* house rule: reduced-motion gets a still slide, so drop the flutter entirely */
   @media (prefers-reduced-motion:reduce){.s9-bf{display:none}}
   /* narrow tablets/phones read the slide as a tall scroll and the two-zone grid
@@ -967,7 +980,7 @@
      <div class="s9-main">
       <div class="eyebrow">AI, minus the jargon</div>
       <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
-      <p class="sub">The examples use Claude Fable 5, Anthropic's newest and most capable model, out June 2026. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
+      <p class="sub">You can use Claude Fable 5 today, Anthropic's newest and most capable model. The ideas hold for any modern AI, so you can size up whatever tool a vendor puts in front of you.</p>
       <ul class="ailit">
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><rect x="5" y="9" width="56" height="41" rx="7" stroke="var(--green)" stroke-width="2.2"/><line x1="5" y1="18" x2="61" y2="18" stroke="var(--green)" stroke-width="1.3" opacity=".45"/><circle cx="11" cy="13.5" r="1.4" fill="var(--rust)"/><circle cx="16.5" cy="13.5" r="1.4" fill="var(--green-bright)" opacity=".75"/><rect x="11" y="24" width="40" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="31" width="44" height="3.2" rx="1.6" fill="var(--rust)" opacity=".7"/><rect x="11" y="38" width="33" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="45" width="41" height="3.2" rx="1.6" fill="var(--green-bright)" opacity=".55"/></svg></span>
@@ -985,16 +998,16 @@
           <span class="def">AI that does a task, not just answers a question. It plans, uses tools, and checks its own work across many steps. The longer the task, the more this matters. <b>Fable 5 can run for days and validate what it did.</b></span>
         </li>
       </ul>
-      <div class="scribble" style="margin-top:.7rem">now you're the one explaining it at the next meeting.</div>
+      <div class="scribble">now you're the one explaining it at the next meeting.</div>
      </div>
      <!-- Fluttering butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
           Wikimedia Commons, CC BY-SA 4.0, attribution required); s9_bf2 = a
           user-supplied blue-admiral GIF. Both re-encoded to animated WebP. -->
      <figure class="s9-fable" aria-hidden="true"><img class="s9-num" data-asset="slide9_fable" alt="The Fable 5 wordmark: a numeral 5 formed from vintage butterfly illustrations">
-       <span class="s9-bf s9-bf1" style="--d:7.5s"><img data-asset="s9_bf1" alt=""></span>
-       <span class="s9-bf s9-bf2" style="--d:6.4s"><img data-asset="s9_bf2" alt=""></span>
-       <span class="s9-bf s9-bf3" style="--d:8.2s"><img class="flip" data-asset="s9_bf2" alt=""></span>
-       <span class="s9-bf s9-bf4" style="--d:6.9s"><img class="flip" data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf1" style="--d:7.5s;--tx:-9px;--ty:-14px;--r0:-6deg;--r1:4deg"><img data-asset="s9_bf1" alt=""></span>
+       <span class="s9-bf s9-bf2" style="--d:6.4s;--tx:10px;--ty:-8px;--r0:4deg;--r1:-5deg"><img data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf3" style="--d:8.2s;--tx:6px;--ty:-13px;--r0:-3deg;--r1:7deg"><img class="flip" data-asset="s9_bf2" alt=""></span>
+       <span class="s9-bf s9-bf4" style="--d:6.9s;--tx:8px;--ty:-10px;--r0:5deg;--r1:-4deg"><img class="flip" data-asset="s9_bf1" alt=""></span>
      </figure>
     </div>
   </section>
