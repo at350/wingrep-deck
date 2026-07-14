@@ -1210,14 +1210,18 @@ objection handling, and next-step.</div>
   .sFaq.active .pane::after{animation:cmpGlare 8s ease-in-out 1.2s infinite}
   @keyframes cmpGlare{0%{transform:translateX(-130%)}55%,100%{transform:translateX(130%)}}
 
-  .sFaq .watchrow{display:flex;flex-wrap:wrap;gap:.5rem}
+  /* all four watchers sit on ONE row at 1280: the lineup is the point, a lone
+     Fathom orphaned onto a second row reads as an accident. The chip padding below
+     is tuned so the four fit the card with room to spare; it still wraps gracefully
+     if the column ever gets narrower. */
+  .sFaq .watchrow{display:flex;flex-wrap:wrap;gap:.42rem}
   /* the deck-wide .brand rule hides the WingRep top-bar mark until the reveal, and it
      also catches the logo <img class="brand"> inside a chip. Undo that here only. */
   .sFaq .watchrow .lchip img.brand{opacity:1;visibility:visible}
   .sFaq .watchrow .lchip{height:auto}
   .sFaq .watchrow .lchip:hover{transform:none} /* they do not move. that is the point. */
   .sFaq .watchrow .lchip b{font-size:12.5px;padding:.34rem .8rem}
-  .sFaq .watchrow .lchip.hasimg{gap:.5rem;padding:.36rem .75rem .36rem .45rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
+  .sFaq .watchrow .lchip.hasimg{gap:.42rem;padding:.36rem .62rem .36rem .42rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
   .sFaq .watchrow .lchip.hasimg img.brand{height:24px;width:24px;max-width:24px;border-radius:7px}
   .sFaq .watchrow .lchip.hasimg b{font-size:14.5px}
   .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(13.5px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
@@ -1634,7 +1638,12 @@ objection handling, and next-step.</div>
     faqs.forEach(function(f,idx){
       var d=document.createElement('div'); d.className='faqrow';
       d.style.cssText='background:var(--card);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .25s';
-      var uber = f[2] ? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:17px;vertical-align:-3px;margin-left:6px;opacity:.92">.' : '';
+      /* The Uber mark is a 24x24 icon-box SVG: the wordmark only occupies the middle
+         third of it, so a 17px box renders the letters ~6px tall, smaller than the
+         body text and unreadable on a projector. Size the box so the wordmark matches
+         the text, sit it on the baseline, and use negative vertical margins so the
+         taller box does not open up the line it sits on. */
+      var uber = f[2] ? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:30px;width:30px;vertical-align:-2px;margin:-8px 0 -8px 3px;opacity:.92">.' : '';
       d.innerHTML='<button style="width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:var(--display);font-weight:800;font-size:clamp(15px,1.7vw,20px);color:var(--ink);padding:.9rem 1.1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center">'+f[0]+'<span class="pl" style="color:var(--green);font-size:1.35em;line-height:1;flex:0 0 auto;transition:transform .3s cubic-bezier(.2,.8,.2,1)">+</span></button><div class="ans" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)"><div style="overflow:hidden"><p style="padding:0 1.1rem 1rem;font-size:15px;line-height:1.5;color:var(--ink-soft);font-weight:500">'+f[1]+uber+'</p></div></div>';
       var btn=d.querySelector('button'),ans=d.querySelector('.ans'),pl=d.querySelector('.pl');
       btn.onclick=function(){
