@@ -1516,7 +1516,136 @@ objection handling, and next-step.</div>
   });
   </script>
 
-  <!-- SLOT:faq-competitors -->
+  <!-- 16 competitors + common questions.
+       Two jobs on one slide. Left: the argument from the archived one-way-mirror
+       slide, without the photo scene, the incumbents' own logos sit behind a pane
+       of glass and a glare crosses it on a loop. They watch. Nothing moves.
+       Right: the FAQ accordion, moved off the trial slide and grown to the real set.
+       All CSS is scoped to .sFaq so nothing here touches another slide. -->
+  <style>
+  .sFaq .eyebrow{margin-bottom:.75rem}
+  .sFaq h1{font-size:clamp(26px,4.1vw,50px);line-height:1.03}
+  .sFaq .faqcols{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(1.3rem,3.2vw,3rem);align-items:start;margin-top:clamp(.9rem,2.4vh,1.6rem)}
+
+  /* shared label rule for both columns */
+  .sFaq .lab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--ink-soft);margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
+  .sFaq .lab::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--line);flex:none}
+  .sFaq .lab.we{color:var(--green)}
+  .sFaq .lab.we::before{background:var(--green-bright)}
+
+  /* the competitor card */
+  .sFaq .cmp{border:1.5px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+  /* the pane they sit behind: a cool wash over the warm card, plus a slow glare.
+     This is the one-way mirror reduced to the only thing it needed to say. */
+  .sFaq .cmp-they{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem);border-bottom:1.5px solid var(--line);background:linear-gradient(180deg,rgba(20,18,13,.055),rgba(20,18,13,.012))}
+  /* the pane the logos sit behind. A glare crosses it on a slow loop and nothing
+     under it moves. It stays off the copy so it can never wash out the reading. */
+  .sFaq .pane{position:relative;overflow:hidden;border-radius:14px;margin:0 -.4rem;padding:.4rem}
+  .sFaq .pane::after{content:"";position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.55) 50%,transparent 58%)}
+  .sFaq.active .pane::after{animation:cmpGlare 8s ease-in-out 1.2s infinite}
+  @keyframes cmpGlare{0%{transform:translateX(-130%)}55%,100%{transform:translateX(130%)}}
+
+  /* all four watchers sit on ONE row at 1280: the lineup is the point, a lone
+     Fathom orphaned onto a second row reads as an accident. The chip padding below
+     is tuned so the four fit the card with room to spare; it still wraps gracefully
+     if the column ever gets narrower. */
+  .sFaq .watchrow{display:flex;flex-wrap:wrap;gap:.42rem}
+  /* the deck-wide .brand rule hides the WingRep top-bar mark until the reveal, and it
+     also catches the logo <img class="brand"> inside a chip. Undo that here only. */
+  .sFaq .watchrow .lchip img.brand{opacity:1;visibility:visible}
+  .sFaq .watchrow .lchip{height:auto}
+  .sFaq .watchrow .lchip:hover{transform:none} /* they do not move. that is the point. */
+  .sFaq .watchrow .lchip b{font-size:12.5px;padding:.34rem .8rem}
+  .sFaq .watchrow .lchip.hasimg{gap:.42rem;padding:.36rem .62rem .36rem .42rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
+  .sFaq .watchrow .lchip.hasimg img.brand{height:24px;width:24px;max-width:24px;border-radius:7px}
+  .sFaq .watchrow .lchip.hasimg b{font-size:14.5px}
+  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(13.5px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
+  .sFaq .cmp-line b{color:var(--ink);font-weight:700}
+
+  .sFaq .cmp-we{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem)}
+  .sFaq .cmp-do{list-style:none;display:grid;gap:.52rem;margin:0}
+  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(13.5px,1.4vw,16px);line-height:1.42;font-weight:500}
+  .sFaq .cmp-do .n{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:var(--green-wash);margin-top:.06rem}
+  .sFaq .cmp-do li.loop{font-weight:700}
+  .sFaq .cmp-do li.loop .n{background:var(--green);color:#fff}
+  /* the closed loop, drawn. the only claim on this slide nobody else can make. */
+  .sFaq .nloop svg{width:15px;height:15px;overflow:visible}
+  .sFaq .nloop path{fill:none;stroke:#fff;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+  .sFaq .nloop .lp{stroke-dasharray:44;stroke-dashoffset:44}
+  .sFaq .nloop .lph{opacity:0}
+  .sFaq.active .nloop .lp{animation:lpDraw .95s cubic-bezier(.5,0,.2,1) .75s forwards}
+  .sFaq.active .nloop .lph{animation:lpTip .3s ease 1.6s forwards}
+  @keyframes lpDraw{to{stroke-dashoffset:0}}
+  @keyframes lpTip{to{opacity:1}}
+  .sFaq .cmp-scrib{margin-top:.7rem;font-size:clamp(18px,2vw,25px)}
+
+  /* the accordion. The shared rules for it are scoped to #trial, so they do not
+     reach this slide. Re-declared here, scoped to .sFaq. The row chrome itself is
+     inline-styled by the FAQ script, so this only re-sizes it for a narrower column. */
+  .sFaq #faq{display:grid;gap:.5rem;max-width:100%}
+  .sFaq .faqrow button{font-size:clamp(14px,1.35vw,17px)!important;padding:.72rem .95rem!important;gap:.8rem!important}
+  .sFaq .faqrow .ans p{font-size:14px!important;line-height:1.5!important;padding:0 .95rem .85rem!important}
+
+  @media (max-width:900px){ .sFaq .faqcols{grid-template-columns:1fr;gap:1.2rem} }
+  /* This is a two-job slide, so it runs tall. On a 720p projector it has to fit with an
+     answer open AND stay clear of the top bar, so compact it on short viewports. */
+  @media (max-height:780px){
+    .sFaq .eyebrow{margin-bottom:.45rem}
+    .sFaq h1{font-size:clamp(26px,3.3vw,42px)}
+    .sFaq .faqcols{margin-top:.55rem}
+    .sFaq .lab{margin-bottom:.5rem}
+    .sFaq .cmp-they,.sFaq .cmp-we{padding-top:.6rem;padding-bottom:.6rem}
+    .sFaq .cmp-line{margin-top:.55rem}
+    .sFaq .cmp-do{gap:.38rem}
+    .sFaq .cmp-scrib{margin-top:.45rem;font-size:21px}
+    .sFaq .faqrow button{padding:.62rem .95rem!important}
+  }
+  /* house rule: reduced motion gets a sane still slide. No glare, loop already closed. */
+  @media (prefers-reduced-motion:reduce){
+    .sFaq.active .pane::after{animation:none}
+    .sFaq .pane::after{display:none}
+    .sFaq .nloop .lp{stroke-dashoffset:0} .sFaq .nloop .lph{opacity:1}
+    .sFaq.active .nloop .lp,.sFaq.active .nloop .lph{animation:none}
+  }
+  </style>
+  <section class="slide sFaq">
+    <div class="wrap">
+      <div class="eyebrow">The question you're about to ask</div>
+      <h1><span class="ln">They see everything.</span><br><span class="ln"><span class="hl">They change nothing.</span></span></h1>
+      <div class="faqcols">
+
+        <div class="cmp">
+          <div class="cmp-they">
+            <div class="lab">The ones you already pay for</div>
+            <div class="pane">
+              <div class="watchrow">
+                <span class="lchip" data-domain="gong.io"><img class="brand" alt="Gong"><b>Gong</b></span>
+                <span class="lchip" data-domain="otter.ai"><img class="brand" alt="Otter"><b>Otter</b></span>
+                <span class="lchip" data-domain="fireflies.ai"><img class="brand" alt="Fireflies"><b>Fireflies</b></span>
+                <span class="lchip" data-domain="fathom.video"><img class="brand" alt="Fathom"><b>Fathom</b></span>
+              </div>
+            </div>
+            <p class="cmp-line">They record the call, transcribe it, summarize it. <b>Then they hand the rep one more thing to read</b>, and the next call sounds exactly like the last one.</p>
+          </div>
+          <div class="cmp-we">
+            <div class="lab we">What WingRep does instead</div>
+            <ul class="cmp-do">
+              <li><span class="n">1</span><span>Writes the CRM in your team's framework, three minutes after the call.</span></li>
+              <li><span class="n">2</span><span>Drafts the follow-up. Reps at Rho send it unedited nine times out of ten.</span></li>
+              <li class="loop"><span class="n nloop"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="lp" d="M12 5a7 7 0 1 1-4.95 2.05"/><path class="lph" d="M9.5 2.9 L13.1 5 L9.5 7.1"/></svg></span><span>Grades whether last call's coaching showed up on this one.</span></li>
+            </ul>
+            <div class="scribble cmp-scrib">only the third one is hard to copy.</div>
+          </div>
+        </div>
+
+        <div class="faqcol">
+          <div class="lab">Common questions</div>
+          <div id="faq"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- 17 walk away dark + animated checks -->
   <section class="slide">
@@ -1962,16 +2091,29 @@ objection handling, and next-step.</div>
 
   /* FAQ: grid-template-rows accordion (smooth, no layout thrash), rotating +/x, active border */
   (function(){
+    /* Lives on the competitors slide (.sFaq) now, not the trial slide. A third
+       element on a row appends the Uber mark inline, used once, on the security
+       answer, where the receipt is the whole point. */
     var faqs=[
       ["Do you replace Gong?","No, we plug into it. Gong watches the call; WingRep does the work after. (One CRO did tell us we're \"a thousand percent more useful,\" but we'll let you be the judge.)"],
-      ["Is my call data safe?","ISO 27001 certified. We cleared Uber's security review. SOC 2 in flight. Your calls don't train anyone else's model."]
+      ["Isn't this just another AI note-taker?","Note-takers watch and transcribe. WingRep writes the CRM, drafts the follow-up, preps the next call, and checks whether the coaching stuck. Quickest way to settle it: run one of your reps' recent calls through both, side by side."],
+      ["Couldn't we just build this ourselves?","The summary and the email, yes, in a weekend. What takes quarters is everything under them: CRM, calendar and dialer plumbing, prompts that hold up across every rep, the coaching loop, and a security packet your CISO will actually sign."],
+      ["Will my reps actually use it?","There is nothing for them to open. The CRM gets written, the follow-up gets drafted, the game plan is in their inbox before the meeting. Tools die when they add work. This one subtracts it, five to ten hours a week per rep."],
+      ["Is my call data safe?","ISO 27001 certified, SOC 2 in flight, and your calls never train anyone else's model. We also cleared the security review at",1]
     ];
-    var box=document.getElementById('faq');
+    /* scoped to this slide on purpose: the accordion now belongs to .sFaq, and
+       scoping it means it cannot latch onto a stale #faq left anywhere else. */
+    var box=document.querySelector('.sFaq #faq');
     if(!box) return;
     faqs.forEach(function(f,idx){
       var d=document.createElement('div'); d.className='faqrow';
       d.style.cssText='background:var(--card);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .25s';
-      var uber = (idx===2)? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:15px;vertical-align:middle;margin-left:6px;opacity:.85">' : '';
+      /* The Uber mark is a 24x24 icon-box SVG: the wordmark only occupies the middle
+         third of it, so a 17px box renders the letters ~6px tall, smaller than the
+         body text and unreadable on a projector. Size the box so the wordmark matches
+         the text, sit it on the baseline, and use negative vertical margins so the
+         taller box does not open up the line it sits on. */
+      var uber = f[2] ? ' <img src="'+EMBED['uber.com']+'" alt="Uber" style="height:30px;width:30px;vertical-align:-2px;margin:-8px 0 -8px 3px;opacity:.92">.' : '';
       d.innerHTML='<button style="width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:var(--display);font-weight:800;font-size:clamp(15px,1.7vw,20px);color:var(--ink);padding:.9rem 1.1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center">'+f[0]+'<span class="pl" style="color:var(--green);font-size:1.35em;line-height:1;flex:0 0 auto;transition:transform .3s cubic-bezier(.2,.8,.2,1)">+</span></button><div class="ans" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)"><div style="overflow:hidden"><p style="padding:0 1.1rem 1rem;font-size:15px;line-height:1.5;color:var(--ink-soft);font-weight:500">'+f[1]+uber+'</p></div></div>';
       var btn=d.querySelector('button'),ans=d.querySelector('.ans'),pl=d.querySelector('.pl');
       btn.onclick=function(){
