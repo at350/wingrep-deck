@@ -873,17 +873,29 @@
         widest nameplate (--stackW), the guide is a full-height column, and the brick stack
         is pushed to the floor with margin-top:auto so it bottoms out level with the photo
         wall. The two columns become one composition instead of a block and a void.
-     2. The nameplates are one LEGO mould now (same brick height, same stud size), so they
-        are sized by HEIGHT and let their own length vary, the way real bricks do. A longer
-        wordmark is simply a longer brick, and the stack widens toward its base. */
+     2. The nameplates are one LEGO mould AND one plate size now: all three are 515x167
+        six-stud plates carrying one type scale and one crest height. They used to be three
+        different plates (UChicago 6 studs / 515px, the others 5 studs / 438px and 443px)
+        with the artwork set at wildly different scales (a 58px type block on Princeton
+        against 90px on UChicago), so UChicago read as a bigger brick rather than a longer
+        one. Same box, same brick, different word. */
   .slide.sAlan{
     --brickH:clamp(84px,15.2vh,124px);
-    --stackW:calc(var(--brickH) * 3.084);   /* the UChicago plate is the widest: 515/167 */
+    --stackW:calc(var(--brickH) * 3.084);   /* every plate is now 515/167 */
     --dvdSZ:clamp(132px,27.5vh,220px);      /* Alan wanted the bouncing headshot twice as big */
   }
-  .sAlan-wrap{max-width:1010px}
+  /* The wrap is the deck-standard 1100px, like every other slide: at 1010px this was the
+     only narrowed column in the deck, so its headline sat 45px further in than every other
+     headline and 58px inside the brand mark it is supposed to register against.
+     The reclaimed 90px must go to the GUTTER, not to either column. The left track is
+     deliberately exactly one nameplate wide, and the photo wall cannot grow because
+     .sAlan-slot is aspect-ratio:4/3, so extra width becomes extra HEIGHT and overflows the
+     slide (which is overflow:hidden, so it would clip the bottom polaroid row at 1280x720).
+     The right track therefore restates its old derived width: old wrap - left track - gap. */
+  .sAlan-wrap{max-width:1100px}
   .sAlan h1{margin-bottom:0}
-  .sAlan-grid{grid-template-columns:var(--stackW) 1fr;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
+  .sAlan-grid{grid-template-columns:var(--stackW) minmax(0,calc(1010px - var(--stackW) - clamp(1.4rem,2.9vw,2.4rem)));
+    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
   .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;height:100%}
@@ -906,32 +918,42 @@
   .sAlan .s3-marks::before{content:none}   /* "Hackathon wins" only restated the line above it */
   .sAlan .s3-marks img.mk{width:auto;height:var(--brickH);
     filter:drop-shadow(0 3px 0 rgba(31,28,22,.10)) drop-shadow(0 9px 13px rgba(31,28,22,.16))}
-  .sAlan .s3-marks img.mk:nth-of-type(1){transform:translateX(9px) rotate(-.5deg)}
-  .sAlan .s3-marks img.mk:nth-of-type(2){transform:translateX(3px) rotate(.35deg)}
+  /* Rotation only. The old translateX(9px)/(3px) nudged the top two plates RIGHT while the
+     bottom one stayed put, so UChicago overhung the stack on BOTH sides at once, which is
+     the visual signature of a brick that has been scaled up rather than one that is simply
+     longer. The plates are all one size now, so they stack flush; the half-degree rotations
+     are all that is left of the hand-placed feel. */
+  .sAlan .s3-marks img.mk:nth-of-type(1){transform:rotate(-.5deg)}
+  .sAlan .s3-marks img.mk:nth-of-type(2){transform:rotate(.35deg)}
 
-  /* ---- the bouncing headshot, now 2x, with a comet tail ----
-     The tail is not a smear: each ghost is a real past position of the ball, carrying the
-     ring colour it had at that moment. So after a wall hit the tail still shows the old
-     colour behind it and you can read the bounce out of the trail. */
-  /* The ball flies OVER the slide, it does not hide behind it. .sAlan-wrap is a
-     z-index:2 stacking context, so at the old z-index of 1 the doubled ball spent
-     most of its orbit occluded by the polaroids and the brick shelf, which is worse
-     than not enlarging it at all. Both layers are pointer-events:none, so nothing
-     on the slide becomes unclickable. */
+  /* ---- the bouncing headshot: it lays a LEGO plate track behind it ----
+     The old tail was eight DOM ghosts parked at distance-gated past positions: a sample was
+     only taken once the ball had travelled 30% of its own width, so at the doubled ball size
+     the tail advanced ~7 times a SECOND. It sat frozen for seven frames and then teleported
+     60px. The browser was rendering that at a perfect 60fps; the tail itself was an 8fps
+     step function, which is exactly what "very low fps" looked like.
+     Now the trail is a canvas the ball stamps into EVERY frame, so it is smooth by
+     construction and cannot regress with ball size or refresh rate. What it stamps is a
+     studded LEGO plate track in the ring colour it is currently wearing, decaying
+     exponentially behind it, so a bounce still reads out of the trail as a colour change.
+     Wall hits knock real bricks loose (#s3bits), which tumble off under gravity.
+     The ball flies OVER the slide, not behind it: .sAlan-wrap is a z-index:2 stacking
+     context, so at a lower z-index the doubled ball spent most of its orbit occluded by the
+     polaroids and the brick shelf. Every layer here is pointer-events:none, so nothing on
+     the slide becomes unclickable. */
   .sAlan .s3-dvd{width:var(--dvdSZ);height:var(--dvdSZ);z-index:6}
-  .sAlan .s3-trail{z-index:5}
   .sAlan .s3-dvd-in{width:var(--dvdSZ);height:var(--dvdSZ);
     box-shadow:0 0 0 5px var(--dvdc,#D97757),0 26px 46px -24px rgba(20,18,13,.55)}
-  .s3-trail{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
-  .s3-trail.on{display:block}
-  .s3-ghost{position:absolute;top:0;left:0;width:var(--dvdSZ);height:var(--dvdSZ);border-radius:50%;
-    background:currentColor;box-shadow:0 0 0 5px currentColor;opacity:0;
-    transform:translate(-999px,-999px);will-change:transform,opacity}
+  .s3-trail,.s3-bits{position:absolute;inset:0;pointer-events:none;display:none}
+  .s3-trail.on,.s3-bits.on{display:block}
+  .sAlan .s3-trail{z-index:5}                /* the track, under the ball */
+  .sAlan .s3-bits{z-index:7}                 /* knocked-loose bricks, over it */
   /* reduced motion: nothing moves, nothing trails, the static avatar simply stays put */
-  @media (prefers-reduced-motion:reduce){.s3-trail{display:none!important}}
+  @media (prefers-reduced-motion:reduce){.s3-trail,.s3-bits{display:none!important}}
   </style>
   <section class="slide sAlan">
-    <div class="s3-trail" id="s3trail" aria-hidden="true"></div>
+    <canvas class="s3-trail" id="s3trail" aria-hidden="true"></canvas>
+    <canvas class="s3-bits" id="s3bits" aria-hidden="true"></canvas>
     <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap sAlan-wrap">
       <div class="eyebrow">Your guide tonight</div>
@@ -945,7 +967,7 @@
                 <img data-img="alan_headshot" alt="Alan Tai">
               </div>
               <div class="s3-id">
-                <div class="s3-name">Alan Tai <span class="role">· builder, not a pitch guy</span></div>
+                <div class="s3-name">Alan Tai <span class="role">builder, not a pitch guy</span></div>
               </div>
             </div>
             <p class="s3-tie"><b>5x hackathon winner.</b> Winning a hackathon is 24 hours to make a stranger care. Same skill as the cold email you'll write tonight.</p>
@@ -956,22 +978,22 @@
             <img class="mk" data-img="logo_uchicago" alt="The University of Chicago">
           </div>
         </div>
-        <div class="sAlan-wall" aria-label="Hackathon and trophy photo placeholders">
+        <div class="sAlan-wall" aria-label="Photos from four hackathons">
           <figure class="sAlan-polaroid rot1">
-            <div class="sAlan-slot"><img data-img="alan_win_1" alt=""><span>hackathon photo</span></div>
-            <figcaption>drop a win here</figcaption>
+            <div class="sAlan-slot"><img data-img="alan_win_1" alt="A crowded hackathon room, laptops open across every table"><span>hackathon photo</span></div>
+            <figcaption>the build</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot2">
-            <div class="sAlan-slot"><img data-img="alan_win_2" alt=""><span>trophy shot</span></div>
-            <figcaption>gold looks good here</figcaption>
+            <div class="sAlan-slot"><img data-img="alan_win_2" alt="The GreenChain team in front of the HackPrinceton balloons"><span>trophy shot</span></div>
+            <figcaption>HackPrinceton</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot3">
-            <div class="sAlan-slot"><img data-img="alan_win_3" alt=""><span>team / stage</span></div>
-            <figcaption>demo day vibes</figcaption>
+            <div class="sAlan-slot"><img data-img="alan_win_3" alt="The WildHacks 2026 closing ceremony"><span>team / stage</span></div>
+            <figcaption>WildHacks 2026</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot4">
-            <div class="sAlan-slot"><img data-img="alan_win_4" alt=""><span>another win</span></div>
-            <figcaption>stack 'em</figcaption>
+            <div class="sAlan-slot"><img data-img="alan_win_4" alt="The GreenChain team on stage as the Dedalus prize is announced"><span>another win</span></div>
+            <figcaption>GreenChain wins</figcaption>
           </figure>
         </div>
       </div>
@@ -1788,74 +1810,162 @@ objection handling, and next-step.</div>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
-  var trail=document.getElementById('s3trail'), h1=slide.querySelector('h1');
+  var trail=document.getElementById('s3trail'), bitsC=document.getElementById('s3bits'), h1=slide.querySelector('h1');
+  var tctx=trail.getContext('2d'), bctx=bitsC.getContext('2d');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=14,TOP=14;
-  // comet tail: GN ghosts, each parked at a real past position of the ball and holding the
-  // ring colour the ball wore at that moment, so a bounce stays legible in the trail
-  var GN=8,ghosts=[],trace=[];
-  function ghost(i){
-    if(!ghosts[i]){var g=document.createElement('div');g.className='s3-ghost';trail.appendChild(g);ghosts[i]=g;}
-    return ghosts[i];
+  var TAU=Math.PI*2;
+  // classic LEGO, led by the deck's coral. No pure yellow: it vanishes on the ivory paper.
+  var COLORS=['#D97757','#0056BF','#D01A20','#34964E','#E8A317'];
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=14,TOP=14,dpr=1;
+  var px=44,py=40,sinceLay=1e9,laid=[],bits=[];
+  var LAY_TTL=1.3;      // a brick's life, so the track runs ~600px behind the ball at 472px/s
+  var GRAV=980, MAXBITS=90;
+
+  // ---- LEGO plastic: a lit top face and a shaded rim off one base colour
+  function mix(hex,to,t){
+    var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return 'rgb('+Math.round(r+(to-r)*t)+','+Math.round(g+(to-g)*t)+','+Math.round(b+(to-b)*t)+')';
   }
+  function lite(c){return mix(c,255,.30);}
+  function dark(c){return mix(c,0,.26);}
+  function rrect(c,X,Y,w,h,r){
+    c.beginPath();c.moveTo(X+r,Y);c.lineTo(X+w-r,Y);c.quadraticCurveTo(X+w,Y,X+w,Y+r);
+    c.lineTo(X+w,Y+h-r);c.quadraticCurveTo(X+w,Y+h,X+w-r,Y+h);c.lineTo(X+r,Y+h);
+    c.quadraticCurveTo(X,Y+h,X,Y+h-r);c.lineTo(X,Y+r);c.quadraticCurveTo(X,Y,X+r,Y);c.closePath();
+  }
+  // a 2x1 plate seen at a slight angle: two studs, a lit body, a shaded lower edge.
+  // The SAME brick the ball lays in its track and the same one that gets knocked loose,
+  // so the track and the shower are visibly the same object.
+  function brick(c,w,col){
+    var h=w*.52,r=w*.10,sr=w*.15;
+    c.fillStyle=lite(col);
+    c.beginPath();c.arc(-w*.24,-h/2-sr*.5,sr,0,TAU);c.fill();
+    c.beginPath();c.arc( w*.24,-h/2-sr*.5,sr,0,TAU);c.fill();
+    c.fillStyle=col;   rrect(c,-w/2,-h/2,w,h,r);c.fill();
+    c.fillStyle=dark(col); rrect(c,-w/2,h*.24,w,h*.26,r*.6);c.fill();
+  }
+  function sizeCanvas(cv,c){
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    cv.style.width=W+'px';cv.style.height=H+'px';
+    c.setTransform(dpr,0,0,dpr,0,0);
+  }
+  // Kept in the loop on purpose. It costs ~1.7us (0.01% of a frame) and it is load-bearing:
+  // .s3-dvd starts display:none, so dvd.offsetWidth is 0 on the first measure and SZ would
+  // stick at its 56px fallback, running the 198px ball clean off the right and bottom edges.
+  // The h1 also drifts during the slide's entrance, and that entrance animates a TRANSFORM,
+  // so a ResizeObserver would never fire for it.
   function measure(){
-    var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;
-    // the ball is twice the size it used to be, so it can no longer be allowed into the
-    // headline's band: floor it just under the h1 rather than at the slide's top edge
+    var r=slide.getBoundingClientRect();
+    var w=r.width,h=r.height,d=Math.min(2,window.devicePixelRatio||1);
+    if(w!==W||h!==H||d!==dpr){W=w;H=h;dpr=d;sizeCanvas(trail,tctx);sizeCanvas(bitsC,bctx);}
+    SZ=dvd.offsetWidth||56;
     TOP=M;
     if(h1){var hr=h1.getBoundingClientRect();TOP=Math.max(M,hr.bottom-r.top+14);}
     if(TOP>H-SZ-M)TOP=M;                    // pathological viewport: fall back to the old box
   }
   function bx(){return Math.max(M,W-SZ-M);} // right limit
   function by(){return Math.max(TOP,H-SZ-M);} // bottom limit
+
   function loop(ts){
     if(!running)return;
-    measure(); // re-measure each frame: the start-time size can be stale (reflow during the slide's entrance), which let the ball run past the real edge
+    measure();
     if(!last)last=ts;var dt=Math.min(.05,(ts-last)/1000);last=ts;
-    x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
-    // bounce a small margin (M) early so the ring/glow around the ball kisses the
-    // edge instead of poking off-screen (SZ is the box; the visible ring sits outside it)
+    px=x;py=y;
+    x+=dx*dt;y+=dy*dt;var hit=false,edges=0,nx=0,ny=0;
+    // bounce a small margin (M) early so the ring around the ball kisses the edge
+    // instead of poking off-screen (SZ is the box; the visible ring sits outside it)
     var hx='',hy='',R=bx(),B=by();
-    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=R){x=R;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
-    if(y<=TOP){y=TOP;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=B){y=B;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
-    if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
+    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';nx=1;}
+    else if(x>=R){x=R;dx=-Math.abs(dx);hit=true;edges++;hx='right';nx=-1;}
+    if(y<=TOP){y=TOP;dy=Math.abs(dy);hit=true;edges++;hy='top';ny=1;}
+    else if(y>=B){y=B;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';ny=-1;}
+
+    var cx=x+SZ/2, cy=y+SZ/2, col=COLORS[ci];
+    if(hit){
+      // knock bricks loose at the contact point, THEN take the next colour, so the
+      // shower that flies off the wall is still wearing the colour that hit it
+      var sx=nx? (nx>0?x:x+SZ) : cx, sy=ny? (ny>0?y:y+SZ) : cy;
+      var a0=Math.atan2(ny,nx), n=edges>=2?13:9;
+      for(var b=0;b<n && bits.length<MAXBITS;b++){
+        var ang=a0+(Math.random()-.5)*1.6, sp=140+Math.random()*300;
+        bits.push({x:sx,y:sy,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-70,
+          rot:Math.random()*TAU, vr:(Math.random()-.5)*11,
+          w:SZ*.13*(.7+Math.random()*.6),
+          c:Math.random()<.55?col:COLORS[(Math.random()*COLORS.length)|0],
+          t:0, ttl:.65+Math.random()*.5});
+      }
+      ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
       // on a corner hit, grow the pop away from the touched corner so it never bulges off-screen
-      if(edges>=2){inner.style.transformOrigin=hx+' '+hy;inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
-    dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
-    // sample by distance, not by frame, so the tail is the same length on a 60Hz and a 120Hz screen
-    var gap=SZ*0.30;
-    if(!trace.length||Math.hypot(x-trace[0].x,y-trace[0].y)>=gap){
-      trace.unshift({x:x,y:y,c:COLORS[ci]});
-      if(trace.length>GN)trace.length=GN;
+      if(edges>=2){inner.style.transformOrigin=hx+' '+hy;inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}
     }
-    for(var i=0;i<GN;i++){
-      var g=ghost(i),s=trace[i];
-      if(!s){g.style.opacity=0;continue;}
-      var f=1-i/GN;
-      g.style.color=s.c;
-      g.style.opacity=(0.30*Math.pow(f,1.5)).toFixed(3);
-      g.style.transform='translate('+s.x.toFixed(1)+'px,'+s.y.toFixed(1)+'px) scale('+(1-0.075*i).toFixed(3)+')';
+    dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+
+    // ---- the track: the ball LAYS a brick every LAY_GAP of travel, aligned to the way it
+    // is heading, so the track turns at every bounce and changes colour with the ring.
+    // A brick never moves once it is down, and the whole track is redrawn from scratch each
+    // frame, so there is nothing that can freeze and teleport the way the old ghosts did.
+    col=COLORS[ci];
+    var pcx=px+SZ/2, pcy=py+SZ/2, LW=SZ*.42, LAY_GAP=SZ*.30;
+    sinceLay+=Math.hypot(cx-pcx,cy-pcy);
+    if(sinceLay>=LAY_GAP){
+      sinceLay=0;
+      laid.push({x:cx,y:cy,rot:Math.atan2(cy-pcy,cx-pcx)+(Math.random()-.5)*.16,c:col,t:0});
+      if(laid.length>40)laid.shift();
+    }
+    // Laid slightly closer together than they are wide, so they interlock into a chain
+    // rather than reading as breadcrumbs. Peak alpha stays under 1: the track crosses the
+    // bio copy, and the words have to win.
+    tctx.clearRect(0,0,W,H);
+    for(var j=0;j<laid.length;j++){
+      var L=laid[j];L.t+=dt;
+      if(L.t>=LAY_TTL){laid.splice(j,1);j--;continue;}
+      var age=L.t/LAY_TTL;
+      var pin=Math.min(1,L.t/.12), e=1-Math.pow(1-pin,3);         // it snaps into place
+      var sc=(.6+.4*e)*(pin<1?1+.1*Math.sin(pin*Math.PI):1)*(1-.16*age);
+      tctx.save();
+      tctx.globalAlpha=Math.max(0,age<.5?1:1-(age-.5)/.5)*.84;
+      tctx.translate(L.x,L.y);tctx.rotate(L.rot);tctx.scale(sc,sc);
+      brick(tctx,LW,L.c);
+      tctx.restore();
+    }
+
+    // ---- the loose bricks, on their own layer so they tumble instead of smearing
+    bctx.clearRect(0,0,W,H);
+    for(var i=bits.length-1;i>=0;i--){
+      var p=bits[i];p.t+=dt;
+      if(p.t>=p.ttl){bits.splice(i,1);continue;}
+      p.vy+=GRAV*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;
+      bctx.save();
+      bctx.globalAlpha=Math.min(1,(1-p.t/p.ttl)*1.7);
+      bctx.translate(p.x,p.y);bctx.rotate(p.rot);
+      brick(bctx,p.w,p.c);
+      bctx.restore();
     }
     raf=requestAnimationFrame(loop);
   }
   function start(){
     if(reduce||running)return;
+    if(ava)ava.style.display='none';
+    dvd.style.display='block';                 // before measure(), or offsetWidth reads 0
+    trail.classList.add('on');bitsC.classList.add('on');
     measure();if(W<20){setTimeout(start,80);return;}
     var spd=472,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
     x=Math.max(M,Math.min(x,bx()));y=Math.max(TOP,Math.min(y,by()));
-    trace.length=0;
-    if(ava)ava.style.display='none';
-    dvd.style.display='block';if(trail)trail.classList.add('on');
+    px=x;py=y;sinceLay=1e9;laid.length=0;bits.length=0;
+    tctx.clearRect(0,0,W,H);bctx.clearRect(0,0,W,H);
     running=true;last=0;raf=requestAnimationFrame(loop);
   }
   function stop(){
     running=false;if(raf)cancelAnimationFrame(raf);raf=0;
-    dvd.style.display='none';if(trail)trail.classList.remove('on');
-    trace.length=0;if(ava)ava.style.display='';
+    dvd.style.display='none';
+    trail.classList.remove('on');bitsC.classList.remove('on');
+    if(W>0){tctx.clearRect(0,0,W,H);bctx.clearRect(0,0,W,H);}
+    laid.length=0;bits.length=0;if(ava)ava.style.display='';
   }
   new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
   addEventListener('resize',function(){if(running)measure();});
+  // rAF is parked while the tab is hidden; don't integrate the whole gap on the way back
+  addEventListener('visibilitychange',function(){last=0;});
   if(slide.classList.contains('active'))start();
 })();
 </script>
