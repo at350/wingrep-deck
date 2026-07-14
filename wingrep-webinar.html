@@ -844,19 +844,83 @@
   </section>
 
   <!-- 4 about Alan: LEGO brick + bouncing headshot + photo placeholders -->
+  <style>
+  /* ===== slide 4 overrides (kept out of the shared block so parallel edits merge clean) =====
+     Two problems fixed here:
+     1. The left column used to be a 1.14fr grid track carrying only ~280px of content, so
+        Alan's name floated in a field of nothing. Now the track is exactly as wide as the
+        widest nameplate (--stackW), the guide is a full-height column, and the brick stack
+        is pushed to the floor with margin-top:auto so it bottoms out level with the photo
+        wall. The two columns become one composition instead of a block and a void.
+     2. The nameplates are one LEGO mould now (same brick height, same stud size), so they
+        are sized by HEIGHT and let their own length vary, the way real bricks do. A longer
+        wordmark is simply a longer brick, and the stack widens toward its base. */
+  .slide.sAlan{
+    --brickH:clamp(84px,15.2vh,124px);
+    --stackW:calc(var(--brickH) * 3.084);   /* the UChicago plate is the widest: 515/167 */
+    --dvdSZ:clamp(132px,27.5vh,220px);      /* Alan wanted the bouncing headshot twice as big */
+  }
+  .sAlan-wrap{max-width:1010px}
+  .sAlan h1{margin-bottom:0}
+  .sAlan-grid{grid-template-columns:var(--stackW) 1fr;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
+  @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
+
+  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;height:100%}
+  .sAlan .s3-head{display:flex;align-items:center;gap:.8rem;width:100%}
+  .sAlan .s3-ava{width:74px;height:74px}
+  .sAlan .s3-name{font-size:clamp(20px,1.95vw,26px);line-height:1.18}
+  .sAlan .s3-name .role{display:block;font-size:.63em;margin-top:.1rem}
+  .sAlan .s3-tie{margin-top:.9rem;max-width:none;font-size:clamp(14px,1.35vw,16.5px);line-height:1.45}
+  /* A veil of paper, not a card. At 2x the bouncing headshot is wide enough to sit right
+     on top of this text, so the bio floats on a soft wash that fades to nothing at its
+     edges: the ball still glides visibly behind it, but the words never lose contrast.
+     No border, no shadow, no z-index on .s3-guide (that would trap the wash below it). */
+  .sAlan .s3-bio{position:relative}
+  .sAlan .s3-bio::before{content:"";position:absolute;z-index:-1;pointer-events:none;
+    left:-22px;right:-18px;top:-20px;bottom:-16px;
+    background:rgba(242,238,226,.9);border-radius:30px;filter:blur(15px)}
+
+  /* the shelf: three plates of one mould, stacked, widening to the base */
+  .sAlan .s3-marks{width:auto;margin-top:auto;padding-top:1.2rem;border-top:none;gap:5px}
+  .sAlan .s3-marks::before{content:none}   /* "Hackathon wins" only restated the line above it */
+  .sAlan .s3-marks img.mk{width:auto;height:var(--brickH);
+    filter:drop-shadow(0 3px 0 rgba(31,28,22,.10)) drop-shadow(0 9px 13px rgba(31,28,22,.16))}
+  .sAlan .s3-marks img.mk:nth-of-type(1){transform:translateX(9px) rotate(-.5deg)}
+  .sAlan .s3-marks img.mk:nth-of-type(2){transform:translateX(3px) rotate(.35deg)}
+
+  /* ---- the bouncing headshot, now 2x, with a comet tail ----
+     The tail is not a smear: each ghost is a real past position of the ball, carrying the
+     ring colour it had at that moment. So after a wall hit the tail still shows the old
+     colour behind it and you can read the bounce out of the trail. */
+  .sAlan .s3-dvd{width:var(--dvdSZ);height:var(--dvdSZ)}
+  .sAlan .s3-dvd-in{width:var(--dvdSZ);height:var(--dvdSZ);
+    box-shadow:0 0 0 5px var(--dvdc,#D97757),0 26px 46px -24px rgba(20,18,13,.55)}
+  .s3-trail{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
+  .s3-trail.on{display:block}
+  .s3-ghost{position:absolute;top:0;left:0;width:var(--dvdSZ);height:var(--dvdSZ);border-radius:50%;
+    background:currentColor;box-shadow:0 0 0 5px currentColor;opacity:0;
+    transform:translate(-999px,-999px);will-change:transform,opacity}
+  /* reduced motion: nothing moves, nothing trails, the static avatar simply stays put */
+  @media (prefers-reduced-motion:reduce){.s3-trail{display:none!important}}
+  </style>
   <section class="slide sAlan">
+    <div class="s3-trail" id="s3trail" aria-hidden="true"></div>
     <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap sAlan-wrap">
       <div class="eyebrow">Your guide tonight</div>
       <h1><span class="ln">Hi, I'm <span class="hl">Alan.</span></span></h1>
       <div class="sAlan-grid">
         <div class="s3-guide">
-          <div class="s3-ava">
-            <span class="fallback" aria-hidden="true">AT</span>
-            <img data-img="alan_headshot" alt="Alan Tai">
-          </div>
-          <div class="s3-id">
-            <div class="s3-name">Alan Tai <span class="role">· builder, not a pitch guy</span></div>
+          <div class="s3-bio">
+            <div class="s3-head">
+              <div class="s3-ava">
+                <span class="fallback" aria-hidden="true">AT</span>
+                <img data-img="alan_headshot" alt="Alan Tai">
+              </div>
+              <div class="s3-id">
+                <div class="s3-name">Alan Tai <span class="role">· builder, not a pitch guy</span></div>
+              </div>
+            </div>
             <p class="s3-tie"><b>5x hackathon winner.</b> Winning a hackathon is 24 hours to make a stranger care. Same skill as the cold email you'll write tonight.</p>
           </div>
           <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
@@ -1469,10 +1533,27 @@ objection handling, and next-step.</div>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
   var slide=dvd.closest('.slide'), inner=dvd.querySelector('.s3-dvd-in'), ava=slide.querySelector('.s3-ava');
+  var trail=document.getElementById('s3trail'), h1=slide.querySelector('h1');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var COLORS=['#D97757','#B14A2C','#0056BF','#34964E','#D01A20'];
-  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=10;
-  function measure(){var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;}
+  var ci=0,x=44,y=40,dx=0,dy=0,raf=0,last=0,running=false,W=0,H=0,SZ=56,M=14,TOP=14;
+  // comet tail: GN ghosts, each parked at a real past position of the ball and holding the
+  // ring colour the ball wore at that moment, so a bounce stays legible in the trail
+  var GN=8,ghosts=[],trace=[];
+  function ghost(i){
+    if(!ghosts[i]){var g=document.createElement('div');g.className='s3-ghost';trail.appendChild(g);ghosts[i]=g;}
+    return ghosts[i];
+  }
+  function measure(){
+    var r=slide.getBoundingClientRect();W=r.width;H=r.height;SZ=dvd.offsetWidth||56;
+    // the ball is twice the size it used to be, so it can no longer be allowed into the
+    // headline's band: floor it just under the h1 rather than at the slide's top edge
+    TOP=M;
+    if(h1){var hr=h1.getBoundingClientRect();TOP=Math.max(M,hr.bottom-r.top+14);}
+    if(TOP>H-SZ-M)TOP=M;                    // pathological viewport: fall back to the old box
+  }
+  function bx(){return Math.max(M,W-SZ-M);} // right limit
+  function by(){return Math.max(TOP,H-SZ-M);} // bottom limit
   function loop(ts){
     if(!running)return;
     measure(); // re-measure each frame: the start-time size can be stale (reflow during the slide's entrance), which let the ball run past the real edge
@@ -1480,24 +1561,44 @@ objection handling, and next-step.</div>
     x+=dx*dt;y+=dy*dt;var hit=false,edges=0;
     // bounce a small margin (M) early so the ring/glow around the ball kisses the
     // edge instead of poking off-screen (SZ is the box; the visible ring sits outside it)
-    var hx='',hy='';
-    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=W-SZ-M){x=W-SZ-M;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
-    if(y<=M){y=M;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=H-SZ-M){y=H-SZ-M;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
+    var hx='',hy='',R=bx(),B=by();
+    if(x<=M){x=M;dx=Math.abs(dx);hit=true;edges++;hx='left';}else if(x>=R){x=R;dx=-Math.abs(dx);hit=true;edges++;hx='right';}
+    if(y<=TOP){y=TOP;dy=Math.abs(dy);hit=true;edges++;hy='top';}else if(y>=B){y=B;dy=-Math.abs(dy);hit=true;edges++;hy='bottom';}
     if(hit){ci=(ci+1)%COLORS.length;inner.style.setProperty('--dvdc',COLORS[ci]);
       // on a corner hit, grow the pop away from the touched corner so it never bulges off-screen
       if(edges>=2){inner.style.transformOrigin=hx+' '+hy;inner.classList.remove('pop');void inner.offsetWidth;inner.classList.add('pop');}}
     dvd.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+    // sample by distance, not by frame, so the tail is the same length on a 60Hz and a 120Hz screen
+    var gap=SZ*0.30;
+    if(!trace.length||Math.hypot(x-trace[0].x,y-trace[0].y)>=gap){
+      trace.unshift({x:x,y:y,c:COLORS[ci]});
+      if(trace.length>GN)trace.length=GN;
+    }
+    for(var i=0;i<GN;i++){
+      var g=ghost(i),s=trace[i];
+      if(!s){g.style.opacity=0;continue;}
+      var f=1-i/GN;
+      g.style.color=s.c;
+      g.style.opacity=(0.30*Math.pow(f,1.5)).toFixed(3);
+      g.style.transform='translate('+s.x.toFixed(1)+'px,'+s.y.toFixed(1)+'px) scale('+(1-0.075*i).toFixed(3)+')';
+    }
     raf=requestAnimationFrame(loop);
   }
   function start(){
     if(reduce||running)return;
     measure();if(W<20){setTimeout(start,80);return;}
     var spd=472,ang=0.62;dx=spd*Math.cos(ang);dy=spd*Math.sin(ang);
-    x=Math.min(x,W-SZ-M);y=Math.min(y,H-SZ-M);
+    x=Math.max(M,Math.min(x,bx()));y=Math.max(TOP,Math.min(y,by()));
+    trace.length=0;
     if(ava)ava.style.display='none';
-    dvd.style.display='block';running=true;last=0;raf=requestAnimationFrame(loop);
+    dvd.style.display='block';if(trail)trail.classList.add('on');
+    running=true;last=0;raf=requestAnimationFrame(loop);
   }
-  function stop(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;dvd.style.display='none';if(ava)ava.style.display='';}
+  function stop(){
+    running=false;if(raf)cancelAnimationFrame(raf);raf=0;
+    dvd.style.display='none';if(trail)trail.classList.remove('on');
+    trace.length=0;if(ava)ava.style.display='';
+  }
   new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
   addEventListener('resize',function(){if(running)measure();});
   if(slide.classList.contains('active'))start();
