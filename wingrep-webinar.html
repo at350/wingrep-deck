@@ -1615,54 +1615,42 @@ objection handling, and next-step.</div>
   });
   </script>
 
-  <!-- 15 CTA: free 3-week trial. Two arcs: every other tool decays, this one climbs. -->
+  <!-- 15 CTA: free 3-week trial. One line climbs from the WingRep origin to a rep who won't give it back. -->
   <style>
-  /* ===== slide 15 (#trial): the two-arc trial ===== */
+  /* ===== slide 15 (#trial): the single-line trial climb ===== */
   /* children 7/8 are the logo-band label then the band itself; keep them in the reveal sequence */
   #trial .wrap>*:nth-child(7){animation-delay:.52s}
   #trial .wrap>*:nth-child(8){animation-delay:.58s}
   #trial .tarc{position:relative;max-width:830px;margin-top:.55rem}
   #trial .tarc svg{width:100%;height:auto;display:block;overflow:visible}
-  #trial .tline{fill:none;stroke-linecap:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1}
-  #trial .tline-old{stroke:var(--ink-soft);stroke-width:2.5;opacity:.42}
-  #trial .tline-new{stroke:var(--green-bright);stroke-width:4}
-  #trial .tdot{fill:var(--green-bright);stroke:var(--paper);stroke-width:2.5;opacity:0}
+  /* one hero line: WingRep climbs across the three weeks. a single line cannot tangle. */
+  #trial .tline{fill:none;stroke:var(--green-bright);stroke-width:4;stroke-linecap:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1}
+  #trial .tdot{fill:var(--green-bright);stroke:var(--paper);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
+  /* origin: the line launches AT WingRep. a filled coral node carries the light WingRep mark so it reads. */
+  #trial .tnode{fill:var(--green-bright);stroke:var(--paper);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
+  #trial .tmark{opacity:0}
+  /* summit: the line lands ON a real face; the payoff quote captions it, not floating. */
   #trial .tface,#trial .tring,#trial .tsaid{opacity:0}
-  /* both memes belong to the greyed-out "every other tool" line. the honeymoon art is
-     duotone WingRep green, which would misread now that the green mark is on screen, so
-     it gets pulled back to neutral. */
-  #trial .tface-h{filter:grayscale(.78) contrast(1.04)}
-  #trial .tface-r{filter:grayscale(.18)}
   #trial .tring{fill:none;stroke:var(--line);stroke-width:2.5}
-  #trial .tsaid{font-family:var(--hand);font-size:18px;fill:var(--ink-soft)}
-  #trial .tlab{opacity:0;font-family:var(--mono);font-size:12.5px;fill:var(--ink-soft);letter-spacing:.02em}
-  /* WingRep now names the coral line at its origin, matched to "every other tool": mono, not display */
-  #trial .tlab-new{font-family:var(--mono);font-weight:700;font-size:12.5px;fill:var(--green-bright);letter-spacing:.02em}
-  /* the summit payoff quote: the hero voice, deep clay, bigger than the neutral meme quotes */
-  #trial .tsaid-win{fill:var(--green);font-size:21px}
-  /* the crossing ripple: one bloom, no standing decoration */
-  #trial .tripple{fill:none;stroke:var(--green-bright);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
-  /* the lines draw at the same time, so the audience watches them cross */
-  #trial.active .tline{animation:tdraw 1.5s cubic-bezier(.4,0,.25,1) .35s forwards}
+  #trial .tsaid-win{font-family:var(--hand);font-size:21px;fill:var(--green)}
+  /* the whole summit group is tugged down and springs back: "you're not taking this back." */
+  #trial .tsummit{transform-box:fill-box;transform-origin:center}
+  /* the line draws once as the slide lands; every beat is keyed off #trial.active */
+  #trial.active .tline{animation:tdraw 1.4s cubic-bezier(.4,0,.25,1) .35s forwards}
+  #trial.active .tnode{animation:tpop .45s cubic-bezier(.2,.85,.25,1) .15s forwards}
+  #trial.active .tmark{animation:tfade .6s ease .28s forwards}
   #trial.active .tdot{animation:tpop .45s cubic-bezier(.2,.85,.25,1) forwards}
-  #trial.active .tdot-1{animation-delay:.5s}
-  #trial.active .tdot-2{animation-delay:1.05s}
-  #trial.active .tdot-3{animation-delay:1.6s}
-  #trial.active .tface-h,#trial.active .tring-h,#trial.active .tsaid-h{animation:tfade .6s ease .15s forwards}
-  /* the reckoning only lands once the old tool's line has finished falling */
-  #trial.active .tface-r,#trial.active .tring-r,#trial.active .tsaid-r{animation:tfade .6s ease 1.7s forwards}
-  #trial.active .tlab-old{animation:tfade .6s ease .9s forwards}
-  /* WingRep names its line early, as the coral stroke launches off it */
-  #trial.active .tlab-new{animation:tfade .6s ease .6s forwards}
-  /* the ripple blooms the instant the drawn coral stroke reaches the crossing */
-  #trial.active .tripple{animation:tripple .7s ease-out 1.1s forwards}
-  /* the summit payoff lands last, the closing button of the whole beat */
-  #trial.active .tsaid-win{animation:tfade .6s ease 1.95s forwards}
+  #trial.active .tdot-2{animation-delay:.9s}
+  #trial.active .tdot-3{animation-delay:1.55s}
+  /* the summit face lands as the drawn line arrives at it */
+  #trial.active .tface,#trial.active .tring{animation:tfade .6s ease 1.55s forwards}
+  /* the refusal: the summit is pulled down and snaps back as the payoff lands */
+  #trial.active .tsummit{animation:trefuse .6s cubic-bezier(.4,0,.2,1) 1.7s}
+  #trial.active .tsaid-win{animation:tfade .6s ease 2.1s forwards}
   @keyframes tdraw{to{stroke-dashoffset:0}}
   @keyframes tpop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
   @keyframes tfade{to{opacity:1}}
-  @keyframes tripple{0%{opacity:.55;transform:scale(.6)}100%{opacity:0;transform:scale(3)}}
-  #trial .tdot{transform-box:fill-box;transform-origin:center}
+  @keyframes trefuse{0%{transform:translateY(0)}40%{transform:translateY(18px)}70%{transform:translateY(-3px)}100%{transform:translateY(0)}}
   /* week columns align exactly under the three dots on the climbing line */
   /* equal columns with no gap keep each week centered under its dot; the breathing room is inner padding */
   #trial .tweeks{max-width:830px;display:grid;grid-template-columns:repeat(3,1fr);margin-top:.95rem}
@@ -1693,37 +1681,30 @@ objection handling, and next-step.</div>
       <p class="body">Not a demo. A real trial with a few reps. If you're on Google Workspace, it connects in a couple of clicks. That's the whole install.</p>
 
       <div class="tarc">
-        <svg viewBox="0 0 1000 224" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Every other sales tool starts at the week-one honeymoon and falls to the week-three reckoning. WingRep climbs the other way, from setup in week one to reps refusing to give it back in week three, overtaking every other tool at week two.">
+        <svg viewBox="0 0 1000 224" preserveAspectRatio="xMidYMid meet" role="img" aria-label="WingRep climbs across a three-week trial: reps set up in week one, see the value by week two, and by week three refuse to give it back.">
           <defs>
-            <clipPath id="tclipH"><rect x="26" y="6" width="128" height="96" rx="11"/></clipPath>
-            <clipPath id="tclipR"><rect x="842" y="122" width="128" height="96" rx="11"/></clipPath>
+            <clipPath id="tclipW"><rect x="846" y="0" width="132" height="98" rx="11"/></clipPath>
+            <clipPath id="tclipMark"><circle cx="167" cy="176" r="11"/></clipPath>
           </defs>
 
-          <!-- every other tool: honeymoon, then the long slide into the reckoning. it passes UNDER the coral dot at week two -->
-          <path class="tline tline-old" d="M167 58 C 280 64, 370 96, 500 125 C 640 150, 720 168, 833 188"/>
-          <!-- your three weeks: the other direction, crossing over every other tool exactly on the week-two dot -->
-          <path class="tline tline-new" d="M167 188 C 290 184, 370 152, 500 125 C 640 100, 720 80, 833 50"/>
+          <!-- the single hero line: WingRep climbs from setup to "won't give it back". one line, nothing to tangle. -->
+          <path class="tline" d="M179 174 C 300 170, 402 138, 500 96 S 700 40, 838 40"/>
 
-          <image class="tface tface-h" data-simg="slide6_honeymoon.green" x="26" y="6" width="128" height="96" clip-path="url(#tclipH)" preserveAspectRatio="xMidYMid slice"/>
-          <rect class="tring tring-h" x="26" y="6" width="128" height="96" rx="11"/>
-          <text class="tsaid tsaid-h" x="90" y="126" text-anchor="middle">"i LOVE logging calls."</text>
+          <!-- origin: the line launches AT WingRep -->
+          <circle class="tnode" cx="167" cy="176" r="12"/>
+          <image class="tmark" data-sasset="ui_markImg" x="157" y="166" width="20" height="20" clip-path="url(#tclipMark)" preserveAspectRatio="xMidYMid meet"/>
 
-          <!-- the reckoning sits above its panel, so it cannot be mistaken for a caption on WEEK 3 -->
-          <text class="tsaid tsaid-r" x="970" y="110" text-anchor="end">"this is fine. it's fine."</text>
-          <image class="tface tface-r" data-simg="slide6_reckoning.clay" x="842" y="122" width="128" height="96" clip-path="url(#tclipR)" preserveAspectRatio="xMidYMid slice"/>
-          <rect class="tring tring-r" x="842" y="122" width="128" height="96" rx="11"/>
+          <!-- the week-two beat, sitting on the line -->
+          <circle class="tdot tdot-2" cx="500" cy="96" r="7"/>
 
-          <!-- each line is named at its own start: grey falls away from its name, coral climbs up off its own -->
-          <text class="tlab tlab-old" x="188" y="42">every other tool</text>
-          <text class="tlab tlab-new" x="182" y="176" text-anchor="start">WingRep</text>
-          <!-- the summit payoff: the rep's answer to week three's "try taking it back off your reps" -->
-          <text class="tsaid tsaid-win" x="974" y="24" text-anchor="end">"you're not taking this back."</text>
-
-          <!-- the crossing beat blooms once on the week-two dot, then is gone -->
-          <circle class="tripple" cx="500" cy="125" r="7"/>
-          <circle class="tdot tdot-1" cx="167" cy="188" r="7"/>
-          <circle class="tdot tdot-2" cx="500" cy="125" r="7"/>
-          <circle class="tdot tdot-3" cx="833" cy="50" r="7"/>
+          <!-- summit: the line lands ON a rep who won't give it back; the quote captions the face.
+               the whole group is tugged down and snaps back as the payoff lands. -->
+          <g class="tsummit">
+            <image class="tface tface-win" data-simg="slide6_honeymoon.green" x="846" y="0" width="132" height="98" clip-path="url(#tclipW)" preserveAspectRatio="xMidYMid slice"/>
+            <rect class="tring tring-win" x="846" y="0" width="132" height="98" rx="11"/>
+            <circle class="tdot tdot-3" cx="838" cy="40" r="7"/>
+            <text class="tsaid tsaid-win" x="978" y="120" text-anchor="end">"you're not taking this back."</text>
+          </g>
         </svg>
       </div>
 
@@ -1745,13 +1726,17 @@ objection handling, and next-step.</div>
     </div>
   </section>
   <script>
-  /* #trial: the two meme endpoints live inside the SVG, so wire their hrefs by hand
-     (the global img[data-img] loader only walks HTML <img> elements). */
+  /* #trial: the SVG <image> endpoints (summit face, WingRep origin mark) are hydrated by
+     hand (the global img[data-img] loader only walks HTML <img> elements). Faces come from
+     window.IMG via data-simg; the WingRep mark comes from window.ASSETS via data-sasset. */
   document.addEventListener('DOMContentLoaded', function(){
-    if(!window.IMG) return;
     document.querySelectorAll('#trial image[data-simg]').forEach(function(el){
       var k = el.dataset.simg;
-      if(window.IMG[k]) el.setAttribute('href', window.IMG[k]);
+      if(window.IMG && window.IMG[k]) el.setAttribute('href', window.IMG[k]);
+    });
+    document.querySelectorAll('#trial image[data-sasset]').forEach(function(el){
+      var k = el.dataset.sasset;
+      if(window.ASSETS && window.ASSETS[k]) el.setAttribute('href', window.ASSETS[k]);
     });
   });
   </script>
