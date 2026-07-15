@@ -182,8 +182,29 @@
   .os .copy{margin-top:.55rem;font-family:var(--body);font-weight:700;font-size:12px;background:#bdb9ad;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;padding:.34rem .8rem;cursor:pointer;color:#14120d}
   .ledger{font-family:var(--mono);font-size:11.5px;line-height:1.5;color:#2c2920;background:#fff;border:1px solid #d6cfbc;border-radius:6px;padding:.7rem .8rem;margin-top:.55rem}
   .ledger .stuck{background:#efddd7;color:#5f2a16;font-weight:700;padding:0 .2em} .ledger .slip{background:#f6dcd4;color:#b3381f;font-weight:700;padding:0 .2em} .ledger .hd{color:#8a8472}
-  .sc{display:flex;gap:.4rem;margin-top:.6rem;align-items:flex-end;height:80px}
-  .sc .bar{flex:1;border-radius:4px 4px 0 0;display:flex;flex-direction:column;justify-content:flex-end;font-size:10px;color:#fff;font-weight:700;text-align:center;padding-bottom:3px}
+  /* Slide 9, tab 3 scorecard. The five columns are the rep's last 5 calls; each
+     shows whether the coaching focus "stuck" or "slipped". --green and --rust are
+     nearly the same warm hue, so pass/fail can't ride on colour alone: STUCK is a
+     solid filled column, SLIPPED is a hollow outlined one. Fill presence carries
+     the read, the check/cross reinforce it, and it stays on the Claude palette. */
+  .sc{margin-top:.65rem}
+  .sc-head{font-family:var(--body);font-size:12px;color:var(--ink-soft);margin-bottom:.5rem;display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap}
+  .sc-head b{font-family:var(--display);font-weight:800;font-size:14px;color:#14120d;letter-spacing:-.01em}
+  .sc-head em{font-style:normal;font-weight:700;color:var(--green)}
+  .sc-cols{display:flex;gap:.5rem;align-items:stretch}
+  .sc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:.32rem}
+  .sc-col .mk{width:100%;height:44px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;font-family:var(--body);line-height:1}
+  .sc-col.stuck .mk{background:var(--green);color:#fdfcf7;border:1.5px solid var(--green)}
+  .sc-col.slip .mk{background:#faf0eb;color:var(--rust);border:1.5px solid var(--rust)}
+  .sc-col .dt{font-family:var(--mono);font-size:10px;color:#8a8472}
+  .sc-foot{display:flex;align-items:center;justify-content:space-between;gap:.55rem 1.2rem;margin-top:.6rem;flex-wrap:wrap}
+  .sc-key{display:flex;align-items:center;gap:.9rem;font-family:var(--body);font-size:11px;font-weight:600;color:var(--ink-soft)}
+  .sc-key span{display:inline-flex;align-items:center;gap:.35rem}
+  .sc-key i{width:12px;height:12px;border-radius:3px}
+  .sc-key i.stuck{background:var(--green)}
+  .sc-key i.slip{background:#faf0eb;border:1.5px solid var(--rust)}
+  .sc-gap{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
+  .sc-gap b{color:var(--green);font-weight:700}
   .os .taskbar{display:flex;align-items:center;gap:.5rem;padding:.3rem .45rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.45rem}
   .os .start{font-family:var(--body);font-weight:700;font-size:12.5px;padding:.28rem .65rem;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.35rem}
   .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#7c786c #fdfcf7 #fdfcf7 #7c786c;padding:.2rem .55rem}
@@ -1401,7 +1422,20 @@ the log, then a new call. Update it:
 scorecard: rep + current focus, last 5 calls showing
 focus <span class="g">stuck (green)</span> or <span class="g">slipped (red)</span>, top recurring gap.</div>
             <button class="copy" data-copy="score">Copy prompt</button>
-            <div class="sc"><div class="bar" style="height:55%;background:var(--green)">✓</div><div class="bar" style="height:80%;background:var(--rust)">✕</div><div class="bar" style="height:70%;background:var(--green)">✓</div><div class="bar" style="height:40%;background:var(--rust)">✕</div><div class="bar" style="height:92%;background:var(--green)">✓</div></div></div>
+            <div class="sc">
+              <div class="sc-head"><b>Jordan</b><span>· focus: <em>ask budget early</em></span></div>
+              <div class="sc-cols">
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 2</span></div>
+                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">Apr 6</span></div>
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 11</span></div>
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 15</span></div>
+                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">Apr 18</span></div>
+              </div>
+              <div class="sc-foot">
+                <div class="sc-key"><span><i class="stuck"></i>stuck</span><span><i class="slip"></i>slipped</span></div>
+                <div class="sc-gap">recurring gap: <b>budget comes up too late</b></div>
+              </div>
+            </div></div>
           <div class="pane" id="t4"><h4>Bonus, a 60-second pre-call game plan</h4>
             <p>Before the call, not after. Most reps wing it; this is the edge.</p>
             <div class="term">Research [company] + [contact]. Give me a one-page
