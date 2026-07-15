@@ -48,11 +48,11 @@
     .sFive .os-cap{margin-top:.4rem}
     /* .slide#trial, not #trial: the trial slide ships its own <style> block further
        down the file, and at equal specificity that later block would win. */
-    .slide#trial .body{margin-top:.6rem}
-    .slide#trial .tarc{max-width:720px;margin-top:.15rem}
-    .slide#trial .tweeks{max-width:720px;margin-top:.55rem}
-    .slide#trial .cta-row{margin-top:.75rem}
-    .slide#trial .bandlab{margin:.7rem 0 .35rem}
+    .slide#trial .body{margin-top:.55rem}
+    .slide#trial .trial-grid{margin-top:.45rem;gap:clamp(1.2rem,3vw,2.4rem)}
+    .slide#trial .trial-weeks{margin-top:.8rem;gap:.55rem}
+    .slide#trial .trial-hero img{aspect-ratio:4/2.85}
+    .slide#trial .bandlab{margin:1.4rem 0 .35rem}
     .slide#trial .logobanner{margin-top:0}
     .slide#trial .bandstrip{padding:.9rem 1.8rem}
   }
@@ -336,18 +336,11 @@
   .how{margin-top:1.4rem;display:grid;gap:.65rem;max-width:58ch}
   .how div{display:flex;gap:.9rem;align-items:baseline;font-size:15px;font-weight:500;line-height:1.4}
   .how div b{font-family:var(--display);font-weight:800;color:var(--green);font-size:12px;letter-spacing:.04em;white-space:nowrap;min-width:4.6em}
-  /* Slide 14 (trial): headline full-width, then the 3-week plan + FAQ in two columns.
-     Splitting the details lets the FAQ dropdowns open inside their column without growing the slide,
-     and fills the otherwise-empty right half so the slide breathes like the rest of the deck. */
-  #trial h1{font-size:clamp(30px,5.2vw,60px)}
-  #trial .trial-cols{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(1.6rem,4vw,4rem);align-items:start;margin-top:.85rem}
-  #trial .trial-faq{align-self:center}
-  #trial .flightplan{margin-top:.2rem;max-width:440px}
-  #trial .how{margin-top:1.1rem;max-width:none}
-  #trial .cta-row{margin-top:1.3rem}
-  #trial .faq-label{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--ink-soft);margin-bottom:.7rem}
-  #trial .logobanner{margin-top:1.2rem}
-  @media(max-width:820px){ #trial .trial-cols{grid-template-columns:1fr;gap:1.3rem} #trial .trial-faq{align-self:start} }
+  /* Slide 12 (trial): headline + bold 3-week list on the left, one big hero image on the right,
+     so the payoff visual fills what used to be dead space. h1 sized for the half-width column. */
+  #trial h1{font-size:clamp(28px,3.4vw,46px);line-height:1.04}
+  #trial .logobanner{margin-top:1.1rem}
+  @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-hero{max-width:460px} }
 
   .soon{text-align:center;align-items:center} .soon .wrap{display:flex;flex-direction:column;align-items:center}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
@@ -1698,106 +1691,54 @@ objection handling, and next-step.</div>
 
   <!-- 15 CTA: free 3-week trial. One line climbs from the WingRep origin to a rep who won't give it back. -->
   <style>
-  /* ===== slide 15 (#trial): the single-line trial climb ===== */
-  /* children 7/8 are the logo-band label then the band itself; keep them in the reveal sequence */
-  #trial .wrap>*:nth-child(7){animation-delay:.52s}
-  #trial .wrap>*:nth-child(8){animation-delay:.58s}
-  #trial .tarc{position:relative;max-width:830px;margin-top:.55rem}
-  #trial .tarc svg{width:100%;height:auto;display:block;overflow:visible}
-  /* one hero line: WingRep climbs across the three weeks. a single line cannot tangle.
-     the line + dots are the hero graphic: deep --green clears the 3:1 non-text contrast
-     bar on the ivory paper (vivid --green-bright does not). */
-  #trial .tline{fill:none;stroke:var(--green);stroke-width:4;stroke-linecap:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1}
-  #trial .tdot{fill:var(--green);stroke:var(--paper);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
-  /* origin: the line launches AT WingRep. a filled green node carries the light WingRep mark so it reads. */
-  #trial .tnode{fill:var(--green);stroke:var(--paper);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
-  #trial .tmark{opacity:0}
-  /* summit: the line lands ON a real face; the payoff quote captions it, not floating. */
-  #trial .tface,#trial .tring,#trial .tsaid{opacity:0}
-  #trial .tring{fill:none;stroke:var(--line);stroke-width:2.5}
-  #trial .tsaid-win{font-family:var(--hand);font-size:21px;fill:var(--green)}
-  /* the whole summit group is tugged down and springs back: "you're not taking this back." */
-  #trial .tsummit{transform-box:fill-box;transform-origin:center}
-  /* the line draws once as the slide lands; every beat is keyed off #trial.active */
-  #trial.active .tline{animation:tdraw 1.4s cubic-bezier(.4,0,.25,1) .35s forwards}
-  #trial.active .tnode{animation:tpop .45s cubic-bezier(.2,.85,.25,1) .15s forwards}
-  #trial.active .tmark{animation:tfade .6s ease .28s forwards}
-  #trial.active .tdot{animation:tpop .45s cubic-bezier(.2,.85,.25,1) forwards}
-  #trial.active .tdot-2{animation-delay:.9s}
-  #trial.active .tdot-3{animation-delay:1.55s}
-  /* the summit face lands as the drawn line arrives at it */
-  #trial.active .tface,#trial.active .tring{animation:tfade .6s ease 1.55s forwards}
-  /* the refusal: the summit is pulled down and snaps back as the payoff lands */
-  #trial.active .tsummit{animation:trefuse .6s cubic-bezier(.4,0,.2,1) 1.7s}
-  #trial.active .tsaid-win{animation:tfade .6s ease 2.1s forwards}
-  @keyframes tdraw{to{stroke-dashoffset:0}}
-  @keyframes tpop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-  @keyframes tfade{to{opacity:1}}
-  @keyframes trefuse{0%{transform:translateY(0)}40%{transform:translateY(18px)}70%{transform:translateY(-3px)}100%{transform:translateY(0)}}
-  /* week columns align exactly under the three dots on the climbing line */
-  /* equal columns with no gap keep each week centered under its dot; the breathing room is inner padding */
-  #trial .tweeks{max-width:830px;display:grid;grid-template-columns:repeat(3,1fr);margin-top:.95rem}
-  #trial .tweeks>div{text-align:center;padding:0 1.2rem}
-  #trial .tweeks .wk{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;color:var(--ink-soft);display:block;margin-bottom:.18rem}
-  #trial .tweeks .wh{font-family:var(--display);font-weight:800;font-size:clamp(15px,1.5vw,18px);color:var(--ink);display:block;margin-bottom:.22rem}
-  #trial .tweeks .ws{font-size:13.5px;line-height:1.35;color:var(--ink-soft);font-weight:500;display:block}
-  #trial .cta-row{margin-top:1rem}
-  #trial .cta-note{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
-  /* the logo band is proof of the summit payoff: these teams took the reverse-trial test and kept it */
-  #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:1rem 0 .55rem}
+  /* ===== slide 15 (#trial): headline + bold 3-week list, one big hero image owns the right ===== */
+  #trial .trial-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(1.5rem,3.6vw,3.2rem);align-items:start;margin-top:1.05rem}
+  #trial .trial-left{min-width:0}
+  #trial .trial-left .body{margin-top:.7rem;max-width:31rem}
+  /* the three weeks as a bold numbered list, not a thin chart */
+  #trial .trial-weeks{list-style:none;margin:1.1rem 0 0;padding:0;display:grid;gap:.8rem}
+  #trial .trial-weeks li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:baseline}
+  #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(14px,1.5vw,18px);color:var(--green);letter-spacing:.02em}
+  #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.85vw,21px);color:var(--ink);display:block;line-height:1.12}
+  #trial .tw-s{font-size:clamp(12.5px,1.25vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.12rem}
+  /* the hero: one big image owns the right */
+  #trial .trial-hero{position:relative;margin:0}
+  #trial .trial-hero img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
+  #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
-  @media(max-width:820px){
-    #trial .tweeks{grid-template-columns:1fr;gap:.6rem;margin-top:1rem}
-    #trial .tweeks>div{text-align:left;padding:0}
-  }
+  /* reveal: the hero lands, the weeks stagger up, the payoff lands last */
+  #trial .trial-hero,#trial .trial-weeks li{opacity:0}
+  #trial.active .trial-hero{animation:theroin .7s cubic-bezier(.2,.8,.2,1) .25s forwards}
+  #trial.active .trial-weeks li{animation:trise .5s cubic-bezier(.2,.8,.2,1) forwards}
+  #trial.active .trial-weeks li:nth-child(1){animation-delay:.35s}
+  #trial.active .trial-weeks li:nth-child(2){animation-delay:.48s}
+  #trial.active .trial-weeks li:nth-child(3){animation-delay:.61s}
+  @keyframes theroin{from{opacity:0;transform:translateY(14px) scale(.975)}to{opacity:1;transform:none}}
+  @keyframes trise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){
-    #trial .tline{stroke-dashoffset:0}
-    #trial .tnode,#trial .tmark,#trial .tdot,#trial .tface,#trial .tring,#trial .tsaid{opacity:1}
-    #trial .tsummit{transform:none}
-    #trial.active .tline,#trial.active .tnode,#trial.active .tmark,#trial.active .tdot,#trial.active .tface,#trial.active .tring,#trial.active .tsaid,#trial.active .tsummit{animation:none}
+    #trial .trial-hero,#trial .trial-weeks li{opacity:1}
+    #trial.active .trial-hero,#trial.active .trial-weeks li{animation:none}
   }
   </style>
   <section class="slide wr-theme" id="trial">
     <div class="wrap">
       <div class="eyebrow">How to start</div>
-      <h1>Free for three weeks,<br>on your <span class="hl">actual calls.</span></h1>
-      <p class="body">Not a demo. A real trial with a few reps. If you're on Google Workspace, it connects in a couple of clicks. That's the whole install.</p>
-
-      <div class="tarc">
-        <svg viewBox="0 0 1000 224" preserveAspectRatio="xMidYMid meet" role="img" aria-label="WingRep climbs across a three-week trial: reps set up in week one, see the value by week two, and by week three refuse to give it back.">
-          <defs>
-            <clipPath id="tclipW"><rect x="846" y="0" width="132" height="98" rx="11"/></clipPath>
-            <clipPath id="tclipMark"><circle cx="167" cy="176" r="11"/></clipPath>
-          </defs>
-
-          <!-- the single hero line: WingRep climbs from setup to "won't give it back". one line, nothing to tangle. -->
-          <path class="tline" d="M179 174 C 300 170, 402 138, 500 96 S 700 40, 838 40"/>
-
-          <!-- origin: the line launches AT WingRep -->
-          <circle class="tnode" cx="167" cy="176" r="12"/>
-          <image class="tmark" data-sasset="ui_markImg" x="157" y="166" width="20" height="20" clip-path="url(#tclipMark)" preserveAspectRatio="xMidYMid meet"/>
-
-          <!-- the week-two beat, sitting on the line -->
-          <circle class="tdot tdot-2" cx="500" cy="96" r="7"/>
-
-          <!-- summit: the line lands ON a rep who won't give it back; the quote captions the face.
-               the whole group is tugged down and snaps back as the payoff lands. -->
-          <g class="tsummit">
-            <image class="tface tface-win" data-simg="slide6_honeymoon.green" x="846" y="0" width="132" height="98" clip-path="url(#tclipW)" preserveAspectRatio="xMidYMid slice"/>
-            <rect class="tring tring-win" x="846" y="0" width="132" height="98" rx="11"/>
-            <circle class="tdot tdot-3" cx="838" cy="40" r="7"/>
-            <text class="tsaid tsaid-win" x="978" y="120" text-anchor="end">"you're not taking this back."</text>
-          </g>
-        </svg>
+      <div class="trial-grid">
+        <div class="trial-left">
+          <h1>Free for three weeks,<br>on your <span class="hl">actual calls.</span></h1>
+          <p class="body">Not a demo. A real trial with a few reps. If you're on Google Workspace, it connects in a couple of clicks.</p>
+          <ol class="trial-weeks">
+            <li><span class="tw-num">01</span><span><span class="tw-b">Get set up.</span><span class="tw-s">Twenty minutes. Then it's on your real calls.</span></span></li>
+            <li><span class="tw-num">02</span><span><span class="tw-b">See the value.</span><span class="tw-s">Follow-ups drafted. CRM written. Reps walk in prepped.</span></span></li>
+            <li><span class="tw-num">03</span><span><span class="tw-b">Hate to see it go.</span><span class="tw-s">Now try taking it back off your reps. That's the actual test.</span></span></li>
+          </ol>
+        </div>
+        <div class="trial-right">
+          <figure class="trial-hero">
+            <img data-img="slide6_honeymoon.green" alt="Success Kid: your reps will not give WingRep back">
+          </figure>
+        </div>
       </div>
-
-      <div class="tweeks">
-        <div><span class="wk">WEEK 1</span><span class="wh">Get set up.</span><span class="ws">Twenty minutes of setup. Then it's on your real calls.</span></div>
-        <div><span class="wk">WEEK 2</span><span class="wh">See the value.</span><span class="ws">Follow-ups drafted. CRM written. Reps walk in prepped.</span></div>
-        <div><span class="wk">WEEK 3</span><span class="wh">Hate to see it go away.</span><span class="ws">Now try taking it back off your reps. That's the actual test.</span></div>
-      </div>
-
-      <div class="cta-row"><a class="btn btn-primary" href="https://wingrep.ai" target="_blank" rel="noopener">Start a 3-week trial →</a><span class="cta-note">Free. No card.</span></div>
       <div class="bandlab">Teams leveling up with WingRep</div>
       <div class="logobanner"><div class="bandstrip">
         <img class="np" data-client="client-2" alt="Rho">
@@ -1808,21 +1749,6 @@ objection handling, and next-step.</div>
       </div></div>
     </div>
   </section>
-  <script>
-  /* #trial: the SVG <image> endpoints (summit face, WingRep origin mark) are hydrated by
-     hand (the global img[data-img] loader only walks HTML <img> elements). Faces come from
-     window.IMG via data-simg; the WingRep mark comes from window.ASSETS via data-sasset. */
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('#trial image[data-simg]').forEach(function(el){
-      var k = el.dataset.simg;
-      if(window.IMG && window.IMG[k]) el.setAttribute('href', window.IMG[k]);
-    });
-    document.querySelectorAll('#trial image[data-sasset]').forEach(function(el){
-      var k = el.dataset.sasset;
-      if(window.ASSETS && window.ASSETS[k]) el.setAttribute('href', window.ASSETS[k]);
-    });
-  });
-  </script>
 
   <!-- 16 competitors + common questions.
        Two jobs on one slide. Left: the argument from the archived one-way-mirror
