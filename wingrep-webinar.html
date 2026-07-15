@@ -2158,13 +2158,16 @@ objection handling, and next-step.</div>
     if(W>0){tctx.clearRect(0,0,W,H);bctx.clearRect(0,0,W,H);}
     laid.length=0;bits.length=0;if(ava)ava.style.display='';
   }
-  // P freezes the whole system, not just the ball: the rAF stops, so the track stops
-  // decaying and the loose bricks hang in mid-air exactly where they were. On resume,
-  // last=0 so the frozen seconds are not integrated as one giant dt and teleported through.
+  // P freezes the ball and the loose bricks hang in mid-air, but the track behind it is
+  // wiped so a pause leaves a clean frame; the trail rebuilds as the ball moves again.
+  // On resume, last=0 so the frozen seconds are not integrated as one giant dt and teleported.
   function togglePause(){
     if(!running)return;
     paused=!paused;
-    if(paused){if(raf)cancelAnimationFrame(raf);raf=0;}
+    if(paused){
+      if(raf)cancelAnimationFrame(raf);raf=0;
+      laid.length=0;if(W>0)tctx.clearRect(0,0,W,H);   // drop the trail so it vanishes on pause
+    }
     else{last=0;raf=requestAnimationFrame(loop);}
   }
   new MutationObserver(function(){slide.classList.contains('active')?start():stop();}).observe(slide,{attributes:true,attributeFilter:['class']});
