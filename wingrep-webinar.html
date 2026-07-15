@@ -1848,7 +1848,7 @@ objection handling, and next-step.</div>
   <style>
   .sFaq .eyebrow{margin-bottom:.75rem}
   .sFaq h1{font-size:clamp(26px,4.1vw,50px);line-height:1.03}
-  .sFaq .faqcols{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(1.3rem,3.2vw,3rem);align-items:start;margin-top:clamp(.9rem,2.4vh,1.6rem)}
+  .sFaq .faqcols{display:grid;grid-template-columns:1.18fr .82fr;gap:clamp(1.6rem,3.8vw,3.6rem);align-items:start;margin-top:clamp(1.7rem,4.2vh,2.7rem)}
 
   /* shared label rule for both columns */
   .sFaq .lab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--ink-soft);margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
@@ -1860,7 +1860,7 @@ objection handling, and next-step.</div>
   .sFaq .cmp{border:1.5px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
   /* the pane they sit behind: a cool wash over the warm card, plus a slow glare.
      This is the one-way mirror reduced to the only thing it needed to say. */
-  .sFaq .cmp-they{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem);border-bottom:1.5px solid var(--line);background:linear-gradient(180deg,rgba(20,18,13,.055),rgba(20,18,13,.012))}
+  .sFaq .cmp-they{padding:clamp(1.05rem,2.1vh,1.35rem) clamp(1.15rem,1.7vw,1.55rem);border-bottom:1.5px solid var(--line);background:linear-gradient(180deg,rgba(20,18,13,.055),rgba(20,18,13,.012))}
   /* the pane the logos sit behind. A glare crosses it on a slow loop and nothing
      under it moves. It stays off the copy so it can never wash out the reading. */
   .sFaq .pane{position:relative;overflow:hidden;border-radius:14px;margin:0 -.4rem;padding:.4rem}
@@ -1882,22 +1882,31 @@ objection handling, and next-step.</div>
   .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(13.5px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
   .sFaq .cmp-line b{color:var(--ink);font-weight:700}
 
-  .sFaq .cmp-we{padding:clamp(.85rem,1.8vh,1.1rem) clamp(1rem,1.5vw,1.35rem)}
-  .sFaq .cmp-do{list-style:none;display:grid;gap:.52rem;margin:0}
+  .sFaq .cmp-we{padding:clamp(1.05rem,2.1vh,1.35rem) clamp(1.15rem,1.7vw,1.55rem)}
+  .sFaq .cmp-do{list-style:none;display:grid;gap:.78rem;margin:0}
   .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(13.5px,1.4vw,16px);line-height:1.42;font-weight:500}
   .sFaq .cmp-do .n{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:var(--green-wash);margin-top:.06rem}
   .sFaq .cmp-do li.loop{font-weight:700}
   .sFaq .cmp-do li.loop .n{background:var(--green);color:#fff}
-  /* the closed loop, drawn. the only claim on this slide nobody else can make. */
-  .sFaq .nloop svg{width:15px;height:15px;overflow:visible}
+  /* the closed loop — the only claim on this slide nobody else can make. It stays
+     fully drawn at all times (a half-drawn arc read as a broken circle); on slide
+     entry it spins once, which is a cleaner "loop" cue than the stroke-draw was. */
+  .sFaq .nloop svg{width:15px;height:15px;overflow:visible;transform-origin:50% 50%}
   .sFaq .nloop path{fill:none;stroke:#fff;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
-  .sFaq .nloop .lp{stroke-dasharray:44;stroke-dashoffset:44}
-  .sFaq .nloop .lph{opacity:0}
-  .sFaq.active .nloop .lp{animation:lpDraw .95s cubic-bezier(.5,0,.2,1) .75s forwards}
-  .sFaq.active .nloop .lph{animation:lpTip .3s ease 1.6s forwards}
-  @keyframes lpDraw{to{stroke-dashoffset:0}}
-  @keyframes lpTip{to{opacity:1}}
-  .sFaq .cmp-scrib{margin-top:.7rem;font-size:clamp(18px,2vw,25px)}
+  .sFaq.active .nloop svg{animation:lpSpin .7s cubic-bezier(.5,0,.2,1) .9s both}
+  @keyframes lpSpin{0%{transform:rotate(-330deg)}100%{transform:rotate(0)}}
+
+  /* the third claim is the one nobody can copy — a reaction carries that, no caption.
+     Sits beside the list (see .cmp-body) so it never leaves dead space beneath it. */
+  .sFaq .cmp-body{display:flex;align-items:center;gap:clamp(1rem,1.8vw,1.6rem)}
+  .sFaq .cmp-do{flex:1;min-width:0}
+  .sFaq .cmp-react{flex:0 0 auto;width:clamp(104px,9.5vw,132px);transform:rotate(2.2deg)}
+  .sFaq .cmp-react img{display:block;width:100%;height:auto;border-radius:13px;border:3px solid #fff;
+    box-shadow:0 10px 26px rgba(15,23,42,.16),0 0 0 1px rgba(15,23,42,.05)}
+  .sFaq.active .cmp-react{animation:reactPop .6s cubic-bezier(.22,1,.36,1) 1.4s both}
+  @keyframes reactPop{from{opacity:0;transform:rotate(-3deg) scale(.86)}to{opacity:1;transform:rotate(2.2deg) scale(1)}}
+  @media (max-width:900px){ .sFaq .cmp-body{gap:1rem} }
+  @media (prefers-reduced-motion:reduce){.sFaq.active .cmp-react,.sFaq.active .nloop{animation:none}}
 
   /* the accordion. The shared rules for it are scoped to #trial, so they do not
      reach this slide. Re-declared here, scoped to .sFaq. The row chrome itself is
@@ -1910,15 +1919,14 @@ objection handling, and next-step.</div>
   /* This is a two-job slide, so it runs tall. On a 720p projector it has to fit with an
      answer open AND stay clear of the top bar, so compact it on short viewports. */
   @media (max-height:780px){
-    .sFaq .eyebrow{margin-bottom:.45rem}
+    .sFaq .eyebrow{margin-bottom:.55rem}
     .sFaq h1{font-size:clamp(26px,3.3vw,42px)}
-    .sFaq .faqcols{margin-top:.55rem}
-    .sFaq .lab{margin-bottom:.5rem}
-    .sFaq .cmp-they,.sFaq .cmp-we{padding-top:.6rem;padding-bottom:.6rem}
-    .sFaq .cmp-line{margin-top:.55rem}
-    .sFaq .cmp-do{gap:.38rem}
-    .sFaq .cmp-scrib{margin-top:.45rem;font-size:21px}
-    .sFaq .faqrow button{padding:.62rem .95rem!important}
+    .sFaq .faqcols{margin-top:1.15rem}
+    .sFaq .lab{margin-bottom:.55rem}
+    .sFaq .cmp-they,.sFaq .cmp-we{padding-top:.82rem;padding-bottom:.82rem}
+    .sFaq .cmp-line{margin-top:.62rem}
+    .sFaq .cmp-do{gap:.6rem}
+    .sFaq .faqrow button{padding:.66rem .95rem!important}
   }
   /* house rule: reduced motion gets a sane still slide. No glare, loop already closed. */
   @media (prefers-reduced-motion:reduce){
@@ -1931,7 +1939,7 @@ objection handling, and next-step.</div>
   <section class="slide sFaq wr-theme">
     <div class="wrap">
       <div class="eyebrow">The question you're about to ask</div>
-      <h1><span class="ln">They see everything.</span><br><span class="ln"><span class="hl">They change nothing.</span></span></h1>
+      <h1><span class="ln">They see everything.</span> <span class="ln"><span class="hl">They change nothing.</span></span></h1>
       <div class="faqcols">
 
         <div class="cmp">
@@ -1949,12 +1957,14 @@ objection handling, and next-step.</div>
           </div>
           <div class="cmp-we">
             <div class="lab we">What WingRep does instead</div>
-            <ul class="cmp-do">
-              <li><span class="n">1</span><span>Writes the CRM in your team's framework, three minutes after the call.</span></li>
-              <li><span class="n">2</span><span>Drafts the follow-up. Reps at Rho send it unedited nine times out of ten.</span></li>
-              <li class="loop"><span class="n nloop"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="lp" d="M12 5a7 7 0 1 1-4.95 2.05"/><path class="lph" d="M9.5 2.9 L13.1 5 L9.5 7.1"/></svg></span><span>Grades whether last call's coaching showed up on this one.</span></li>
-            </ul>
-            <div class="scribble cmp-scrib">only the third one is hard to copy.</div>
+            <div class="cmp-body">
+              <ul class="cmp-do">
+                <li><span class="n">1</span><span>Writes the CRM in your team's framework, three minutes after the call.</span></li>
+                <li><span class="n">2</span><span>Drafts the follow-up. Reps at Rho send it unedited nine times out of ten.</span></li>
+                <li class="loop"><span class="n nloop"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="lp" d="M19 12a7 7 0 1 1-2.05-4.95"/><path class="lph" d="M19 5v4.67h-4.67"/></svg></span><span>Grades whether last call's coaching showed up on this one.</span></li>
+              </ul>
+              <figure class="cmp-react" aria-hidden="true"><img data-img="slide13_react" alt=""></figure>
+            </div>
           </div>
         </div>
 
