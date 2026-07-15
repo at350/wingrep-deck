@@ -101,7 +101,8 @@
 
   /* customer banner, real white wordmark nameplates on the WingRep gradient (mirrors wingrep.ai) */
   .logobanner{margin-top:1rem;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
-  .bandstrip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.4rem 2.5rem;background:linear-gradient(110deg,#6d4bf0 0%,#8d4a31 55%,#a44927 100%);padding:1.2rem 1.8rem}
+  /* the one place the WingRep signature green->violet gradient lands: the logo band. */
+  .bandstrip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.4rem 2.5rem;background:linear-gradient(115deg,#028944 0%,#049850 40%,#5F43D1 100%);padding:1.2rem 1.8rem}
   .bandstrip img.np{height:36px;width:auto;opacity:.97;filter:drop-shadow(0 2px 7px rgba(0,0,0,.2))}
   @media(max-width:680px){.bandstrip img.np{height:26px} .bandstrip{gap:1.1rem 1.6rem;padding:1.3rem}}
   .dark .lchip b{color:#e6d6d0;border-color:#5b3a2d;background:rgba(255,255,255,.05)}
@@ -745,7 +746,7 @@
   @media (max-width:760px){.s20-grid{grid-template-columns:1fr} .s20-photo{margin-top:1rem}}
 
   /* slide 18: game clear-pop particles */
-  .gpart{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--green-bright);pointer-events:none;box-shadow:0 0 6px rgba(164,73,39,.7);animation:gpop .5s cubic-bezier(.2,.8,.2,1) forwards;z-index:5}
+  .gpart{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--green-bright);pointer-events:none;box-shadow:0 0 6px rgba(18,161,80,.7);animation:gpop .5s cubic-bezier(.2,.8,.2,1) forwards;z-index:5}
   @keyframes gpop{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
 
   /* slide 19: celebration GIF finale */
@@ -1505,11 +1506,41 @@ objection handling, and next-step.</div>
           live column is the payoff: it is the one thing the Claude workflow on
           slide 9 structurally cannot do, because Claude never hears the call. -->
   <style>
-  #wingrepReveal{--wr:#009443;--wr-lit:#22c06d;--wr-dim:rgba(0,148,67,.34)}
-  #wingrepReveal .app{max-width:1000px;margin-top:1rem}
+  /* ============================================================
+     WingRep palette takes over from the reveal (slide 11) onward.
+     .wr-theme is set on every section from #wingrepReveal to the
+     finale, so every green and rust custom property inside those
+     slides resolves to WingRep's own palette without touching 1-10
+     (which stay Claude clay on purpose, so the brand-green arrival
+     still means something). WingRep is mostly green; violet is a
+     restrained second accent, used only where it carries meaning.
+     Paper-side greens are the deep end of the ramp for AA on the
+     ivory canvas; fills/lines use the brighter --green-bright. ============================================================ */
+  .wr-theme{
+    --green:#05713F;         /* deep WingRep green: AA text/primary on paper */
+    --green-bright:#12A150;  /* vivid WingRep green: bars, lines, fills */
+    --green-deep:#053421;    /* very deep green, rare */
+    --green-wash:#E4F3EA;    /* light green tint */
+    --rust:#C23D21;          /* warm alert (game stress); deep enough for AA text on white */
+    --rust-soft:#E8A08E;--rust-deep:#B0361B;--amber:#E0A05A;
+    --violet:#5F43D1;        /* WingRep violet, deep */
+    --violet-lit:#8B7FE8;    /* light periwinkle */
+  }
+  /* hardcoded Claude-clay values on these slides that no var reaches */
+  .wr-theme .checks .ck{stroke:var(--green)}
+  .wr-theme .btn-primary{box-shadow:0 12px 26px -10px rgba(4,90,52,.5)}
+  #wingrepReveal{
+    --wr:#009443;--wr-lit:#2ec978;--wr-dim:rgba(0,148,67,.34);
+    --vi:#6E5CF2;--vi-lit:#B3A7F7;
+    /* cool-slate product chrome, matching wingrep.ai's real app card */
+    --c-app:#0F172A;--c-bar:#0B1220;--c-panel:#151D30;--c-line:#26314A;
+    --c-tx:#E8ECF4;--c-tx2:#C2CBDD;--c-lbl:#8A97B2;--c-mut:#7C8AA5;
+  }
+  #wingrepReveal .app{max-width:1000px;margin-top:1rem;background:var(--c-app);border-color:var(--c-line)}
+  #wingrepReveal .app .bar{background:var(--c-bar)}
   #wingrepReveal .bar .wm{color:var(--wr-lit)}
-  #wingrepReveal .bar .status{color:#9d8279;font-variant-numeric:tabular-nums}
-  #wingrepReveal .bar .status::before{background:#553529;animation:none;transition:background .4s}
+  #wingrepReveal .bar .status{color:var(--c-mut);font-variant-numeric:tabular-nums}
+  #wingrepReveal .bar .status::before{background:var(--c-line);animation:none;transition:background .4s}
   #wingrepReveal .bar .status.on{color:var(--wr-lit)}
   #wingrepReveal .bar .status.on::before{background:var(--wr);animation:wrPulse 1.5s infinite}
   @keyframes wrPulse{0%{box-shadow:0 0 0 0 rgba(0,148,67,.55)}70%{box-shadow:0 0 0 8px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
@@ -1518,53 +1549,57 @@ objection handling, and next-step.</div>
   #wingrepReveal .stage{display:grid;grid-template-columns:minmax(0,.94fr) 26px minmax(0,1fr);gap:.15rem;padding:.9rem}
   #wingrepReveal .panes{padding:0;align-content:start;gap:.5rem}
   #wingrepReveal .divide{position:relative;align-self:stretch}
-  #wingrepReveal .divide::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;margin-left:-.5px;background:#45281d}
-  #wingrepReveal .divide span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6355;background:#23130d;padding:.45rem 0;opacity:0;transition:opacity .6s}
+  #wingrepReveal .divide::before{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:1px;margin-left:-.5px;background:var(--c-line)}
+  #wingrepReveal .divide span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-mut);background:var(--c-app);padding:.45rem 0;opacity:0;transition:opacity .6s}
   #wingrepReveal .divide span.on{opacity:1}
 
   /* left: the call, still running */
-  #wingrepReveal .lv{display:flex;flex-direction:column;gap:.58rem;background:#2a1811;border:1.5px solid var(--wr-dim);border-radius:12px;padding:.75rem .85rem;opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .6s}
+  #wingrepReveal .lv{display:flex;flex-direction:column;gap:.58rem;background:var(--c-panel);border:1.5px solid var(--wr-dim);border-radius:12px;padding:.75rem .85rem;opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1),border-color .6s}
   #wingrepReveal .lv.show{opacity:1;transform:none}
-  #wingrepReveal .lv.ended{border-color:#45281d}
+  #wingrepReveal .lv.ended{border-color:var(--c-line)}
   #wingrepReveal .lvtop{display:flex;align-items:center;gap:.5rem}
   #wingrepReveal .lvbadge{display:inline-flex;align-items:center;gap:.34rem;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--wr);border-radius:4px;padding:.2rem .4rem;transition:background .4s,color .4s}
   #wingrepReveal .lvbadge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:wrBlink 1.2s infinite}
   @keyframes wrBlink{0%,100%{opacity:1}50%{opacity:.2}}
-  #wingrepReveal .lv.ended .lvbadge{background:#45281d;color:#b08d80}
-  #wingrepReveal .lv.ended .lvbadge::before{animation:none;background:#8a6355}
-  #wingrepReveal .lvwho{font-size:12.5px;font-weight:600;color:#d9c8c1}
-  #wingrepReveal .lvclock{margin-left:auto;font-family:var(--mono);font-size:12px;color:#de9a81;font-variant-numeric:tabular-nums}
+  #wingrepReveal .lv.ended .lvbadge{background:var(--c-line);color:var(--c-lbl)}
+  #wingrepReveal .lv.ended .lvbadge::before{animation:none;background:var(--c-mut)}
+  #wingrepReveal .lvwho{font-size:12.5px;font-weight:600;color:var(--c-tx2)}
+  #wingrepReveal .lvclock{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--c-lbl);font-variant-numeric:tabular-nums}
   /* WingRep is hearing it. the bars are the whole argument, so they are green. */
   #wingrepReveal .wave{display:flex;align-items:center;gap:3px;height:26px}
   #wingrepReveal .wave i{flex:1 1 0;min-width:0;height:100%;border-radius:1.5px;background:var(--wr);opacity:.85;transform:scaleY(.12);transform-origin:center;animation:wrWave 1s ease-in-out infinite;transition:transform .35s ease,background .5s ease}
   @keyframes wrWave{0%,100%{transform:scaleY(.1)}50%{transform:scaleY(var(--a,1))}}
-  #wingrepReveal .lv.ended .wave i{animation:none;transform:scaleY(.07);background:#45281d;opacity:1}
+  #wingrepReveal .lv.ended .wave i{animation:none;transform:scaleY(.07);background:var(--c-line);opacity:1}
   /* a live transcript: newest line sits against the nudge, older ones scroll up
      under the fade. the fade is what makes the pane read as still running. */
   #wingrepReveal .lvtx{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-end;gap:.24rem;overflow:hidden;min-height:0;max-height:170px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%)}
-  #wingrepReveal .lvtx p{font-size:12.5px;line-height:1.42;font-weight:500;color:#b8a49c}
+  #wingrepReveal .lvtx p{font-size:12.5px;line-height:1.42;font-weight:500;color:var(--c-lbl)}
   #wingrepReveal .lvtx p{padding-left:46px;text-indent:-46px}
-  #wingrepReveal .lvtx p b{display:inline-block;width:40px;margin-right:6px;text-indent:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#8a6355}
-  #wingrepReveal .lvtx p.now{color:#f4edea;font-size:13.5px}
+  #wingrepReveal .lvtx p b{display:inline-block;width:40px;margin-right:6px;text-indent:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--c-mut)}
+  #wingrepReveal .lvtx p.now{color:var(--c-tx);font-size:13.5px}
   #wingrepReveal .car{display:inline-block;width:2px;height:.95em;margin-left:2px;vertical-align:-1px;background:var(--wr);animation:wrBlink 1s step-end infinite}
   #wingrepReveal .lv.ended .car{display:none}
-  /* the nudge lands from the right, while she is still mid-sentence */
-  #wingrepReveal .nudge{margin-top:auto;background:linear-gradient(180deg,rgba(0,148,67,.16),rgba(0,148,67,.05));border:1.5px solid var(--wr);border-radius:10px;padding:.62rem .72rem;opacity:0;transform:translateX(18px) scale(.97);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1)}
+  /* the nudge is WingRep's live coaching brief, so it carries the second accent:
+     violet, the way wingrep.ai marks its Prep/brief. green stays the work it did. */
+  #wingrepReveal .nudge{margin-top:auto;background:linear-gradient(180deg,rgba(110,92,242,.22),rgba(110,92,242,.06));border:1.5px solid var(--vi);border-radius:10px;padding:.62rem .72rem;opacity:0;transform:translateX(18px) scale(.97);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1)}
   #wingrepReveal .nudge.show{opacity:1;transform:none;animation:wrLand .9s ease-out}
-  @keyframes wrLand{0%{box-shadow:0 0 0 0 rgba(0,148,67,.45)}60%{box-shadow:0 0 0 11px rgba(0,148,67,0)}100%{box-shadow:0 0 0 0 rgba(0,148,67,0)}}
-  #wingrepReveal .nudge .nh{display:flex;align-items:center;gap:.35rem;margin-bottom:.36rem;font-family:var(--body);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--wr-lit)}
+  @keyframes wrLand{0%{box-shadow:0 0 0 0 rgba(110,92,242,.42)}60%{box-shadow:0 0 0 11px rgba(110,92,242,0)}100%{box-shadow:0 0 0 0 rgba(110,92,242,0)}}
+  #wingrepReveal .nudge .nh{display:flex;align-items:center;gap:.35rem;margin-bottom:.36rem;font-family:var(--body);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--vi-lit)}
   #wingrepReveal .nudge .nh img{height:12px}
-  #wingrepReveal .nudge p{font-size:13.5px;line-height:1.42;font-weight:500;color:#f4edea}
+  #wingrepReveal .nudge p{font-size:13.5px;line-height:1.42;font-weight:500;color:var(--c-tx)}
   #wingrepReveal .nudge p b{color:#fff;font-weight:800}
-  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:11.5px;font-weight:600;color:#b79b91}
+  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:11.5px;font-weight:600;color:var(--c-lbl)}
+  /* "she asked" is the confirmed positive outcome, so it stays green, not violet */
   #wingrepReveal .nok{margin-left:auto;font-size:11px;text-transform:none;letter-spacing:0;color:var(--wr-lit);opacity:0;transition:opacity .55s}
   #wingrepReveal .nok.on{opacity:1}
 
   /* right: what it did about it. green marks the work WingRep finished. */
-  #wingrepReveal .pane2{padding:.62rem .8rem}
-  #wingrepReveal .pane2 .row{padding:.28rem 0}
+  #wingrepReveal .pane2{padding:.62rem .8rem;background:var(--c-panel);border-color:var(--c-line)}
+  #wingrepReveal .pane2 p{color:var(--c-tx)}
+  #wingrepReveal .pane2 .h{color:var(--c-lbl)}
+  #wingrepReveal .pane2 .row{padding:.28rem 0;border-top-color:var(--c-line);color:var(--c-tx2)}
   #wingrepReveal .pane2 .h .ok{color:var(--wr-lit)}
-  #wingrepReveal .pane2.coach{background:linear-gradient(180deg,rgba(0,148,67,.12),rgba(0,148,67,.03)),#2a1811;border-color:rgba(0,148,67,.6)}
+  #wingrepReveal .pane2.coach{background:linear-gradient(180deg,rgba(0,148,67,.14),rgba(0,148,67,.03)),var(--c-panel);border-color:rgba(0,148,67,.55)}
   #wingrepReveal .pane2.coach .h{color:var(--wr-lit)}
   #wingrepReveal .pane2.coach .stuck{color:var(--wr-lit);font-weight:800}
 
@@ -1599,7 +1634,7 @@ objection handling, and next-step.</div>
     #wingrepReveal .car{display:none}
   }
   </style>
-  <section class="slide" id="wingrepReveal" data-animate="app">
+  <section class="slide wr-theme" id="wingrepReveal" data-animate="app">
     <div class="wrap">
       <div class="eyebrow">This is the part we built</div>
       <h1>Same loop. No files. <span class="hl">No pasting.</span></h1>
@@ -1671,8 +1706,10 @@ objection handling, and next-step.</div>
   #trial .tarc svg{width:100%;height:auto;display:block;overflow:visible}
   #trial .tline{fill:none;stroke-linecap:round;pathLength:1;stroke-dasharray:1;stroke-dashoffset:1}
   #trial .tline-old{stroke:var(--ink-soft);stroke-width:2.5;opacity:.42}
-  #trial .tline-new{stroke:var(--green-bright);stroke-width:4}
-  #trial .tdot{fill:var(--green-bright);stroke:var(--paper);stroke-width:2.5;opacity:0}
+  /* the climbing line + dots are the hero graphic: deep green clears the 3:1
+     non-text contrast bar on the ivory paper (vivid --green-bright does not) */
+  #trial .tline-new{stroke:var(--green);stroke-width:4}
+  #trial .tdot{fill:var(--green);stroke:var(--paper);stroke-width:2.5;opacity:0}
   #trial .tface,#trial .tring,#trial .tsaid{opacity:0}
   /* both memes belong to the greyed-out "every other tool" line. the honeymoon art is
      duotone WingRep green, which would misread now that the green mark is on screen, so
@@ -1683,7 +1720,7 @@ objection handling, and next-step.</div>
   #trial .tsaid{font-family:var(--hand);font-size:18px;fill:var(--ink-soft)}
   #trial .tlab{opacity:0;font-family:var(--mono);font-size:12.5px;fill:var(--ink-soft);letter-spacing:.02em}
   /* WingRep now names the coral line at its origin, matched to "every other tool": mono, not display */
-  #trial .tlab-new{font-family:var(--mono);font-weight:700;font-size:12.5px;fill:var(--green-bright);letter-spacing:.02em}
+  #trial .tlab-new{font-family:var(--mono);font-weight:700;font-size:12.5px;fill:var(--green);letter-spacing:.02em}
   /* the summit payoff quote: the hero voice, deep clay, bigger than the neutral meme quotes */
   #trial .tsaid-win{fill:var(--green);font-size:21px}
   /* the crossing ripple: one bloom, no standing decoration */
@@ -1732,7 +1769,7 @@ objection handling, and next-step.</div>
     #trial.active .tline,#trial.active .tdot,#trial.active .tface,#trial.active .tring,#trial.active .tsaid,#trial.active .tlab{animation:none}
   }
   </style>
-  <section class="slide" id="trial">
+  <section class="slide wr-theme" id="trial">
     <div class="wrap">
       <div class="eyebrow">How to start</div>
       <h1>Free for three weeks,<br>on your <span class="hl">actual calls.</span></h1>
@@ -1891,7 +1928,7 @@ objection handling, and next-step.</div>
     .sFaq.active .nloop .lp,.sFaq.active .nloop .lph{animation:none}
   }
   </style>
-  <section class="slide sFaq">
+  <section class="slide sFaq wr-theme">
     <div class="wrap">
       <div class="eyebrow">The question you're about to ask</div>
       <h1><span class="ln">They see everything.</span><br><span class="ln"><span class="hl">They change nothing.</span></span></h1>
@@ -1931,7 +1968,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 17 walk away dark + animated checks -->
-  <section class="slide">
+  <section class="slide wr-theme">
     <div class="wrap">
       <div class="eyebrow">Last call</div>
       <h1>What you walk away with.</h1>
@@ -1945,7 +1982,7 @@ objection handling, and next-step.</div>
   </section>
 
   <!-- 18 GAME -->
-  <section class="slide">
+  <section class="slide wr-theme">
     <div class="wrap">
       <div class="eyebrow">Feel why the manual loop doesn't scale</div>
       <h1>Clear the admin. <span class="hl">Manually.</span></h1>
@@ -1987,10 +2024,10 @@ objection handling, and next-step.</div>
   .s19-links{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
   .s19-cx{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--ink);padding:.3rem .7rem .3rem .3rem;border-radius:14px;transition:transform .16s,background .16s}
   .s19-cx:hover,.s19-cx:focus-visible{background:var(--green-wash);transform:translateX(4px)}
-  .s19-ci{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);border:1px solid #e9d4c8;transition:background .16s,color .16s}
+  .s19-ci{flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);border:1px solid #cfe6d8;transition:background .16s,color .16s}
   .s19-cx:hover .s19-ci,.s19-cx:focus-visible .s19-ci{background:var(--green);color:#fff}
   .s19-ci svg{width:21px;height:21px;display:block}
-  .s19-ct{font-family:var(--mono);font-weight:600;font-size:clamp(17px,1.95vw,25px);line-height:1.1;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:rgba(177,74,44,.35);transition:text-decoration-color .16s}
+  .s19-ct{font-family:var(--mono);font-weight:600;font-size:clamp(17px,1.95vw,25px);line-height:1.1;letter-spacing:-.01em;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:rgba(0,148,67,.4);transition:text-decoration-color .16s}
   .s19-cx:hover .s19-ct,.s19-cx:focus-visible .s19-ct{text-decoration-color:var(--green)}
   /* the details arrive a beat after the headline, so the eye lands on the thank
      you first and the contact is what it settles on. translate (not transform)
@@ -2002,7 +2039,7 @@ objection handling, and next-step.</div>
   @media (prefers-reduced-motion:reduce){.s19.active .s19-hand,.s19.active .s19-cx{animation:none}}
   @media (max-width:760px){.s19-contact{margin-top:1.2rem}}
   </style>
-  <section class="slide s19" data-animate="confetti">
+  <section class="slide s19 wr-theme" data-animate="confetti">
     <canvas id="confetti" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <div class="wrap" style="z-index:1">
       <div class="s19-grid">
@@ -2529,7 +2566,7 @@ objection handling, and next-step.</div>
   function startConfetti(){
     var cv=document.getElementById('confetti'); if(!cv)return; var ctx=cv.getContext('2d');
     var W=cv.width=cv.offsetWidth, H=cv.height=cv.offsetHeight;
-    var cols=['#6e311a','#a44927','#F2A33C','#C84026','#de9a81'];
+    var cols=['#12A150','#009443','#05713F','#6E5CF2','#F2A33C'];
     var P=[]; for(var n=0;n<120;n++)P.push({x:Math.random()*W,y:-20-Math.random()*H,s:6+Math.random()*7,vy:2+Math.random()*3,vx:-1+Math.random()*2,rot:Math.random()*6,vr:-.2+Math.random()*.4,c:cols[(Math.random()*cols.length)|0]});
     var start=performance.now();
     function loop(t){ctx.clearRect(0,0,W,H);
