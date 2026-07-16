@@ -1370,8 +1370,8 @@
       </ol>
       <div class="glow" aria-label="Drag to upgrade a lazy prompt into a structured one">
         <div class="glow-stage">
-          <div class="glow-col"><span class="glow-tag">your prompt</span><div class="glow-prompt" id="glowPrompt">summarize this call</div></div>
-          <div class="glow-col"><span class="glow-tag">claude's output</span><div class="glow-out" id="glowOut">A tidy recap: the environment, the pain, the pricing question, the next steps. You read it, you nod, nothing changes.</div></div>
+          <div class="glow-col"><span class="glow-tag">your prompt</span><div class="glow-prompt" id="glowPrompt">Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.</div></div>
+          <div class="glow-col"><span class="glow-tag">claude's output</span><div class="glow-out" id="glowOut">Hi Priya, great connecting today! Thrilled you loved the demo. Excited about the next steps we discussed. Let me know if you have any questions!</div></div>
         </div>
         <div class="glow-ctrl"><span class="glow-lab" id="glowLab">lazy</span><input type="range" id="glowRange" min="0" max="100" value="0"><span class="glow-lab">top 1%</span></div>
       </div>
@@ -2998,14 +2998,14 @@ objection handling, and next-step.</div>
     var glow=r.closest('.glow'),pr=document.getElementById('glowPrompt'),out=document.getElementById('glowOut'),lab=document.getElementById('glowLab');
     var STAGES=[
       {lab:'lazy',cls:'',
-       p:'summarize this call',
-       o:'A tidy recap: the environment, the pain, the pricing question, the next steps. You read it, you nod, nothing changes.'},
+       p:'Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.',
+       o:'Hi Priya, great connecting today! Thrilled you loved the demo. Excited about the next steps we discussed. Let me know if you have any questions!'},
       {lab:'better',cls:'lvl2',
-       p:'summarize this call, list the objection and the next step',
-       o:'Summary: pricing + security came up. Objection: needs SOC 2. Next step: send security docs.'},
+       p:"Here's the transcript. Write my follow-up to Priya.",
+       o:'Hi Priya, thanks for the deep dive on your AWS setup. Recapping: trial with Dana on two accounts, times to follow. Will send the recap and paperwork today.'},
       {lab:'top 1%',cls:'lvl3',
-       p:"Here's my coaching log and today's transcript. Add a dated entry, check if last call's focus (get a path to the CISO) showed up, quote the moment, then give one focus for next call.",
-       o:'Jul 10 · Cobalt. Focus "path to the CISO": SHOWED UP. Quoted "any appetite to get thirty minutes with him?" at 1:11. Next focus: pin a date on the one-pager. Log updated.'}
+       p:"You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap.",
+       o:'E: MISSING. "Getting Marcus\'s attention is its own project" (19:31). Biggest gap: no path to the CISO. Follow-up drafted: it gives Priya a one-pager she can forward to Marcus.'}
     ];
     function paint(){
       var v=+r.value, s= v<34?0 : v<67?1 : 2;
