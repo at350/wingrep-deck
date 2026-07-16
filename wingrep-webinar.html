@@ -1396,57 +1396,46 @@
           <button data-tab="t6">6 · The catch</button>
         </div>
         <div class="screen">
-          <div class="pane on" id="t1"><h4>Step 1, keep a file per rep</h4>
-            <p>The non-obvious move: don't paste a call once. Keep <b>one running markdown file per rep</b> so Claude has memory you control.</p>
-            <div class="term">C:\reps\> dir
-<span class="g">rep-jordan.md</span>   rep-priya.md   rep-marcus.md
-C:\reps\> claude open rep-jordan.md  +  today's call ▌</div></div>
+          <div class="pane on" id="t1"><h4>Step 1, one running file per deal</h4>
+            <p>The non-obvious move: don't paste a call once. Keep <b>a running markdown file per deal and per rep</b> so Claude has memory you control.</p>
+            <div class="term">C:\deals\> dir
+<span class="g">cobalt-deal-scorecard.md</span>   jordan-coaching-log.md
+C:\deals\> claude
+Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.</div>
+            <button class="copy" data-copy="capture">Copy prompt</button></div>
           <div class="pane" id="t2"><h4>Step 2, the prompt that does the real work</h4>
-            <p>Paste the rep's log <b>plus</b> the new call. Ask Claude to check whether last call's coaching showed up.</p>
-            <div class="term">You keep a coaching log for one of my reps. I'll paste
-the log, then a new call. Update it:
-<span class="g">1.</span> Add a dated entry, 2 lines.
-<span class="g">2.</span> Take the LAST "next focus." Did it show up in
-   THIS call? Quote the moment, or say it didn't.
-<span class="g">3.</span> Give ONE specific focus for next call.
-<span class="g">4.</span> Update a "patterns" list up top.</div>
+            <p>Paste the rep's log <b>plus</b> the new call. Claude checks whether last call's coaching stuck.</p>
+            <div class="term">Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.</div>
             <button class="copy" data-copy="ledger">Copy prompt</button>
-            <div class="ledger"><span class="hd"># rep-jordan.md · patterns: strong rapport, weak on budget</span>
+            <div class="ledger"><span class="hd"># jordan-coaching-log.md · patterns: strong rapport, slow to the economic buyer</span>
 
-<b>Apr 18, Northwind</b>  <span class="slip">last focus "ask budget early", slipped ✕</span></div></div>
-          <div class="pane" id="t3"><h4>Step 3, render it into a scorecard</h4>
-            <p>Hand the markdown back and ask for a one-file HTML scorecard. Coaching becomes glanceable.</p>
-            <div class="term">Take this log and build a single self-contained HTML
-scorecard: rep + current focus, last 5 calls showing
-focus <span class="g">stuck (green)</span> or <span class="g">slipped (red)</span>, top recurring gap.</div>
+<b>Jul 10, Cobalt</b>  <span class="stuck">last focus "path to Marcus", stuck ✓</span></div></div>
+          <div class="pane" id="t3"><h4>Step 3, the MEDDIC deal scorecard</h4>
+            <p>Hand the deal file back with the new transcript. It updates <b>letter by letter, on quoted evidence</b>.</p>
+            <div class="term">You're my deal-desk analyst. Update this deal's MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.</div>
             <button class="copy" data-copy="score">Copy prompt</button>
             <div class="sc">
-              <div class="sc-head"><b>Jordan</b><span>· focus: <em>ask budget early</em></span></div>
+              <div class="sc-head"><b>Cobalt Freight</b><span>· target: <em>end of Q3</em></span></div>
               <div class="sc-cols">
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 2</span></div>
-                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">Apr 6</span></div>
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 11</span></div>
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">Apr 15</span></div>
-                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">Apr 18</span></div>
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">M</span></div>
+                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">E</span></div>
+                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">D</span></div>
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">D</span></div>
+                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">I</span></div>
+                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">C</span></div>
               </div>
               <div class="sc-foot">
-                <div class="sc-key"><span><i class="stuck"></i>stuck</span><span><i class="slip"></i>slipped</span></div>
-                <div class="sc-gap">recurring gap: <b>budget comes up too late</b></div>
+                <div class="sc-key"><span><i class="stuck"></i>proven</span><span><i class="slip"></i>missing</span></div>
+                <div class="sc-gap">biggest gap: <b>no path to the economic buyer</b></div>
               </div>
             </div></div>
-          <div class="pane" id="t4"><h4>Bonus, a 60-second pre-call game plan</h4>
+          <div class="pane" id="t4"><h4>Step 4, a 60-second pre-call game plan</h4>
             <p>Before the call, not after. Most reps wing it; this is the edge.</p>
-            <div class="term">Research [company] + [contact]. Give me a one-page
-game plan: their likely top priority, 3 discovery
-questions that open budget, the objection I'll hit,
-and the ONE trap to avoid on this call.</div>
+            <div class="term">Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.</div>
             <button class="copy" data-copy="plan">Copy prompt</button></div>
-          <div class="pane" id="t5"><h4>Bonus, practice on Claude, not the customer</h4>
+          <div class="pane" id="t5"><h4>Step 5, practice on Claude, not the customer</h4>
             <p>Reps get reps. Claude plays the skeptic so the real call isn't the first try.</p>
-            <div class="term">Be a skeptical [VP of Sales] who already uses a
-competitor. I'll pitch. Push back the way they
-really would. After 5 exchanges, score my discovery,
-objection handling, and next-step.</div>
+            <div class="term">Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.</div>
             <button class="copy" data-copy="drill">Copy prompt</button></div>
           <div class="pane" id="t6"><h4>…and here's where it falls apart</h4>
             <ul class="gap" style="margin-top:.3rem">
@@ -1641,7 +1630,7 @@ objection handling, and next-step.</div>
           <div class="lv" id="wrLive">
             <div class="lvtop">
               <span class="lvbadge" id="wrBadge">LIVE</span>
-              <span class="lvwho">Dana · Northwind</span>
+              <span class="lvwho">Dana · Cobalt Freight</span>
               <span class="lvclock" id="wrClock">29:41</span>
             </div>
             <div class="wave" id="wrWave" aria-hidden="true"></div>
@@ -1659,16 +1648,16 @@ objection handling, and next-step.</div>
             </div>
             <div class="nudge" id="wrNudge">
               <div class="nh"><img data-asset="ui_barwm" alt="">nudge<span class="nok" id="wrNok">she asked ✓</span></div>
-              <p><b>Ask who signs off on the budget.</b> Now, while Dana is still on it.</p>
+              <p><b>That's Marcus. Ask for thirty minutes with him.</b> Now, while Dana is still on it.</p>
               <div class="nf">your coached focus from last call</div>
             </div>
           </div>
           <div class="divide"><span id="wrPivot">call ends</span></div>
           <div class="panes">
-            <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Dana @ Northwind, 32 min. The rep took the call. Did nothing else.</p></div>
+            <div class="pane2" data-step="1"><div class="h">Call ended · 11:42</div><p>Dana @ Cobalt Freight, 32 min. The rep took the call. Did nothing else.</p></div>
             <div class="pane2" data-step="2"><div class="h">Follow-up <span class="ok">· drafted &amp; queued ✓</span></div><p>Thanks Dana, sending the 2-week rollout plan, looping in security before the 24th…</p></div>
-            <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Security review · Apr 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
-            <div class="pane2 coach" data-step="4"><div class="h">Coaching <span class="ok">· checked vs last call ✓</span></div><p>Last call you coached: ask for the budget owner earlier. This call, <span class="stuck">she did.</span> The log updated itself.</p></div>
+            <div class="pane2" data-step="3"><div class="h">CRM <span class="ok">· written ✓</span></div><div class="row"><span>Stage</span><b>Evaluation</b></div><div class="row"><span>Next step</span><b>Marcus meeting · Jul 24</b></div><div class="row"><span>Summary</span><b>Logged</b></div></div>
+            <div class="pane2 coach" data-step="4"><div class="h">Coaching <span class="ok">· checked vs last call ✓</span></div><p>Last call you coached: get thirty minutes with Marcus. This call, <span class="stuck">she asked.</span> The log updated itself.</p></div>
           </div>
         </div>
       </div>
@@ -2316,11 +2305,14 @@ objection handling, and next-step.</div>
     document.querySelectorAll('.os .pane').forEach(function(p){p.classList.remove('on');});
     b.classList.add('on'); document.getElementById(b.dataset.tab).classList.add('on');
   };});
+  /* One canonical set: these strings are byte-identical to the runbook pastes,
+     prompts.md, and the handout. Edit them there and here together, always. */
   var PROMPTS={
-    ledger:"You keep a coaching log for one of my reps. I'll paste the log, then a new call. Update it:\n1. Add a dated entry, 2 lines.\n2. Take the LAST \"next focus.\" Did it show up in THIS call? Quote the moment, or say it didn't.\n3. Give ONE specific focus for next call.\n4. Update a \"patterns\" list up top.\nReturn the full updated log in markdown.\n\n=== LOG ===\n[ paste rep file ]\n=== NEW CALL ===\n[ paste transcript ]",
-    score:"Take this coaching log and build a single self-contained HTML scorecard I can open in a browser: rep name + current focus up top, the last 5 calls showing whether the prior focus \"stuck\" (green) or \"slipped\" (red), and the top recurring gap. Inline CSS only.\n\n[ paste the markdown log ]",
-    plan:"Research [company] and [contact name/title]. Give me a one-page pre-call game plan: their likely #1 priority right now, 3 discovery questions that open up budget, the objection I'm most likely to hit, and the single trap to avoid on this call.",
-    drill:"Be a skeptical [VP of Sales] who already uses [competitor]. I'm going to pitch you. Push back the way they really would, hard but fair. After 5 exchanges, stop and score my discovery, objection handling, and whether I earned a next step."
+    capture:"Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.",
+    ledger:"Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.",
+    score:"You're my deal-desk analyst. Update this deal's MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.",
+    plan:"Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.",
+    drill:"Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting."
   };
   document.querySelectorAll('.os .copy').forEach(function(b){b.onclick=function(){
     var t=PROMPTS[b.dataset.copy]; if(!t)return;
