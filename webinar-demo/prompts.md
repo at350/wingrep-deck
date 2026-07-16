@@ -5,21 +5,21 @@ Every prompt here uses the same four moves: give it a role, show it a real trans
 ## Part 1 · The five prompts to steal (the slide-8 live loop, in order)
 
 ### 1. Capture
-> Here's the transcript of today's call with [prospect]. Append an entry to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+> Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 
 ### 2. Coaching ledger
 > Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 
 ### 3. Deal scorecard
-> You're my deal-desk analyst. Update this deal's MEDDIC scorecard from the new transcript. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment that proves it, or mark it MISSING. Then give me the two questions I should have asked.
+> You're my deal-desk analyst. Update this deal's MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
 
 Swap MEDDIC for SPICED, BANT, or Sandler; the structure holds.
 
 ### 4. Game plan
-> Here's the deal file and my last two transcripts with [prospect]. Give me a 60-second brief for the next call: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
+> Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 
 ### 5. Drill
-> Play [buyer name], the [role] from these transcripts, and keep their personality. I want to practice handling their pricing pushback. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching.
+> Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 
 ## Part 2 · The deal-desk extras
 
