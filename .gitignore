@@ -7,3 +7,6 @@
 !/wingrep-assets.js
 !/README.md
 !/.gitignore
+# Fictional webinar demo kit (transcripts, prompt library); contains no real customer or company data.
+!/webinar-demo/
+!/webinar-demo/**
