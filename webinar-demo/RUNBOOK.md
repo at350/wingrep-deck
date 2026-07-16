@@ -29,11 +29,11 @@ You now perform demo 1 once, for real, so a finished version exists. No narratio
 1. On Tab 1, start a **plain new chat**: click **New chat** from the claude.ai home/sidebar, NOT from inside the `Sales Coach` project. (Check: the chat header should NOT show the project name.)
 2. Send this as message 1:
 ```
-Write my follow-up email to Priya. Call went well, she liked the demo, pricing came up, there's a CISO involved somewhere.
+Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.
 ```
 3. Go to Tab 3, select all (⌘A), copy (⌘C). Back on Tab 1, paste into the message box (⌘V, it collapses into a paste chip), then paste this after it and send:
 ```
-You're my deal-desk analyst. Here's the real transcript. Score this call against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then draft the follow-up email that closes the biggest gap.
+You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap.
 ```
 4. Read the output. **Pick your favorite invented detail in message 1's email now** (a recap that never happened, enthusiasm never voiced, a made-up next step) so you know what to point at live.
 5. Rename the conversation: hover it in the sidebar → **⋯ → Rename** → `BACKUP · demo 1`.
@@ -92,7 +92,7 @@ Read the ✕ and ✓ boxes on the slide aloud. Then say: **"let me prove it on a
 
 **Step 1 · Garbage in.** Click **New chat** (plain, NOT in the project). Type this by hand, casually, like a rep at 6pm:
 ```
-Write my follow-up email to Priya. Call went well, she liked the demo, pricing came up, there's a CISO involved somewhere.
+Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.
 ```
 Send. While it streams, say: *"this is what most reps actually give AI: no transcript, just vibes. And watch, it will not say 'I don't know.' It will be confident."*
 
@@ -100,7 +100,7 @@ Send. While it streams, say: *"this is what most reps actually give AI: no trans
 
 **Step 3 · The real call in.** Go to Tab 3 (call-1 raw), ⌘A, ⌘C. Back on the Claude tab: ⌘V into the message box (it becomes a paste chip). Then copy this from Tab 2 and paste it after the chip, and send:
 ```
-You're my deal-desk analyst. Here's the real transcript. Score this call against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then draft the follow-up email that closes the biggest gap.
+You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap.
 ```
 While it streams: *"same AI, same deliverable. The only thing that changed is what went in: the real call, the rubric your team already runs on, and one rule, quote the moment or mark it MISSING. If it has to quote the transcript, it can't make things up."*
 
