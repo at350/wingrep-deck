@@ -1486,7 +1486,7 @@ objection handling, and next-step.</div>
     <div class="wrap">
       <div class="eyebrow">Where Claude falls short</div>
       <h1>Claude does the thinking.<br>You're still the <span class="hl">plumbing.</span></h1>
-      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: it updates the coaching log correctly, then answers three follow-ups with I have no hands, I have no clock, I have no ears. The cursor sits waiting."></div>
+      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: the coaching-ledger prompt from the live demo updates the log correctly, then three follow-ups get I have no hands, I have no clock, I have no ears. The cursor sits waiting."></div>
       <p class="s10-cap">The thinking was never the bottleneck. <b>Everything around it is.</b></p>
     </div>
   </section>
@@ -2337,7 +2337,7 @@ objection handling, and next-step.</div>
     var el=document.getElementById('typer'); if(!el)return;
     // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
     var lines=[
-      {t:'> here is the rep log. here is today\'s call. update it.'},
+      {t:'> here\'s my coaching log and today\'s call. add a dated entry. did last call\'s focus stick? quote the moment.'},
       {t:'✓ done. the Marcus focus stuck. she asked for a one-pager at 1:32.', g:true},
       {t:'> now put it in the CRM.'},
       {t:'✗ I have no hands. paste it in yourself.', n:true},
