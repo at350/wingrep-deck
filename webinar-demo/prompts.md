@@ -37,4 +37,4 @@ Swap MEDDIC for SPICED, BANT, or Sandler; the structure holds.
 
 ---
 
-**Anti-pattern, for contrast:** "Summarize this call." Vague in, vague out.
+**Anti-pattern, for contrast:** "Write my follow-up to Priya. Call went well, she liked the demo, pricing came up." No transcript, just vibes: confident, generic, and it invents the details.
