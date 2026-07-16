@@ -42,19 +42,19 @@ You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDI
 1. Open the `Sales Coach` project and click **New chat** INSIDE it (check: header shows the project name).
 2. Send these five messages, in order, waiting for each to finish:
 ```
-Today's call with Cobalt Freight is call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
 ```
 Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 ```
 ```
-You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since call 1.
+You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
 ```
 ```
-Using the deal file and both transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
+Using the deal file and the transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 ```
 ```
-Play Marcus. He's a CISO buried in a board audit who asks about price in the first five minutes. I'm going to practice my opening for that meeting. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
+Play Marcus, the CISO from these transcripts. I want to practice his pricing pushback in the first five minutes. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 ```
 3. For the last one, reply once as yourself (practice your opener: tie the trial's triage-time savings to his board audit) so the backup shows one full drill exchange.
 4. Rename the conversation `BACKUP · demo 2`.
@@ -111,43 +111,47 @@ While it streams: *"same AI, same deliverable. The only thing that changed is wh
 
 **Switch back:** *"that's one prompt. There are five I want you to steal"* → ⌘-Tab to the deck → advance to slide 8.
 
-## Slide 8, "Five prompts to steal" → DEMO 2 (~6 min)
+## Slide 8, "Five prompts to steal" (~30 sec, deck only)
 
-Talk the five list items for ~30 seconds. Drag the glow slider to top 1% once. Then: **"reading prompts on a slide is one thing. Let me run all five, right now, on this deal"** → ⌘-Tab to the browser.
+Talk the five list items. Drag the glow slider to top 1% once (it levels the demo-1 vibes prompt up into the deal-desk prompt the audience just watched work). Then advance to slide 9.
 
-Open the `Sales Coach` project → **New chat** inside it (header shows the project name). Say this first, it sews the slide, the handout, and the screen together: *"These are the exact five prompts from your handout, in the same order as the slide. The only thing I've done is fill in the blanks with this deal's names."*
+## Slide 9, "Build it live, click each tab" → DEMO 2 (~6 min)
 
-All five messages go in this ONE conversation, in order. Copy each from here, paste, send, narrate one line while it streams.
+This slide is a SalesOS '95 window with six tabs, one per step, and **each tab displays the exact prompt template you're about to paste** (the handout's wording, with [brackets] where the deal names go). The rhythm for each step is: click the tab on the slide → say the line → ⌘-Tab to Claude → paste the filled version → let the output land → ⌘-Tab back → next tab.
 
-**1 · Capture**, say: *"step one, the call becomes a record."*
+Before step 1, say (it sews slide, handout, and screen together): *"Each tab is a prompt from your handout, word for word. All I do in Claude is fill in the brackets with this deal's names."*
+
+First time you switch to Claude: open the `Sales Coach` project → **New chat** inside it (header shows the project name). All five messages go in this ONE conversation, in order.
+
+**Tab 1 · Capture**, say: *"step one, the call becomes a record."* Paste:
 ```
-Today's call with Cobalt Freight is call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
 
-**2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt typed on slide 9 two slides from now.)
+**Tab 2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt on the tab, no brackets to fill, and the same one typed on slide 10 next.) Paste:
 ```
 Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 ```
 THE MEMORY PAYOFF, give it a beat. When it quotes the "thirty minutes with Marcus / one-pager" moment, point at it: *"two weeks ago the log said get to the CISO. Today it checked. That's a coach, not a note-taker."*
 
-**3 · Deal scorecard**, say: *"step three, the MEDDIC scorecard updates itself."*
+**Tab 3 · Scorecard**, say: *"step three, the MEDDIC scorecard updates itself."* Paste:
 ```
-You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since call 1.
+You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
 ```
-Point: *"Economic buyer just moved from MISSING toward PARTIAL, and it shows you the sentence that moved it."*
+Point: *"Economic buyer just moved from MISSING toward PARTIAL, and it shows you the sentence that moved it."* (The tab's mock scorecard shows the same picture: E and C red, the gap named.)
 
-**4 · Game plan**, say: *"step four, next call's prep in the time it takes to walk to your desk."*
+**Tab 4 · Game plan**, say: *"step four, next call's prep in the time it takes to walk to your desk."* Paste:
 ```
-Using the deal file and both transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
+Using the deal file and the transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 ```
 
-**5 · Drill**, say: *"and step five, practice on the AI, not on the customer."*
+**Tab 5 · Drill**, say: *"and step five, practice on Claude, not the customer."* Paste:
 ```
-Play Marcus. He's a CISO buried in a board audit who asks about price in the first five minutes. I'm going to practice my opening for that meeting. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
+Play Marcus, the CISO from these transcripts. I want to practice his pricing pushback in the first five minutes. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 ```
 Claude opens as Marcus. **Answer out loud, live** (your rehearsed opener: the trial's triage-time savings, framed for his board audit). Cap it at TWO exchanges, then: *"I could do this all day, and that's the point, my reps can."*
 
-**Switch back:** *"Now. Everything I just did worked. It also took me five pastes, four files, and I'll have to do it again after every single call. The AI did the thinking..."* → ⌘-Tab to the deck → advance to slide 9 → *"...and I'm still the plumbing."* From slide 9 on it's pure deck again, through the WingRep reveal to the end.
+**The catch:** ⌘-Tab back to the deck → click **Tab 6 · The catch** and read its four bullets, that's the honest cost of the loop you just ran. (Clicking tab 6 a SECOND time triggers a blue-screen gag, "COACHING.EXE has stopped responding", use it if the room is warm.) Then: *"The AI did the thinking..."* → advance to slide 10 → *"...and I'm still the plumbing."* From slide 10 on it's pure deck again, through the WingRep reveal to the end.
 
 ---
 
