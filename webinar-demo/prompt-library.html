@@ -1,0 +1,163 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F0E6; --card:#FFFDF8; --ink:#211A12; --soft:#6B6053;
+    --clay:#B14A2C; --coral:#D97757; --deep:#3A1C10; --line:#E2D5C2; --wash:#F5E6DD;
+    --display:"Bricolage Grotesque",sans-serif; --body:"Space Grotesk",sans-serif;
+    --mono:"JetBrains Mono",monospace; --hand:"Caveat",cursive;
+  }
+  @page{size:letter;margin:0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--paper)}
+  .page{width:8.5in;height:11in;background:var(--paper);position:relative;overflow:hidden;
+    font-family:var(--body);color:var(--ink);padding:.62in .66in .5in;page-break-after:always;display:flex;flex-direction:column}
+  .page:last-child{page-break-after:auto}
+
+  /* masthead */
+  .rule{height:5px;background:linear-gradient(90deg,var(--clay),var(--coral));position:absolute;top:0;left:0;right:0}
+  .eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--clay);font-weight:600;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:2.5px;background:var(--clay)}
+  h1{font-family:var(--display);font-weight:800;font-size:44px;line-height:1.0;letter-spacing:-.015em;margin:10px 0 10px}
+  h1 .hl{color:var(--clay)}
+  .sub{font-size:11.5px;line-height:1.55;color:var(--soft);max-width:62ch}
+  .sub b{color:var(--ink)}
+
+  /* four moves strip */
+  .moves{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 4px}
+  .mv{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:8px 11px}
+  .mv b{font-family:var(--display);font-weight:700;font-size:11px;display:block;color:var(--deep)}
+  .mv span{font-size:9px;color:var(--soft);line-height:1.35;display:block;margin-top:2px}
+  .mv i{font-family:var(--mono);font-style:normal;font-size:8px;color:var(--coral);letter-spacing:.14em}
+
+  /* section head */
+  .sec{display:flex;align-items:baseline;gap:12px;margin:18px 0 10px}
+  .sec h2{font-family:var(--display);font-weight:800;font-size:17px}
+  .sec small{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--coral);font-weight:600}
+  .sec::after{content:"";flex:1;height:1.5px;background:var(--line);align-self:center}
+
+  /* prompt cards */
+  .cardlist{display:flex;flex-direction:column;gap:9px;flex:1}
+  .pc{display:grid;grid-template-columns:52px 1fr;background:var(--card);border:1.5px solid var(--line);
+      border-radius:14px;overflow:hidden;box-shadow:0 1px 0 rgba(33,26,18,.04)}
+  .pc .num{background:var(--wash);display:flex;align-items:center;justify-content:center;
+      font-family:var(--display);font-weight:800;font-size:21px;color:var(--clay);border-right:1.5px solid var(--line)}
+  .pc .bodyc{padding:9px 14px 10px}
+  .pc h3{font-family:var(--display);font-weight:800;font-size:13.5px;display:inline}
+  .pc .when{font-family:var(--hand);font-size:14.5px;color:var(--coral);margin-left:9px;font-weight:700}
+  .pc p.pr{font-family:var(--mono);font-size:8.9px;line-height:1.58;color:var(--deep);margin-top:5px;
+      background:#F9F3E9;border-left:2.5px solid var(--coral);padding:6px 9px;border-radius:0 7px 7px 0}
+  .pc p.note{font-size:8.6px;color:var(--soft);margin-top:4px;font-style:italic}
+
+  /* page 2 grid */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid2 .bodyc p.pr{font-size:9.4px}
+  .grid2 .pc{grid-template-columns:1fr}
+  .grid2 .bodyc{padding:11px 14px 12px}
+  .grid2 h3{color:var(--clay)}
+
+  /* anti-pattern */
+  .anti{margin-top:26px;margin-bottom:6px;border:1.5px dashed var(--coral);background:var(--wash);border-radius:14px;padding:12px 16px;display:flex;gap:12px;align-items:center}
+  .anti .x{font-family:var(--display);font-weight:800;font-size:20px;color:var(--clay)}
+  .anti b{font-family:var(--mono);font-size:10px;font-weight:600}
+  .anti span{font-size:9.5px;color:var(--soft)}
+
+  .scribble{font-family:var(--hand);font-size:22px;color:var(--clay);font-weight:700;transform:rotate(-1.6deg);margin-top:18px;margin-bottom:14px}
+
+  /* run-it-tonight */
+  .tonight{margin-top:22px;background:var(--deep);border-radius:16px;padding:18px 22px 20px;color:#F3E9DD}
+  .tonight h2{font-family:var(--display);font-weight:800;font-size:16px;color:#FFD9C4;margin-bottom:12px}
+  .tonight .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .tonight .st b{font-family:var(--display);font-weight:700;font-size:11px;display:block;color:#FFF;margin-bottom:3px}
+  .tonight .st span{font-size:9px;line-height:1.5;color:#D9C6B4;display:block}
+
+  footer{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;border-top:1.5px solid var(--line)}
+  footer .l{font-family:var(--mono);font-size:8px;letter-spacing:.16em;color:var(--soft)}
+  footer .r{font-family:var(--display);font-weight:800;font-size:9.5px;color:var(--clay)}
+</style></head><body>
+
+<!-- PAGE 1 -->
+<div class="page"><div class="rule"></div>
+  <div class="eyebrow">THE PROMPT LIBRARY · WORKSHOP HANDOUT</div>
+  <h1>AI as your<br>sales <span class="hl">coach.</span></h1>
+  <p class="sub">Copy-paste prompts for running your own calls through Claude. Every one uses the same four moves, and the phrase <b>"quote the exact moment or mark it MISSING"</b> does the heavy lifting: it forces the answer to come from the transcript instead of being made up.</p>
+
+  <div class="moves">
+    <div class="mv"><b>Give it a role</b><span>"You're my deal-desk analyst."</span></div>
+    <div class="mv"><b>Show, don't tell</b><span>Paste the real transcript, not a description.</span></div>
+    <div class="mv"><b>Give it memory</b><span>One running file per deal, pasted back each time.</span></div>
+    <div class="mv"><b>One clear ask</b><span>Evidence quoted, gaps named, next step drafted.</span></div>
+  </div>
+
+  <div class="sec"><h2>The five prompts to steal</h2><small>RUN THEM IN ORDER, AFTER EVERY CALL</small></div>
+  <div class="cardlist">
+    <div class="pc"><div class="num">1</div><div class="bodyc">
+      <h3>Capture</h3><span class="when">the deal gets a memory</span>
+      <p class="pr">Here's the transcript of today's call with [prospect]. Append an entry to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.</p>
+    </div></div>
+    <div class="pc"><div class="num">2</div><div class="bodyc">
+      <h3>Coaching ledger</h3><span class="when">did last call's focus stick?</span>
+      <p class="pr">Here's my running coaching log and the transcript of today's call. Add a dated entry: what went well, gaps, and one focus for next call. First, check whether last entry's focus actually showed up on this call, and quote the moment where it did or didn't.</p>
+    </div></div>
+    <div class="pc"><div class="num">3</div><div class="bodyc">
+      <h3>Deal scorecard</h3><span class="when">MEDDIC, letter by letter</span>
+      <p class="pr">You're my deal-desk analyst. Update this deal's MEDDIC scorecard from the new transcript. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment that proves it, or mark it MISSING. Then give me the two questions I should have asked.</p>
+      <p class="note">Swap MEDDIC for SPICED, BANT, or Sandler. The structure holds.</p>
+    </div></div>
+    <div class="pc"><div class="num">4</div><div class="bodyc">
+      <h3>Game plan</h3><span class="when">the 60-second pre-call brief</span>
+      <p class="pr">Here's the deal file and my last two transcripts with [prospect]. Give me a 60-second brief for the next call: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.</p>
+    </div></div>
+    <div class="pc"><div class="num">5</div><div class="bodyc">
+      <h3>Drill</h3><span class="when">practice on Claude, not the customer</span>
+      <p class="pr">Play [buyer name], the [role] from these transcripts, and keep their personality. I want to practice handling their pricing pushback. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching.</p>
+    </div></div>
+  </div>
+
+  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">1 / 2</span></footer>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page"><div class="rule"></div>
+  <div class="eyebrow">PART TWO</div>
+  <h1 style="font-size:34px">The deal-desk <span class="hl">extras.</span></h1>
+  <p class="sub">For the moments between calls: pressure-testing your champion, your objection handling, and the number you just typed into the CRM.</p>
+
+  <div class="sec" style="margin-top:20px"><h2>Four more worth stealing</h2><small>WHEN THE DEAL FEELS TOO GOOD</small></div>
+  <div class="grid2">
+    <div class="pc"><div class="bodyc">
+      <h3>Champion test</h3>
+      <p class="pr">From this transcript, is [name] a champion or just a friendly coach? Check three things and cite the evidence for each: do they have access to power, do they have a personal win if this closes, and have they actually spent internal capital selling for us yet? End with one concrete ask that would test them.</p>
+    </div></div>
+    <div class="pc"><div class="bodyc">
+      <h3>Objection autopsy</h3>
+      <p class="pr">List every objection or pushback raised on this call, even the soft ones. Classify each as price, timing, authority, trust, or status quo. For each, quote what I said in response and score it 1 to 5, then write what a top rep would have said instead.</p>
+    </div></div>
+    <div class="pc"><div class="bodyc">
+      <h3>Mutual action plan</h3>
+      <p class="pr">Draft a mutual action plan from what was agreed on this call: every milestone, the owner on each side, and the date. Flag anything that has no owner or no date, because that's where the deal will stall. Format it so I can paste it straight into the follow-up email.</p>
+    </div></div>
+    <div class="pc"><div class="bodyc">
+      <h3>Forecast honesty check</h3>
+      <p class="pr">I have this deal at 70% to close this quarter in my CRM. Using only what's in these transcripts, argue against that number. What has the buyer actually committed to, in their own words? What am I assuming that no one ever said?</p>
+    </div></div>
+  </div>
+
+  <div class="anti"><span class="x">&#10005;</span><div><b>"Summarize this call."</b><br><span>The anti-pattern. Vague in, vague out: a bland blob you still have to rewrite.</span></div></div>
+
+  <div class="scribble">make it quote the transcript and it can't make things up.</div>
+
+  <div class="tonight">
+    <h2>Run it tonight</h2>
+    <div class="steps">
+      <div class="st"><b>Export one call</b><span>Pull a transcript from your recorder (Zoom, Gong, Otter, anything). One real call beats ten hypotheticals.</span></div>
+      <div class="st"><b>Start the deal file</b><span>Run prompt 1 on it. Save Claude's entry as a doc. That doc is now the deal's memory.</span></div>
+      <div class="st"><b>Close the loop</b><span>After your next call with that prospect, paste the file back with prompt 2. The moment it checks your last focus, you'll get it.</span></div>
+    </div>
+  </div>
+
+  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">2 / 2</span></footer>
+</div>
+
+</body></html>

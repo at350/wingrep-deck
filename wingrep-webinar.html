@@ -712,6 +712,9 @@
   /* each row pairs one Drake panel with its box: reject panel (top crop) -> no, approve panel (bottom crop) -> yes.
      the square panel sets the row height; the box stretches to match so both columns are equal-height (no floating) */
   .s14-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.6rem;max-width:980px}
+  /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
+  .s14-why{margin-top:1.15rem;margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
+  @media (max-width:760px){.s14-why{margin-left:0}}
   .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
   .s14-panel{margin:0;width:138px;aspect-ratio:1;overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:var(--paper-2)}
   .s14-panel img{width:100%;height:100%;object-fit:cover;display:block}
@@ -1271,9 +1274,10 @@
         </div>
         <div class="s14-row yes">
           <figure class="s14-panel"><img data-img="slide14_drake.clay" alt="Drake approving the structured prompt"></figure>
-          <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my coaching log for Jordan. Add a dated entry, check if last call's focus (ask budget early) showed up, quote the moment, then give one focus for next time."</b> Role + memory + example + one clear ask.</div></div>
+          <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my deal-desk analyst. Score this call on MEDDIC. For each letter, quote the exact moment that proves it, or mark it MISSING. Then give me the two questions I should have asked."</b> Role + rubric + evidence + one clear ask.</div></div>
         </div>
       </div>
+      <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
     </div>
     <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
@@ -1360,7 +1364,7 @@
       <ol class="prompts5">
         <li><b>Capture</b>, drop the call transcript into the rep's running file.</li>
         <li><b>Coaching ledger</b>, did last call's focus stick?</li>
-        <li><b>Scorecard</b>, render the log into one glanceable page.</li>
+        <li><b>Deal scorecard</b>, MEDDIC letter by letter, evidence quoted.</li>
         <li><b>Game plan</b>, a 60-second pre-call brief.</li>
         <li><b>Drill</b>, practice the pitch on Claude, not the customer.</li>
       </ol>
@@ -3000,8 +3004,8 @@ objection handling, and next-step.</div>
        p:'summarize this call, list the objection and the next step',
        o:'Summary: pricing + security came up. Objection: needs SOC 2. Next step: send security docs.'},
       {lab:'top 1%',cls:'lvl3',
-       p:"You're my coaching log for Jordan. Add a dated entry, check if last call's focus (ask budget early) stuck, quote the moment, then give one focus for next call.",
-       o:'Apr 18 · Northwind. Focus "ask budget early": STUCK. Quoted "what is the budget owner name?" at 4:12. Next focus: name a number first. Ledger updated.'}
+       p:"Here's my coaching log and today's transcript. Add a dated entry, check if last call's focus (get a path to the CISO) showed up, quote the moment, then give one focus for next call.",
+       o:'Jul 10 · Cobalt. Focus "path to the CISO": SHOWED UP. Quoted "any appetite to get thirty minutes with him?" at 1:11. Next focus: pin a date on the one-pager. Log updated.'}
     ];
     function paint(){
       var v=+r.value, s= v<34?0 : v<67?1 : 2;
