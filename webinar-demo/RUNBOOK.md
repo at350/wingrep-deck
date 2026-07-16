@@ -9,13 +9,16 @@ Everything below is literal. Messages to paste into Claude are in code blocks; p
 **A1. Create the Project.**
 1. Go to claude.ai, sidebar → Projects → New project.
 2. Name: `Sales Coach`. Leave instructions empty.
-3. In the project's knowledge panel, upload these 4 files from `webinar-demo/`:
-   - `transcripts/call-1-discovery-cobalt.md`
+3. In the project's knowledge panel, upload these 3 files from `webinar-demo/`:
    - `transcripts/call-2-trial-checkin-cobalt.md`
    - `jordan-coaching-log.md`
    - `cobalt-deal-scorecard.md`
 
-**A2. Record the backups.** Run BOTH demo scripts below (Part C and Part D), exactly as written, in two fresh conversations inside the project. When done, rename them in the sidebar:
+**Two contamination rules (they matter):**
+- **Demo 1 runs OUTSIDE the project**, in a plain new chat, with call 1 pasted in. If the scorecard file is in reach during demo 1, Claude may crib from it (it contains the full MEDDIC answer) and could even cite it as a source on stage, which would look rigged.
+- **Never run the demos anywhere Claude can browse the `webinar-demo/` folder** (Claude Code, desktop with folder access). The README describes the transcript's deliberate gaps; if Claude reads it, you get suspiciously perfect answers.
+
+**A2. Record the backups.** Run BOTH demo scripts below exactly as written and where they'll run live: Part C (demo 1) in a plain chat OUTSIDE the project with call 1 pasted in, Part D (demo 2) in a fresh conversation INSIDE the project. When done, rename them in the sidebar:
 - `BACKUP · demo 1 scorecard`
 - `BACKUP · demo 2 five steps`
 
@@ -31,30 +34,33 @@ These are your parachutes. If live generation stalls or a response comes back we
 
 ## Part B · Day of, 10 minutes before doors
 
-1. Open the `Sales Coach` project. Confirm the 4 files are still in knowledge.
+1. Open the `Sales Coach` project. Confirm the 3 files are still in knowledge.
 2. Confirm the two BACKUP conversations are in the sidebar.
-3. Open one fresh conversation in the project and leave it blank, this is where Demo 1 will run. (Demo 2 gets its own fresh conversation later; starting clean each time keeps the transcript readable on screen.)
+3. In the paste-sheet tab, have the raw text of `call-1-discovery-cobalt.md` one click away (you'll copy-paste it at the start of demo 1). Demo 1 = plain new chat outside the project; demo 2 = new chat inside the project.
 4. Check zoom is still 150%. Check Focus mode. ⌘-Tab once to confirm it flips deck ↔ browser.
 
 ---
 
-## Part C · DEMO 1, on slide 7 "Garbage in, garbage out" (~90 sec)
+## Part C · DEMO 1, on slide 7 "Garbage in, garbage out" (~2 min)
 
 **When to switch:** land on slide 7, read the ✕ and ✓ boxes aloud, then say "let me prove it on a real call" → ⌘-Tab to Claude.
 
-**C1.** In the fresh conversation, TYPE this one by hand (it's the joke, typing it fast is part of it):
+**C1.** Open a plain NEW CHAT (not in the project). From the paste-sheet tab, copy the FULL TEXT of `call-1-discovery-cobalt.md` and paste it into the message box (it collapses into a paste chip). Then TYPE above/after it, by hand, the four words from the slide:
 ```
-Summarize the discovery call in call-1-discovery-cobalt.md.
+Summarize this call.
 ```
-Hit Enter. While it streams, say something like: "this is what most people do with AI. And look, it's... fine. Fine and useless. Nothing here tells me what to DO."
+Hit Enter. While it streams: "this is what most people do with AI."
 
-**C2.** Copy-paste this and hit Enter:
-```
-You're my deal-desk analyst. Score the discovery call in call-1-discovery-cobalt.md against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then give me the two questions I should have asked.
-```
-While it streams: "same call, same AI. The only thing that changed is the prompt: a role, a rubric your team already uses, and one rule, quote the moment or mark it MISSING. That last part is the trick. If it has to quote the transcript, it can't make things up."
+**C2. Do NOT trash the summary. Praise it.** This is the beat: "Notice, this is actually a *good* summary. That's the trap. It reads well enough that you stop here. But try to use it: is Priya a real champion? Did I ask the questions my sales process says I have to ask? Can I compare this call to the last one? A summary, even a great one, is something you read once, nod at, and never open again."
 
-**C3.** When it finishes, point at TWO things: **Economic buyer: MISSING** ("the rep never got a path to the CISO, and the AI caught it") and the **Champion** line ("Priya is friendly, but friendly is not a champion").
+**C3.** Copy-paste this and hit Enter:
+
+```
+You're my deal-desk analyst. Score this call against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then give me the two questions I should have asked.
+```
+While it streams: "same call, same AI, same intelligence. I didn't get a smarter model, I gave it the right job: a role, the rubric your team already runs on, and one rule, quote the moment or mark it MISSING. If it has to quote the transcript, it can't make things up."
+
+**C4.** When it finishes, point at TWO things: **Economic buyer: MISSING** ("the rep never got a path to the CISO, and the AI caught it") and the **Champion** line ("Priya is friendly, but friendly is not a champion").
 
 **Switch back:** "so that's one prompt. There are five I want you to steal" → ⌘-Tab to the deck → advance to slide 8.
 
