@@ -18,9 +18,19 @@ Everything to have staged in Claude before going live. All names and companies a
 6. One full timed dress rehearsal.
 
 ## Live run order (mirrors the deck)
-1. **Bad prompt** (during "Garbage in, garbage out"): paste call 1, type `Summarize this call.` Let the bland blob land.
-2. **Good prompt:** paste prompt #1 (MEDDIC scorecard) on the same transcript. The quoted-evidence scorecard with MISSING letters is the money shot. Point at the E and the C.
-3. **Memory:** new message with the coaching log + call 2, run prompt #4. Claude notices last call's focus (path to Marcus) showed up, and quotes the one-pager moment.
-4. Bridge line: "and everything I just did by hand, the pasting, the files, the re-running, is the plumbing" → back to the deck → WingRep reveal.
 
-Each demo is ~90 seconds because nothing is written live except the bad prompt.
+**Demo 1, on slide 7 "Garbage in, garbage out" (~90 sec):**
+1. Alt-tab to Claude, paste call 1, type `Summarize this call.` Let the bland blob land.
+2. Paste the deal-scorecard prompt on the same transcript. The quoted-evidence MEDDIC scorecard with MISSING letters is the money shot. Point at the E and the C. Back to the deck.
+
+**Demo 2, on slide 8 "Five prompts to steal" (~5-6 min, ALL FIVE live, one conversation):**
+Talk the list on the slide for 30 seconds, then alt-tab and run the loop in order. One Claude conversation, call 2 as "today's call":
+1. **Capture**: paste call 2 + the capture prompt. The deal file gets its entry.
+2. **Coaching ledger**: paste the coaching log + the ledger prompt. Claude checks last call's focus ("get a path to Marcus"), quotes the one-pager moment from call 2, and logs a new focus. This is the memory payoff; give it a beat.
+3. **Deal scorecard**: paste the MEDDIC scorecard + the update prompt. E moves from MISSING toward PARTIAL, on quoted evidence.
+4. **Game plan**: run the game-plan prompt. Claude drafts the 60-second brief for the Marcus meeting.
+5. **Drill**: run the drill prompt ("play Marcus, push back on price"). Answer its first objection out loud, live. Biggest laugh + most memorable beat of the webinar; keep it to 2 exchanges.
+
+Then the bridge line: "and everything I just did by hand, the pasting, the files, the re-running, is the plumbing" → back to the deck → slide 9 → WingRep reveal.
+
+Every prompt is pasted, never typed (except the bad one). Steps 1-4 are each ~45 seconds because the files are pre-staged; the drill is the only improvised part, and the pre-run fallback conversation covers you if it goes sideways.
