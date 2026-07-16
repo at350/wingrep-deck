@@ -45,7 +45,7 @@ You're my deal-desk analyst. Here's the real transcript. Score this call against
 Today's call with Cobalt Freight is call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
 ```
-Now the coaching side. Using jordan-coaching-log.md and today's transcript: add a dated entry with what went well, gaps, and one focus for next call. First, check whether the last entry's focus (get a path to Marcus with an artifact he'd actually read) showed up on this call, and quote the moment where it did or didn't.
+Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 ```
 ```
 You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since call 1.
@@ -124,9 +124,9 @@ All five messages go in this ONE conversation, in order. Copy each from here, pa
 Today's call with Cobalt Freight is call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
 
-**2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."*
+**2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt typed on slide 9 two slides from now.)
 ```
-Now the coaching side. Using jordan-coaching-log.md and today's transcript: add a dated entry with what went well, gaps, and one focus for next call. First, check whether the last entry's focus (get a path to Marcus with an artifact he'd actually read) showed up on this call, and quote the moment where it did or didn't.
+Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 ```
 THE MEMORY PAYOFF, give it a beat. When it quotes the "thirty minutes with Marcus / one-pager" moment, point at it: *"two weeks ago the log said get to the CISO. Today it checked. That's a coach, not a note-taker."*
 

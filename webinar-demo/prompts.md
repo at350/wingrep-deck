@@ -8,7 +8,7 @@ Every prompt here uses the same four moves: give it a role, show it a real trans
 > Here's the transcript of today's call with [prospect]. Append an entry to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 
 ### 2. Coaching ledger
-> Here's my running coaching log and the transcript of today's call. Add a dated entry: what went well, gaps, and one focus for next call. First, check whether last entry's focus actually showed up on this call, and quote the moment where it did or didn't.
+> Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 
 ### 3. Deal scorecard
 > You're my deal-desk analyst. Update this deal's MEDDIC scorecard from the new transcript. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment that proves it, or mark it MISSING. Then give me the two questions I should have asked.
