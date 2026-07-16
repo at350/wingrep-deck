@@ -45,22 +45,23 @@ These are your parachutes. If live generation stalls or a response comes back we
 
 **When to switch:** land on slide 7, read the ✕ and ✓ boxes aloud, then say "let me prove it on a real call" → ⌘-Tab to Claude.
 
-**C1.** Open a plain NEW CHAT (not in the project). From the paste-sheet tab, copy the FULL TEXT of `call-1-discovery-cobalt.md` and paste it into the message box (it collapses into a paste chip). Then TYPE above/after it, by hand, the four words from the slide:
-```
-Summarize this call.
-```
-Hit Enter. While it streams: "this is what most people do with AI."
+The point this demo proves: garbage in, garbage out is about the INPUT. Feed the AI vibes, it writes fiction. Feed it the transcript, it writes the deal. Same deliverable (a follow-up email) both times, so the contrast is undeniable.
 
-**C2. Do NOT trash the summary. Praise it.** This is the beat: "Notice, this is actually a *good* summary. That's the trap. It reads well enough that you stop here. But try to use it: is Priya a real champion? Did I ask the questions my sales process says I have to ask? Can I compare this call to the last one? A summary, even a great one, is something you read once, nod at, and never open again."
-
-**C3.** Copy-paste this and hit Enter:
-
+**C1. Garbage in.** Open a plain NEW CHAT (not in the project). TYPE this by hand, casually, like a rep at 6pm:
 ```
-You're my deal-desk analyst. Score this call against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then give me the two questions I should have asked.
+Write my follow-up email to Priya. Call went well, she liked the demo, pricing came up, there's a CISO involved somewhere.
 ```
-While it streams: "same call, same AI, same intelligence. I didn't get a smarter model, I gave it the right job: a role, the rubric your team already runs on, and one rule, quote the moment or mark it MISSING. If it has to quote the transcript, it can't make things up."
+Hit Enter. While it streams: "this is what most reps actually give AI: no transcript, just vibes. And watch, it will not say 'I don't know.' It will be confident."
 
-**C4.** When it finishes, point at TWO things: **Economic buyer: MISSING** ("the rep never got a path to the CISO, and the AI caught it") and the **Champion** line ("Priya is friendly, but friendly is not a champion").
+**C2. Read the garbage out loud.** Point at the generic lines and, crucially, at anything it INVENTED (it will make up specifics: a recap that never happened, enthusiasm she never voiced, a next step nobody agreed to). Say: "confident, polished, and partly fiction. Garbage in, garbage out. The model isn't broken, it just has nothing real to work with."
+
+**C3. The real call in.** From the paste-sheet tab, copy the FULL TEXT of `call-1-discovery-cobalt.md`, paste it into the message box (it collapses into a paste chip), then paste this with it and hit Enter:
+```
+You're my deal-desk analyst. Here's the real transcript. Score this call against MEDDIC. For each letter (Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion), quote the exact moment from the transcript that proves it, or mark it MISSING. Then draft the follow-up email that closes the biggest gap.
+```
+While it streams: "same AI, same deliverable. The only thing that changed is what went in: the real call, the rubric your team already runs on, and one rule, quote the moment or mark it MISSING. If it has to quote the transcript, it can't make things up."
+
+**C4.** When it finishes, point at THREE things: **Economic buyer: MISSING** ("the rep never got a path to the CISO, and the AI caught it"), the **Champion** line ("Priya is friendly, but friendly is not a champion"), and the follow-up email ("compare this email to the first one. This one closes a real gap, that one was fan fiction").
 
 **Switch back:** "so that's one prompt. There are five I want you to steal" → ⌘-Tab to the deck → advance to slide 8.
 
@@ -71,6 +72,8 @@ While it streams: "same call, same AI, same intelligence. I didn't get a smarter
 **When to switch:** talk the five list items on the slide for ~30 seconds, drag the glow slider once to top 1%, then: "reading prompts on a slide is one thing. Let me actually run all five, right now, on this deal" → ⌘-Tab to Claude → click New chat inside the project.
 
 Run these five messages in ONE conversation, in order. Between each, one sentence of narration while it streams.
+
+**Say this first, it sews the slide, the handout, and the screen together:** "These are the exact five prompts from your handout, in the same order as the slide. The only thing I've done is fill in the blanks with this deal's names." (True: each paste below is the handout template with [prospect]/[buyer name] filled in for Cobalt and Marcus.)
 
 **D1 · Capture** (say: "step one, the call becomes a record")
 ```
@@ -85,13 +88,13 @@ When it quotes the "thirty minutes with Marcus / one-pager" moment, point at it:
 
 **D3 · Deal scorecard** (say: "step three, the MEDDIC scorecard updates itself")
 ```
-Update cobalt-deal-scorecard.md from today's call. For each MEDDIC letter, quote the exact moment that proves it or mark it MISSING, and call out which letters moved since call 1.
+You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since call 1. Then give me the two questions I should have asked.
 ```
 Point: "Economic buyer just moved from MISSING toward PARTIAL, and it can show you the sentence that moved it."
 
 **D4 · Game plan** (say: "step four, next call's prep, in the time it takes to walk to your desk")
 ```
-The next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
+Using the deal file and both transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 ```
 
 **D5 · Drill** (say: "and step five, practice on the AI, not on the customer"):
