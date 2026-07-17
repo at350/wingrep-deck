@@ -166,3 +166,8 @@ Claude opens as Marcus. **Answer out loud, live** (your rehearsed opener: the tr
 | The demo-1 vibes email comes out surprisingly cautious (asks for details instead of inventing them) | Still a win, read it as: "see, even the AI is telling me it has nothing to work with." Then proceed to Step 3 unchanged. |
 | The drill goes sideways or a weird roleplay beat | Break it yourself: "and see, it'll keep going, that's the drill" → jump to the switch-back line. Never negotiate with the roleplay on stage. |
 | You blank on narration | Read Claude's own output headers aloud. The scorecard is its own narration. |
+
+## Live Q&A talk tracks (only if asked; none of this goes on slides)
+- **Security / compliance:** "Short version: your calls never train anyone else's model, and we're ISO 27001 certified. I'll send the full security packet with the follow-up, and we go deep on it in the demo." Do not enumerate SOC 2 status on stage.
+- **"Do you replace Gong?":** "No, we plug into it. Gong watches the call; WingRep does the work after."
+- **Real-time coaching availability:** pitch it exactly as the reveal slide shows it. If someone asks when they can have it: "It's rolling out with design partners now. Book the demo and we'll show you it live on your stack." Do not litigate the roadmap on stage.
