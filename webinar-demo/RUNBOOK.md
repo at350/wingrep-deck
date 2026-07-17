@@ -2,156 +2,178 @@
 
 **How to use this document: read it top to bottom, once per section, in order. Nothing ever asks you to skip ahead or scroll back.** Part 1 is the day before. Part 2 is right before doors. Part 3 is the live show, written in show order, and it is the ONLY part you touch while presenting. Part 4 is what to do if something breaks.
 
-Anything in a code block gets sent to Claude character-for-character. Some blocks appear twice (once in rehearsal, once in the live script) so each section stands alone; if you ever edit a prompt, edit it in both places.
+Anything in a code block gets sent to Claude character-for-character. Every prompt appears twice: once in Part 1 when you record the backup, once in Part 3 in the live script, so each section stands alone. If you ever edit a prompt, edit it in both places. Spoken narration is in *italics* and is never typed into Claude.
 
 ---
 
-# Part 1 · The day before (~40 min)
+# Part 1 · The day before (~60 min)
 
-## 1.1 Create the Project
-1. Go to claude.ai. In the left sidebar, click **Projects → New project**.
-2. Name it `Sales Coach`. Leave the instructions box empty. Create it.
-3. On the project page, find the **knowledge** panel (right side) and upload these 3 files from the `webinar-demo/` folder:
-   - `transcripts/call-2-trial-checkin-cobalt.md`
-   - `jordan-coaching-log.md`
-   - `cobalt-deal-scorecard.md`
-
-Do NOT upload `call-1-discovery-cobalt.md`, the README, or `prompts.md`. Call 1 stays out because demo 1 runs outside the project: `cobalt-deal-scorecard.md` is effectively demo 1's answer key, and if Claude can see it during demo 1 it may crib from it or cite it on stage, which would look rigged. Same reason you never run these demos anywhere Claude can browse the whole `webinar-demo/` folder (Claude Code, the desktop app with folder access): the README describes the transcript's planted gaps.
-
-## 1.2 Set up your browser tabs (this exact arrangement is what you present with)
-One browser window, three tabs, in this order:
-- **Tab 1: Claude** (claude.ai).
-- **Tab 2: this RUNBOOK**, scrolled to Part 3. This is your script and paste source.
-- **Tab 3: the raw text of `call-1-discovery-cobalt.md`** (on GitHub: open the file → click **Raw**). You will select-all and copy from here during demo 1.
-
-## 1.3 Record backup #1 (the demo-1 parachute)
-You now perform demo 1 once, for real, so a finished version exists. No narration needed, just the sends.
-1. On Tab 1, start a **plain new chat**: click **New chat** from the claude.ai home/sidebar, NOT from inside the `Sales Coach` project. (Check: the chat header should NOT show the project name.)
-2. Send this as message 1:
+## 1.1 Record the demo-1 backup (the demo-1 parachute)
+Demo 1 runs in plain claude.ai, outside any project. There is no `Sales Coach` project to build anymore; demo 2 has moved to the Claude desktop app. You perform demo 1 once now, for real, so a finished version exists. No narration needed, just the sends.
+1. Go to claude.ai. In a second tab, open the raw text of `call-1-discovery-cobalt.md` (on GitHub: open the file, click **Raw**). You copy the transcript from here.
+2. Start a **plain new chat**: click **New chat** from the claude.ai home/sidebar. (Check: the chat header shows NO project name.)
+3. Send this as message 1:
 ```
 Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.
 ```
-3. Go to Tab 3, select all (⌘A), copy (⌘C). Back on Tab 1, paste into the message box (⌘V, it collapses into a paste chip), then paste this after it and send:
+4. Go to the call-1 raw tab, select all (⌘A), copy (⌘C). Back on the chat, paste into the message box (⌘V, it collapses into a paste chip), then paste this after it and send:
 ```
 You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap.
 ```
-4. Read the output. **Pick your favorite invented detail in message 1's email now** (a recap that never happened, enthusiasm never voiced, a made-up next step) so you know what to point at live.
-5. Rename the conversation: hover it in the sidebar → **⋯ → Rename** → `BACKUP · demo 1`.
+5. Read the output. **Pick your favorite invented detail in message 1's email now** (a recap that never happened, enthusiasm never voiced, a made-up next step) so you know what to point at live.
+6. Rename the conversation: hover it in the sidebar, **⋯ → Rename → `BACKUP · demo 1`**.
 
-## 1.4 Record backup #2 (the demo-2 parachute)
-1. Open the `Sales Coach` project and click **New chat** INSIDE it (check: header shows the project name).
-2. Send these five messages, in order, waiting for each to finish:
+## 1.2 The demo workspace
+Demo 2 is a live build in the Claude desktop app, reading real files off disk. Create a folder OUTSIDE this repo at `~/Coaching Demo/` containing EXACTLY these five things, and nothing else:
+- `transcripts/call-1-discovery-cobalt.md` (copied)
+- `transcripts/call-2-trial-checkin-cobalt.md` (copied)
+- `cobalt-deal-scorecard.md` (copied)
+- `jordan-coaching-log.md` (copied)
+- `cobalt-deal-file.md`, a NEW empty file you create in the folder root (this is the "deal file" the loop appends to; its pre-loop state is empty)
+- plus an empty `game-plans/` folder
+
+NEVER copy the README, the RUNBOOK, or `prompts.md` into it. Those describe the transcript's planted gaps; if Claude can read them on stage, the demo looks rigged. Copy only the four existing files, create `cobalt-deal-file.md` empty by hand, and make `game-plans/` empty by hand.
+
+Then point the Claude desktop app at this folder: grant it access to `~/Coaching Demo/` only, never the whole repo.
+
+## 1.3 Senses (calendar)
+1. In the desktop app settings, connect Google Calendar.
+2. Create the staged event on the morning your live question will point at. On stage you ask *what's my first call tomorrow?*, so the event lives on the morning after the webinar: `10:00am · Marcus Webb (CISO) · Cobalt Freight · 30 min`.
+3. Then CHECK the rest of that same morning on screen. Any personal event that would embarrass on a projector gets its calendar **deselected in the app for the day**. The live calendar ask is:
 ```
-Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+what's my first call tomorrow?
 ```
+and the staged Marcus event must be the honest answer. If anything earlier than 10:00am survives on a visible calendar, deselect that calendar or move the event so Marcus is genuinely first.
+
+## 1.4 Record the demo-2 backup, then reset the stage
+This section builds the whole loop once, saves it as a parachute, then wipes the stage so the live run is identical to the backup.
+
+**Record the backup:**
+1. In the desktop app, open one conversation on the `~/Coaching Demo/` folder. Paste the LOOP prompt and let it run; it appends to all three files (`cobalt-deal-file.md`, `jordan-coaching-log.md`, `cobalt-deal-scorecard.md`):
 ```
-Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:
+1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Then stop and tell me the one thing that changed most.
 ```
+2. In the same conversation, create the scheduled automation with the AUTOMATION prompt:
 ```
-You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.
 ```
-```
-Using the deal file and the transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
-```
+3. Run the automation once manually (**run now**) and confirm `game-plans/` gains the Marcus brief.
+4. In the same conversation, run the drill once so the backup shows one full exchange:
 ```
 Play Marcus, the CISO from these transcripts. I want to practice his pricing pushback in the first five minutes. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 ```
-3. For the last one, reply once as yourself (practice your opener: tie the trial's triage-time savings to his board audit) so the backup shows one full drill exchange.
-4. Rename the conversation `BACKUP · demo 2`.
+Reply once as yourself (your rehearsed opener: tie the trial's triage-time savings to his board audit) so the backup captures a real drill turn.
+5. Rename/save this conversation as the backup: `BACKUP · demo 2`.
+
+**Reset the stage (only after the backup is saved):**
+6. Revert the three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`) to their pre-loop state. For the deal file, pre-loop means EMPTY: restore it to an empty file. Keep copies of the appended versions somewhere OUTSIDE `~/Coaching Demo/` (for example `~/Coaching Demo reference/`) so you have them if you need to point at what "after" looks like.
+7. DELETE the generated file in `game-plans/` so the folder is empty again.
+8. DELETE the scheduled task, so nothing on stage says "already exists".
+
+The paradox, say it to yourself once so you trust it: the backup proves the loop works; the reset makes the live run identical to the backup. On stage you are re-running something you already watched land.
 
 ## 1.5 Stage the machine
-1. Quit every app except the deck and the browser. With exactly two apps open, ⌘-Tab always lands on the other one.
+1. Quit every app except the deck, the browser, and the Claude desktop app. ⌘-Tab cycles these three by most-recent-use: during demo 1 you flip deck ↔ browser, during demo 2 you flip deck ↔ desktop app. As long as you never touch the third app mid-demo, ⌘-Tab keeps flipping the two you want.
 2. Turn on macOS Focus mode (no notification can appear on stage).
 3. In the browser: hide the bookmarks bar, set zoom to 150% on the Claude tab (⌘+ three times). Claude's default text is unreadable on a projector.
-4. Open the deck, press `t` on slide 1 if you want to set the doors-open countdown to the real start time.
+4. In the Claude desktop app: bump the text size up for the projector, and widen the window so a file's contents read from the back of the room.
+5. Open the deck, press `t` on slide 1 if you want to set the doors-open countdown to the real start time.
 
 ## 1.6 Dress rehearsal
-Your rehearsal IS the live script: keep reading in order through Part 2 and into Part 3, and the first time through Part 3, perform it out loud, timed, including every ⌘-Tab. Target: demo 1 about 2 min, demo 2 about 6 min. Afterward, delete the two rehearsal conversations it created (keep the two BACKUPs).
+Your rehearsal IS the live script: keep reading in order through Part 2 and into Part 3, and the first time through Part 3, perform it out loud, timed, including every app switch. Target: demo 1 about 90 seconds, demo 2 about 8 minutes. The rehearsal runs the loop for real, so afterward reset the stage again exactly as in 1.4 steps 6 through 8 (files pre-loop, `game-plans/` empty, scheduled task deleted). Delete the rehearsal conversation; keep the two BACKUPs.
 
 ---
 
 # Part 2 · Day of, 10 minutes before doors
 
 Work down this checklist:
-1. Browser has the three tabs from 1.2: Claude / this runbook scrolled to Part 3 / call-1 raw text.
-2. `Sales Coach` project shows 3 files in knowledge.
-3. Sidebar shows `BACKUP · demo 1` and `BACKUP · demo 2`.
-4. Claude tab zoom still 150%. Focus mode still on.
-5. ⌘-Tab once: it flips deck ↔ browser and nothing else.
-6. Deck on slide 1, countdown running.
+1. **Browser:** three tabs, in order: Claude web (for demo 1) / this RUNBOOK scrolled to Part 3 / call-1 raw text.
+2. **Desktop app:** open on the `~/Coaching Demo/` folder.
+3. The three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`) are at their **pre-loop** state; the deal file is empty.
+4. `game-plans/` is **empty**.
+5. **No scheduled tasks** listed in the desktop app.
+6. Calendar shows the staged `10:00am · Marcus Webb (CISO) · Cobalt Freight · 30 min` as the honest answer to *what's my first call tomorrow?*, and nothing embarrassing sits earlier.
+7. **Backups present:** `BACKUP · demo 1` in the claude.ai sidebar, `BACKUP · demo 2` in the desktop app.
+8. Claude tab zoom still 150%; desktop app text bumped. Focus mode still on.
+9. Deck on slide 1, countdown running.
+
+**Paste-count guard.** Demo 1 has exactly **2 sends** (vibes prompt, deal-desk prompt). Demo 2 has exactly **4 sends** (loop paste, calendar ask, automation prompt into the scheduler, drill paste) plus **one button** (run now). If a send count comes up short mid-demo, the missing one is almost certainly the loop paste; send it and the order self-heals.
 
 ---
 
 # Part 3 · THE LIVE SCRIPT (the only part you use on stage)
 
-Slides 1 through 7: pure deck. Nothing to prepare, nothing to switch to.
+**Slides 1 through 7: pure deck.** Two things to do while they are up:
+- On **slide 1**, during doors: point at the callout and say the install line, the room installs the Claude desktop app while they wait.
+- On **slide 4**: point at the artifact strip and say: *"that brief wrote itself at 7am. By slide 10 you'll know how."*
 
-## Slide 8, "Garbage in, garbage out." → DEMO 1 (~2 min)
+## Slide 8, "Garbage in, garbage out." → DEMO 1 (~90 sec)
 
-Read the ✕ and ✓ boxes on the slide aloud. Then say: **"let me prove it on a real call"** → ⌘-Tab to the browser (Claude tab).
+Read the ✕ and ✓ boxes on the slide aloud. Then: *"let me prove it on a real call"* → switch to the browser (Claude tab).
 
-**Step 1 · Garbage in.** Click **New chat** (plain, NOT in the project). Type this by hand, casually, like a rep at 6pm:
+**Vibes prompt.** Click **New chat** (plain, no project). Type this by hand, casually, like a rep at 6pm:
 ```
 Write my follow-up to Priya. Call went well, she liked the demo, pricing came up.
 ```
-Send. While it streams, say: *"this is what most reps actually give AI: no transcript, just vibes. And watch, it will not say 'I don't know.' It will be confident."*
+Send. ONE line of narration while it streams: *"this is what most reps give AI: no transcript, just vibes, and it will not say 'I don't know,' it will be confident."* Point at the one invented detail you picked in rehearsal.
 
-**Step 2 · Read the garbage out loud.** Point at the generic lines and at the invented detail you picked during rehearsal. Say: *"confident, polished, and partly fiction. Garbage in, garbage out. The model isn't broken, it just has nothing real to work with."*
-
-**Step 3 · The real call in.** Go to Tab 3 (call-1 raw), ⌘A, ⌘C. Back on the Claude tab: ⌘V into the message box (it becomes a paste chip). Then copy this from Tab 2 and paste it after the chip, and send:
+**Transcript + deal-desk.** Go to the call-1 raw tab, ⌘A, ⌘C. Back on the Claude tab: ⌘V (paste chip), paste this after it, and send:
 ```
 You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap.
 ```
-While it streams: *"same AI, same deliverable. The only thing that changed is what went in: the real call, the rubric your team already runs on, and one rule, quote the moment or mark it MISSING. If it has to quote the transcript, it can't make things up."*
-
-**Step 4 · Land it.** Point at three things:
+Land TWO beats only:
 - **Economic buyer: MISSING**: *"the rep never got a path to the CISO, and the AI caught it."*
-- The **Champion** line: *"Priya is friendly. Friendly is not a champion."*
-- The follow-up email: *"compare this email to the first one. This one closes a real gap. That one was fan fiction."*
+- **Compare the two emails**: *"this one closes a real gap. The first one was fan fiction."*
 
-**Switch back:** *"that's one prompt. There are five I want you to steal"* → ⌘-Tab to the deck → advance to slide 9.
+Exit line: *"Pasting fixed it. Pasting is also the problem. Let me show you the version where the context shows up on its own."* → switch to the deck → advance to slide 9.
 
-## Slide 9, "Five prompts to steal" (~30 sec, deck only)
+## Slide 9, "The loop" (~40 sec, deck only)
 
-Talk the five list items. Drag the glow slider to top 1% once (it levels the demo-1 vibes prompt up into the deal-desk prompt the audience just watched work). Then advance to slide 10.
+Five jobs, one loop. Name the discipline: *"the AI world calls this loop engineering; sales just calls it coaching that sticks."* Advance to slide 10.
 
-## Slide 10, "Build it live, click each tab" → DEMO 2 (~6 min)
+## Slide 10, "Build it live, click each tab" → DEMO 2 (~8 min)
 
-This slide is a SalesOS '95 window with six tabs, one per step, and **each tab displays the exact prompt template you're about to paste** (the handout's wording, with [brackets] where the deal names go). The rhythm for each step is: click the tab on the slide → say the line → ⌘-Tab to Claude → paste the filled version → let the output land → ⌘-Tab back → next tab.
+This slide is the SalesOS window with six tabs: **1 Memory, 2 The loop, 3 Calendar, 4 Automation, 5 Drill, 6 The catch.** The rhythm for each tab is: click the tab on the slide → say the line → switch to the Claude desktop app → do the thing → switch back → next tab. The desktop app is already open on `~/Coaching Demo/`.
 
-Before step 1, say (it sews slide, handout, and screen together): *"Each tab is a prompt from your handout, word for word. All I do in Claude is fill in the brackets with this deal's names."*
+**Tab 1 · Memory**, say: *"the deal file started empty this morning. The log and the scorecard carry two weeks of calls. Nobody typed a word of any of them; the loop wrote every entry."* Show the folder in the app: the three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`), the transcripts, and the empty `game-plans/`.
 
-First time you switch to Claude: open the `Sales Coach` project → **New chat** inside it (header shows the project name). All five messages go in this ONE conversation, in order.
-
-**Tab 1 · Capture**, say: *"step one, the call becomes a record."* Paste:
+**Tab 2 · The loop**, paste:
 ```
-Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:
+1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Then stop and tell me the one thing that changed most.
 ```
+THE MEMORY PAYOFF, give it a beat. When the coaching-log step quotes the thirty-minutes-with-Marcus moment, point: *"two weeks ago the log said get to the CISO. Today it checked, and quoted the exact moment the ask happened. That's observability, the thing most coaching never has."*
 
-**Tab 2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt on the tab, no brackets to fill, and the same one typed on slide 11 next.) Paste:
+**Tab 3 · Calendar**, type the calendar ask live:
 ```
-Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+what's my first call tomorrow?
 ```
-THE MEMORY PAYOFF, give it a beat. When it quotes the "thirty minutes with Marcus / one-pager" moment, point at it: *"two weeks ago the log said get to the CISO. Today it checked. That's a coach, not a note-taker."*
+The staged Marcus event is the answer. Say: *"that's the loop's senses. No pasting, the context comes to it."*
 
-**Tab 3 · Scorecard**, say: *"step three, the MEDDIC scorecard updates itself."* Paste:
+**Tab 4 · Automation**, create the scheduled task with the AUTOMATION prompt:
 ```
-You're my deal-desk analyst. Update this deal's MEDDIC scorecard (cobalt-deal-scorecard.md) from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.
 ```
-Point: *"Economic buyer just moved from MISSING toward PARTIAL, and it shows you the sentence that moved it."* (The tab's mock scorecard shows the same picture: E and C red, the gap named.)
+Say the good-loop line: *"clear goal, right context, and a stopping rule."* Hit **run now**. Open the generated brief in `game-plans/`, point at the quoted coaching focus.
 
-**Tab 4 · Game plan**, say: *"step four, next call's prep in the time it takes to walk to your desk."* Paste:
-```
-Using the deal file and the transcripts: the next call is the 30-minute meeting with Marcus, Cobalt's CISO. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
-```
-
-**Tab 5 · Drill**, say: *"and step five, practice on Claude, not the customer."* Paste:
+**Tab 5 · Drill**, paste:
 ```
 Play Marcus, the CISO from these transcripts. I want to practice his pricing pushback in the first five minutes. Push back the way he would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 ```
-Claude opens as Marcus. **Answer out loud, live** (your rehearsed opener: the trial's triage-time savings, framed for his board audit). Cap it at TWO exchanges, then: *"I could do this all day, and that's the point, my reps can."*
+Claude opens as Marcus. Answer out loud as yourself, once or twice max (your rehearsed opener: the trial's triage-time savings, framed for his board audit). Exit line: *"I could do this all day, and that's the point, my reps can."*
 
-**The catch:** ⌘-Tab back to the deck → click **Tab 6 · The catch** and read its four bullets, that's the honest cost of the loop you just ran. (Clicking tab 6 a SECOND time triggers a blue-screen gag, "COACHING.EXE has stopped responding", use it if the room is warm.) Then: *"The AI did the thinking..."* → advance to slide 11 → *"...and I'm still the plumbing."* From slide 11 on it's pure deck again, through the WingRep reveal to the end.
+**Tab 6 · The catch**, switch back to the deck → click **Tab 6** and read its four bullets, the honest cost of the loop you just ran. Clicking Tab 6 a SECOND time triggers the blue-screen gag, *"Eight reps, eight folders, one of you."*, use it if the room is warm.
+
+**Transition into slide 11:** *"The loop preps, reviews, even drills. Here's the one thing it cannot do..."* → advance to slide 11 → the typer plays → bridge into the reveal: *"Keep the loop, it's on your cheat sheet, it's free, and it's genuinely good. We built it, ran it, loved it, and hit the same wall you just saw: it has no ears. So we gave it ears."* → slide 12 reveal.
+
+From slide 12 on it is pure deck to the end (slide 17 is `Book time with Amit`, just present it, nothing to switch to), through the WingRep reveal to the close.
 
 ---
 
@@ -159,8 +181,16 @@ Claude opens as Marcus. **Answer out loud, live** (your rehearsed opener: the tr
 
 | If | Then |
 |---|---|
-| A response is slow or the site hiccups | "Let me show you one I ran on this exact call earlier" → sidebar → open the matching BACKUP conversation → scroll it while narrating. The words are identical. |
-| In demo 2, Claude can't find a file by name | Say "one sec," open the file on GitHub (raw), copy its text, paste it above the prompt and resend. 15 seconds, looks intentional. |
-| The demo-1 vibes email comes out surprisingly cautious (asks for details instead of inventing them) | Still a win, read it as: "see, even the AI is telling me it has nothing to work with." Then proceed to Step 3 unchanged. |
-| The drill goes sideways or a weird roleplay beat | Break it yourself: "and see, it'll keep going, that's the drill" → jump to the switch-back line. Never negotiate with the roleplay on stage. |
+| A response is slow or the app hiccups | *"Let me show you one I ran on this exact call earlier"* → open the matching BACKUP (`BACKUP · demo 1` in the claude.ai sidebar, `BACKUP · demo 2` in the desktop app) → scroll it while narrating. The words are identical. |
+| The demo-1 vibes email comes out surprisingly cautious (asks for details instead of inventing them) | Still a win, read it as: *"see, even the AI is telling me it has nothing to work with."* Then proceed to the transcript + deal-desk send unchanged. |
+| The drill goes sideways or a weird roleplay beat | Break it yourself: *"and see, it'll keep going, that's the drill"* → jump to the exit line. Never negotiate with the roleplay on stage. |
 | You blank on narration | Read Claude's own output headers aloud. The scorecard is its own narration. |
+| The calendar connector fails or returns the wrong thing | Open the `BACKUP · demo 2` conversation and narrate the calendar answer from there. Do not re-ask live. |
+| The scheduler UI hiccups | Paste the Tab 4 automation prompt as a normal message instead of a scheduled task, and say: *"the schedule is just this prompt on a timer."* |
+| The loop writes to the wrong file | Open the file it did write; the content is still right. Say nothing about the filename; fix it after the show. |
+| Screen share drops | Keep narrating, re-share the ENTIRE display (not a single window), and recap in one line where you were. |
+
+## Live Q&A talk tracks (only if asked; none of this goes on slides)
+- **Security / compliance:** "Short version: your calls never train anyone else's model, and we're ISO 27001 certified. I'll send the full security packet with the follow-up, and we go deep on it in the demo." Do not enumerate SOC 2 status on stage.
+- **"Do you replace Gong?":** "No, we plug into it. Gong watches the call; WingRep does the work after."
+- **Real-time coaching availability:** pitch it exactly as the reveal slide shows it. If someone asks when they can have it: "It's rolling out with design partners now. Book the demo and we'll show you it live on your stack." Do not litigate the roadmap on stage.

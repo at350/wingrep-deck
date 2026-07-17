@@ -75,6 +75,25 @@
   footer{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;border-top:1.5px solid var(--line)}
   footer .l{font-family:var(--mono);font-size:8px;letter-spacing:.16em;color:var(--soft)}
   footer .r{font-family:var(--display);font-weight:800;font-size:9.5px;color:var(--clay)}
+
+  /* page 3 · the loop */
+  .build{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:2px}
+  .bs{display:grid;grid-template-columns:32px 1fr;align-items:center;background:var(--card);
+      border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+  .bs .n{align-self:stretch;background:var(--wash);display:flex;align-items:center;justify-content:center;
+      font-family:var(--display);font-weight:800;font-size:18px;color:var(--clay);border-right:1.5px solid var(--line)}
+  .bs p{font-size:9.3px;line-height:1.4;color:var(--deep);padding:9px 12px}
+  .looplist{display:flex;flex-direction:column;gap:9px}
+  .looplist .pc{grid-template-columns:1fr}
+  .looplist .bodyc{padding:10px 14px 11px}
+  .looplist h3{color:var(--clay)}
+  .looplist p.pr.multi{white-space:pre-wrap}
+  .pc{break-inside:avoid}
+  .trust{margin-top:20px;margin-bottom:6px;border:1.5px solid var(--coral);background:var(--wash);
+      border-radius:14px;padding:12px 16px;display:flex;gap:12px;align-items:center}
+  .trust .c{font-family:var(--display);font-weight:800;font-size:20px;color:var(--clay)}
+  .trust b{font-family:var(--mono);font-size:10px;font-weight:600}
+  .trust span{font-size:9.5px;color:var(--soft)}
 </style></head><body>
 
 <!-- PAGE 1 -->
@@ -115,7 +134,7 @@
     </div></div>
   </div>
 
-  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">1 / 2</span></footer>
+  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">1 / 3</span></footer>
 </div>
 
 <!-- PAGE 2 -->
@@ -157,7 +176,42 @@
     </div>
   </div>
 
-  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">2 / 2</span></footer>
+  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">2 / 3</span></footer>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page"><div class="rule"></div>
+  <div class="eyebrow">PART THREE</div>
+  <h1 style="font-size:34px">Put it on a <span class="hl">loop.</span></h1>
+  <p class="sub">Prompts are the steps. The upgrade is the loop: memory it writes to, senses that feed it, and a schedule that runs it. <b>Set up once, per rep.</b></p>
+
+  <div class="sec" style="margin-top:20px"><h2>The build, once per rep</h2><small>CLAUDE DESKTOP APP</small></div>
+  <div class="build">
+    <div class="bs"><span class="n">1</span><p>Install the Claude desktop app (claude.ai/download) and point it at a folder.</p></div>
+    <div class="bs"><span class="n">2</span><p>In the folder: your call transcripts plus two empty files, a deal file and a coaching log. You never type in them; the loop appends, call by call.</p></div>
+    <div class="bs"><span class="n">3</span><p>Connect Google Calendar in the app's settings, so the loop knows which calls are coming.</p></div>
+    <div class="bs"><span class="n">4</span><p>Schedule the automation below for 7am weekdays. Your reps start every day prepped.</p></div>
+  </div>
+
+  <div class="sec"><h2>The two prompts that run it</h2><small>SET UP ONCE, THEN AUTOMATIC</small></div>
+  <div class="looplist">
+    <div class="pc"><div class="bodyc">
+      <h3>The after-call loop</h3><span class="when">run after every call; it replaces prompts 1 to 3</span>
+      <p class="pr multi">Run my after-call loop on today's call with [prospect] ([transcript file]), in this order:
+1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Then stop and tell me the one thing that changed most.</p>
+    </div></div>
+    <div class="pc"><div class="bodyc">
+      <h3>The morning brief, scheduled</h3><span class="when">paste as a scheduled task in the app</span>
+      <p class="pr">Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.</p>
+    </div></div>
+  </div>
+
+  <div class="trust"><span class="c">&#10003;</span><div><b>A loop you can trust has:</b> <span>a clear goal, the right context, small steps, receipts you can check, and a stopping rule.</span></div></div>
+
+  <footer><span class="l">BUILD YOUR OWN AI SALES ASSISTANT</span><span class="r">3 / 3</span></footer>
 </div>
 
 </body></html>
