@@ -309,7 +309,26 @@
   .sAlan-slot:has(img.imgon){border-style:solid;border-color:transparent;background:#ddd}
   .sAlan-slot:has(img.imgon)::before,.sAlan-slot:has(img.imgon)::after,.sAlan-slot:has(img.imgon) span{display:none}
   .sAlan-polaroid figcaption{font-family:var(--hand);font-weight:700;font-size:15px;color:var(--ink-soft);text-align:center;margin-top:6px;line-height:1.1}
-  @media(max-width:900px){.sAlan-wall{max-width:420px}}
+  /* Alan's headshot framed as a coral LEGO plate, drawn to match the university brick
+     PNGs below it: a glossy top-lit body, a row of cylindrical studs poking off the top
+     edge, and a dark bottom lip for thickness. The photo is recessed into the face where
+     those bricks carry their logo. It straddles the top of the photo wall — most of it
+     above, the lower edge dipping onto the top two polaroids. The wall's top padding opens
+     that room; the negative top offset lets the plate ride up beside the headline. */
+  .sAlan-wall{--faceD:clamp(212px,31vh,266px);--faceP:clamp(46px,7vh,82px);position:relative;padding-top:var(--faceP)}
+  .sAlan-face{position:absolute;top:calc(var(--faceP) - var(--faceD) * 0.58);left:50%;transform:translateX(-50%);
+    z-index:4;width:var(--faceD);aspect-ratio:1;overflow:visible;
+    filter:drop-shadow(0 18px 20px rgba(20,18,13,.42))}
+  .sAlan-brick{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;pointer-events:none}
+  /* the photo, set into the plate face (window rect 26,58 198x176 of the 250 viewBox) */
+  .sAlan-face-in{position:absolute;left:10.4%;top:23.2%;width:79.2%;height:70.4%;
+    border-radius:2px;overflow:hidden;background:#B9880C;z-index:2;
+    box-shadow:inset 0 3px 7px rgba(60,42,4,.45),inset 0 -1px 0 rgba(255,255,255,.16),0 0 0 2px rgba(150,110,10,.55)}
+  .sAlan-face-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:none}
+  .sAlan-face-in img.imgon{display:block}
+  .sAlan-face-in .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:800;font-size:2.4rem;color:#7a5a08}
+  @media(max-width:900px){.sAlan-wall{max-width:420px;margin:0 auto}}
 
   /* bouncing DVD-logo headshot (lives on the about-Alan slide) */
   .s3-dvd{position:absolute;top:0;left:0;width:110px;height:110px;z-index:1;display:none;pointer-events:none;will-change:transform}
@@ -981,12 +1000,17 @@
     justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
-  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;height:100%}
-  .sAlan .s3-head{display:flex;align-items:center;gap:.8rem;width:100%}
-  .sAlan .s3-ava{width:74px;height:74px}
-  .sAlan .s3-name{font-size:clamp(20px,1.95vw,26px);line-height:1.18}
-  .sAlan .s3-name .role{display:block;font-size:.63em;margin-top:.1rem}
-  .sAlan .s3-tie{margin-top:.9rem;max-width:none;font-size:clamp(14px,1.35vw,16.5px);line-height:1.45}
+  /* With the nameplate gone the left column carried only the tie line + brick shelf, so
+     bottoming the bricks out (margin-top:auto) left a tall dead gap in the middle. The
+     cluster is now centred as one block against the photo wall, and the tie line is a touch
+     larger so the column has real weight instead of a sentence stranded at the top. */
+  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1.4rem,4vh,2.4rem);height:100%}
+  .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(15px,1.55vw,19px);line-height:1.5}
+  /* the hackathon wins are demoted from the headline claim to a quiet, captioned strip:
+     the AI-research line above now carries the credibility, these are human texture. */
+  .sAlan .s3-markwrap{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:auto}
+  .sAlan .s3-markcap{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--rust-deep)}
   /* A veil of paper, not a card. At 2x the bouncing headshot is wide enough to sit right
      on top of this text, so the bio floats on a soft wash that fades to nothing at its
      edges: the ball still glides visibly behind it, but the words never lose contrast.
@@ -997,7 +1021,7 @@
     background:rgba(242,238,226,.9);border-radius:30px;filter:blur(15px)}
 
   /* the shelf: three plates of one mould, stacked, widening to the base */
-  .sAlan .s3-marks{width:auto;margin-top:auto;padding-top:1.2rem;border-top:none;gap:5px}
+  .sAlan .s3-marks{width:auto;margin-top:0;padding-top:0;border-top:none;gap:5px}
   .sAlan .s3-marks::before{content:none}   /* "Hackathon wins" only restated the line above it */
   .sAlan .s3-marks img.mk{width:auto;height:var(--brickH);
     filter:drop-shadow(0 3px 0 rgba(31,28,22,.10)) drop-shadow(0 9px 13px rgba(31,28,22,.16))}
@@ -1035,33 +1059,42 @@
   @media (prefers-reduced-motion:reduce){.s3-trail,.s3-bits{display:none!important}}
   </style>
   <section class="slide sAlan">
-    <canvas class="s3-trail" id="s3trail" aria-hidden="true"></canvas>
-    <canvas class="s3-bits" id="s3bits" aria-hidden="true"></canvas>
-    <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap sAlan-wrap">
       <div class="eyebrow">Your guide tonight</div>
       <h1><span class="ln">Hi, I'm <span class="hl">Alan.</span></span></h1>
       <div class="sAlan-grid">
         <div class="s3-guide">
           <div class="s3-bio">
-            <div class="s3-head">
-              <div class="s3-ava">
-                <span class="fallback" aria-hidden="true">AT</span>
-                <img data-img="alan_headshot" alt="Alan Tai">
-              </div>
-              <div class="s3-id">
-                <div class="s3-name">Alan Tai <span class="role">builder, not a pitch guy</span></div>
-              </div>
-            </div>
-            <p class="s3-tie"><b>5x hackathon winner.</b> Winning a hackathon is 24 hours to make a stranger care. Same skill as the cold email you'll write tonight.</p>
+            <p class="s3-tie"><b>I build AI that actually works for sales teams.</b> My own background is in AI &mdash; published, peer-reviewed research in neural networks and computer vision &mdash; now pointed straight at the work your reps do every day.</p>
           </div>
-          <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
-            <img class="mk" data-img="logo_princeton" alt="Princeton University">
-            <img class="mk" data-img="logo_northwestern" alt="Northwestern University">
-            <img class="mk" data-img="logo_uchicago" alt="The University of Chicago">
+          <div class="s3-markwrap">
+            <div class="s3-markcap">5&times; hackathon winner</div>
+            <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
+              <img class="mk" data-img="logo_princeton" alt="Princeton University">
+              <img class="mk" data-img="logo_northwestern" alt="Northwestern University">
+              <img class="mk" data-img="logo_uchicago" alt="The University of Chicago">
+            </div>
           </div>
         </div>
         <div class="sAlan-wall" aria-label="Photos from four hackathons">
+          <div class="sAlan-face">
+            <svg class="sAlan-brick" viewBox="0 0 250 250" aria-hidden="true">
+              <rect x="8" y="50" width="234" height="198" rx="4" fill="#D3A017"/>
+              <g stroke="#C9960C" stroke-width="0.5">
+                <g><rect x="15" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="37" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="37" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="74" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="96" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="96" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="133" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="155" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="155" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="191" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="213" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="213" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+              </g>
+              <rect x="8" y="40" width="234" height="200" rx="4" fill="#F5C518" stroke="#C9960C" stroke-width="0.6"/>
+              <rect x="16" y="46" width="218" height="6" rx="2" fill="#FBDB6A"/>
+              <rect x="26" y="58" width="198" height="176" rx="3" fill="#B9880C"/>
+            </svg>
+            <div class="sAlan-face-in">
+              <span class="fallback" aria-hidden="true">AT</span>
+              <img data-img="alan_headshot" alt="Alan Tai">
+            </div>
+          </div>
           <figure class="sAlan-polaroid rot1">
             <div class="sAlan-slot"><img data-img="alan_win_1" alt="A crowded hackathon room, laptops open across every table"><span>hackathon photo</span></div>
             <figcaption>the build</figcaption>
