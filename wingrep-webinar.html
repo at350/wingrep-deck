@@ -1800,8 +1800,10 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   #trial .trial-hero{position:relative;margin:0 auto;width:min(100%,384px)}
   /* aspect-ratio matches the captured card crop so the UI is never cut */
   #trial .trial-hero img{width:100%;display:block;aspect-ratio:1200/1270;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
-  /* the meme, polaroid-style, overlapping the card's bottom-right corner */
-  #trial .trial-meme{position:absolute;right:-18px;bottom:-16px;width:46%;margin:0;background:#fff;border-radius:2px;padding:7px 7px 6px;box-shadow:0 12px 26px -14px rgba(20,18,13,.5),0 1px 0 rgba(255,255,255,.8) inset;transform:rotate(3deg);transform-origin:center;z-index:2}
+  /* the meme, polaroid-style, tucked onto the card's bottom-right corner.
+     Percentage offsets scale with the hero so the meme's top edge stays below
+     the last gameplan row at every hero size; the rows stay fully readable. */
+  #trial .trial-meme{position:absolute;right:-15%;bottom:-21.5%;width:30%;margin:0;background:#fff;border-radius:2px;padding:7px 7px 6px;box-shadow:0 12px 26px -14px rgba(20,18,13,.5),0 1px 0 rgba(255,255,255,.8) inset;transform:rotate(3deg);transform-origin:center;z-index:2}
   #trial .trial-meme img{width:100%;display:block;border-radius:1px}
   #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
