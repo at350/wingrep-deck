@@ -84,9 +84,9 @@ Work down this checklist:
 
 # Part 3 · THE LIVE SCRIPT (the only part you use on stage)
 
-Slides 1 through 6: pure deck. Nothing to prepare, nothing to switch to.
+Slides 1 through 7: pure deck. Nothing to prepare, nothing to switch to.
 
-## Slide 7, "Garbage in, garbage out." → DEMO 1 (~2 min)
+## Slide 8, "Garbage in, garbage out." → DEMO 1 (~2 min)
 
 Read the ✕ and ✓ boxes on the slide aloud. Then say: **"let me prove it on a real call"** → ⌘-Tab to the browser (Claude tab).
 
@@ -109,13 +109,13 @@ While it streams: *"same AI, same deliverable. The only thing that changed is wh
 - The **Champion** line: *"Priya is friendly. Friendly is not a champion."*
 - The follow-up email: *"compare this email to the first one. This one closes a real gap. That one was fan fiction."*
 
-**Switch back:** *"that's one prompt. There are five I want you to steal"* → ⌘-Tab to the deck → advance to slide 8.
+**Switch back:** *"that's one prompt. There are five I want you to steal"* → ⌘-Tab to the deck → advance to slide 9.
 
-## Slide 8, "Five prompts to steal" (~30 sec, deck only)
+## Slide 9, "Five prompts to steal" (~30 sec, deck only)
 
-Talk the five list items. Drag the glow slider to top 1% once (it levels the demo-1 vibes prompt up into the deal-desk prompt the audience just watched work). Then advance to slide 9.
+Talk the five list items. Drag the glow slider to top 1% once (it levels the demo-1 vibes prompt up into the deal-desk prompt the audience just watched work). Then advance to slide 10.
 
-## Slide 9, "Build it live, click each tab" → DEMO 2 (~6 min)
+## Slide 10, "Build it live, click each tab" → DEMO 2 (~6 min)
 
 This slide is a SalesOS '95 window with six tabs, one per step, and **each tab displays the exact prompt template you're about to paste** (the handout's wording, with [brackets] where the deal names go). The rhythm for each step is: click the tab on the slide → say the line → ⌘-Tab to Claude → paste the filled version → let the output land → ⌘-Tab back → next tab.
 
@@ -128,7 +128,7 @@ First time you switch to Claude: open the `Sales Coach` project → **New chat**
 Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
 
-**Tab 2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt on the tab, no brackets to fill, and the same one typed on slide 10 next.) Paste:
+**Tab 2 · Coaching ledger**, say: *"step two is the one that changed how I sell: the AI checks whether I did what I said I'd do."* (This paste is, word for word, the prompt on the tab, no brackets to fill, and the same one typed on slide 11 next.) Paste:
 ```
 Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
 ```
@@ -151,7 +151,7 @@ Play Marcus, the CISO from these transcripts. I want to practice his pricing pus
 ```
 Claude opens as Marcus. **Answer out loud, live** (your rehearsed opener: the trial's triage-time savings, framed for his board audit). Cap it at TWO exchanges, then: *"I could do this all day, and that's the point, my reps can."*
 
-**The catch:** ⌘-Tab back to the deck → click **Tab 6 · The catch** and read its four bullets, that's the honest cost of the loop you just ran. (Clicking tab 6 a SECOND time triggers a blue-screen gag, "COACHING.EXE has stopped responding", use it if the room is warm.) Then: *"The AI did the thinking..."* → advance to slide 10 → *"...and I'm still the plumbing."* From slide 10 on it's pure deck again, through the WingRep reveal to the end.
+**The catch:** ⌘-Tab back to the deck → click **Tab 6 · The catch** and read its four bullets, that's the honest cost of the loop you just ran. (Clicking tab 6 a SECOND time triggers a blue-screen gag, "COACHING.EXE has stopped responding", use it if the room is warm.) Then: *"The AI did the thinking..."* → advance to slide 11 → *"...and I'm still the plumbing."* From slide 11 on it's pure deck again, through the WingRep reveal to the end.
 
 ---
 
