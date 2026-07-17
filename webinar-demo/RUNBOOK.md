@@ -121,9 +121,11 @@ This slide is a SalesOS '95 window with six tabs, one per step, and **each tab d
 
 Before step 1, say (it sews slide, handout, and screen together): *"Each tab is a prompt from your handout, word for word. All I do in Claude is fill in the brackets with this deal's names."*
 
+One more framing line before tab 1: *"Everything you're about to watch, I set up once, yesterday, in about forty minutes. That's the point: this is a system you stand up for the team, not homework you do per call."*
+
 First time you switch to Claude: open the `Sales Coach` project → **New chat** inside it (header shows the project name). All five messages go in this ONE conversation, in order.
 
-**Tab 1 · Capture**, say: *"step one, the call becomes a record."* Paste:
+**Tab 1 · Capture**, say: *"step one, the call becomes a record. The trick: this file started empty. Nobody ever types in it. Claude appends an entry after every call, and that pile of entries is what makes every later step smart."* Paste:
 ```
 Here's today's call with Cobalt Freight: call-2-trial-checkin-cobalt.md. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 ```
