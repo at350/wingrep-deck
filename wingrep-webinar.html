@@ -1473,8 +1473,8 @@
   <!-- NEW: the 5 prompts to steal + prompt glow-up slider -->
   <section class="slide sFive">
     <div class="wrap">
-      <div class="eyebrow">Five prompts to steal</div>
-      <h1>Claude writes up the call, <span class="hl">then coaches the rep.</span></h1>
+      <div class="eyebrow">Loop engineering</div>
+      <h1>Five jobs. One loop.<br>Run on <span class="hl">every call.</span></h1>
       <ol class="prompts5">
         <li><b>Capture</b>, an empty file per deal that Claude fills, call by call.</li>
         <li><b>Coaching ledger</b>, did last call's focus stick? Checked on every rep.</li>
@@ -1498,70 +1498,57 @@
     <div class="wrap">
       <div class="eyebrow">Build it live, click each tab</div>
       <div class="os">
-        <div class="bsod" id="bsod" aria-hidden="true"><div class="bsod-in"><div class="bsod-face">:(</div><p>COACHING.EXE has stopped responding.<br>You kept the file by hand for three weeks. It rotted.</p><p class="bsod-press">click tab 6 again to continue _</p></div></div>
+        <div class="bsod" id="bsod" aria-hidden="true"><div class="bsod-in"><div class="bsod-face">:(</div><p>COACHING.EXE has stopped responding.<br>Eight reps, eight folders, one of you.</p><p class="bsod-press">click tab 6 again to continue _</p></div></div>
         <div class="clippy" id="clippy" aria-hidden="true"><div class="clippy-bubble">It looks like you're coaching a rep. Want Claude to remember it for you?</div><div class="clippy-art"><svg viewBox="0 0 120 168" role="img" aria-label="Clippy"><defs><linearGradient id="clippyMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2ee"/><stop offset=".45" stop-color="#b3b3c9"/><stop offset="1" stop-color="#83839b"/></linearGradient></defs><g transform="rotate(-5 60 90)"><path d="M20 54 A34 34 0 0 1 88 54 L88 122 A34 34 0 0 1 20 122 Z" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M72 108 L72 66 A18 18 0 0 0 36 66 L36 106 A18 18 0 0 0 68 114" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g><g><ellipse cx="45" cy="51" rx="15" ry="16.5" fill="#fff" stroke="#242424" stroke-width="2.4"/><ellipse cx="75" cy="45" rx="16.5" ry="18" fill="#fff" stroke="#242424" stroke-width="2.4"/><circle cx="49.5" cy="55" r="7.6" fill="#1b1b1b"/><circle cx="79.5" cy="49" r="8.2" fill="#1b1b1b"/><circle cx="46.6" cy="51.5" r="2.5" fill="#fff"/><circle cx="76.4" cy="45.4" r="2.7" fill="#fff"/></g><path class="clippy-brow" d="M29 34 Q43 24 55 32" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/><path class="clippy-brow r" d="M61 28 Q76 20 89 30" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/></svg></div></div>
         <div class="titlebar"><img data-asset="ui_titlebar" alt=""> SalesOS '95, coaching.exe <span class="sp"><i>_</i><i>▢</i><i>✕</i></span></div>
         <div class="tabs">
-          <button class="on" data-tab="t1">1 · Capture</button>
-          <button data-tab="t2">2 · Coaching ledger</button>
-          <button data-tab="t3">3 · Scorecard</button>
-          <button data-tab="t4">4 · Game plan</button>
+          <button class="on" data-tab="t1">1 · Memory</button>
+          <button data-tab="t2">2 · The loop</button>
+          <button data-tab="t3">3 · Calendar</button>
+          <button data-tab="t4">4 · Automation</button>
           <button data-tab="t5">5 · Drill</button>
           <button data-tab="t6">6 · The catch</button>
         </div>
         <div class="screen">
-          <div class="pane on" id="t1"><h4>Step 1, one running file per deal</h4>
-            <p>The non-obvious move: start an <b>empty</b> markdown file per deal and per rep. You never write in it. Claude appends an entry after every call, so the file becomes the deal's memory, and you control it.</p>
-            <div class="term">C:\deals\> dir
+          <div class="pane on" id="t1"><h4>Step 1, memory the loop writes to</h4>
+            <p>Make a folder. Transcripts you already have, plus <b>two empty files</b>: a deal file and a coaching log. You never type in them again; the loop appends, call by call.</p>
+            <div class="term">C:\coaching\> dir
 <span class="g">cobalt-deal-scorecard.md</span>   jordan-coaching-log.md
-C:\deals\> claude
-Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.</div>
-            <button class="copy" data-copy="capture">Copy prompt</button></div>
-          <div class="pane" id="t2"><h4>Step 2, the prompt that does the real work</h4>
-            <p>Paste the rep's log <b>plus</b> the new call. Claude checks whether last call's coaching stuck.</p>
-            <div class="term">Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.</div>
-            <button class="copy" data-copy="ledger">Copy prompt</button>
+transcripts\call-1-discovery-cobalt.md   <span class="g">game-plans\</span></div></div>
+          <div class="pane" id="t2"><h4>Step 2, one prompt runs the whole loop</h4>
+            <p>After each call, one paste does capture, coaching, and scorecard, <b>in order, then stops</b>.</p>
+            <div class="term">Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:
+1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
+2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
+3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
+Then stop and tell me the one thing that changed most.</div>
+            <button class="copy" data-copy="loop">Copy prompt</button>
             <div class="ledger"><span class="hd"># jordan-coaching-log.md · patterns: strong rapport, slow to the economic buyer</span>
 
 <b>Jul 10, Cobalt</b>  <span class="stuck">last focus "path to Marcus", stuck ✓</span></div></div>
-          <div class="pane" id="t3"><h4>Step 3, the MEDDIC deal scorecard</h4>
-            <p>Hand the deal file back with the new transcript. It updates <b>letter by letter, on quoted evidence</b>.</p>
-            <div class="term">You're my deal-desk analyst. Update this deal's MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.</div>
-            <button class="copy" data-copy="score">Copy prompt</button>
-            <div class="sc">
-              <div class="sc-head"><b>Cobalt Freight</b><span>· target: <em>end of Q3</em></span></div>
-              <div class="sc-cols">
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">M</span></div>
-                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">E</span></div>
-                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">D</span></div>
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">D</span></div>
-                <div class="sc-col stuck"><span class="mk">✓</span><span class="dt">I</span></div>
-                <div class="sc-col slip"><span class="mk">✕</span><span class="dt">C</span></div>
-              </div>
-              <div class="sc-foot">
-                <div class="sc-key"><span><i class="stuck"></i>proven</span><span><i class="slip"></i>missing</span></div>
-                <div class="sc-gap">biggest gap: <b>no path to the economic buyer</b></div>
-              </div>
-            </div></div>
-          <div class="pane" id="t4"><h4>Step 4, a 60-second pre-call game plan</h4>
-            <p>Before the call, not after. Most reps wing it; this is the edge.</p>
-            <div class="term">Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.</div>
-            <button class="copy" data-copy="plan">Copy prompt</button></div>
+          <div class="pane" id="t3"><h4>Step 3, give the loop senses</h4>
+            <p>Connect Google Calendar in the app. The loop now knows which calls are coming; <b>context arrives on its own</b>.</p>
+            <div class="term">You: what's my first call tomorrow?
+<span class="g">Claude: 10:00am, Marcus Webb (CISO) at Cobalt Freight, 30 minutes.</span></div></div>
+          <div class="pane" id="t4"><h4>Step 4, put the loop on a schedule</h4>
+            <p>Clear goal, right context, and a stopping rule: <b>that's a loop you can trust</b>.</p>
+            <div class="term">Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.</div>
+            <button class="copy" data-copy="auto">Copy prompt</button></div>
           <div class="pane" id="t5"><h4>Step 5, practice on Claude, not the customer</h4>
             <p>Reps get reps. Claude plays the skeptic so the real call isn't the first try.</p>
             <div class="term">Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.</div>
             <button class="copy" data-copy="drill">Copy prompt</button></div>
           <div class="pane" id="t6"><h4>…and here's where it falls apart</h4>
             <ul class="gap" style="margin-top:.3rem">
-              <li>One rep, one deal: fine. Eight reps, forty deals: someone hand-feeds every file, every call. Skip a week, it rots.</li>
-              <li>Claude never hears the call. "Did it stick?" is only as good as the transcript someone remembered to paste.</li>
-              <li>Nothing reaches your CRM. Your reps still copy it over, or don't.</li>
-              <li>No reminders, no prep that fires itself, no nudge mid-call.</li>
+              <li>The loop preps and reviews. Nobody is in the call. Mid-call, your rep is still alone.</li>
+              <li>It runs per person. Eight reps means eight folders, eight connectors, eight schedules, and you babysit all of them.</li>
+              <li>Your CRM still writes itself the old way: by a rep, at 6pm, from memory.</li>
+              <li>Coaching quality is capped by what a transcript can carry. Tone, timing, the moment it went sideways: not in the file.</li>
             </ul></div>
         </div>
         <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Start</span><span class="clock">11:42 AM</span></div>
       </div>
-      <div class="os-cap">genuinely useful. genuinely a chore. ↓</div>
+      <div class="os-cap">one rep: an evening. a team: a job. ↓</div>
     </div>
   </section>
 
@@ -2418,7 +2405,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Not another note-taker","What you walk away with","The admin pile-up","Book time with Amit","Thank you"];
+  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Not another note-taker","What you walk away with","The admin pile-up","Book time with Amit","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
@@ -2516,10 +2503,8 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   /* One canonical set: these strings are byte-identical to the runbook pastes,
      prompts.md, and the handout. Edit them there and here together, always. */
   var PROMPTS={
-    capture:"Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.",
-    ledger:"Here's my coaching log and today's call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.",
-    score:"You're my deal-desk analyst. Update this deal's MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.",
-    plan:"Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.",
+    loop:"Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:\n1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.\n2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.\n3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.\nThen stop and tell me the one thing that changed most.",
+    auto:"Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.",
     drill:"Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting."
   };
   document.querySelectorAll('.os .copy').forEach(function(b){b.onclick=function(){
