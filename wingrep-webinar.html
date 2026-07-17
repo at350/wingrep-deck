@@ -221,8 +221,8 @@
   .pane2{background:#2a1811;border:1.5px solid #45281d;border-radius:12px;padding:.8rem .95rem;opacity:0;transform:translateY(14px);transition:.5s cubic-bezier(.2,.8,.2,1)}
   .pane2.show{opacity:1;transform:none}
   .pane2 .h{font-family:var(--body);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#de9a81;margin-bottom:.4rem}
-  .pane2 .h .ok{color:#a44927} .pane2 p{font-size:13.5px;line-height:1.42;font-weight:500;color:#f4edea}
-  .pane2 .row{display:flex;justify-content:space-between;border-top:1px solid #45281d;padding:.35rem 0;font-size:13px;color:#eee0db} .pane2 .row:first-of-type{border-top:none} .pane2 .row b{font-weight:700;color:#fff}
+  .pane2 .h .ok{color:#a44927} .pane2 p{font-size:14px;line-height:1.42;font-weight:500;color:#f4edea}
+  .pane2 .row{display:flex;justify-content:space-between;border-top:1px solid #45281d;padding:.35rem 0;font-size:14px;color:#eee0db} .pane2 .row:first-of-type{border-top:none} .pane2 .row b{font-weight:700;color:#fff}
   .pane2.coach{background:#37180d;border-color:#a44927} .pane2.coach .stuck{color:#de9a81;font-weight:800}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(164,73,39,.5)}70%{box-shadow:0 0 0 9px rgba(164,73,39,0)}100%{box-shadow:0 0 0 0 rgba(164,73,39,0)}}
   .caption{margin-top:1rem;font-size:clamp(15px,1.6vw,19px);font-weight:600;color:var(--ink-soft);opacity:0;transition:opacity .5s} .caption.show{opacity:1}
@@ -1562,11 +1562,11 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
        text it sits next to, so the final line box outgrows a plain one and the
        panel would still tick down ~2px right as the run lands. Reserved in em so
        it also holds at the 880px breakpoint's smaller type. */
-    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:13.5px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.2em + 2.3rem)}
+    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:15px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.2em + 2.3rem)}
     .sShort .typer .n{color:#a68b80}
     .sShort .s10-cap{margin-top:1.15rem;font-size:clamp(15px,1.6vw,19px);line-height:1.4;font-weight:600;color:var(--ink-soft);max-width:48ch}
     .sShort .s10-cap b{color:var(--green);font-weight:700}
-    @media (max-width:880px){.sShort .typer{font-size:12px;line-height:1.7}}
+    @media (max-width:880px){.sShort .typer{font-size:13.5px;line-height:1.7}}
     @media (prefers-reduced-motion:reduce){.sShort .typer .cr{animation:none;opacity:1}}
   </style>
   <section class="slide sShort" data-animate="type">
@@ -1647,7 +1647,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   @keyframes wrBlink{0%,100%{opacity:1}50%{opacity:.2}}
   #wingrepReveal .lv.ended .lvbadge{background:var(--c-line);color:var(--c-lbl)}
   #wingrepReveal .lv.ended .lvbadge::before{animation:none;background:var(--c-mut)}
-  #wingrepReveal .lvwho{font-size:12.5px;font-weight:600;color:var(--c-tx2)}
+  #wingrepReveal .lvwho{font-size:14px;font-weight:600;color:var(--c-tx2)}
   #wingrepReveal .lvclock{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--c-lbl);font-variant-numeric:tabular-nums}
   /* WingRep is hearing it. the bars are the whole argument, so they are green. */
   #wingrepReveal .wave{display:flex;align-items:center;gap:3px;height:26px}
@@ -1657,10 +1657,10 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   /* a live transcript: newest line sits against the nudge, older ones scroll up
      under the fade. the fade is what makes the pane read as still running. */
   #wingrepReveal .lvtx{flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-end;gap:.24rem;overflow:hidden;min-height:0;max-height:170px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%)}
-  #wingrepReveal .lvtx p{font-size:12.5px;line-height:1.42;font-weight:500;color:var(--c-lbl)}
+  #wingrepReveal .lvtx p{font-size:14px;line-height:1.42;font-weight:500;color:var(--c-lbl)}
   #wingrepReveal .lvtx p{padding-left:46px;text-indent:-46px}
   #wingrepReveal .lvtx p b{display:inline-block;width:40px;margin-right:6px;text-indent:0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--c-mut)}
-  #wingrepReveal .lvtx p.now{color:var(--c-tx);font-size:13.5px}
+  #wingrepReveal .lvtx p.now{color:var(--c-tx);font-size:15px}
   #wingrepReveal .car{display:inline-block;width:2px;height:.95em;margin-left:2px;vertical-align:-1px;background:var(--wr);animation:wrBlink 1s step-end infinite}
   #wingrepReveal .lv.ended .car{display:none}
   /* the nudge is WingRep's live coaching brief, so it carries the second accent:
@@ -1670,9 +1670,9 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   @keyframes wrLand{0%{box-shadow:0 0 0 0 rgba(110,92,242,.42)}60%{box-shadow:0 0 0 11px rgba(110,92,242,0)}100%{box-shadow:0 0 0 0 rgba(110,92,242,0)}}
   #wingrepReveal .nudge .nh{display:flex;align-items:center;gap:.35rem;margin-bottom:.36rem;font-family:var(--body);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--vi-lit)}
   #wingrepReveal .nudge .nh img{height:12px}
-  #wingrepReveal .nudge p{font-size:13.5px;line-height:1.42;font-weight:500;color:var(--c-tx)}
+  #wingrepReveal .nudge p{font-size:15px;line-height:1.42;font-weight:500;color:var(--c-tx)}
   #wingrepReveal .nudge p b{color:#fff;font-weight:800}
-  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:11.5px;font-weight:600;color:var(--c-lbl)}
+  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:12.5px;font-weight:600;color:var(--c-lbl)}
   /* "she asked" is the confirmed positive outcome, so it stays green, not violet */
   #wingrepReveal .nok{margin-left:auto;font-size:11px;text-transform:none;letter-spacing:0;color:var(--wr-lit);opacity:0;transition:opacity .55s}
   #wingrepReveal .nok.on{opacity:1}
@@ -1880,12 +1880,12 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   .sFaq .watchrow .lchip.hasimg{gap:.42rem;padding:.36rem .62rem .36rem .42rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
   .sFaq .watchrow .lchip.hasimg img.brand{height:24px;width:24px;max-width:24px;border-radius:7px}
   .sFaq .watchrow .lchip.hasimg b{font-size:14.5px}
-  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(13.5px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
+  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(15px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
   .sFaq .cmp-line b{color:var(--ink);font-weight:700}
 
   .sFaq .cmp-we{padding:clamp(1.05rem,2.1vh,1.35rem) clamp(1.15rem,1.7vw,1.55rem)}
   .sFaq .cmp-do{list-style:none;display:grid;gap:.78rem;margin:0}
-  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(13.5px,1.4vw,16px);line-height:1.42;font-weight:500}
+  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(15px,1.4vw,16px);line-height:1.42;font-weight:500}
   .sFaq .cmp-do .n{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:var(--green-wash);margin-top:.06rem}
   .sFaq .cmp-do li.loop{font-weight:700}
   .sFaq .cmp-do li.loop .n{background:var(--green);color:#fff}
