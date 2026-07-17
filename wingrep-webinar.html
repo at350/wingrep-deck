@@ -51,7 +51,8 @@
     .slide#trial .body{margin-top:.55rem}
     .slide#trial .trial-grid{margin-top:.45rem;gap:clamp(1.2rem,3vw,2.4rem)}
     .slide#trial .trial-weeks{margin-top:.8rem;gap:.55rem}
-    .slide#trial .trial-hero img{aspect-ratio:4/2.85}
+    .slide#trial .trial-hero{width:min(100%,300px)}
+    .slide#trial .trial-hero img{aspect-ratio:1200/1270}
     .slide#trial .bandlab{margin:1.4rem 0 .35rem}
     .slide#trial .logobanner{margin-top:0}
     .slide#trial .bandstrip{padding:.9rem 1.8rem}
@@ -1792,23 +1793,30 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(14px,1.5vw,18px);color:var(--green);letter-spacing:.02em}
   #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.85vw,21px);color:var(--ink);display:block;line-height:1.12}
   #trial .tw-s{font-size:clamp(12.5px,1.25vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.12rem}
-  /* the hero: one big image owns the right */
-  #trial .trial-hero{position:relative;margin:0}
-  #trial .trial-hero img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
+  /* the hero: the real product card owns the right, the meme rides its corner */
+  #trial .trial-right{position:relative}
+  #trial .trial-hero{position:relative;margin:0 auto;width:min(100%,384px)}
+  /* aspect-ratio matches the captured card crop so the UI is never cut */
+  #trial .trial-hero img{width:100%;display:block;aspect-ratio:1200/1270;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
+  /* the meme, polaroid-style, overlapping the card's bottom-right corner */
+  #trial .trial-meme{position:absolute;right:-18px;bottom:-16px;width:46%;margin:0;background:#fff;border-radius:2px;padding:7px 7px 6px;box-shadow:0 12px 26px -14px rgba(20,18,13,.5),0 1px 0 rgba(255,255,255,.8) inset;transform:rotate(3deg);transform-origin:center;z-index:2}
+  #trial .trial-meme img{width:100%;display:block;border-radius:1px}
   #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
-  /* reveal: the hero lands, the weeks stagger up, the payoff lands last */
-  #trial .trial-hero,#trial .trial-weeks li{opacity:0}
+  /* reveal: the card lands, the weeks stagger up, the meme pops onto the corner last */
+  #trial .trial-hero,#trial .trial-weeks li,#trial .trial-meme{opacity:0}
   #trial.active .trial-hero{animation:theroin .7s cubic-bezier(.2,.8,.2,1) .25s forwards}
   #trial.active .trial-weeks li{animation:trise .5s cubic-bezier(.2,.8,.2,1) forwards}
+  #trial.active .trial-meme{animation:tmemein .55s cubic-bezier(.2,.8,.2,1) .78s forwards}
   #trial.active .trial-weeks li:nth-child(1){animation-delay:.35s}
   #trial.active .trial-weeks li:nth-child(2){animation-delay:.48s}
   #trial.active .trial-weeks li:nth-child(3){animation-delay:.61s}
   @keyframes theroin{from{opacity:0;transform:translateY(14px) scale(.975)}to{opacity:1;transform:none}}
   @keyframes trise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes tmemein{from{opacity:0;transform:rotate(3deg) translateY(14px) scale(.94)}to{opacity:1;transform:rotate(3deg) translateY(0) scale(1)}}
   @media (prefers-reduced-motion:reduce){
-    #trial .trial-hero,#trial .trial-weeks li{opacity:1}
-    #trial.active .trial-hero,#trial.active .trial-weeks li{animation:none}
+    #trial .trial-hero,#trial .trial-weeks li,#trial .trial-meme{opacity:1}
+    #trial.active .trial-hero,#trial.active .trial-weeks li,#trial.active .trial-meme{animation:none}
   }
   </style>
   <section class="slide wr-theme" id="trial">
@@ -1826,7 +1834,10 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
         </div>
         <div class="trial-right">
           <figure class="trial-hero">
-            <img data-img="slide6_honeymoon.green" alt="Success Kid: your reps will not give WingRep back">
+            <img data-img="shot_prep" alt="WingRep's prep brief before a call: last call graded, gameplan ready">
+            <figure class="trial-meme">
+              <img data-img="slide6_honeymoon.green" alt="Success Kid: your reps will not give WingRep back">
+            </figure>
           </figure>
         </div>
       </div>
