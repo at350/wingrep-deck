@@ -8,13 +8,13 @@
 <title>Build your own AI sales assistant with Claude, WingRep</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600;700&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600;700&family=VT323&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F2EEE2;--paper-2:#E7E1D0;--ink:#14120D;--ink-soft:#56503F;
     --green:#B14A2C;--green-bright:#D97757;--green-deep:#3A1C10;--green-wash:#F5E6DD;
     --rust:#CB5A33;--rust-soft:#E2967B;--rust-deep:#A8431F;--amber:#E0A05A;--line:#D6CFBC;--card:#FBF9F1;
-    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --display:"Martian Mono",ui-monospace,"JetBrains Mono",monospace;
     --body:"Space Grotesk",system-ui,-apple-system,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
     --hand:"Caveat",cursive;--pixel:"VT323",monospace;
@@ -76,7 +76,7 @@
 
   .eyebrow{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(11px,1.05vw,13px);color:var(--green);display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem}
   .eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright)}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,6.2vw,76px);line-height:1.0;letter-spacing:-.02em;text-wrap:balance}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5.4vw,60px);line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
   h1 .hl{color:var(--green)} h1 .rust{color:var(--rust)}
   .sub{font-size:clamp(16px,2vw,23px);line-height:1.45;color:var(--ink-soft);margin-top:1.2rem;max-width:46ch;font-weight:500}
   p.body{font-size:clamp(16px,1.6vw,20px);line-height:1.55;margin-top:1.1rem;max-width:56ch;font-weight:500}
@@ -579,11 +579,11 @@
 
   /* ---- headline + sub ---- */
   .s12-h{
-    font-family:"Bricolage Grotesque",sans-serif;
+    font-family:var(--display);
     font-weight:800;
-    font-size:clamp(40px,7vw,92px);
-    line-height:.98;
-    letter-spacing:-.02em;
+    font-size:clamp(32px,5.2vw,64px);
+    line-height:1.0;
+    letter-spacing:-.035em;
     margin:0;
   }
   .s12-h .s12-line{display:block;overflow:hidden;}
