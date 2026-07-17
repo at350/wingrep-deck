@@ -363,6 +363,9 @@
   @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-hero{max-width:460px} }
 
   .soon{text-align:center;align-items:center} .soon .wrap{display:flex;flex-direction:column;align-items:center}
+  /* scoped: static install callout, mono/eyebrow language, visible under reduced motion */
+  .soon-install{margin-top:1rem;max-width:52ch;font-family:var(--mono);font-size:clamp(14px,1.5vw,16px);line-height:1.45;color:var(--green-deep);border:1px solid var(--line);border-radius:8px;background:var(--card);padding:.55rem .95rem}
+  .soon-install b{color:var(--green);font-weight:700}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
   .soonmark svg{width:84px;height:84px;transform-origin:center;animation:breathe 4.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
@@ -735,6 +738,8 @@
   /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
   .s14-why{margin-top:1.15rem;margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
   @media (max-width:760px){.s14-why{margin-left:0}}
+  /* scoped: the plumbing payoff, tucked tight under the why line */
+  .s14-plumbing{margin-top:.75rem;font-size:clamp(15px,1.6vw,19px);max-width:66ch}
   .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
   .s14-panel{margin:0;width:138px;aspect-ratio:1;overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:var(--paper-2)}
   .s14-panel img{width:100%;height:100%;object-fit:cover;display:block}
@@ -851,6 +856,7 @@
       <p class="sub">Grab a coffee. Mute Slack. You'll leave with a workflow you can run tonight.</p>
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
+      <div class="soon-install">While you wait: install the <b>Claude desktop app</b> at claude.ai/download. You build with it tonight.</div>
     </div>
   </section>
 
@@ -1001,6 +1007,10 @@
   }
   @keyframes s3cSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
   @keyframes s3cFloor{0%,100%{transform:scale(1);opacity:.26}48%{transform:scale(.68);opacity:.09}}
+  /* scoped: artifact flash strip, borrowing the deck's .term dark/mono language */
+  .s3c-flash{display:flex;align-items:center;flex-wrap:wrap;gap:.7rem .95rem;margin-top:1rem}
+  .s3c-term{font-family:var(--mono);font-size:13px;line-height:1.4;background:#1a120f;color:#e7d6d0;border-radius:6px;padding:.5rem .75rem}
+  .s3c-scribble{font-family:var(--hand);color:var(--green);font-weight:700;font-size:clamp(18px,1.9vw,23px);transform:rotate(-2.5deg);white-space:nowrap}
   /* house rule: reduced motion gets a still slide. The critter stays, it just stands
      there (mid-stride, shadow under its feet) instead of dancing. */
   @media (prefers-reduced-motion:reduce){
@@ -1017,14 +1027,18 @@
   <section class="slide s3c">
     <div class="wrap">
       <div class="eyebrow">Here's the deal</div>
-      <h1><span class="ln">In forty-five minutes,</span><br><span class="ln">you build the assistant</span><br><span class="ln">your team <span class="hl">runs on.</span></span></h1>
+      <h1><span class="ln">In forty-five minutes,</span><br><span class="ln">you build a coaching loop</span><br><span class="ln">that <span class="hl">runs itself.</span></span></h1>
       <ul class="checks" aria-label="What you will be able to do tonight">
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Run a coaching loop that sticks.</b> Coach one thing, then check the next call to see if it landed. For every rep, not just the one you rode along with.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Write prompts Claude takes seriously.</b> The four moves that separate junk from gold. Your reps copy them from a one-page cheat sheet.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Give Claude memory.</b> One running file per rep and per deal, so nothing resets every Monday. Set it up once; it compounds.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Prep and drill before the call</b>, not scramble after it. Reps get reps without burning a prospect.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Memory.</b> Files that start empty and fill themselves, one per rep and per deal. Nothing resets on Monday.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Senses.</b> Connect your calendar so context arrives on its own. No pasting.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>A schedule.</b> One automation preps every rep's day before it starts.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Proof it stuck.</b> The loop checks whether coaching showed up on the next call, then drills it.</span></li>
       </ul>
-      <p class="sub" style="max-width:62ch">Everything we build tonight is a system you set up once for the team, and it's yours to keep whether or not we ever talk again.</p>
+      <p class="sub" style="max-width:62ch">You set this up once for the team. The cheat sheet at the end has every step, and it's yours whether or not we ever talk again.</p>
+      <div class="s3c-flash">
+        <code class="s3c-term">game-plans/jul-18.md · GOAL Get Marcus to name the audit deadline. · written 7:00am</code>
+        <span class="s3c-scribble">this wrote itself. stay for slide 10.</span>
+      </div>
       <figure class="s3c-claude" aria-hidden="true">
         <span class="s3c-sway"><img class="s3c-dancer" data-asset="s3_claude" alt=""></span>
         <span class="s3c-floor"></span>
@@ -1377,6 +1391,7 @@
         </div>
       </div>
       <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
+      <p class="sub s14-plumbing" style="max-width:66ch">Garbage in was never a prompting problem. It's a plumbing problem: context should arrive on its own.</p>
     </div>
     <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
