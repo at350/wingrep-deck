@@ -1700,16 +1700,18 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
      the tallest thing in the deck: at that height the headline and eyebrow ride up
      under the fixed top-bar mark, which lands on exactly the slide where that mark
      first appears. Tighten the whole column on short viewports. Nothing is dropped,
-     it just gets closer together. Untouched at 800px and above. */
+     it just gets closer together. Untouched at 800px and above. The tightened
+     paddings, gaps, and margins here pay for the raised type floors: at 720p the
+     larger transcript and pane text would otherwise overflow the slide by 12px. */
   @media (max-height:780px){
     #wingrepReveal h1{font-size:clamp(30px,4.2vw,56px)}
-    #wingrepReveal .app{margin-top:.55rem}
-    #wingrepReveal .stage{padding:.6rem}
-    #wingrepReveal .panes{gap:.42rem}
-    #wingrepReveal .pane2{padding:.48rem .75rem}
+    #wingrepReveal .app{margin-top:.4rem}
+    #wingrepReveal .stage{padding:.45rem .6rem}
+    #wingrepReveal .panes{gap:.38rem}
+    #wingrepReveal .pane2{padding:.38rem .75rem}
     #wingrepReveal .pane2 .row{padding:.2rem 0}
     #wingrepReveal .lvtx{max-height:116px}
-    #wingrepReveal .caption{margin-top:.55rem;font-size:16px}
+    #wingrepReveal .caption{margin-top:.45rem;font-size:16px}
     #wingrepReveal .replay{margin-top:.4rem}
   }
 
