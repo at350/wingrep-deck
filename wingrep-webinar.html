@@ -178,11 +178,11 @@
   .os .screen{background:#fdfcf7;border:2px solid;border-color:#7c786c #fdfcf7 #fdfcf7 #7c786c;margin:0 .45rem;min-height:250px;padding:.9rem 1rem}
   .os .pane{display:none} .os .pane.on{display:block;animation:rev .3s both}
   .os .pane h4{font-family:var(--body);font-weight:700;font-size:14.5px;margin-bottom:.45rem;color:#14120d}
-  .os .pane p{font-size:13px;line-height:1.48;color:#2c2920;font-weight:500;max-width:62ch}
-  .os .term{font-family:var(--mono);font-size:11.5px;line-height:1.5;background:#1a120f;color:#e7d6d0;border-radius:6px;padding:.75rem .85rem;margin-top:.6rem;white-space:pre-wrap}
+  .os .pane p{font-size:14px;line-height:1.48;color:#2c2920;font-weight:500;max-width:62ch}
+  .os .term{font-family:var(--mono);font-size:13.5px;line-height:1.42;background:#1a120f;color:#e7d6d0;border-radius:6px;padding:.75rem .85rem;margin-top:.6rem;white-space:pre-wrap}
   .os .term .g{color:#d19781}
   .os .copy{margin-top:.55rem;font-family:var(--body);font-weight:700;font-size:12px;background:#bdb9ad;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;padding:.34rem .8rem;cursor:pointer;color:#14120d}
-  .ledger{font-family:var(--mono);font-size:11.5px;line-height:1.5;color:#2c2920;background:#fff;border:1px solid #d6cfbc;border-radius:6px;padding:.7rem .8rem;margin-top:.55rem}
+  .ledger{font-family:var(--mono);font-size:13px;line-height:1.5;color:#2c2920;background:#fff;border:1px solid #d6cfbc;border-radius:6px;padding:.7rem .8rem;margin-top:.55rem}
   .ledger .stuck{background:#efddd7;color:#5f2a16;font-weight:700;padding:0 .2em} .ledger .slip{background:#f6dcd4;color:#b3381f;font-weight:700;padding:0 .2em} .ledger .hd{color:#8a8472}
   /* Slide 9, tab 3 scorecard. The five columns are the rep's last 5 calls; each
      shows whether the coaching focus "stuck" or "slipped". --green and --rust are
@@ -756,8 +756,6 @@
   /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
   .s14-why{margin-top:1.15rem;margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
   @media (max-width:760px){.s14-why{margin-left:0}}
-  /* scoped: the plumbing payoff, tucked tight under the why line */
-  .s14-plumbing{margin-top:.75rem;font-size:clamp(15px,1.6vw,19px);max-width:66ch}
   .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
   .s14-panel{margin:0;width:138px;aspect-ratio:1;overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:var(--paper-2)}
   .s14-panel img{width:100%;height:100%;object-fit:cover;display:block}
@@ -817,7 +815,7 @@
   .glow-stage{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   .glow-col{display:flex;flex-direction:column;gap:.4rem}
   .glow-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-  .glow-prompt,.glow-out{font-family:var(--mono);font-size:12.5px;line-height:1.5;border-radius:10px;padding:.75rem .85rem;min-height:108px;transition:background .35s,color .35s,box-shadow .35s,border-color .35s}
+  .glow-prompt,.glow-out{font-family:var(--mono);font-size:14px;line-height:1.5;border-radius:10px;padding:.75rem .85rem;min-height:108px;transition:background .35s,color .35s,box-shadow .35s,border-color .35s}
   .glow-prompt{background:#1a120f;color:#e7d6d0;border:1px solid #45281d}
   .glow-out{background:#fff;color:#56503f;border:1.5px solid var(--line)}
   .glow.lvl2 .glow-out{color:#2c2920}
@@ -833,7 +831,7 @@
   .os{position:relative}
   .clippy{position:absolute;right:-6px;bottom:54px;z-index:6;display:flex;align-items:flex-end;gap:.4rem;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
   .clippy.show{opacity:1;transform:none}
-  .clippy-bubble{max-width:210px;background:#fffbdc;border:1.5px solid #b8b48f;border-radius:10px;padding:.5rem .7rem;font-family:var(--body);font-weight:600;font-size:12px;line-height:1.35;color:#3a3722;box-shadow:3px 3px 0 rgba(20,18,13,.2)}
+  .clippy-bubble{max-width:210px;background:#fffbdc;border:1.5px solid #b8b48f;border-radius:10px;padding:.5rem .7rem;font-family:var(--body);font-weight:600;font-size:13px;line-height:1.35;color:#3a3722;box-shadow:3px 3px 0 rgba(20,18,13,.2)}
   .clippy-art{line-height:0;animation:float 4s ease-in-out infinite}
   .clippy-art svg{width:54px;height:74px;display:block;overflow:visible;filter:drop-shadow(1.5px 2.5px 1.5px rgba(20,18,13,.3))}
   .clippy-brow{transform-box:fill-box;transform-origin:center 90%;animation:clippyBrow 3.4s ease-in-out infinite}
@@ -1418,7 +1416,6 @@
         </div>
       </div>
       <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
-      <p class="sub s14-plumbing" style="max-width:66ch">Garbage in was never a prompting problem. It's a plumbing problem: context should arrive on its own.</p>
     </div>
     <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
@@ -1542,8 +1539,8 @@
             <div class="term">C:\coaching\> dir
 <span class="g">cobalt-deal-file.md</span>   jordan-coaching-log.md
 cobalt-deal-scorecard.md   transcripts\   <span class="g">game-plans\</span></div></div>
-          <div class="pane" id="t2"><h4>Step 2, one prompt runs the whole loop</h4>
-            <p>After each call, one paste does capture, coaching, and scorecard, <b>in order, then stops</b>.</p>
+          <div class="pane" id="t2"><h4>Step 2, the loop is the cycle. This prompt is one turn of it.</h4>
+            <p>Every call gets the same pass: capture, coaching check, scorecard, <b>then stop</b>. Run it after each call and the files compound; that repetition is the loop. Step 4 makes it run without you.</p>
             <div class="term">Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:
 1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
 2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
@@ -1605,7 +1602,7 @@ Then stop and tell me the one thing that changed most.</div>
       <div class="eyebrow">Where Claude falls short</div>
       <h1>The loop preps and reviews.<br>Nobody's <span class="hl">in the call.</span></h1>
       <div class="typer" id="typer" role="img" aria-label="A chat with Claude: the after-call loop and tomorrow's morning game plans both come back done, then asking it to join the 2pm call and nudge live, and to run for all eight reps, both get an honest no. The cursor sits waiting."></div>
-      <p class="s10-cap">Keep this loop. It's the best free coaching system in sales. <b>It still can't hear the call.</b></p>
+      <p class="s10-cap">All of that is yours, and it runs without you. <b>The one place it can't coach is the call itself.</b></p>
     </div>
   </section>
 
@@ -1703,7 +1700,7 @@ Then stop and tell me the one thing that changed most.</div>
   #wingrepReveal .nudge .nh img{height:12px}
   #wingrepReveal .nudge p{font-size:15px;line-height:1.42;font-weight:500;color:var(--c-tx)}
   #wingrepReveal .nudge p b{color:#fff;font-weight:800}
-  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:12.5px;font-weight:600;color:var(--c-lbl)}
+  #wingrepReveal .nudge .nf{margin-top:.34rem;font-size:13.5px;font-weight:600;color:var(--c-lbl)}
   /* "she asked" is the confirmed positive outcome, so it stays green, not violet */
   #wingrepReveal .nok{margin-left:auto;font-size:11px;text-transform:none;letter-spacing:0;color:var(--wr-lit);opacity:0;transition:opacity .55s}
   #wingrepReveal .nok.on{opacity:1}
@@ -2070,7 +2067,7 @@ Then stop and tell me the one thing that changed most.</div>
     border:2.5px solid #fff;box-shadow:0 0 0 2px var(--green),0 8px 18px -8px rgba(20,18,13,.55);background:var(--green-wash)}
   .sOffer-ava img{width:100%;height:100%;object-fit:cover;display:block}
   .sOffer-book .btn{margin:0}
-  .sOffer-url{font-family:var(--mono);font-size:clamp(10px,1.1vw,12.5px);color:var(--green-deep);margin-top:.75rem;opacity:.9;letter-spacing:.01em}
+  .sOffer-url{font-family:var(--mono);font-size:20px;color:var(--green-deep);margin-top:.75rem;opacity:.9;letter-spacing:.01em}
   /* the flip clock: a real object in the deck palette (deep green slabs, cream numerals) */
   .sOffer-clockzone{display:flex;flex-direction:column;align-items:center;gap:.9rem}
   .sOffer-clocklbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(9px,1.05vw,11.5px);color:var(--ink-soft);text-align:center}
