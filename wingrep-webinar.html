@@ -8,13 +8,13 @@
 <title>Build your own AI sales assistant with Claude, WingRep</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600;700&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600;700&family=VT323&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#F2EEE2;--paper-2:#E7E1D0;--ink:#14120D;--ink-soft:#56503F;
     --green:#B14A2C;--green-bright:#D97757;--green-deep:#3A1C10;--green-wash:#F5E6DD;
     --rust:#CB5A33;--rust-soft:#E2967B;--rust-deep:#A8431F;--amber:#E0A05A;--line:#D6CFBC;--card:#FBF9F1;
-    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --display:"Martian Mono",ui-monospace,"JetBrains Mono",monospace;
     --body:"Space Grotesk",system-ui,-apple-system,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
     --hand:"Caveat",cursive;--pixel:"VT323",monospace;
@@ -41,7 +41,7 @@
      it is what clears the fixed top bar. */
   @media (max-height:800px){
     .slide{padding-bottom:3.5vh}
-    .sFive h1,.slide#trial h1{font-size:clamp(26px,3.5vw,42px)}
+    .sFive h1{font-size:clamp(26px,3.5vw,42px)}
     .sFive .prompts5{margin-top:.7rem}
     .sFive .prompts5 li{padding-top:.42rem;padding-bottom:.42rem}
     .sFive .glow{margin-top:.75rem}
@@ -76,7 +76,7 @@
 
   .eyebrow{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(11px,1.05vw,13px);color:var(--green);display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem}
   .eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright)}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,6.2vw,76px);line-height:1.0;letter-spacing:-.02em;text-wrap:balance}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5.4vw,60px);line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
   h1 .hl{color:var(--green)} h1 .rust{color:var(--rust)}
   .sub{font-size:clamp(16px,2vw,23px);line-height:1.45;color:var(--ink-soft);margin-top:1.2rem;max-width:46ch;font-weight:500}
   p.body{font-size:clamp(16px,1.6vw,20px);line-height:1.55;margin-top:1.1rem;max-width:56ch;font-weight:500}
@@ -255,7 +255,7 @@
 
   /* slide 3 agenda: roomy now that the presenter beat moved out */
   .slide.s3c{padding-top:5.2vh;padding-bottom:5.5vh}
-  .s3c h1{font-size:clamp(32px,5vw,64px)}
+  .s3c h1{font-size:clamp(32px,5vw,64px);white-space:nowrap}
   .s3c .checks{margin-top:1.2rem;gap:.85rem}
   .s3c .checks li{font-size:clamp(15px,1.55vw,18px)}
   .s3c .sub{margin-top:1.1rem;font-size:clamp(16px,1.7vw,19px);line-height:1.4}
@@ -309,7 +309,26 @@
   .sAlan-slot:has(img.imgon){border-style:solid;border-color:transparent;background:#ddd}
   .sAlan-slot:has(img.imgon)::before,.sAlan-slot:has(img.imgon)::after,.sAlan-slot:has(img.imgon) span{display:none}
   .sAlan-polaroid figcaption{font-family:var(--hand);font-weight:700;font-size:15px;color:var(--ink-soft);text-align:center;margin-top:6px;line-height:1.1}
-  @media(max-width:900px){.sAlan-wall{max-width:420px}}
+  /* Alan's headshot framed as a coral LEGO plate, drawn to match the university brick
+     PNGs below it: a glossy top-lit body, a row of cylindrical studs poking off the top
+     edge, and a dark bottom lip for thickness. The photo is recessed into the face where
+     those bricks carry their logo. It straddles the top of the photo wall — most of it
+     above, the lower edge dipping onto the top two polaroids. The wall's top padding opens
+     that room; the negative top offset lets the plate ride up beside the headline. */
+  .sAlan-wall{--faceD:clamp(212px,31vh,266px);--faceP:clamp(46px,7vh,82px);position:relative;padding-top:var(--faceP)}
+  .sAlan-face{position:absolute;top:calc(var(--faceP) - var(--faceD) * 0.58);left:50%;transform:translateX(-50%);
+    z-index:4;width:var(--faceD);aspect-ratio:1;overflow:visible;
+    filter:drop-shadow(0 18px 20px rgba(20,18,13,.42))}
+  .sAlan-brick{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;pointer-events:none}
+  /* the photo, set into the plate face (window rect 26,58 198x176 of the 250 viewBox) */
+  .sAlan-face-in{position:absolute;left:10.4%;top:23.2%;width:79.2%;height:70.4%;
+    border-radius:2px;overflow:hidden;background:#B9880C;z-index:2;
+    box-shadow:inset 0 3px 7px rgba(60,42,4,.45),inset 0 -1px 0 rgba(255,255,255,.16),0 0 0 2px rgba(150,110,10,.55)}
+  .sAlan-face-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:none}
+  .sAlan-face-in img.imgon{display:block}
+  .sAlan-face-in .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:800;font-size:2.4rem;color:#7a5a08}
+  @media(max-width:900px){.sAlan-wall{max-width:420px;margin:0 auto}}
 
   /* bouncing DVD-logo headshot (lives on the about-Alan slide) */
   .s3-dvd{position:absolute;top:0;left:0;width:110px;height:110px;z-index:1;display:none;pointer-events:none;will-change:transform}
@@ -338,7 +357,7 @@
   .how div b{font-family:var(--display);font-weight:800;color:var(--green);font-size:12px;letter-spacing:.04em;white-space:nowrap;min-width:4.6em}
   /* Slide 12 (trial): headline + bold 3-week list on the left, one big hero image on the right,
      so the payoff visual fills what used to be dead space. h1 sized for the half-width column. */
-  #trial h1{font-size:clamp(28px,3.4vw,46px);line-height:1.04}
+  #trial h1{font-size:clamp(24px,3.1vw,37px);line-height:1.05;white-space:nowrap}
   #trial .logobanner{margin-top:1.1rem}
   @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-hero{max-width:460px} }
 
@@ -579,11 +598,11 @@
 
   /* ---- headline + sub ---- */
   .s12-h{
-    font-family:"Bricolage Grotesque",sans-serif;
+    font-family:var(--display);
     font-weight:800;
-    font-size:clamp(40px,7vw,92px);
-    line-height:.98;
-    letter-spacing:-.02em;
+    font-size:clamp(32px,5.2vw,64px);
+    line-height:1.0;
+    letter-spacing:-.035em;
     margin:0;
   }
   .s12-h .s12-line{display:block;overflow:hidden;}
@@ -669,7 +688,7 @@
   /* slide 2: polaroid */
   .s2-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:clamp(24px,4vw,58px);align-items:center}
   .s2-copy{min-width:0}
-  .s2-copy h1{font-size:clamp(30px,4.7vw,55px);line-height:1.04}
+  .s2-copy h1{font-size:clamp(26px,3.6vw,44px);line-height:1.05;white-space:nowrap}
   .s2-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:380px}
   .s2-polaroid{position:relative;background:#fff;padding:15px 15px 0;border-radius:8px;box-shadow:0 34px 74px -32px rgba(20,18,13,.62);width:min(330px,86%);animation:s2bob 6.5s ease-in-out infinite;z-index:2}
   @keyframes s2bob{0%,100%{transform:rotate(2.4deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-13px)}}
@@ -817,7 +836,7 @@
 <div class="progress" id="progress"></div>
 <div class="topbar" id="topbar">
   <div class="brand"><img data-asset="ui_brand" alt="WingRep"></div>
-  <div class="counter" id="counter">01 / 21</div>
+  <div class="counter" id="counter">01 / 17</div>
 </div>
 
 <div class="deck" id="deck">
@@ -866,6 +885,71 @@
           <span class="s2-chip c4">+11 fields</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 2b: the tool wall. Every logo the room already pays for; none of them did
+       the 7:14pm work on the previous slide. -->
+  <style>
+  /* ===== slide "swall": the sales-tool wall =====
+     Scoped block, nothing leaks. Pre-reveal slide, so Claude clay palette only.
+     Beat: tiles pop in one by one (the buying spree), then the whole wall greys
+     out as the payoff line lands. The tiles reuse the deck's .lchip + EMBED
+     hydration (same markup as the FAQ competitor chips), restyled here as grid
+     tiles; a brand with no embedded logo falls back to the wordmark pill. */
+  .swall h1{font-size:clamp(30px,4.8vw,58px)}
+  .swall-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(.5rem,1.4vh,.8rem);margin-top:clamp(1.2rem,3vh,2rem)}
+  .swall-grid .lchip{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:.55rem;background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:.62rem .5rem;box-shadow:0 10px 24px -16px rgba(20,18,13,.5)}
+  .swall-grid .lchip b{border:none;background:none;border-radius:0;padding:0;font-family:var(--display);font-weight:800;font-size:clamp(12px,1.25vw,16px);color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
+  .swall-grid .lchip.hasimg{gap:.55rem;padding:.62rem .5rem;border-radius:13px;height:100%}
+  .swall-grid .lchip.hasimg img.brand{display:block;height:clamp(20px,2.2vw,26px);width:auto;max-width:32px;object-fit:contain}
+  .swall-pay{margin-top:clamp(1rem,2.6vh,1.7rem);font-family:var(--body);font-weight:700;font-size:clamp(17px,2vw,25px)}
+  .swall-pay b{color:var(--rust)}
+  /* motion: entrance rev on the grid container (keeps the deck's .wrap stagger),
+     per-tile pop on a --n delay, then swallFail dims the wall right before the
+     payoff line lands */
+  /* the .wrap> in these two selectors is load-bearing: the deck's global
+     stagger rule (.slide.active .wrap>*:nth-child(n)) carries an extra
+     pseudo-class of specificity, and without matching it the 2.4s/2.55s
+     delays lose to the stagger's .12s/.2s */
+  .swall.active .wrap>.swall-grid{animation:rev .6s cubic-bezier(.2,.85,.25,1) forwards,swallFail .6s ease forwards;animation-delay:.12s,2.4s}
+  .swall.active .swall-grid .lchip{opacity:0;animation:swallPop .34s cubic-bezier(.2,.85,.3,1.1) forwards;animation-delay:calc(.3s + var(--n)*.07s)}
+  .swall.active .wrap>.swall-pay{opacity:0;animation:rev .5s cubic-bezier(.2,.85,.25,1) forwards;animation-delay:2.55s}
+  @keyframes swallPop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+  @keyframes swallFail{to{filter:grayscale(1);opacity:.42}}
+  /* house rule: reduced motion gets the resolved still frame (dimmed wall,
+     payoff visible). The global rule kills durations but NOT delays, so the
+     animations are removed outright here. */
+  @media (prefers-reduced-motion:reduce){
+    .swall.active .swall-grid,.swall.active .swall-grid .lchip,.swall.active .swall-pay{animation:none;opacity:1}
+    .swall.active .swall-grid{filter:grayscale(1);opacity:.42}
+  }
+  @media (max-width:900px){.swall-grid{grid-template-columns:repeat(4,1fr)}}
+  </style>
+  <section class="slide swall">
+    <div class="wrap">
+      <h1><span class="ln">Every sales tool has</span><br><span class="ln">the same problem...</span></h1>
+      <div class="swall-grid" aria-label="Sales tools the room already owns">
+        <span class="lchip" data-domain="gong.io" style="--n:0"><img class="brand" alt="Gong"><b>Gong</b></span>
+        <span class="lchip" data-domain="clari.com" style="--n:1"><img class="brand" alt="Clari"><b>Clari</b></span>
+        <span class="lchip" data-domain="hubspot.com" style="--n:2"><img class="brand" alt="HubSpot"><b>HubSpot</b></span>
+        <span class="lchip" data-domain="fireflies.ai" style="--n:3"><img class="brand" alt="Fireflies"><b>Fireflies</b></span>
+        <span class="lchip" data-domain="outreach.io" style="--n:4"><img class="brand" alt="Outreach"><b>Outreach</b></span>
+        <span class="lchip" data-domain="zoominfo.com" style="--n:5"><img class="brand" alt="ZoomInfo"><b>ZoomInfo</b></span>
+        <span class="lchip" data-domain="salesforce.com" style="--n:6"><img class="brand" alt="Salesforce"><b>Salesforce</b></span>
+        <span class="lchip" data-domain="dooly.ai" style="--n:7"><img class="brand" alt="Dooly"><b>Dooly</b></span>
+        <span class="lchip" data-domain="otter.ai" style="--n:8"><img class="brand" alt="Otter"><b>Otter</b></span>
+        <span class="lchip" data-domain="highspot.com" style="--n:9"><img class="brand" alt="Highspot"><b>Highspot</b></span>
+        <span class="lchip" data-domain="apollo.io" style="--n:10"><img class="brand" alt="Apollo"><b>Apollo</b></span>
+        <span class="lchip" data-domain="scratchpad.com" style="--n:11"><img class="brand" alt="Scratchpad"><b>Scratchpad</b></span>
+        <span class="lchip" data-domain="salesloft.com" style="--n:12"><img class="brand" alt="Salesloft"><b>Salesloft</b></span>
+        <span class="lchip" data-domain="fathom.video" style="--n:13"><img class="brand" alt="Fathom"><b>Fathom</b></span>
+        <span class="lchip" data-domain="6sense.com" style="--n:14"><img class="brand" alt="6sense"><b>6sense</b></span>
+        <span class="lchip" data-domain="pipedrive.com" style="--n:15"><img class="brand" alt="Pipedrive"><b>Pipedrive</b></span>
+        <span class="lchip" data-domain="sybill.ai" style="--n:16"><img class="brand" alt="Sybill"><b>Sybill</b></span>
+        <span class="lchip" data-domain="close.com" style="--n:17"><img class="brand" alt="Close"><b>Close</b></span>
+      </div>
+      <p class="swall-pay">They record. They transcribe. <b>You still type.</b></p>
     </div>
   </section>
 
@@ -981,12 +1065,17 @@
     justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
-  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:0;height:100%}
-  .sAlan .s3-head{display:flex;align-items:center;gap:.8rem;width:100%}
-  .sAlan .s3-ava{width:74px;height:74px}
-  .sAlan .s3-name{font-size:clamp(20px,1.95vw,26px);line-height:1.18}
-  .sAlan .s3-name .role{display:block;font-size:.63em;margin-top:.1rem}
-  .sAlan .s3-tie{margin-top:.9rem;max-width:none;font-size:clamp(14px,1.35vw,16.5px);line-height:1.45}
+  /* With the nameplate gone the left column carried only the tie line + brick shelf, so
+     bottoming the bricks out (margin-top:auto) left a tall dead gap in the middle. The
+     cluster is now centred as one block against the photo wall, and the tie line is a touch
+     larger so the column has real weight instead of a sentence stranded at the top. */
+  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1.4rem,4vh,2.4rem);height:100%}
+  .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(15px,1.55vw,19px);line-height:1.5}
+  /* the hackathon wins are demoted from the headline claim to a quiet, captioned strip:
+     the AI-research line above now carries the credibility, these are human texture. */
+  .sAlan .s3-markwrap{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:auto}
+  .sAlan .s3-markcap{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--rust-deep)}
   /* A veil of paper, not a card. At 2x the bouncing headshot is wide enough to sit right
      on top of this text, so the bio floats on a soft wash that fades to nothing at its
      edges: the ball still glides visibly behind it, but the words never lose contrast.
@@ -997,7 +1086,7 @@
     background:rgba(242,238,226,.9);border-radius:30px;filter:blur(15px)}
 
   /* the shelf: three plates of one mould, stacked, widening to the base */
-  .sAlan .s3-marks{width:auto;margin-top:auto;padding-top:1.2rem;border-top:none;gap:5px}
+  .sAlan .s3-marks{width:auto;margin-top:0;padding-top:0;border-top:none;gap:5px}
   .sAlan .s3-marks::before{content:none}   /* "Hackathon wins" only restated the line above it */
   .sAlan .s3-marks img.mk{width:auto;height:var(--brickH);
     filter:drop-shadow(0 3px 0 rgba(31,28,22,.10)) drop-shadow(0 9px 13px rgba(31,28,22,.16))}
@@ -1035,33 +1124,42 @@
   @media (prefers-reduced-motion:reduce){.s3-trail,.s3-bits{display:none!important}}
   </style>
   <section class="slide sAlan">
-    <canvas class="s3-trail" id="s3trail" aria-hidden="true"></canvas>
-    <canvas class="s3-bits" id="s3bits" aria-hidden="true"></canvas>
-    <div class="s3-dvd" id="s3dvd" aria-hidden="true"><div class="s3-dvd-in"><img data-img="alan_headshot" alt=""></div></div>
     <div class="wrap sAlan-wrap">
       <div class="eyebrow">Your guide tonight</div>
       <h1><span class="ln">Hi, I'm <span class="hl">Alan.</span></span></h1>
       <div class="sAlan-grid">
         <div class="s3-guide">
           <div class="s3-bio">
-            <div class="s3-head">
-              <div class="s3-ava">
-                <span class="fallback" aria-hidden="true">AT</span>
-                <img data-img="alan_headshot" alt="Alan Tai">
-              </div>
-              <div class="s3-id">
-                <div class="s3-name">Alan Tai <span class="role">builder, not a pitch guy</span></div>
-              </div>
-            </div>
-            <p class="s3-tie"><b>5x hackathon winner.</b> Winning a hackathon is 24 hours to make a stranger care. Same skill as the cold email you'll write tonight.</p>
+            <p class="s3-tie"><b>I build AI that actually works for sales teams.</b> My own background is in AI &mdash; published, peer-reviewed research in neural networks and computer vision &mdash; now pointed straight at the work your reps do every day.</p>
           </div>
-          <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
-            <img class="mk" data-img="logo_princeton" alt="Princeton University">
-            <img class="mk" data-img="logo_northwestern" alt="Northwestern University">
-            <img class="mk" data-img="logo_uchicago" alt="The University of Chicago">
+          <div class="s3-markwrap">
+            <div class="s3-markcap">5&times; hackathon winner</div>
+            <div class="s3-marks" aria-label="Hackathon wins at Princeton, Northwestern, and UChicago">
+              <img class="mk" data-img="logo_princeton" alt="Princeton University">
+              <img class="mk" data-img="logo_northwestern" alt="Northwestern University">
+              <img class="mk" data-img="logo_uchicago" alt="The University of Chicago">
+            </div>
           </div>
         </div>
         <div class="sAlan-wall" aria-label="Photos from four hackathons">
+          <div class="sAlan-face">
+            <svg class="sAlan-brick" viewBox="0 0 250 250" aria-hidden="true">
+              <rect x="8" y="50" width="234" height="198" rx="4" fill="#D3A017"/>
+              <g stroke="#C9960C" stroke-width="0.5">
+                <g><rect x="15" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="37" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="37" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="74" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="96" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="96" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="133" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="155" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="155" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+                <g><rect x="191" y="19" width="44" height="28" rx="6" fill="#E7B41E"/><ellipse cx="213" cy="19" rx="22" ry="8.5" fill="#F7CE3C"/><ellipse cx="213" cy="16.5" rx="13" ry="3.6" fill="#FBDD6E" stroke="none"/></g>
+              </g>
+              <rect x="8" y="40" width="234" height="200" rx="4" fill="#F5C518" stroke="#C9960C" stroke-width="0.6"/>
+              <rect x="16" y="46" width="218" height="6" rx="2" fill="#FBDB6A"/>
+              <rect x="26" y="58" width="198" height="176" rx="3" fill="#B9880C"/>
+            </svg>
+            <div class="sAlan-face-in">
+              <span class="fallback" aria-hidden="true">AT</span>
+              <img data-img="alan_headshot" alt="Alan Tai">
+            </div>
+          </div>
           <figure class="sAlan-polaroid rot1">
             <div class="sAlan-slot"><img data-img="alan_win_1" alt="A crowded hackathon room, laptops open across every table"><span>hackathon photo</span></div>
             <figcaption>the build</figcaption>
@@ -1197,25 +1295,25 @@
      <div class="s9-main">
       <div class="eyebrow">AI, minus the jargon</div>
       <h1><span class="ln">Three words and you</span><br><span class="ln">actually <span class="hl">get modern AI.</span></span></h1>
-      <p class="sub">Three words describe every current frontier model, so learn them once and you can size up whatever tool a vendor puts in front of you.</p>
+      <p class="sub">Every frontier model runs on the same three. Learn them once and you can size up whatever a vendor puts in front of you.</p>
       <ul class="ailit">
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><rect x="5" y="9" width="56" height="41" rx="7" stroke="var(--green)" stroke-width="2.2"/><line x1="5" y1="18" x2="61" y2="18" stroke="var(--green)" stroke-width="1.3" opacity=".45"/><circle cx="11" cy="13.5" r="1.4" fill="var(--rust)"/><circle cx="16.5" cy="13.5" r="1.4" fill="var(--green-bright)" opacity=".75"/><rect x="11" y="24" width="40" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="31" width="44" height="3.2" rx="1.6" fill="var(--rust)" opacity=".7"/><rect x="11" y="38" width="33" height="3.2" rx="1.6" fill="var(--green)" opacity=".85"/><rect x="11" y="45" width="41" height="3.2" rx="1.6" fill="var(--green-bright)" opacity=".55"/></svg></span>
           <span class="term">Context window<small>ITS MEMORY</small></span>
-          <span class="def">How much the model can hold at once before it answers. Bigger window, more it can read in one go. <b>Today's top models hold around a million tokens, roughly 750,000 words, a whole quarter of call notes in one pass.</b></span>
+          <span class="def">How much it can hold at once. <b>The best now read ~750,000 words in a single pass — a whole quarter of call notes.</b></span>
         </li>
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><path d="M12 47 L25 47 L25 34 L38 34 L38 21 L50 21" stroke="var(--rust)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 6.5" opacity=".75"/><circle cx="12" cy="47" r="3.8" fill="var(--card)" stroke="var(--green)" stroke-width="2.2"/><circle cx="25" cy="34" r="3.8" fill="var(--card)" stroke="var(--green)" stroke-width="2.2"/><circle cx="38" cy="21" r="3.8" fill="var(--card)" stroke="var(--green)" stroke-width="2.2"/><g stroke="var(--green-bright)" stroke-width="2.2" stroke-linecap="round"><line x1="55" y1="6.5" x2="55" y2="17.5"/><line x1="49.5" y1="12" x2="60.5" y2="12"/><line x1="51" y1="8" x2="59" y2="16"/><line x1="59" y1="8" x2="51" y2="16"/></g></svg></span>
           <span class="term">Reasoning<small>IT THINKS FIRST</small></span>
-          <span class="def">Newer models work through a problem in steps before replying, and you can turn the effort up for the hard ones. That is why they run circles around older AI on anything that takes real thought. <b>On the newest models, it's always on.</b></span>
+          <span class="def">It works through a problem in steps before answering — which is why it runs circles around older AI on anything that takes real thought. <b>Now always on.</b></span>
         </li>
         <li>
           <span class="viz"><svg viewBox="0 0 66 58" fill="none" aria-hidden="true"><path d="M46 21 A16 16 0 0 0 17 27" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round"/><path d="M17.5 18.5 L16.5 27.5 L25 25.5" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 39 A16 16 0 0 0 47 33" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round"/><path d="M46.5 41.5 L47.5 32.5 L39 34.5" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 30 L30 35 L40 23" stroke="var(--rust)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <span class="term">Agentic<small>IT DOES THE JOB</small></span>
-          <span class="def">AI that does a task, not just answers a question. It plans, uses tools, and checks its own work across many steps. The longer the task, the more this matters. <b>The best can now run for days and validate what they did.</b></span>
+          <span class="def">It does the task, not just answers it — plans, uses tools, checks its own work. <b>The best now run for days and validate what they did.</b></span>
         </li>
       </ul>
-      <p class="s9-models">Same three ideas on <b>Claude Opus</b><span class="sep">·</span><b>GPT-5.6</b><span class="sep">·</span><b>GPT-5.5</b><span class="sep">·</span><b>Fable 5</b><span class="nb">, the newest of them.</span></p>
+      <p class="s9-models">You'll find all three in <b>Claude Opus</b><span class="sep">·</span><b>GPT-5.6</b><span class="sep">·</span><b>GPT-5.5</b><span class="sep">·</span><b>Fable 5</b><span class="nb">, the newest of them.</span></p>
       <div class="scribble">now you're the one explaining it at the next meeting.</div>
      </div>
      <!-- Drifting butterflies: s9_bf1 = "Butterfly animation" (acegif.com, via
@@ -1457,7 +1555,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
        cannot get past, and just sits there blinking. The stall is the argument,
        so the caret never goes away. Refusals are dimmed rather than alarmed:
        this is a boundary, not a bug. */
-    .sShort h1{max-width:19ch}
+    .sShort h1{white-space:nowrap}
     /* height is reserved for all 9 lines up front, otherwise the panel grows as it
        types and shoves the line underneath it down the screen. 9 lines x 1.78 =
        16.02em, plus headroom for the caret: it is an inline-block taller than the
@@ -2024,7 +2122,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
      from a screenshot: real text, mono, link-sized, not a footer. The old
      "Reply to whoever invited you" ghost button pointed at a dead href="#" and
      is dropped, the mailto below does that job directly and better. */
-  .s19 h1{font-size:clamp(30px,4.7vw,58px)}
+  .s19 h1{font-size:clamp(30px,3.6vw,45px);white-space:nowrap}
   .s19 p.body{margin-top:.9rem;max-width:44ch;font-size:clamp(15px,1.5vw,18px)}
   .s19 .cta-row{margin-top:1.2rem}
   .s19-contact{margin-top:1.45rem;padding-top:1.2rem;border-top:1px dashed var(--line)}
@@ -2304,7 +2402,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Book time with Amit","Thank you"];
+  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Book time with Amit","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
