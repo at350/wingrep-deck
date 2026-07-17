@@ -2022,6 +2022,100 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
     </div>
   </section>
 
+  <!-- 20 THE OFFER: attendee-only founder onboarding + live flip-clock countdown.
+       Penultimate slide, sits between the game (feel the admin pain) and the finale
+       (warm goodbye). Urgency lives on ACCESS, not the clock: the wingrep.ai/webinar
+       page and Amit's limited calendar are the scarce thing, so the copy stays
+       understated and the timer just reads as a real object. All CSS scoped to .sOffer;
+       reduced-motion stops the fold; no em dashes; the only new asset is s_amit (Amit's
+       headshot in wingrep-assets.js). The countdown script sits with the others near
+       </body>. -->
+  <style>
+  .sOffer .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.4rem,4vw,3rem);align-items:center}
+  .sOffer h1{font-size:clamp(25px,3.5vw,46px);line-height:1.04;max-width:15ch}
+  .sOffer .sub{font-size:clamp(14px,1.5vw,18px);line-height:1.5;max-width:42ch;margin-top:1rem}
+  .sOffer-book{display:flex;align-items:center;gap:.85rem;margin-top:clamp(1.1rem,2.6vh,1.6rem)}
+  .sOffer-ava{width:clamp(50px,5vw,60px);height:clamp(50px,5vw,60px);border-radius:50%;overflow:hidden;flex:none;
+    border:2.5px solid #fff;box-shadow:0 0 0 2px var(--green),0 8px 18px -8px rgba(20,18,13,.55);background:var(--green-wash)}
+  .sOffer-ava img{width:100%;height:100%;object-fit:cover;display:block}
+  .sOffer-book .btn{margin:0}
+  .sOffer-url{font-family:var(--mono);font-size:clamp(10px,1.1vw,12.5px);color:var(--green-deep);margin-top:.75rem;opacity:.9;letter-spacing:.01em}
+  /* the flip clock: a real object in the deck palette (deep green slabs, cream numerals) */
+  .sOffer-clockzone{display:flex;flex-direction:column;align-items:center;gap:.9rem}
+  .sOffer-clocklbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(9px,1.05vw,11.5px);color:var(--ink-soft);text-align:center}
+  .sOffer-clock{display:flex;align-items:flex-start;gap:clamp(.25rem,.7vw,.5rem)}
+  .sOffer-grp{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .sOffer-flip{position:relative;width:clamp(50px,6.2vw,84px);height:clamp(68px,8.6vw,114px);perspective:360px;
+    font-family:var(--mono);font-weight:800;font-size:clamp(35px,4.6vw,66px);color:#F3EEE1;line-height:1;border-radius:10px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+  .sOffer-panel{position:absolute;left:0;width:100%;height:50%;overflow:hidden;background:linear-gradient(#12241a,#0c1a12)}
+  .sOffer-panel span{position:absolute;left:0;width:100%;height:200%;display:block;text-align:center;line-height:clamp(68px,8.6vw,114px);font-variant-numeric:tabular-nums}
+  .sOffer-panel.top{top:0;border-radius:10px 10px 0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .sOffer-panel.top span{top:0}
+  .sOffer-panel.bottom{bottom:0;border-radius:0 0 10px 10px;background:linear-gradient(#0e1e15,#0a1710)}
+  .sOffer-panel.bottom span{bottom:0}
+  .sOffer-flip::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-1px);background:rgba(0,0,0,.5);z-index:7;pointer-events:none}
+  .sOffer-flip::before{content:"";position:absolute;left:-3px;top:calc(50% - 6px);width:6px;height:12px;border-radius:2px;background:#0a1710;box-shadow:calc(100% + 6px) 0 0 #0a1710;z-index:8}
+  /* leaves hidden at rest, shown only mid-flip (prevents a stale half glitching between ticks) */
+  .sOffer-flap{visibility:hidden;backface-visibility:hidden;z-index:6}
+  .sOffer-flip.go .sOffer-flap{visibility:visible}
+  .sOffer-flap.top{transform-origin:50% 100%}
+  .sOffer-flap.bottom{transform-origin:50% 0%;transform:rotateX(90deg)}
+  .sOffer-flip.go .sOffer-flap.top{animation:sOfferFoldTop .30s ease-in forwards}
+  .sOffer-flip.go .sOffer-flap.bottom{animation:sOfferFoldBot .30s .30s ease-out forwards}
+  @keyframes sOfferFoldTop{from{transform:rotateX(0)}to{transform:rotateX(-90deg)}}
+  @keyframes sOfferFoldBot{from{transform:rotateX(90deg)}to{transform:rotateX(0)}}
+  .sOffer-glbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:clamp(8px,.95vw,10.5px);color:var(--ink-soft)}
+  .sOffer-colon{font-family:var(--mono);font-weight:800;font-size:clamp(26px,3.4vw,46px);color:var(--ink-soft);opacity:.5;margin-top:clamp(.9rem,2vh,1.5rem)}
+  /* graceful post-deadline state */
+  .sOffer-closed{display:none;font-size:clamp(13px,1.4vw,16px);line-height:1.5;color:var(--ink-soft);max-width:26ch;text-align:center}
+  .sOffer-closed a{color:var(--green);font-weight:700}
+  .sOffer.is-closed .sOffer-clock{display:none}
+  .sOffer.is-closed .sOffer-closed{display:block}
+  @media (max-width:820px){ .sOffer .wrap{grid-template-columns:1fr;gap:1.3rem} .sOffer-clockzone{align-items:flex-start} }
+  @media (max-height:780px){
+    .sOffer h1{font-size:clamp(23px,3vw,38px)}
+    .sOffer .sub{margin-top:.7rem}
+    .sOffer-book{margin-top:1rem}
+    .sOffer-flip{width:clamp(46px,5.4vw,72px);height:clamp(62px,7.6vw,100px);font-size:clamp(30px,4vw,58px)}
+    .sOffer-panel span{line-height:clamp(62px,7.6vw,100px)}
+  }
+  @media (prefers-reduced-motion:reduce){ .sOffer-flip.go .sOffer-flap.top,.sOffer-flip.go .sOffer-flap.bottom{animation:none} }
+  </style>
+  <section class="slide sOffer wr-theme">
+    <div class="wrap">
+      <div class="sOffer-col">
+        <div class="eyebrow">For the teams who showed up today</div>
+        <h1>You just felt the admin. <span class="hl">Amit will get you live on your calls.</span></h1>
+        <p class="sub">Twenty minutes with <b>Amit, our founder</b>, and you'll walk out knowing how to get WingRep live on your real calls. He's holding a few slots this week for teams who were here today.</p>
+        <div class="sOffer-book">
+          <span class="sOffer-ava"><img data-asset="s_amit" alt="Amit, founder of WingRep"></span>
+          <a class="btn btn-primary" href="https://wingrep.ai/webinar" target="_blank" rel="noopener">Book exclusive time with Amit →</a>
+        </div>
+        <div class="sOffer-url">wingrep.ai/webinar · attendees only</div>
+      </div>
+      <div class="sOffer-clockzone">
+        <div class="sOffer-clocklbl">Today's spots close in</div>
+        <div class="sOffer-clock">
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="h"><div class="sOffer-panel top"><span>08</span></div><div class="sOffer-panel bottom"><span>08</span></div><div class="sOffer-panel top sOffer-flap"><span>08</span></div><div class="sOffer-panel bottom sOffer-flap"><span>08</span></div></div>
+            <span class="sOffer-glbl">Hrs</span>
+          </div>
+          <span class="sOffer-colon">:</span>
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="m"><div class="sOffer-panel top"><span>12</span></div><div class="sOffer-panel bottom"><span>12</span></div><div class="sOffer-panel top sOffer-flap"><span>12</span></div><div class="sOffer-panel bottom sOffer-flap"><span>12</span></div></div>
+            <span class="sOffer-glbl">Mins</span>
+          </div>
+          <span class="sOffer-colon">:</span>
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="s"><div class="sOffer-panel top"><span>47</span></div><div class="sOffer-panel bottom"><span>47</span></div><div class="sOffer-panel top sOffer-flap"><span>47</span></div><div class="sOffer-panel bottom sOffer-flap"><span>47</span></div></div>
+            <span class="sOffer-glbl">Secs</span>
+          </div>
+        </div>
+        <div class="sOffer-closed">Today's founder slots are taken. You can still start anytime at <a href="https://wingrep.ai" target="_blank" rel="noopener">wingrep.ai</a>.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- 21 thank you + confetti (finale) -->
   <style>
   /* Finale contact block. This slide is what the room stares at for the whole
@@ -2309,7 +2403,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Not another note-taker","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Not another note-taker","What you walk away with","The admin pile-up","Book time with Amit","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
@@ -3125,6 +3219,56 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
       setTimeout(function(){ box.remove(); },5200);
     }
   })();
+})();
+</script>
+<script>
+/* 20 THE OFFER: live flip-clock countdown for the .sOffer slide.
+   Anchor = a fixed close-time. SET SPOTS_CLOSE before each webinar (local time,
+   e.g. '2026-07-17T23:59:00'); leave null to default to the end of the current day.
+   This is intentionally NOT a per-load 24h reset: a resetting timer is the easiest
+   "fake urgency" tell, and this deck trades on credibility. Reduced motion changes
+   the numbers without folding. Past the close time, the slide shows a graceful
+   closed state and repoints the CTA to the homepage. */
+(function(){
+  var slide=document.querySelector('.sOffer'); if(!slide) return;
+  var SPOTS_CLOSE = null; /* e.g. '2026-07-17T23:59:00'  (local time). null => end of today. */
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pad(n){return (n<10?'0':'')+n;}
+  function endOfToday(){var d=new Date();d.setHours(23,59,59,999);return d.getTime();}
+  var end = SPOTS_CLOSE ? new Date(SPOTS_CLOSE).getTime() : endOfToday();
+
+  var units={};
+  slide.querySelectorAll('.sOffer-flip').forEach(function(f){
+    var sp=f.querySelectorAll('span');
+    units[f.dataset.unit]={el:f,topS:sp[0],botS:sp[1],topF:sp[2],botF:sp[3],v:sp[0].textContent,t:0};
+  });
+  function set(u,val){
+    if(val===u.v) return;
+    var old=u.v;
+    u.topS.textContent=val; u.botS.textContent=old; u.topF.textContent=old; u.botF.textContent=val; u.v=val;
+    if(reduce){ u.botS.textContent=val; return; }
+    u.el.classList.remove('go'); void u.el.offsetWidth; u.el.classList.add('go');
+    clearTimeout(u.t);
+    u.t=setTimeout(function(){ u.botS.textContent=val; u.el.classList.remove('go'); },620);
+  }
+  var closed=false, iv;
+  function closeOut(){
+    if(closed) return; closed=true;
+    slide.classList.add('is-closed');
+    var lbl=slide.querySelector('.sOffer-clocklbl'); if(lbl) lbl.textContent='Founder slots for today are taken';
+    var cta=slide.querySelector('.sOffer-book .btn'); if(cta){ cta.textContent='Start at wingrep.ai →'; cta.setAttribute('href','https://wingrep.ai'); }
+    var url=slide.querySelector('.sOffer-url'); if(url) url.textContent='wingrep.ai · start anytime';
+    if(iv) clearInterval(iv);
+  }
+  function tick(){
+    var d=end-Date.now();
+    if(d<=0){ set(units.h,'00'); set(units.m,'00'); set(units.s,'00'); closeOut(); return; }
+    var t=Math.floor(d/1000);
+    set(units.h,pad(Math.floor(t/3600)));
+    set(units.m,pad(Math.floor(t%3600/60)));
+    set(units.s,pad(t%60));
+  }
+  tick(); iv=setInterval(tick,1000);
 })();
 </script>
 </body>
