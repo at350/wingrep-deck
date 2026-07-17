@@ -173,7 +173,11 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Transition into slide 11:** *"The loop preps, reviews, even drills. Here's the one thing it cannot do..."* → advance to slide 11 → the typer plays → bridge into the reveal: *"Keep the loop, it's on your cheat sheet, it's free, and it's genuinely good. We built it, ran it, loved it, and hit the same wall you just saw: it has no ears. So we gave it ears."* → slide 12 reveal.
 
-From slide 12 on it is pure deck to the end (slide 17 is `Book time with Amit`, just present it, nothing to switch to), through the WingRep reveal to the close.
+Slide 13, the real thing: point at each screenshot, one sentence each, this is the live product, not a render.
+
+From slide 12 on it is pure deck to the end (slide 18 is `Book time with Amit`, just present it, nothing to switch to), through the WingRep reveal to the close.
+
+**Finale (slide 19):** As this slide lands, paste into the Zoom chat: the cheat-sheet PDF link and the deck link. Say: "everything on screen is in the chat right now."
 
 ---
 
