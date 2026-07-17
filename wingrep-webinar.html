@@ -817,7 +817,7 @@
 <div class="progress" id="progress"></div>
 <div class="topbar" id="topbar">
   <div class="brand"><img data-asset="ui_brand" alt="WingRep"></div>
-  <div class="counter" id="counter">01 / 21</div>
+  <div class="counter" id="counter">01 / 17</div>
 </div>
 
 <div class="deck" id="deck">
@@ -866,6 +866,71 @@
           <span class="s2-chip c4">+11 fields</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 2b: the tool wall. Every logo the room already pays for; none of them did
+       the 7:14pm work on the previous slide. -->
+  <style>
+  /* ===== slide "swall": the sales-tool wall =====
+     Scoped block, nothing leaks. Pre-reveal slide, so Claude clay palette only.
+     Beat: tiles pop in one by one (the buying spree), then the whole wall greys
+     out as the payoff line lands. The tiles reuse the deck's .lchip + EMBED
+     hydration (same markup as the FAQ competitor chips), restyled here as grid
+     tiles; a brand with no embedded logo falls back to the wordmark pill. */
+  .swall h1{font-size:clamp(30px,4.8vw,58px)}
+  .swall-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(.5rem,1.4vh,.8rem);margin-top:clamp(1.2rem,3vh,2rem)}
+  .swall-grid .lchip{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:.55rem;background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:.62rem .5rem;box-shadow:0 10px 24px -16px rgba(20,18,13,.5)}
+  .swall-grid .lchip b{border:none;background:none;border-radius:0;padding:0;font-family:var(--display);font-weight:800;font-size:clamp(12px,1.25vw,16px);color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
+  .swall-grid .lchip.hasimg{gap:.55rem;padding:.62rem .5rem;border-radius:13px;height:100%}
+  .swall-grid .lchip.hasimg img.brand{display:block;height:clamp(20px,2.2vw,26px);width:auto;max-width:32px;object-fit:contain}
+  .swall-pay{margin-top:clamp(1rem,2.6vh,1.7rem);font-family:var(--body);font-weight:700;font-size:clamp(17px,2vw,25px)}
+  .swall-pay b{color:var(--rust)}
+  /* motion: entrance rev on the grid container (keeps the deck's .wrap stagger),
+     per-tile pop on a --n delay, then swallFail dims the wall right before the
+     payoff line lands */
+  /* the .wrap> in these two selectors is load-bearing: the deck's global
+     stagger rule (.slide.active .wrap>*:nth-child(n)) carries an extra
+     pseudo-class of specificity, and without matching it the 2.4s/2.55s
+     delays lose to the stagger's .12s/.2s */
+  .swall.active .wrap>.swall-grid{animation:rev .6s cubic-bezier(.2,.85,.25,1) forwards,swallFail .6s ease forwards;animation-delay:.12s,2.4s}
+  .swall.active .swall-grid .lchip{opacity:0;animation:swallPop .34s cubic-bezier(.2,.85,.3,1.1) forwards;animation-delay:calc(.3s + var(--n)*.07s)}
+  .swall.active .wrap>.swall-pay{opacity:0;animation:rev .5s cubic-bezier(.2,.85,.25,1) forwards;animation-delay:2.55s}
+  @keyframes swallPop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
+  @keyframes swallFail{to{filter:grayscale(1);opacity:.42}}
+  /* house rule: reduced motion gets the resolved still frame (dimmed wall,
+     payoff visible). The global rule kills durations but NOT delays, so the
+     animations are removed outright here. */
+  @media (prefers-reduced-motion:reduce){
+    .swall.active .swall-grid,.swall.active .swall-grid .lchip,.swall.active .swall-pay{animation:none;opacity:1}
+    .swall.active .swall-grid{filter:grayscale(1);opacity:.42}
+  }
+  @media (max-width:900px){.swall-grid{grid-template-columns:repeat(4,1fr)}}
+  </style>
+  <section class="slide swall">
+    <div class="wrap">
+      <h1><span class="ln">Every sales tool has</span><br><span class="ln">the same problem...</span></h1>
+      <div class="swall-grid" aria-label="Sales tools the room already owns">
+        <span class="lchip" data-domain="gong.io" style="--n:0"><img class="brand" alt="Gong"><b>Gong</b></span>
+        <span class="lchip" data-domain="clari.com" style="--n:1"><img class="brand" alt="Clari"><b>Clari</b></span>
+        <span class="lchip" data-domain="hubspot.com" style="--n:2"><img class="brand" alt="HubSpot"><b>HubSpot</b></span>
+        <span class="lchip" data-domain="fireflies.ai" style="--n:3"><img class="brand" alt="Fireflies"><b>Fireflies</b></span>
+        <span class="lchip" data-domain="outreach.io" style="--n:4"><img class="brand" alt="Outreach"><b>Outreach</b></span>
+        <span class="lchip" data-domain="zoominfo.com" style="--n:5"><img class="brand" alt="ZoomInfo"><b>ZoomInfo</b></span>
+        <span class="lchip" data-domain="salesforce.com" style="--n:6"><img class="brand" alt="Salesforce"><b>Salesforce</b></span>
+        <span class="lchip" data-domain="dooly.ai" style="--n:7"><img class="brand" alt="Dooly"><b>Dooly</b></span>
+        <span class="lchip" data-domain="otter.ai" style="--n:8"><img class="brand" alt="Otter"><b>Otter</b></span>
+        <span class="lchip" data-domain="highspot.com" style="--n:9"><img class="brand" alt="Highspot"><b>Highspot</b></span>
+        <span class="lchip" data-domain="apollo.io" style="--n:10"><img class="brand" alt="Apollo"><b>Apollo</b></span>
+        <span class="lchip" data-domain="scratchpad.com" style="--n:11"><img class="brand" alt="Scratchpad"><b>Scratchpad</b></span>
+        <span class="lchip" data-domain="salesloft.com" style="--n:12"><img class="brand" alt="Salesloft"><b>Salesloft</b></span>
+        <span class="lchip" data-domain="fathom.video" style="--n:13"><img class="brand" alt="Fathom"><b>Fathom</b></span>
+        <span class="lchip" data-domain="6sense.com" style="--n:14"><img class="brand" alt="6sense"><b>6sense</b></span>
+        <span class="lchip" data-domain="pipedrive.com" style="--n:15"><img class="brand" alt="Pipedrive"><b>Pipedrive</b></span>
+        <span class="lchip" data-domain="sybill.ai" style="--n:16"><img class="brand" alt="Sybill"><b>Sybill</b></span>
+        <span class="lchip" data-domain="close.com" style="--n:17"><img class="brand" alt="Close"><b>Close</b></span>
+      </div>
+      <p class="swall-pay">They record. They transcribe. <b>You still type.</b></p>
     </div>
   </section>
 
@@ -2210,7 +2275,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
+  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Five prompts to steal","SalesOS '95","Where Claude falls short","The reveal","The free 3-week trial","Common questions","What you walk away with","The admin pile-up","Thank you"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
