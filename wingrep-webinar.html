@@ -724,7 +724,7 @@
 
   /* (the observation-room slide 4 is image-led; no sticker) */
 
-  @media (prefers-reduced-motion:reduce){.s2-polaroid{transition:none} .s2-polaroid:hover{transform:rotate(2.3deg) scale(1)} .tl-chat{transition:none} .s1-tick{transition:none} .ans{transition:none} .pl{transition:none} .s20-photo img{transition:none} .s14-opt{transition:none}}
+  @media (prefers-reduced-motion:reduce){.s2-polaroid{transition:none} .s2-polaroid:hover{transform:rotate(2.3deg) scale(1)} .tl-chat{transition:none} .s1-tick{transition:none} .s20-photo img{transition:none} .s14-opt{transition:none}}
 
   /* ============================== WAVE 3 ============================== */
   /* slide 14: Drake meme drives the three options */
@@ -1851,7 +1851,7 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   .sFaq h1{font-size:clamp(26px,4.1vw,50px);line-height:1.03}
   .sFaq .faqcols{display:grid;grid-template-columns:minmax(0,760px);justify-content:center;gap:0;margin-top:clamp(1.7rem,4.2vh,2.7rem)}
 
-  /* shared label rule for both columns */
+  /* label rule for the card */
   .sFaq .lab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--ink-soft);margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
   .sFaq .lab::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--line);flex:none}
   .sFaq .lab.we{color:var(--green)}
@@ -1910,8 +1910,8 @@ Here's today's call with [prospect]. Write the entry I should append to this dea
   @media (prefers-reduced-motion:reduce){.sFaq.active .cmp-react,.sFaq.active .nloop{animation:none}}
 
   @media (max-width:900px){ .sFaq .faqcols{grid-template-columns:1fr} }
-  /* This is a two-job slide, so it runs tall. On a 720p projector it has to fit with an
-     answer open AND stay clear of the top bar, so compact it on short viewports. */
+  /* Single tall card: on a 720p projector it has to fit AND stay clear of the top bar,
+     so compact it on short viewports. */
   @media (max-height:780px){
     .sFaq .eyebrow{margin-bottom:.55rem}
     .sFaq h1{font-size:clamp(26px,3.3vw,42px)}
