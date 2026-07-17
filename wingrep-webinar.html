@@ -1703,10 +1703,11 @@ Then stop and tell me the one thing that changed most.</div>
      the tallest thing in the deck: at that height the headline and eyebrow ride up
      under the fixed top-bar mark, which lands on exactly the slide where that mark
      first appears. Tighten the whole column on short viewports. Nothing is dropped,
-     it just gets closer together. Untouched at 800px and above. The tightened
-     paddings, gaps, and margins here pay for the raised type floors: at 720p the
-     larger transcript and pane text would otherwise overflow the slide by 12px. */
-  @media (max-height:780px){
+     it just gets closer together. The tightened paddings, gaps, and margins here
+     pay for the raised type floors: without them the larger transcript and pane
+     text overflow the slide by 12px at 720p and 11px at 800p, which is why the
+     threshold covers 820 and not just the 780 it originally guarded. */
+  @media (max-height:820px){
     #wingrepReveal h1{font-size:clamp(30px,4.2vw,56px)}
     #wingrepReveal .app{margin-top:.4rem}
     #wingrepReveal .stage{padding:.45rem .6rem}
