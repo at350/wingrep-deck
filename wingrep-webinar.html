@@ -1554,10 +1554,11 @@ Then stop and tell me the one thing that changed most.</div>
 
   <!-- 10 where Claude falls short. Scoped styles only, nothing outside .sShort. -->
   <style>
-    /* Slide 10. The terminal does the hard part well, then hits three walls it
-       cannot get past, and just sits there blinking. The stall is the argument,
-       so the caret never goes away. Refusals are dimmed rather than alarmed:
-       this is a boundary, not a bug. */
+    /* Slide 10. The loop does the prep and the review well, then hits the two
+       things it cannot do: it cannot sit in the live call, and it does not scale
+       itself across a team. It just sits there blinking. The stall is the
+       argument, so the caret never goes away. Refusals are dimmed rather than
+       alarmed: this is a boundary, not a bug. */
     .sShort h1{white-space:nowrap}
     /* height is reserved for all 9 lines up front, otherwise the panel grows as it
        types and shoves the line underneath it down the screen. 9 lines x 1.78 =
@@ -1575,9 +1576,9 @@ Then stop and tell me the one thing that changed most.</div>
   <section class="slide sShort" data-animate="type">
     <div class="wrap">
       <div class="eyebrow">Where Claude falls short</div>
-      <h1>Claude does the thinking.<br>You're still the <span class="hl">plumbing.</span></h1>
-      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: the coaching-ledger prompt from the live demo updates the log correctly, then three follow-ups get I have no hands, I have no clock, I have no ears. The cursor sits waiting."></div>
-      <p class="s10-cap">The thinking was never the bottleneck. <b>Everything around it is.</b></p>
+      <h1>The loop preps and reviews.<br>Nobody's <span class="hl">in the call.</span></h1>
+      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: the after-call loop and tomorrow's morning game plans both come back done, then asking it to join the 2pm call and nudge live, and to run for all eight reps, both get an honest no. The cursor sits waiting."></div>
+      <p class="s10-cap">Keep this loop. It's the best free coaching system in sales. <b>It still can't hear the call.</b></p>
     </div>
   </section>
 
@@ -2513,23 +2514,25 @@ Then stop and tell me the one thing that changed most.</div>
   };});
 
   /* slide 10, "where Claude falls short". Types PLAIN text per line, colorizes
-     only once a line is done. Claude nails the coaching update, then answers the
-     next three asks with an honest no. The run ends on a live prompt that never
-     goes anywhere: the waiting IS the point, so the caret stays. */
+     only once a line is done. The loop delivers: the after-call work and the
+     morning game plans both come back done. Then the two asks it cannot meet,
+     joining the live call and scaling to all eight reps, get an honest no. The
+     run ends on a prompt that never goes anywhere: the waiting IS the point, so
+     the caret stays. */
   var typeTimer;
   var TYPER_TAIL='> ';
   function runTyper(){
     var el=document.getElementById('typer'); if(!el)return;
     // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
     var lines=[
-      {t:'> Here\'s my coaching log and today\'s call. Add a dated entry: what went well, gaps, one focus for next call. First, check if last call\'s focus stuck, and quote the moment.'},
-      {t:'✓ done. the Marcus focus stuck. she asked for a one-pager at 1:32.', g:true},
-      {t:'> now put it in the CRM.'},
-      {t:'✗ I have no hands. paste it in yourself.', n:true},
-      {t:'> remind me before the Marcus call.'},
-      {t:'✗ I have no clock. I only run when you type.', n:true},
-      {t:'> did she actually say it, or did the transcript miss it?'},
-      {t:'✗ I have no ears. I only know what you pasted.', n:true}
+      {t:'> run my after-call loop'},
+      {t:'deal file, coaching log, scorecard: updated ✓', g:true},
+      {t:'> game plans for tomorrow'},
+      {t:'written at 7:00am, before you woke ✓', g:true},
+      {t:'> join my 2pm call and nudge me live'},
+      {t:'I have no ears. I can only read what you record.', n:true},
+      {t:'> run this for all eight of my reps'},
+      {t:'Eight folders, eight schedules. Who maintains them?', n:true}
     ];
     function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
     function line(l){var c=l.g?'g':(l.n?'n':''); return c ? '<span class="'+c+'">'+esc(l.t)+'</span>' : esc(l.t);}
