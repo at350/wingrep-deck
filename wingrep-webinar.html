@@ -262,7 +262,7 @@
   .s3c .sub{margin-top:1.1rem;font-size:clamp(16px,1.7vw,19px);line-height:1.4}
 
   /* ===== about-Alan slide: a restrained credential shelf, not a giant fake brick ===== */
-  .slide.sAlan{padding-top:2.8vh;padding-bottom:2.8vh;overflow:hidden}
+  .slide.sAlan{padding-top:1.0vh;padding-bottom:1.0vh;overflow:hidden}
   .sAlan-wrap{position:relative;z-index:2;max-width:1240px}
   .sAlan h1{font-size:clamp(36px,5vw,64px);margin-bottom:.05rem}
   .sAlan-grid{display:grid;grid-template-columns:1.14fr .86fr;gap:clamp(1.4rem,3.2vw,2.8rem);align-items:start;margin-top:.55rem}
@@ -291,7 +291,7 @@
   .s3-marks img.mk{width:100%;height:auto;display:block;border-radius:0;filter:drop-shadow(0 3px 0 rgba(31,28,22,.12)) drop-shadow(0 6px 8px rgba(31,28,22,.10))}
 
   /* trophy / hackathon photo placeholders (polaroids) */
-  .sAlan-wall{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;align-content:start;padding-top:.2rem}
+  .sAlan-wall{display:grid;grid-template-columns:1fr 1fr;gap:9px 10px;align-content:end;padding-top:.2rem}
   .sAlan-polaroid{background:#fff;border-radius:2px;padding:8px 8px 6px;box-shadow:0 10px 22px -14px rgba(20,18,13,.4),0 1px 0 rgba(255,255,255,.8) inset;transform-origin:center;transition:transform .2s ease}
   .sAlan-polaroid.rot1{transform:rotate(-4.5deg)}
   .sAlan-polaroid.rot2{transform:rotate(3.2deg)}
@@ -310,16 +310,30 @@
   .sAlan-slot:has(img.imgon){border-style:solid;border-color:transparent;background:#ddd}
   .sAlan-slot:has(img.imgon)::before,.sAlan-slot:has(img.imgon)::after,.sAlan-slot:has(img.imgon) span{display:none}
   .sAlan-polaroid figcaption{font-family:var(--hand);font-weight:700;font-size:15px;color:var(--ink-soft);text-align:center;margin-top:6px;line-height:1.1}
-  /* Alan's headshot framed as a coral LEGO plate, drawn to match the university brick
+  /* LEGO "pin" studs: one per polaroid, poking off a top corner as if pinning the photo
+     to the wall. Same lit-top / shaded-rim plastic read as the brick studs, one deck
+     palette colour each, riding its polaroid's rotation because it lives inside the figure. */
+  .sAlan-pin{position:absolute;top:-8px;width:17px;height:17px;z-index:5;overflow:visible;
+    filter:drop-shadow(0 2px 2px rgba(20,18,13,.34));pointer-events:none}
+  .sAlan-pin.pl{left:-7px}
+  .sAlan-pin.pr{right:-7px}
+  .sAlan-pin .rim{fill:var(--pcSh)}
+  .sAlan-pin .body{fill:var(--pc)}
+  .sAlan-pin .lit{fill:var(--pcLt)}
+  .sAlan-pin .hi{fill:rgba(255,255,255,.6)}
+  .sAlan-polaroid.rot1{--pc:#D01A20;--pcSh:#911115;--pcLt:#e64a4f}
+  .sAlan-polaroid.rot2{--pc:#0056BF;--pcSh:#003c86;--pcLt:#3183e8}
+  .sAlan-polaroid.rot3{--pc:#34964E;--pcSh:#215f33;--pcLt:#56bd71}
+  .sAlan-polaroid.rot4{--pc:#F5C518;--pcSh:#c08e0a;--pcLt:#ffdb52}
+  /* Alan's headshot framed as a yellow LEGO plate, drawn to match the university brick
      PNGs below it: a glossy top-lit body, a row of cylindrical studs poking off the top
      edge, and a dark bottom lip for thickness. The photo is recessed into the face where
-     those bricks carry their logo. It straddles the top of the photo wall — most of it
-     above, the lower edge dipping onto the top two polaroids. The wall's top padding opens
-     that room; the negative top offset lets the plate ride up beside the headline. */
-  .sAlan-wall{--faceD:clamp(212px,31vh,266px);--faceP:clamp(46px,7vh,82px);position:relative;padding-top:var(--faceP)}
-  .sAlan-face{position:absolute;top:calc(var(--faceP) - var(--faceD) * 0.58);left:50%;transform:translateX(-50%);
-    z-index:4;width:var(--faceD);aspect-ratio:1;overflow:visible;
-    filter:drop-shadow(0 18px 20px rgba(20,18,13,.42))}
+     those bricks carry their logo. It rides high above the photo wall so only its lower
+     third dips onto the top polaroids; the wall's top padding opens that room and the
+     negative top offset lets the plate sit up beside the headline. No cast shadow. */
+  .sAlan-wall{--faceD:clamp(212px,31vh,266px);--faceP:clamp(46px,7vh,82px);position:relative;padding-top:var(--faceP);padding-bottom:11px}
+  .sAlan-face{position:absolute;top:calc(var(--faceP) - var(--faceD) * 0.68);left:50%;transform:translateX(-50%);
+    z-index:4;width:var(--faceD);aspect-ratio:1;overflow:visible}
   .sAlan-brick{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;pointer-events:none}
   /* the photo, set into the plate face (window rect 26,58 198x176 of the 250 viewBox) */
   .sAlan-face-in{position:absolute;left:10.4%;top:23.2%;width:79.2%;height:70.4%;
@@ -1084,18 +1098,20 @@
   .sAlan-wrap{max-width:1100px}
   .sAlan h1{margin-bottom:0}
   .sAlan-grid{grid-template-columns:var(--stackW) minmax(0,calc(1010px - var(--stackW) - clamp(1.4rem,2.9vw,2.4rem)));
-    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.9rem}
+    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.3rem}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
-  /* With the nameplate gone the left column carried only the tie line + brick shelf, so
-     bottoming the bricks out (margin-top:auto) left a tall dead gap in the middle. The
-     cluster is now centred as one block against the photo wall, and the tie line is a touch
-     larger so the column has real weight instead of a sentence stranded at the top. */
+  /* The bio sits under the headline and the brick shelf is pinned to the bottom of the
+     column (margin-top:auto) so its base lines up with the bottom polaroid row at both 720
+     and 800. Bottom-anchoring is what holds that alignment: centring the cluster only lined
+     up when the bio happened to fill the column, and it drifted the moment the copy changed.
+     The space between the bio and the shelf now reads as the break between who-I-am and the
+     credentials rather than a stranded sentence. */
   .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1.4rem,4vh,2.4rem);height:100%}
   .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(15px,1.55vw,19px);line-height:1.5}
   /* the hackathon wins are demoted from the headline claim to a quiet, captioned strip:
      the AI-research line above now carries the credibility, these are human texture. */
-  .sAlan .s3-markwrap{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:auto}
+  .sAlan .s3-markwrap{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:auto;margin-top:auto}
   .sAlan .s3-markcap{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.08em;
     text-transform:uppercase;color:var(--rust-deep)}
   /* A veil of paper, not a card. At 2x the bouncing headshot is wide enough to sit right
@@ -1152,7 +1168,7 @@
       <div class="sAlan-grid">
         <div class="s3-guide">
           <div class="s3-bio">
-            <p class="s3-tie"><b>I build AI that actually works for sales teams.</b> My own background is in AI &mdash; published, peer-reviewed research in neural networks and computer vision &mdash; now pointed straight at the work your reps do every day.</p>
+            <p class="s3-tie"><b>I build AI that actually works for sales teams.</b> My background is published, peer-reviewed research in neural networks and computer vision, now pointed straight at the work your reps do every day.</p>
           </div>
           <div class="s3-markwrap">
             <div class="s3-markcap">5&times; hackathon winner</div>
@@ -1183,18 +1199,22 @@
             </div>
           </div>
           <figure class="sAlan-polaroid rot1">
+            <svg class="sAlan-pin pl" viewBox="0 0 20 20" aria-hidden="true"><circle class="rim" cx="10" cy="10.6" r="9"/><circle class="body" cx="10" cy="10" r="8.4"/><circle class="lit" cx="10" cy="9.2" r="5.3"/><ellipse class="hi" cx="8.3" cy="7.1" rx="2.4" ry="1.5"/></svg>
             <div class="sAlan-slot"><img data-img="alan_win_1" alt="A crowded hackathon room, laptops open across every table"><span>hackathon photo</span></div>
             <figcaption>the build</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot2">
+            <svg class="sAlan-pin pr" viewBox="0 0 20 20" aria-hidden="true"><circle class="rim" cx="10" cy="10.6" r="9"/><circle class="body" cx="10" cy="10" r="8.4"/><circle class="lit" cx="10" cy="9.2" r="5.3"/><ellipse class="hi" cx="8.3" cy="7.1" rx="2.4" ry="1.5"/></svg>
             <div class="sAlan-slot"><img data-img="alan_win_2" alt="The GreenChain team in front of the HackPrinceton balloons"><span>trophy shot</span></div>
             <figcaption>HackPrinceton</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot3">
+            <svg class="sAlan-pin pl" viewBox="0 0 20 20" aria-hidden="true"><circle class="rim" cx="10" cy="10.6" r="9"/><circle class="body" cx="10" cy="10" r="8.4"/><circle class="lit" cx="10" cy="9.2" r="5.3"/><ellipse class="hi" cx="8.3" cy="7.1" rx="2.4" ry="1.5"/></svg>
             <div class="sAlan-slot"><img data-img="alan_win_3" alt="The WildHacks 2026 closing ceremony"><span>team / stage</span></div>
             <figcaption>WildHacks 2026</figcaption>
           </figure>
           <figure class="sAlan-polaroid rot4">
+            <svg class="sAlan-pin pr" viewBox="0 0 20 20" aria-hidden="true"><circle class="rim" cx="10" cy="10.6" r="9"/><circle class="body" cx="10" cy="10" r="8.4"/><circle class="lit" cx="10" cy="9.2" r="5.3"/><ellipse class="hi" cx="8.3" cy="7.1" rx="2.4" ry="1.5"/></svg>
             <div class="sAlan-slot"><img data-img="alan_win_4" alt="The GreenChain team on stage as the Dedalus prize is announced"><span>another win</span></div>
             <figcaption>GreenChain wins</figcaption>
           </figure>
