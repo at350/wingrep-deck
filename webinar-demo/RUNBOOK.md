@@ -24,14 +24,15 @@ You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDI
 6. Rename the conversation: hover it in the sidebar, **⋯ → Rename → `BACKUP · demo 1`**.
 
 ## 1.2 The demo workspace
-Demo 2 is a live build in the Claude desktop app, reading real files off disk. Create a folder OUTSIDE this repo at `~/Coaching Demo/` containing EXACTLY these, and nothing else:
-- `transcripts/call-1-discovery-cobalt.md`
-- `transcripts/call-2-trial-checkin-cobalt.md`
-- `cobalt-deal-scorecard.md`
-- `jordan-coaching-log.md`
-- an empty `game-plans/` folder
+Demo 2 is a live build in the Claude desktop app, reading real files off disk. Create a folder OUTSIDE this repo at `~/Coaching Demo/` containing EXACTLY these five things, and nothing else:
+- `transcripts/call-1-discovery-cobalt.md` (copied)
+- `transcripts/call-2-trial-checkin-cobalt.md` (copied)
+- `cobalt-deal-scorecard.md` (copied)
+- `jordan-coaching-log.md` (copied)
+- `cobalt-deal-file.md`, a NEW empty file you create in the folder root (this is the "deal file" the loop appends to; its pre-loop state is empty)
+- plus an empty `game-plans/` folder
 
-NEVER copy the README, the RUNBOOK, or `prompts.md` into it. Those describe the transcript's planted gaps; if Claude can read them on stage, the demo looks rigged. Copy only the four files, and make `game-plans/` empty by hand.
+NEVER copy the README, the RUNBOOK, or `prompts.md` into it. Those describe the transcript's planted gaps; if Claude can read them on stage, the demo looks rigged. Copy only the four existing files, create `cobalt-deal-file.md` empty by hand, and make `game-plans/` empty by hand.
 
 Then point the Claude desktop app at this folder: grant it access to `~/Coaching Demo/` only, never the whole repo.
 
@@ -48,7 +49,7 @@ and the staged Marcus event must be the honest answer. If anything earlier than 
 This section builds the whole loop once, saves it as a parachute, then wipes the stage so the live run is identical to the backup.
 
 **Record the backup:**
-1. In the desktop app, open one conversation on the `~/Coaching Demo/` folder. Paste the LOOP prompt and let it run; it appends to all three files:
+1. In the desktop app, open one conversation on the `~/Coaching Demo/` folder. Paste the LOOP prompt and let it run; it appends to all three files (`cobalt-deal-file.md`, `jordan-coaching-log.md`, `cobalt-deal-scorecard.md`):
 ```
 Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin-cobalt.md), in this order:
 1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
@@ -69,7 +70,7 @@ Reply once as yourself (your rehearsed opener: tie the trial's triage-time savin
 5. Rename/save this conversation as the backup: `BACKUP · demo 2`.
 
 **Reset the stage (only after the backup is saved):**
-6. Revert the three files to their pre-loop state. Keep copies of the appended versions somewhere OUTSIDE `~/Coaching Demo/` (for example `~/Coaching Demo reference/`) so you have them if you need to point at what "after" looks like.
+6. Revert the three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`) to their pre-loop state. For the deal file, pre-loop means EMPTY: restore it to an empty file. Keep copies of the appended versions somewhere OUTSIDE `~/Coaching Demo/` (for example `~/Coaching Demo reference/`) so you have them if you need to point at what "after" looks like.
 7. DELETE the generated file in `game-plans/` so the folder is empty again.
 8. DELETE the scheduled task, so nothing on stage says "already exists".
 
@@ -92,7 +93,7 @@ Your rehearsal IS the live script: keep reading in order through Part 2 and into
 Work down this checklist:
 1. **Browser:** three tabs, in order: Claude web (for demo 1) / this RUNBOOK scrolled to Part 3 / call-1 raw text.
 2. **Desktop app:** open on the `~/Coaching Demo/` folder.
-3. The three files (deal file, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`) are at their **pre-loop** state.
+3. The three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`) are at their **pre-loop** state; the deal file is empty.
 4. `game-plans/` is **empty**.
 5. **No scheduled tasks** listed in the desktop app.
 6. Calendar shows the staged `10:00am · Marcus Webb (CISO) · Cobalt Freight · 30 min` as the honest answer to *what's my first call tomorrow?*, and nothing embarrassing sits earlier.
@@ -138,7 +139,7 @@ Five jobs, one loop. Name the discipline: *"the AI world calls this loop enginee
 
 This slide is the SalesOS window with six tabs: **1 Memory, 2 The loop, 3 Calendar, 4 Automation, 5 Drill, 6 The catch.** The rhythm for each tab is: click the tab on the slide → say the line → switch to the Claude desktop app → do the thing → switch back → next tab. The desktop app is already open on `~/Coaching Demo/`.
 
-**Tab 1 · Memory**, say: *"these files start empty, and nobody ever types in them. Watch what fills them."* Show the folder in the app: the three files and the empty `game-plans/`.
+**Tab 1 · Memory**, say: *"the deal file started empty this morning. The log and the scorecard carry two weeks of calls. Nobody typed a word of any of them; the loop wrote every entry."* Show the folder in the app: the three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`), the transcripts, and the empty `game-plans/`.
 
 **Tab 2 · The loop**, paste:
 ```
@@ -148,7 +149,7 @@ Run my after-call loop on today's call with Cobalt Freight (call-2-trial-checkin
 3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
 Then stop and tell me the one thing that changed most.
 ```
-THE MEMORY PAYOFF, give it a beat. When the coaching-log step quotes the thirty-minutes-with-Marcus moment, point: *"two weeks ago the log said get to the CISO. Today it checked, and quoted her asking. That's observability, the thing most coaching never has."*
+THE MEMORY PAYOFF, give it a beat. When the coaching-log step quotes the thirty-minutes-with-Marcus moment, point: *"two weeks ago the log said get to the CISO. Today it checked, and quoted the exact moment the ask happened. That's observability, the thing most coaching never has."*
 
 **Tab 3 · Calendar**, type the calendar ask live:
 ```
