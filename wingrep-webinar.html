@@ -363,9 +363,13 @@
   @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-hero{max-width:460px} }
 
   .soon{text-align:center;align-items:center} .soon .wrap{display:flex;flex-direction:column;align-items:center}
-  /* scoped: static install callout, mono/eyebrow language, visible under reduced motion */
-  .soon-install{margin-top:1rem;max-width:52ch;font-family:var(--mono);font-size:clamp(14px,1.5vw,16px);line-height:1.45;color:var(--green-deep);border:1px solid var(--line);border-radius:8px;background:var(--card);padding:.55rem .95rem}
+  /* scoped: compact single-line install pill (reads as a visual element, not a paragraph).
+     kbd/chip language: mono, pill bg + border. white-space:nowrap keeps it to one line;
+     at 1280 wide the full label fits, so the trailing clause stays. Visible under reduced motion. */
+  .soon-install{margin-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;max-width:100%;font-family:var(--mono);font-size:clamp(14px,1.4vw,15px);line-height:1;color:var(--green-deep);border:1.5px solid var(--line);border-radius:999px;background:var(--card);padding:.5rem 1rem}
+  .soon-install span{white-space:nowrap}
   .soon-install b{color:var(--green);font-weight:700}
+  .soon-install svg{flex:0 0 auto;width:18px;height:18px;stroke:var(--green)}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
   .soonmark svg{width:84px;height:84px;transform-origin:center;animation:breathe 4.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
@@ -853,10 +857,10 @@
       <div class="soonmark"><svg viewBox="0 0 24 24" fill="#D97757" aria-hidden="true"><use href="#claudeMark"/></svg></div>
       <div class="live"><span class="d"></span> Live workshop · starting soon</div>
       <h1><span class="ln">Build your own AI sales</span><br><span class="ln">assistant <span class="hl">with Claude</span></span></h1>
-      <p class="sub">Grab a coffee. Mute Slack. You'll leave with a workflow you can run tonight.</p>
+      <p class="sub">Grab a coffee. Mute Slack.</p>
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
-      <div class="soon-install">While you wait: install the <b>Claude desktop app</b> at claude.ai/download. You build with it tonight.</div>
+      <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Get the <b>Claude desktop app</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
     </div>
   </section>
 
@@ -912,24 +916,30 @@
   .swall-grid .lchip.hasimg img.brand{display:block;height:clamp(20px,2.2vw,26px);width:auto;max-width:32px;object-fit:contain}
   .swall-pay{margin-top:clamp(1rem,2.6vh,1.7rem);font-family:var(--body);font-weight:700;font-size:clamp(17px,2vw,25px)}
   .swall-pay b{color:var(--rust)}
-  /* motion: entrance rev on the grid container (keeps the deck's .wrap stagger),
-     per-tile pop on a --n delay, then swallFail dims the wall right before the
-     payoff line lands */
-  /* the .wrap> in these two selectors is load-bearing: the deck's global
-     stagger rule (.slide.active .wrap>*:nth-child(n)) carries an extra
-     pseudo-class of specificity, and without matching it the 2.4s/2.55s
-     delays lose to the stagger's .12s/.2s */
-  .swall.active .wrap>.swall-grid{animation:rev .6s cubic-bezier(.2,.85,.25,1) forwards,swallFail .6s ease forwards;animation-delay:.12s,2.4s}
+  /* motion: presenter-gated in two stages, not on a timer.
+     stage 1 (slide active): entrance rev on the grid container (keeps the deck's
+     .wrap stagger), per-tile pop on a --n delay, wall full color, payoff hidden.
+     stage 2 (.swall.stage2, added on the first presenter advance): swallFail dims
+     the wall and the payoff line reveals. The gate lives in next() in the deck JS. */
+  /* the .wrap> in these selectors is load-bearing: the deck's global stagger rule
+     (.slide.active .wrap>*:nth-child(n)) carries an extra pseudo-class of
+     specificity, so matching .wrap> lets these scoped rules win. The stage2 rules
+     come later in source and share specificity with the stage1 rules, so they win. */
+  .swall.active .wrap>.swall-grid{animation:rev .6s cubic-bezier(.2,.85,.25,1) forwards;animation-delay:.12s}
   .swall.active .swall-grid .lchip{opacity:0;animation:swallPop .34s cubic-bezier(.2,.85,.3,1.1) forwards;animation-delay:calc(.3s + var(--n)*.07s)}
-  .swall.active .wrap>.swall-pay{opacity:0;animation:rev .5s cubic-bezier(.2,.85,.25,1) forwards;animation-delay:2.55s}
+  .swall.active .wrap>.swall-pay{opacity:0;animation:none}
+  .swall.stage2 .wrap>.swall-grid{animation:swallFail .6s ease forwards}
+  .swall.stage2 .wrap>.swall-pay{opacity:0;animation:rev .5s cubic-bezier(.2,.85,.25,1) forwards}
   @keyframes swallPop{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
   @keyframes swallFail{to{filter:grayscale(1);opacity:.42}}
-  /* house rule: reduced motion gets the resolved still frame (dimmed wall,
-     payoff visible). The global rule kills durations but NOT delays, so the
-     animations are removed outright here. */
+  /* house rule: reduced motion still requires the presenter keypress to reach
+     stage 2, but each stage applies instantly with no animation. */
   @media (prefers-reduced-motion:reduce){
-    .swall.active .swall-grid,.swall.active .swall-grid .lchip,.swall.active .swall-pay{animation:none;opacity:1}
-    .swall.active .swall-grid{filter:grayscale(1);opacity:.42}
+    .swall.active .swall-grid,.swall.active .swall-grid .lchip,.swall.active .wrap>.swall-pay{animation:none}
+    .swall.active .swall-grid .lchip{opacity:1}
+    .swall.active .wrap>.swall-pay{opacity:0}
+    .swall.stage2 .wrap>.swall-grid{filter:grayscale(1);opacity:.42;animation:none}
+    .swall.stage2 .wrap>.swall-pay{opacity:1;animation:none}
   }
   @media (max-width:900px){.swall-grid{grid-template-columns:repeat(4,1fr)}}
   </style>
@@ -990,11 +1000,12 @@
      eyebrow's row, clipped against the top of the slide. */
   .s3c.has-claude .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:repeat(4,auto);column-gap:clamp(20px,3.2vw,56px);align-items:center}
   .s3c.has-claude .wrap>*{grid-column:1}
-  /* top:36px: the hop apex is -15% of the dancer (up to ~43px), and the longer
-     loop-contract headline leaves only ~12px of static clearance above the box,
-     so at the apex the critter clipped the h1's descenders. Resting it lower
-     keeps the whole hop under the text at every dancer size. */
-  .s3c.has-claude .s3c-claude{display:block;grid-column:2;grid-row:1 / -1;align-self:center;top:36px}
+  /* top:64px: with the bottom artifact strip removed, column 1 is shorter and the
+     centred critter rides higher, so it read as crowding the headline. Dropping it
+     64px separates the whole hop (apex is -15% of the dancer) from the h1's second
+     line by a clear margin at every dancer size, and the floor shadow still clears
+     the bottom of the slide at both 720 and 800 tall. Measured below. */
+  .s3c.has-claude .s3c-claude{display:block;grid-column:2;grid-row:1 / -1;align-self:center;top:64px}
   .s3c-sway{display:block;transform-origin:50% 92%;will-change:transform;
     animation:s3cSway 1.24s ease-in-out infinite}
   .s3c-dancer{display:block;width:clamp(180px,20.5vw,286px);height:auto;
@@ -1011,10 +1022,6 @@
   }
   @keyframes s3cSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
   @keyframes s3cFloor{0%,100%{transform:scale(1);opacity:.26}48%{transform:scale(.68);opacity:.09}}
-  /* scoped: artifact flash strip, borrowing the deck's .term dark/mono language */
-  .s3c-flash{display:flex;align-items:center;flex-wrap:wrap;gap:.7rem .95rem;margin-top:1rem}
-  .s3c-term{font-family:var(--mono);font-size:13px;line-height:1.4;background:#1a120f;color:#e7d6d0;border-radius:6px;padding:.5rem .75rem}
-  .s3c-scribble{font-family:var(--hand);color:var(--green);font-weight:700;font-size:clamp(18px,1.9vw,23px);transform:rotate(-2.5deg);white-space:nowrap}
   /* house rule: reduced motion gets a still slide. The critter stays, it just stands
      there (mid-stride, shadow under its feet) instead of dancing. */
   @media (prefers-reduced-motion:reduce){
@@ -1039,10 +1046,6 @@
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Proof it stuck.</b> The loop checks whether coaching showed up on the next call, then drills it.</span></li>
       </ul>
       <p class="sub" style="max-width:62ch">You set this up once for the team. The cheat sheet at the end has every step, and it's yours whether or not we ever talk again.</p>
-      <div class="s3c-flash">
-        <code class="s3c-term">game-plans/jul-18.md · GOAL Get Marcus to name the audit deadline. · written 7:00am</code>
-        <span class="s3c-scribble">this wrote itself. stay for slide 10.</span>
-      </div>
       <figure class="s3c-claude" aria-hidden="true">
         <span class="s3c-sway"><img class="s3c-dancer" data-asset="s3_claude" alt=""></span>
         <span class="s3c-floor"></span>
@@ -2432,8 +2435,17 @@ Then stop and tell me the one thing that changed most.</div>
     if(a==='type')runTyper();
     if(a==='confetti')startConfetti();
     if(slides[i].querySelector('#ballCanvas'))startBall();
+    // presenter-gated slides reset to stage 1 every time they are (re-)entered
+    if(slides[i].classList.contains('swall'))slides[i].classList.remove('stage2');
   }
-  var next=function(){show(i+1);}, prev=function(){show(i-1);};
+  // stage gate: a slide can absorb the first forward advance to run its own beat
+  // instead of changing slides. Currently only the logo wall opts in.
+  function advanceGated(){
+    var cur=slides[i];
+    if(cur.classList.contains('swall')&&!cur.classList.contains('stage2')){cur.classList.add('stage2');return true;}
+    return false;
+  }
+  var next=function(){if(advanceGated())return;show(i+1);}, prev=function(){show(i-1);};
   prevB.onclick=prev; nextB.onclick=next;
 
   var index=document.getElementById('index'), list=document.getElementById('indexList');
