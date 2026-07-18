@@ -1748,7 +1748,9 @@ Then stop and tell me the one thing that changed most.</div>
   #wingrepReveal .wrrow.done.gr .rc{border-color:var(--wr);background:var(--wr)}
   #wingrepReveal .wrrow.done .rc svg{opacity:1}
   #wingrepReveal .wrrow .rt{font-size:clamp(12.5px,1.25vw,14.5px);font-weight:500;color:var(--c-tx2)}
-  #wingrepReveal .wrrow.done .rt{text-decoration:line-through;color:var(--c-mut)}
+  /* done follow-ups keep full legibility: the green check already says "handled",
+     and striking CRM/coaching lines reads as cancelled, not completed */
+  #wingrepReveal .wrrow.done .rt{color:var(--c-tx)}
 
   /* talk ratio bar */
   #wingrepReveal .wrtalk .glbl{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-mut);margin-bottom:.5rem}
@@ -1824,7 +1826,7 @@ Then stop and tell me the one thing that changed most.</div>
             <div class="wrcall">
               <span class="wricon"><img data-asset="ui_barwm" alt=""></span>
               <div class="wrmeta">
-                <div class="t">Cobalt Freight · Trial check-in</div>
+                <div class="t">Cobalt · Trial check-in</div>
                 <div class="s">11:10 AM · 30m</div>
               </div>
               <span class="wrchip prep" id="wrChip">PREP</span>
@@ -2766,7 +2768,9 @@ Then stop and tell me the one thing that changed most.</div>
   // set-piece, told in the product's own chrome. Timers cancel on slide exit.
   var appTimers=[];
   function runApp(){
-    var slide=slides[i];
+    // anchored to the section, not slides[i]: replay and any future trigger path
+    // must work no matter which index the deck thinks it is on
+    var slide=document.getElementById('wingrepReveal');
     var app=slide.querySelector('#wrApp'),card=slide.querySelector('#wrCard'),cap=slide.querySelector('#appCaption');
     var rail=slide.querySelectorAll('.wrrail b'),stacks=slide.querySelectorAll('.wrstack');
     var stlbl=slide.querySelector('#wrStateLbl'),chip=slide.querySelector('#wrChip'),seg=slide.querySelector('#wrSeg');
