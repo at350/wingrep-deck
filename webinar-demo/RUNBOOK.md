@@ -175,15 +175,15 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
-**Slide 13, outcome proof:** scroll the two native demo emails. Every name, address, company, score, and call detail is fictional. The game plan arrives before the call; the scored debrief arrives after it. The point is that reps do not need to reopen the product to get the workflow's value.
+**Slide 13, outcome proof:** scroll the two native emails. The Gmail mark, WingRep email treatment, and Jeffrey Gitomer coach assets come from the supplied email examples; every account, address, meeting, and performance detail is fictional. The game plan arrives before the call; the debrief arrives after it. The point is that reps do not need to reopen the product to get the workflow's value.
 
 **Slide 14, differentiation:** most call tools preserve the conversation; WingRep changes the next call. Read the comparison as the answer to “why another tool?”
 
-**Slide 15, manual-admin game:** let the room feel the cost of running the loop by hand. Play or skip, then advance.
+**Slide 15, manual-admin game:** let the room feel the cost of running the loop by hand. The pre-game controls disappear once play begins, so the end menu owns the single WingRep action.
 
 **Slide 16, recap:** give the workflow away cleanly: five prompts, four moves, one coaching rhythm. The room can run it with or without WingRep.
 
-**Slide 17, standard trial:** present the ordinary three-week pilot and use the three stacked call cards as the visual metaphor: evidence compounds across real calls. Do not mention Amit or founder onboarding yet.
+**Slide 17, standard trial:** present the ordinary three-week pilot. The right-side filmstrip uses real WingRep prep, live-guidance, and follow-through views, not an illustration or decorative claim. Do not mention Amit or founder onboarding yet.
 
 **Slide 18, founder bonus:** this is the first founder-deal reveal. Say: *"You just felt the admin. Now get live with Amit."* Present the attendee-only 20-minute onboarding, point to the larger live founder-slot clock, and send the room to `wingrep.ai/webinar`.
 

@@ -51,8 +51,8 @@
     .slide#trial .body{margin-top:.55rem}
     .slide#trial .trial-grid{margin-top:.45rem;gap:clamp(1.2rem,3vw,2.4rem)}
     .slide#trial .trial-weeks{margin-top:.8rem;gap:.55rem}
-    .slide#trial .trial-hero{width:min(100%,300px)}
-    .slide#trial .trial-hero img{aspect-ratio:1200/1270}
+    .slide#trial .trial-film{width:min(100%,310px)}
+    .slide#trial .trial-shot{height:88px}
     .slide#trial .bandlab{margin:1.4rem 0 .35rem}
     .slide#trial .logobanner{margin-top:0}
     .slide#trial .bandstrip{padding:.9rem 1.8rem}
@@ -227,7 +227,6 @@
   .pane2.coach{background:#37180d;border-color:#a44927} .pane2.coach .stuck{color:#de9a81;font-weight:800}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(164,73,39,.5)}70%{box-shadow:0 0 0 9px rgba(164,73,39,0)}100%{box-shadow:0 0 0 0 rgba(164,73,39,0)}}
   .caption{margin-top:1rem;font-size:clamp(15px,1.6vw,19px);font-weight:600;color:var(--ink-soft);opacity:0;transition:opacity .5s} .caption.show{opacity:1}
-  .replay{margin-top:.7rem;font-family:var(--body);font-weight:700;font-size:12.5px;background:none;border:1.5px solid var(--line);border-radius:999px;padding:.36rem .9rem;cursor:pointer;color:var(--green)}
 
   .roi{margin-top:1.4rem;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem 1.7rem;max-width:640px;box-shadow:var(--shadow)}
   .roi .repline{display:flex;align-items:baseline;gap:.6rem;font-weight:600;font-size:16px}
@@ -370,11 +369,11 @@
   .how{margin-top:1.4rem;display:grid;gap:.65rem;max-width:58ch}
   .how div{display:flex;gap:.9rem;align-items:baseline;font-size:15px;font-weight:500;line-height:1.4}
   .how div b{font-family:var(--display);font-weight:800;color:var(--green);font-size:12px;letter-spacing:.04em;white-space:nowrap;min-width:4.6em}
-  /* Slide 17 (trial): headline + bold 3-week list on the left, one big hero image on the right,
-     so the payoff visual fills what used to be dead space. h1 sized for the half-width column. */
-  #trial h1{font-size:clamp(24px,3.1vw,37px);line-height:1.05;white-space:nowrap}
+  /* Slide 17 (trial): the heading is allowed to wrap inside its own column, so the
+     authentic product filmstrip can never cover the last word on a laptop. */
+  #trial h1{font-size:clamp(24px,3vw,36px);line-height:1.05;max-width:17ch}
   #trial .logobanner{margin-top:1.1rem}
-  @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-hero{max-width:460px} }
+  @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-film{max-width:460px} }
 
   .soon{text-align:center;align-items:center} .soon .wrap{display:flex;flex-direction:column;align-items:center}
   /* scoped: compact single-line install pill (reads as a visual element, not a paragraph).
@@ -428,6 +427,7 @@
   .gameover h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.6vw,38px);margin-bottom:.4rem}
   .gameover p{font-size:15px;max-width:36ch;color:#d9d3c2;font-weight:500}
   .gamebtns{display:flex;gap:.7rem;margin-top:.7rem;flex-wrap:wrap;justify-content:center}
+  #gameControls[hidden]{display:none!important}
 
   .friday{margin-top:1.5rem;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:1.5rem 1.7rem;max-width:50ch;box-shadow:var(--shadow)}
   .friday .clockrow{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem}
@@ -1673,7 +1673,6 @@ Then stop and tell me the one thing that changed most.</div>
   #wingrepReveal .wrrail button:nth-child(1).on{color:var(--violet)}
   #wingrepReveal .wrrail button:nth-child(2).on{color:var(--rust)}
   #wingrepReveal .wrrail button:nth-child(3).on{color:#9a4f18}
-  #wingrepReveal .replay{display:block;margin-top:.85rem;color:var(--green)}
 
   /* .app is the gradient frame the card floats on; the two backdrops crossfade */
   #wingrepReveal .app{position:relative;flex:none;margin:0;max-width:none;width:clamp(316px,29vw,376px);border:none;border-radius:26px;overflow:hidden;padding:clamp(15px,1.9vw,24px);background:#0c2b1e;box-shadow:0 30px 70px -30px rgba(10,20,14,.65)}
@@ -1775,7 +1774,6 @@ Then stop and tell me the one thing that changed most.</div>
     #wingrepReveal .wrcall{padding-bottom:clamp(6px,.75vw,9px)}
     #wingrepReveal .wrseg{height:36px}
     #wingrepReveal .wrseg span{font-size:12.5px}
-    #wingrepReveal .replay{margin-top:.7rem}
   }
   /* 1280x720 gets one final rhythm trim. */
   @media (max-height:760px){
@@ -1809,7 +1807,6 @@ Then stop and tell me the one thing that changed most.</div>
           <button type="button" data-wr-state="during" aria-pressed="false">during</button>
           <button type="button" data-wr-state="after" aria-pressed="false">after</button>
         </div>
-        <button class="replay" id="appReplay" type="button">↺ replay from before</button>
       </div>
       <div class="wrdemo">
         <div class="app" id="wrApp">
@@ -1880,50 +1877,65 @@ Then stop and tell me the one thing that changed most.</div>
     </div>
   </section>
 
-  <!-- 13 OUTCOME PROOF: native, scrollable demo emails. All people, companies,
-       addresses, scores, and call details are fictional so this can be presented
-       publicly without exposing a customer's inbox or a screenshot of one. -->
+  <!-- 13 OUTCOME PROOF: native, scrollable demo emails. The Gmail mark, WingRep
+       email treatment, and Jeffrey Gitomer coach assets come from the supplied
+       PDFs; all account, meeting, address, and performance data is fictional. -->
   <style>
   #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,3vw,2.4rem);align-items:start;margin-top:clamp(1.1rem,2.6vh,1.55rem);max-width:1040px}
   #sShots .sShots-card{margin:0;min-width:0}
   #sShots .sShots-lbl{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-weight:600;letter-spacing:.02em;font-size:clamp(12px,1.2vw,14px);color:var(--green);margin-bottom:.6rem}
   #sShots .sShots-lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none;box-shadow:0 0 0 3px var(--green-wash)}
-  #sShots .sShots-mail{height:clamp(340px,48vh,430px);display:flex;flex-direction:column;overflow:hidden;border-radius:16px;border:1.5px solid #d7d9df;box-shadow:var(--shadow);background:#fff;color:#202124}
-  #sShots .demo-mail-toolbar{height:40px;flex:none;display:flex;align-items:center;gap:.65rem;padding:0 .8rem;background:#f7f8fb;border-bottom:1px solid #e5e7eb;font-family:Arial,sans-serif;font-size:11px;color:#5f6368}
-  #sShots .demo-mail-mark{width:24px;height:24px;border-radius:7px;background:#143f2d;color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:13px}
-  #sShots .demo-mail-search{flex:1;height:24px;display:flex;align-items:center;padding:0 .7rem;border-radius:8px;background:#eceff3;color:#81868c}
-  #sShots .demo-mail-fake{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#7b8188;white-space:nowrap}
+  #sShots .sShots-mail{height:clamp(340px,48vh,430px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124}
+  #sShots .demo-mail-toolbar{height:39px;flex:none;display:flex;align-items:center;gap:.7rem;padding:0 .75rem;background:#fff;border-bottom:1px solid #e6e8eb;font-family:Arial,sans-serif;color:#5f6368}
+  #sShots .demo-mail-gmail{width:67px;height:auto;display:block;flex:none}
+  #sShots .demo-mail-search{flex:1;height:25px;display:flex;align-items:center;padding:0 .7rem;border-radius:8px;background:#f1f3f4;font-size:10px;color:#80868b}
+  #sShots .demo-mail-tools{display:flex;gap:.38rem;align-items:center}
+  #sShots .demo-mail-tools i{display:block;width:5px;height:5px;border-radius:50%;background:#9aa0a6}
   #sShots .demo-mail-scroll{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-color:#b8bdc5 #f1f3f4;scrollbar-width:thin;background:#fff}
   #sShots .demo-mail-subject,#sShots .demo-mail-from{overflow-wrap:anywhere}
   #sShots .demo-mail-scroll::-webkit-scrollbar{width:9px}
   #sShots .demo-mail-scroll::-webkit-scrollbar-track{background:#f1f3f4}
   #sShots .demo-mail-scroll::-webkit-scrollbar-thumb{background:#b8bdc5;border:2px solid #f1f3f4;border-radius:999px}
-  #sShots .demo-mail-head{padding:13px 16px 11px;border-bottom:1px solid #eceff1;font-family:Arial,sans-serif}
-  #sShots .demo-mail-subject{font-size:15px;font-weight:500;line-height:1.25;color:#202124;margin-bottom:10px}
-  #sShots .demo-mail-sender{display:grid;grid-template-columns:30px 1fr;gap:9px;align-items:center}
-  #sShots .demo-mail-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#184f37;color:#fff;font-weight:700;font-size:12px}
-  #sShots .demo-mail-from{font-size:11px;line-height:1.35;color:#5f6368}
-  #sShots .demo-mail-from b{font-size:12px;color:#202124}
-  #sShots .demo-mail-body{padding:14px;background:#f5f5f3;font-family:Arial,sans-serif}
-  #sShots .demo-email{max-width:420px;margin:0 auto;background:#fff;border:1px solid #e2e4e1;border-radius:7px;overflow:hidden;box-shadow:0 3px 10px rgba(32,33,36,.08)}
-  #sShots .demo-email-hero{padding:19px 20px 17px;background:linear-gradient(135deg,#174b34,#0f3525);color:#fff}
-  #sShots .demo-email-logo{font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.02em;margin-bottom:14px}
-  #sShots .demo-email-kicker{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#bce3c8;margin-bottom:5px}
-  #sShots .demo-email-hero h3{font-family:Arial,sans-serif;font-size:19px;line-height:1.17;margin:0;color:#fff}
-  #sShots .demo-email-hero p{font-size:11px;line-height:1.45;margin:7px 0 0;color:#d9eee0}
-  #sShots .demo-email-content{padding:17px 20px 22px;color:#28302c}
-  #sShots .demo-email-call{font-size:14px;line-height:1.3;margin:0 0 4px;font-weight:700;color:#183c2c}
-  #sShots .demo-email-meta{font-size:10px;color:#6e756f;margin-bottom:13px}
-  #sShots .demo-email-section{border-top:1px solid #e7e9e6;padding-top:12px;margin-top:12px}
-  #sShots .demo-email-section h4{margin:0 0 6px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#397153}
-  #sShots .demo-email-section p,#sShots .demo-email-section li{font-size:11px;line-height:1.45;color:#48504b}
+  #sShots .demo-mail-head{padding:12px 14px 10px;border-bottom:1px solid #eceff1;font-family:Arial,sans-serif}
+  #sShots .demo-mail-subject{font-size:14px;font-weight:700;line-height:1.25;color:#202124;margin-bottom:8px}
+  #sShots .demo-mail-sender{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  #sShots .demo-mail-from,#sShots .demo-mail-date{font-size:10px;line-height:1.35;color:#5f6368}
+  #sShots .demo-mail-from b{font-size:11px;color:#202124}
+  #sShots .demo-mail-date{white-space:nowrap}
+  #sShots .demo-mail-body{padding:13px;background:#fff;font-family:Arial,sans-serif}
+  #sShots .demo-email{max-width:430px;margin:0 auto;background:#fff;border:1px solid #e1e4e8;border-radius:8px;overflow:hidden}
+  #sShots .demo-email-hero{padding:18px 18px 16px;background:#009443;color:#fff}
+  #sShots .demo-email-brand{font-size:12px;font-weight:700;letter-spacing:.08em;margin-bottom:8px;color:#fff}
+  #sShots .demo-email-hero h3{font-family:Arial,sans-serif;font-size:18px;line-height:1.2;margin:0;color:#fff}
+  #sShots .demo-email-hero p{font-size:10.5px;line-height:1.4;margin:6px 0 0;color:#e8fff1}
+  #sShots .demo-email-content{padding:16px 18px 19px;color:#222}
+  #sShots .demo-priority{font-size:11px;line-height:1.45;margin:0 0 11px;color:#222}
+  #sShots .demo-priority b{font-weight:700}
+  #sShots .demo-coach{display:flex;align-items:center;gap:10px;margin-top:12px}
+  #sShots .demo-coach-face{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none}
+  #sShots .demo-coach-copy{font-size:9.5px;color:#6b6f72;line-height:1.25}
+  #sShots .demo-coach-signature{width:84px;height:25px;object-fit:contain;object-position:left center;display:block;margin-top:1px}
+  #sShots .demo-email-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 18px;background:#009443;color:#fff;font-size:10px}
+  #sShots .demo-email-bar b{font-size:11px}
+  #sShots .demo-email-context{padding:8px 18px;background:#f4fff7;border-bottom:1px solid #d8e9dd;font-size:9.5px;line-height:1.4;color:#315c43}
+  #sShots .demo-meeting{padding:15px 18px 20px}
+  #sShots .demo-meeting h4{margin:0 0 5px;font-size:14px;color:#222}
+  #sShots .demo-email-meta{font-size:10px;font-weight:700;color:#5f6368;margin-bottom:12px}
+  #sShots .demo-email-section{margin-top:12px}
+  #sShots .demo-email-section h5{margin:0 0 5px;font-size:12px;color:#009443}
+  #sShots .demo-email-section p,#sShots .demo-email-section li{font-size:10.5px;line-height:1.45;color:#34383a}
   #sShots .demo-email-section p{margin:0}
-  #sShots .demo-email-section ul{margin:0;padding-left:17px;display:grid;gap:5px}
-  #sShots .demo-scoreline{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-  #sShots .demo-score{width:56px;height:56px;flex:none;border-radius:50%;display:grid;place-items:center;background:#e8f4ec;color:#174b34;font-weight:700;font-size:19px;border:4px solid #55a774}
-  #sShots .demo-scorecopy{font-size:11px;line-height:1.4;color:#48504b}
-  #sShots .demo-pill{display:inline-flex;align-items:center;border-radius:999px;padding:3px 7px;background:#e8f4ec;color:#245c3f;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-  #sShots .demo-email-foot{padding:13px 20px;background:#f7faf8;border-top:1px solid #e7ece8;font-size:9px;line-height:1.45;color:#727a74;text-align:center}
+  #sShots .demo-email-section ul{margin:0;padding-left:17px;display:grid;gap:4px}
+  #sShots .demo-notes-hero{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:11px;color:#e5ffed}
+  #sShots .demo-notes-pill{padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.22);font-size:8.5px;font-weight:700;letter-spacing:.08em}
+  #sShots .demo-notes-bg{padding:15px 15px 20px;background:#f4f5f6;color:#222}
+  #sShots .demo-notes-hi{font-size:11px;margin:0 0 14px}
+  #sShots .demo-notes-title{font-size:14px;color:#009443;margin:0 0 9px}
+  #sShots .demo-notes-card{padding:15px 17px;background:#fff;border:1px solid #dcdfe3;border-radius:13px}
+  #sShots .demo-notes-card h4{font-size:12px;margin:0 0 10px;color:#222}
+  #sShots .demo-notes-card h5{font-size:11px;margin:11px 0 5px;color:#222}
+  #sShots .demo-notes-card p,#sShots .demo-notes-card li{font-size:10.5px;line-height:1.45;color:#303236}
+  #sShots .demo-notes-card ul{padding-left:17px;display:grid;gap:4px}
   #sShots .sShots-grid{animation:none;opacity:1}
   #sShots .sShots-card{opacity:0}
   #sShots.active .sShots-card{animation:shotsRise .6s cubic-bezier(.2,.85,.25,1) forwards}
@@ -1951,25 +1963,23 @@ Then stop and tell me the one thing that changed most.</div>
         <figure class="sShots-card">
           <div class="sShots-lbl">Before the call · Tomorrow's game plan</div>
           <div class="sShots-mail" aria-label="Scrollable fictional game-plan email">
-            <div class="demo-mail-toolbar"><span class="demo-mail-mark">W</span><span class="demo-mail-search">Search mail</span><span class="demo-mail-fake">demo · scroll ↓</span></div>
+            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span></div>
             <div class="demo-mail-scroll" tabindex="0" role="region" aria-label="Fictional game-plan email, scroll for the full message">
               <div class="demo-mail-head">
-                <div class="demo-mail-subject">Tomorrow's game plan for Maya Chen · Tue, Jul 21</div>
-                <div class="demo-mail-sender"><span class="demo-mail-avatar">W</span><div class="demo-mail-from"><b>WingRep</b> &lt;no-reply@wingrep.ai&gt;<br>to Maya &lt;maya@northstar.example&gt;</div></div>
+                <div class="demo-mail-subject">Tomorrow's game plan for Maya Chen - Tue, Jul 21</div>
+                <div class="demo-mail-sender"><div class="demo-mail-from"><b>WingRep</b> &lt;no-reply@wingrep.ai&gt;<br>to Maya &lt;maya@northstar.example&gt;</div><div class="demo-mail-date">Mon, Jul 20, 3:00 PM</div></div>
               </div>
               <div class="demo-mail-body">
                 <article class="demo-email">
-                  <header class="demo-email-hero"><div class="demo-email-logo">WingRep</div><div class="demo-email-kicker">Tomorrow's game plan</div><h3>Good morning, Maya.</h3><p>Your priorities and prep for Tuesday's calls are ready.</p></header>
+                  <header class="demo-email-hero"><div class="demo-email-brand">WINGREP</div><h3>Tomorrow's game plan for Maya Chen - Tue, Jul 21</h3><p>Focus areas and prep to help you win tomorrow's meetings</p></header>
                   <div class="demo-email-content">
-                    <div class="demo-pill">Priority call</div>
-                    <p class="demo-email-call">Northstar Logistics · Trial check-in</p>
-                    <div class="demo-email-meta">10:30 AM · 30 minutes · Alex Rivera, VP Operations</div>
-                    <section class="demo-email-section"><h4>Who you're meeting</h4><p>Alex owns the rollout decision. He cares about reducing review time without adding another tool for managers to maintain.</p></section>
-                    <section class="demo-email-section"><h4>Context from the last call</h4><p>The team liked the coaching loop. The open concern was whether the two-week rollout would interrupt the current CRM process.</p></section>
-                    <section class="demo-email-section"><h4>Actions for this call</h4><ul><li>Lead with the time saved in manager review.</li><li>Show how the rollout works alongside the existing CRM.</li><li>Leave with a date for the team pilot.</li></ul></section>
-                    <section class="demo-email-section"><h4>One thing to practice</h4><p>After Alex names a concern, pause and ask one follow-up before answering it.</p></section>
+                    <p class="demo-priority"><b>Tomorrow's priority:</b> Your 10:30 AM trial check-in with Alex.</p>
+                    <p class="demo-priority">Make this meeting count. Lock in clear next steps, confirm the decision process, and leave with the pilot date.</p>
+                    <div class="demo-coach"><img class="demo-coach-face" src="webinar-demo/assets/email-jeffrey-gitomer.jpg" alt="Jeffrey Gitomer"><div class="demo-coach-copy">Yours in sales, Jeffrey Gitomer<img class="demo-coach-signature" src="webinar-demo/assets/email-jeffrey-signature.png" alt="Jeffrey Gitomer signature"></div></div>
                   </div>
-                  <footer class="demo-email-foot">Fictional demonstration data · Generated by WingRep</footer>
+                  <div class="demo-email-bar"><b>Tomorrow's MEETINGS</b><span>Tue, Jul 21 - 2 meetings</span></div>
+                  <div class="demo-email-context">Includes context from prior meetings and current account research to help you prepare.</div>
+                  <div class="demo-meeting"><h4>Northstar Logistics - Trial check-in</h4><div class="demo-email-meta">Tue, Jul 21, 2026 at 10:30 AM</div><section class="demo-email-section"><h5>Who You're Meeting</h5><p>Alex Rivera leads operations and owns the rollout decision. He wants faster manager reviews without another system to maintain.</p></section><section class="demo-email-section"><h5>Context</h5><p>The team liked the coaching loop. The open question is whether a two-week rollout can work alongside the current CRM process.</p></section><section class="demo-email-section"><h5>Actions for This Call</h5><ul><li>Lead with manager-review time saved.</li><li>Show how the rollout works with the existing CRM.</li><li>Confirm the pilot date and success criteria.</li></ul></section></div>
                 </article>
               </div>
             </div>
@@ -1978,23 +1988,20 @@ Then stop and tell me the one thing that changed most.</div>
         <figure class="sShots-card">
           <div class="sShots-lbl">After the call · Scored debrief</div>
           <div class="sShots-mail" aria-label="Scrollable fictional scored-debrief email">
-            <div class="demo-mail-toolbar"><span class="demo-mail-mark">W</span><span class="demo-mail-search">Search mail</span><span class="demo-mail-fake">demo · scroll ↓</span></div>
+            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span></div>
             <div class="demo-mail-scroll" tabindex="0" role="region" aria-label="Fictional scored-debrief email, scroll for the full message">
               <div class="demo-mail-head">
-                <div class="demo-mail-subject">WingRep Debrief · Northstar trial check-in</div>
-                <div class="demo-mail-sender"><span class="demo-mail-avatar">W</span><div class="demo-mail-from"><b>WingRep</b> &lt;no-reply@wingrep.ai&gt;<br>to Maya &lt;maya@northstar.example&gt;</div></div>
+                <div class="demo-mail-subject">WingRep Debrief - Northstar trial check-in</div>
+                <div class="demo-mail-sender"><div class="demo-mail-from"><b>Jeffrey Gitomer</b> &lt;no-reply@wingrep.ai&gt;<br>to Maya &lt;maya@northstar.example&gt;</div><div class="demo-mail-date">Tue, Jul 21, 11:08 AM</div></div>
               </div>
               <div class="demo-mail-body">
                 <article class="demo-email">
-                  <header class="demo-email-hero"><div class="demo-email-logo">WingRep</div><div class="demo-email-kicker">Call debrief</div><h3>Northstar trial check-in</h3><p>Your score, coaching insight, and next actions are ready.</p></header>
-                  <div class="demo-email-content">
-                    <div class="demo-scoreline"><div class="demo-score">8.1</div><div class="demo-scorecopy"><b>Strong call.</b><br>You connected the rollout to Alex's review-time concern and earned the next step.</div></div>
-                    <section class="demo-email-section"><h4>What went well</h4><ul><li>You repeated Alex's concern in his own words before answering.</li><li>You quantified the current manager-review cost.</li><li>You confirmed the pilot date before the call ended.</li></ul></section>
-                    <section class="demo-email-section"><h4>Coaching insight</h4><p>Your discovery was strongest when you stayed with the buyer's language. Next call, let the silence run one beat longer after the first objection.</p></section>
-                    <section class="demo-email-section"><h4>Suggested follow-ups</h4><ul><li>Send the two-week rollout outline to Alex.</li><li>Invite Jordan Lee, Sales Enablement, to the kickoff.</li><li>Log the pilot date and success criteria in the CRM.</li></ul></section>
-                    <section class="demo-email-section"><h4>Progress from last call</h4><p>Previous coaching focus: ask one follow-up before answering. Completed twice on this call.</p></section>
+                  <header class="demo-email-hero"><div class="demo-notes-hero"><span>WingRep Notes</span><span class="demo-notes-pill">PRE-SALES</span></div><h3>Northstar trial check-in</h3></header>
+                  <div class="demo-notes-bg">
+                    <p class="demo-notes-hi">Hi Maya,</p>
+                    <h3 class="demo-notes-title">Meeting Notes</h3>
+                    <div class="demo-notes-card"><h4>Meeting: Northstar trial check-in</h4><h5>Decision Process</h5><ul><li>Alex owns the operations rollout decision.</li><li>Sales Enablement joins the pilot kickoff next week.</li><li>Success means less manager-review time without new CRM work.</li></ul><h5>What Moved Forward</h5><ul><li>The team agreed to a two-week pilot.</li><li>Maya confirmed the kickoff date and participant list.</li><li>The rollout outline will be shared today.</li></ul><h5>Coaching Insight</h5><p>The strongest moment came when Maya repeated the rollout concern before answering. Next time, leave one more beat of silence after the first objection.</p><h5>Follow-ups</h5><ul><li>Send Alex the rollout outline.</li><li>Invite Jordan Lee to the kickoff.</li><li>Log the pilot date and success criteria.</li></ul></div>
                   </div>
-                  <footer class="demo-email-foot">Fictional demonstration data · Generated by WingRep</footer>
                 </article>
               </div>
             </div>
@@ -2006,8 +2013,8 @@ Then stop and tell me the one thing that changed most.</div>
 
   <!-- 17 STANDARD TRIAL: three weeks on real calls, with no founder-bonus preview. -->
   <style>
-  /* ===== slide 17 (#trial): headline + bold 3-week list, one purpose-built field-test visual ===== */
-  #trial .trial-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(1.5rem,3.6vw,3.2rem);align-items:start;margin-top:1.05rem}
+  /* ===== slide 17 (#trial): headline + bold 3-week list, authentic product filmstrip ===== */
+  #trial .trial-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(310px,.92fr);gap:clamp(2rem,4vw,3.4rem);align-items:start;margin-top:1.05rem}
   #trial .trial-left{min-width:0}
   #trial .trial-left .body{margin-top:.7rem;max-width:31rem}
   /* the three weeks as a bold numbered list, not a thin chart */
@@ -2016,16 +2023,18 @@ Then stop and tell me the one thing that changed most.</div>
   #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(14px,1.5vw,18px);color:var(--green);letter-spacing:.02em}
   #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.85vw,21px);color:var(--ink);display:block;line-height:1.12}
   #trial .tw-s{font-size:clamp(12.5px,1.25vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.12rem}
-  #trial .trial-right{position:relative;padding-top:clamp(.4rem,1.5vh,1rem)}
-  #trial .trial-hero{position:relative;margin:0 auto;width:min(100%,390px)}
-  #trial .trial-hero img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;border-radius:22px;border:1.5px solid rgba(48,91,67,.18);box-shadow:0 22px 48px -28px rgba(20,54,37,.5)}
-  #trial .trial-proof{position:absolute;right:-.7rem;bottom:1.25rem;display:flex;align-items:center;gap:.45rem;padding:.55rem .7rem;border-radius:999px;background:#fff;border:1px solid #d8dfda;box-shadow:0 10px 24px -15px rgba(20,18,13,.55);font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.04em;color:var(--green-deep)}
-  #trial .trial-proof::before{content:"";width:8px;height:8px;border-radius:50%;background:#DD7053;box-shadow:0 0 0 3px rgba(221,112,83,.14)}
+  #trial .trial-right{min-width:0;padding-top:.2rem}
+  #trial .trial-film{width:min(100%,370px);margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  #trial .trial-shot{display:grid;grid-template-columns:72px minmax(0,1fr);height:108px;margin:0;border-bottom:1px solid var(--line);background:#fff;overflow:hidden}
+  #trial .trial-shot:last-child{border-bottom:0}
+  #trial .trial-shot figcaption{display:flex;align-items:center;justify-content:center;padding:.55rem;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep);background:#f7f2e8;border-right:1px solid var(--line);writing-mode:vertical-rl;transform:rotate(180deg)}
+  #trial .trial-shot img{width:100%;height:108px;display:block;object-fit:cover;object-position:50% 18%}
+  #trial .trial-shot.live figcaption{color:#fff;background:var(--green)}
   #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
-  /* reveal: the evidence collage lands, then the three weeks stagger up. */
-  #trial .trial-hero,#trial .trial-weeks li{opacity:0}
-  #trial.active .trial-hero{animation:theroin .7s cubic-bezier(.2,.8,.2,1) .25s forwards}
+  /* reveal: one cohesive real-product composition lands, then the weeks rise. */
+  #trial .trial-film,#trial .trial-weeks li{opacity:0}
+  #trial.active .trial-film{animation:theroin .7s cubic-bezier(.2,.8,.2,1) .25s forwards}
   #trial.active .trial-weeks li{animation:trise .5s cubic-bezier(.2,.8,.2,1) forwards}
   #trial.active .trial-weeks li:nth-child(1){animation-delay:.35s}
   #trial.active .trial-weeks li:nth-child(2){animation-delay:.48s}
@@ -2035,12 +2044,13 @@ Then stop and tell me the one thing that changed most.</div>
   /* Short viewports keep the customer strip clear of the trial steps. */
   @media (max-height:800px){
     #trial .bandlab{margin-top:1.2rem}
-    #trial .trial-right{padding-top:.2rem}
-    #trial .trial-hero{width:min(100%,340px)}
+    #trial .trial-film{width:min(100%,310px)}
+    #trial .trial-shot{height:88px}
+    #trial .trial-shot img{height:88px}
   }
   @media (prefers-reduced-motion:reduce){
-    #trial .trial-hero,#trial .trial-weeks li{opacity:1}
-    #trial.active .trial-hero,#trial.active .trial-weeks li{animation:none}
+    #trial .trial-film,#trial .trial-weeks li{opacity:1}
+    #trial.active .trial-film,#trial.active .trial-weeks li{animation:none}
   }
   </style>
   <section class="slide wr-theme" id="trial">
@@ -2048,7 +2058,7 @@ Then stop and tell me the one thing that changed most.</div>
       <div class="eyebrow">How to start</div>
       <div class="trial-grid">
         <div class="trial-left">
-          <h1>Try it on your actual calls<br>for <span class="hl">three weeks.</span></h1>
+          <h1>Run it on real calls for <span class="hl">three weeks.</span></h1>
           <p class="body">Start with a few reps. If you're on Google Workspace, setup takes about twenty minutes.</p>
           <ol class="trial-weeks">
             <li><span class="tw-num">01</span><span><span class="tw-b">Connect a few reps.</span><span class="tw-s">Start with one team and the calls they already run.</span></span></li>
@@ -2057,10 +2067,11 @@ Then stop and tell me the one thing that changed most.</div>
           </ol>
         </div>
         <div class="trial-right">
-          <figure class="trial-hero">
-            <img src="webinar-demo/assets/trial-field-test.png" alt="Three weeks of real calls becoming accumulated evidence">
-            <figcaption class="trial-proof">evidence compounds</figcaption>
-          </figure>
+          <div class="trial-film" aria-label="Real WingRep product views across the call workflow">
+            <figure class="trial-shot"><figcaption>Before</figcaption><img data-img="shot_prep" alt="WingRep preparation view before a call"></figure>
+            <figure class="trial-shot live"><figcaption>During</figcaption><img data-img="shot_during" alt="WingRep guidance during a call"></figure>
+            <figure class="trial-shot"><figcaption>After</figcaption><img data-img="shot_after" alt="WingRep actions after a call"></figure>
+          </div>
         </div>
       </div>
       <div class="bandlab">Teams leveling up with WingRep</div>
@@ -2235,7 +2246,7 @@ Then stop and tell me the one thing that changed most.</div>
             </div>
           </div>
         </div>
-        <div class="gamebtns" style="justify-content:flex-start"><button class="btn btn-primary" id="gStart" style="font-size:14px;padding:.65rem 1.3rem">Start</button><button class="btn btn-ghost" id="gWingTop" style="font-size:14px;padding:.65rem 1.3rem">Skip, let WingRep do it</button></div>
+        <div class="gamebtns" id="gameControls" style="justify-content:flex-start"><button class="btn btn-primary" id="gStart" style="font-size:14px;padding:.65rem 1.3rem">Start</button><button class="btn btn-ghost" id="gWingTop" style="font-size:14px;padding:.65rem 1.3rem">Skip, let WingRep do it</button></div>
       </div>
     </div>
   </section>
@@ -2886,7 +2897,6 @@ Then stop and tell me the one thing that changed most.</div>
   }
   function runApp(){setAppStateByIndex(0);}
   document.querySelectorAll('#wingrepReveal .wrrail button').forEach(function(b){b.onclick=function(){setAppStateByIndex({before:0,during:1,after:2}[b.dataset.wrState]);};});
-  document.getElementById('appReplay').onclick=runApp;
 
   /* (cut) friday before/after, removed in the 80/20 rebalance */
 
@@ -2908,12 +2918,12 @@ Then stop and tell me the one thing that changed most.</div>
   function stopConfetti(){if(confRAF)cancelAnimationFrame(confRAF);confRAF=null;}
 
   /* GAME */
-  var area=document.getElementById('gameArea'), over=document.getElementById('gameOver');
+  var area=document.getElementById('gameArea'), over=document.getElementById('gameOver'), controls=document.getElementById('gameControls');
   var gScore=document.getElementById('gScore'), gMiss=document.getElementById('gMiss'), gTime=document.getElementById('gTime'), gStress=document.getElementById('gStress');
   var TASKS=["Update CRM","Draft follow-up","Log the call","Set next step","Notify manager","Fill 14 fields","Forecast notes"];
   var score=0,miss=0,time=30,spawnT=null,tickT=null,live=[];
   function clearTasks(){live.forEach(function(o){clearTimeout(o.t);if(o.el.parentNode)o.el.remove();});live=[];}
-  function stopGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();if(over)over.classList.remove('show');}
+  function stopGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();if(over)over.classList.remove('show');if(controls)controls.hidden=false;}
   function hud(){gScore.textContent='Cleared: '+score;gMiss.textContent='Piled up: '+miss;gTime.textContent='0:'+pad(time);gStress.style.width=Math.min(100,miss/12*100)+'%';}
   function burst(x,y){
     if(!reduce){ for(var i=0;i<8;i++){ var p=document.createElement('div'); p.className='gpart';
@@ -2930,15 +2940,15 @@ Then stop and tell me the one thing that changed most.</div>
     el.onclick=function(){score++;hud();burst(el.offsetLeft,el.offsetTop);clearTimeout(o.t);el.remove();live=live.filter(function(z){return z!==o;});};
     live.push(o);
   }
-  function startGame(){stopGame();score=0;miss=0;time=30;hud();over.classList.remove('show');
+  function startGame(){stopGame();if(controls)controls.hidden=true;score=0;miss=0;time=30;hud();over.classList.remove('show');
     spawnT=setInterval(function(){spawn();if(score>8)spawn();},680);
     tickT=setInterval(function(){time--;hud();if(time<=0)endGame();},1000);}
-  function endGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();
+  function endGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();if(controls)controls.hidden=true;
     document.getElementById('goTitle').textContent=miss>=12?"Buried.":"Time. You cleared "+score+".";
     document.getElementById('goText').textContent=miss>=12?"The admin won. "+miss+" tasks piled up while you were heads-down.":"And "+miss+" still slipped through. That's a normal Tuesday for ONE rep.";
     document.getElementById('goScribble').textContent="now multiply by your whole team.";
     over.classList.add('show');}
-  function wingClear(){stopGame();
+  function wingClear(){stopGame();if(controls)controls.hidden=true;
     document.getElementById('goTitle').textContent="Inbox zero.";
     document.getElementById('goText').textContent="Every task cleared. You touched none of it. That's the point.";
     document.getElementById('goScribble').textContent="this is just WingRep.";
