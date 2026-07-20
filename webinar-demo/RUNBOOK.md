@@ -183,7 +183,7 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Slide 16, recap:** give the workflow away cleanly: five prompts, four moves, one coaching rhythm. The room can run it with or without WingRep.
 
-**Slide 17, standard trial:** present the ordinary pilot as one simple three-week decision: connect a few reps, let the loop run, then decide from evidence. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Amit or founder onboarding yet.
+**Slide 17, standard trial:** present the ordinary pilot as one simple three-week progression: connect a few reps, let the loop run, then make the removal test tangible. Land on *"Hate to see it go away"* and explain that taking WingRep back off the reps is the actual test. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Amit or founder onboarding yet.
 
 **Slide 18, founder bonus:** this is the first founder-deal reveal. Say: *"You just felt the admin. Now get live with Amit."* Present the attendee-only 20-minute onboarding, point to the larger live founder-slot clock, and send the room to `wingrep.ai/webinar`.
 
