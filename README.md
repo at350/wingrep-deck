@@ -1,6 +1,6 @@
 # WingRep webinar deck
 
-**"Build your own AI sales assistant with Claude"** — an interactive HTML presentation (17 slides) for WingRep, modeled on the workplace.io style: real imagery, surgical humor, and live interactions. The deck is built to teach first (roughly 80% hands-on content, 20% product): it walks through the coaching-loop framework, the four prompting moves, and five copy-paste prompts before a short, honest WingRep section near the end. Markup, CSS and JS live in `wingrep-webinar.html`; the base64 images are split into a sibling `wingrep-assets.js` (loaded locally, no network) so the deck stays small and editable.
+**"Build your own AI sales assistant with Claude"** is a 19-slide interactive HTML presentation for WingRep, modeled on the workplace.io style: real imagery, surgical humor, and live interactions. The deck teaches the coaching-loop framework, four prompting moves, and five reusable prompts before moving through product proof, differentiation, the manual cost, a three-week trial, and a webinar-only founder-onboarding offer. Markup, CSS and JS live in `wingrep-webinar.html`; the base64 images are split into a sibling `wingrep-assets.js` (loaded locally, no network) so the deck stays small and editable.
 
 ## View it
 
@@ -15,11 +15,15 @@
 
 The deck markup, CSS and JS all live in **`wingrep-webinar.html`** (one Google Fonts link, no build step). The images are base64 in **`wingrep-assets.js`** as `window.IMG` / `window.EMBED` / `window.CLIENTS` / `window.ASSETS` — edit copy/layout in the HTML, swap imagery in the JS. Keep the two files together.
 
-Slide 10 ("AI, minus the jargon") shows an oversized Fable 5 numeral (a "5" formed from vintage butterflies) anchored large on the right, loaded from the `"slide9_fable"` entry in `window.ASSETS` (`wingrep-assets.js`). It's a transparent WebP cutout, so it floats straight on the cream slide with no box, and the slide splits into a two-zone hero layout (teaching content left, numeral right). Two real butterflies flutter around the numeral (`s9_bf1`, a CC BY-SA 4.0 butterfly animation from Wikimedia Commons / acegif.com, attribution required; and `s9_bf2`, a user-supplied blue-admiral GIF), re-encoded as transparent animated WebP and placed in four spots. The wing-flap is baked into the frames, so the CSS only adds a slow drift. Below 820px the numeral and its butterflies drop and the slide collapses to one column to keep the teaching content tight; the butterflies are also removed entirely under `prefers-reduced-motion` (still slide). The slot self-hides if the `slide9_fable` key is ever removed (no broken layout), so to swap the numeral just replace that one base64 entry.
+Slide 5 ("Hi, I'm Alan") deliberately uses an opaque paper background so the global ambient gradient cannot show through. Its LEGO shelf, photo wall, and bouncing-headshot animation remain self-contained.
 
-Slide 4 ("Here's the deal") puts the Claude Code critter to the right of the agenda, dancing: a transparent PNG cutout from `"s3_claude"` in `window.ASSETS`, with the hop, the lean and the contact shadow all done in CSS (`.s3c-claude`), so there is no GIF to keep in sync. Same self-hiding contract as the slide 10 numeral: the second column only appears when the asset is present, and it drops back to one column below 820px. Reduced motion leaves the critter standing still.
+Slide 7 ("AI, minus the jargon") shows the Fable 5 butterfly numeral from `window.ASSETS.slide9_fable`. The transparent cutout and drifting butterflies self-hide below 820px and stop moving under `prefers-reduced-motion`.
 
-Navigation while presenting: **← / → / Space** to move, **F** for fullscreen, **S** for the slide index.
+Slide 10 is the audience follow-along build. Its visible prompts and copy buttons use bracketed templates; the fictional Cobalt values live only in the presenter runbook. Slide 12 is presenter-controlled: Forward moves Before → During → After → slide 13, Previous reverses those states, the stage pills jump directly, and Replay resets to Before. Nothing advances on a timer.
+
+Slides 13 through 19 follow one closing arc: product proof, differentiation, the manual-admin game, the audience recap, the standard trial, the first founder-onboarding reveal, and a final `wingrep.ai/webinar` CTA.
+
+Navigation while presenting: **← / → / Space** to move, **F** for fullscreen, **S** for the slide index. On slide 12, the normal navigation controls move through the three product states before leaving the slide.
 
 ## House rules (keep these)
 
