@@ -175,7 +175,7 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
-**Slide 13, outcome proof:** point at the two real screenshots. On “In the moment,” land the live nudge. On “Three minutes later,” land the score and completed follow-through. The point is what changed for the rep, not whether the interface is a mockup.
+**Slide 13, outcome proof:** point at the two real inbox deliveries. The game plan arrives before the call; the scored debrief arrives after it. The point is that reps do not need to reopen the product to get the workflow's value.
 
 **Slide 14, differentiation:** most call tools preserve the conversation; WingRep changes the next call. Read the comparison as the answer to “why another tool?”
 
@@ -185,7 +185,7 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Slide 17, standard trial:** present the ordinary three-week pilot. Do not mention Amit or founder onboarding yet.
 
-**Slide 18, founder bonus:** this is the first founder-deal reveal. Present the webinar-only 20-minute onboarding, what to bring, and what the attendee leaves with. Point to `wingrep.ai/webinar`.
+**Slide 18, founder bonus:** this is the first founder-deal reveal. Bring back the emotional transition from the admin game: *"You just felt the admin. Amit will get you live on your calls."* Present the attendee-only 20-minute onboarding, point to the live founder-slot clock, and send the room to `wingrep.ai/webinar`.
 
 **Finale (slide 19):** point to `wingrep.ai/webinar`, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
 
