@@ -49,10 +49,8 @@
     /* .slide#trial, not #trial: the trial slide ships its own <style> block further
        down the file, and at equal specificity that later block would win. */
     .slide#trial .body{margin-top:.55rem}
-    .slide#trial .trial-grid{margin-top:.45rem;gap:clamp(1.2rem,3vw,2.4rem)}
-    .slide#trial .trial-weeks{margin-top:.8rem;gap:.55rem}
-    .slide#trial .trial-film{width:min(100%,310px)}
-    .slide#trial .trial-shot{height:88px}
+    .slide#trial .trial-main{margin-top:.45rem}
+    .slide#trial .trial-weeks{margin-top:.8rem}
     .slide#trial .bandlab{margin:1.4rem 0 .35rem}
     .slide#trial .logobanner{margin-top:0}
     .slide#trial .bandstrip{padding:.9rem 1.8rem}
@@ -369,11 +367,10 @@
   .how{margin-top:1.4rem;display:grid;gap:.65rem;max-width:58ch}
   .how div{display:flex;gap:.9rem;align-items:baseline;font-size:15px;font-weight:500;line-height:1.4}
   .how div b{font-family:var(--display);font-weight:800;color:var(--green);font-size:12px;letter-spacing:.04em;white-space:nowrap;min-width:4.6em}
-  /* Slide 17 (trial): the heading is allowed to wrap inside its own column, so the
-     authentic product filmstrip can never cover the last word on a laptop. */
+  /* Slide 17 (trial): keep the decision headline compact above the three-week sequence. */
   #trial h1{font-size:clamp(24px,3vw,36px);line-height:1.05;max-width:17ch}
   #trial .logobanner{margin-top:1.1rem}
-  @media(max-width:820px){ #trial .trial-grid{grid-template-columns:1fr;gap:1.2rem} #trial .trial-film{max-width:460px} }
+  @media(max-width:820px){ #trial .trial-weeks{grid-template-columns:1fr} }
 
   .soon{text-align:center;align-items:center} .soon .wrap{display:flex;flex-direction:column;align-items:center}
   /* scoped: compact single-line install pill (reads as a visual element, not a paragraph).
@@ -1881,11 +1878,13 @@ Then stop and tell me the one thing that changed most.</div>
        email treatment, and Jeffrey Gitomer coach assets come from the supplied
        PDFs; all account, meeting, address, and performance data is fictional. -->
   <style>
-  #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,3vw,2.4rem);align-items:start;margin-top:clamp(1.1rem,2.6vh,1.55rem);max-width:1040px}
+  #sShots .wrap{max-width:1220px}
+  #sShots h1{font-size:clamp(30px,2.65vw,38px);line-height:1.04;white-space:nowrap}
+  #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.3rem,2.4vw,2rem);align-items:start;margin-top:clamp(.8rem,1.9vh,1.15rem);max-width:none}
   #sShots .sShots-card{margin:0;min-width:0}
   #sShots .sShots-lbl{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-weight:600;letter-spacing:.02em;font-size:clamp(12px,1.2vw,14px);color:var(--green);margin-bottom:.6rem}
   #sShots .sShots-lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none;box-shadow:0 0 0 3px var(--green-wash)}
-  #sShots .sShots-mail{height:clamp(340px,48vh,430px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124}
+  #sShots .sShots-mail{height:clamp(400px,54vh,470px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124}
   #sShots .demo-mail-toolbar{height:39px;flex:none;display:flex;align-items:center;gap:.7rem;padding:0 .75rem;background:#fff;border-bottom:1px solid #e6e8eb;font-family:Arial,sans-serif;color:#5f6368}
   #sShots .demo-mail-gmail{width:67px;height:auto;display:block;flex:none}
   #sShots .demo-mail-search{flex:1;height:25px;display:flex;align-items:center;padding:0 .7rem;border-radius:8px;background:#f1f3f4;font-size:10px;color:#80868b}
@@ -1897,17 +1896,26 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots .demo-mail-scroll::-webkit-scrollbar-track{background:#f1f3f4}
   #sShots .demo-mail-scroll::-webkit-scrollbar-thumb{background:#b8bdc5;border:2px solid #f1f3f4;border-radius:999px}
   #sShots .demo-mail-head{padding:12px 14px 10px;border-bottom:1px solid #eceff1;font-family:Arial,sans-serif}
-  #sShots .demo-mail-subject{font-size:14px;font-weight:700;line-height:1.25;color:#202124;margin-bottom:8px}
+  #sShots .demo-mail-subject{font-size:15px;font-weight:700;line-height:1.25;color:#202124;margin-bottom:8px}
   #sShots .demo-mail-sender{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  #sShots .demo-mail-from,#sShots .demo-mail-date{font-size:10px;line-height:1.35;color:#5f6368}
-  #sShots .demo-mail-from b{font-size:11px;color:#202124}
+  #sShots .demo-mail-from,#sShots .demo-mail-date{font-size:10.5px;line-height:1.35;color:#5f6368}
+  #sShots .demo-mail-from b{font-size:11.5px;color:#202124}
   #sShots .demo-mail-date{white-space:nowrap}
   #sShots .demo-mail-body{padding:13px;background:#fff;font-family:Arial,sans-serif}
-  #sShots .demo-email{max-width:430px;margin:0 auto;background:#fff;border:1px solid #e1e4e8;border-radius:8px;overflow:hidden}
-  #sShots .demo-email-hero{padding:18px 18px 16px;background:#009443;color:#fff}
-  #sShots .demo-email-brand{font-size:12px;font-weight:700;letter-spacing:.08em;margin-bottom:8px;color:#fff}
-  #sShots .demo-email-hero h3{font-family:Arial,sans-serif;font-size:18px;line-height:1.2;margin:0;color:#fff}
-  #sShots .demo-email-hero p{font-size:10.5px;line-height:1.4;margin:6px 0 0;color:#e8fff1}
+  #sShots .demo-email{max-width:520px;margin:0 auto;background:#fff;border:1px solid #e1e4e8;border-radius:8px;overflow:hidden}
+  #sShots .demo-email-hero{padding:19px 20px 17px;background:#009443;color:#fff}
+  #sShots .demo-email-brand{display:flex;align-items:center;margin-bottom:10px}
+  #sShots .demo-email-brand img{display:block;width:auto;height:22px;filter:brightness(0) invert(1)}
+  #sShots .demo-email-hero h3{font-family:Arial,sans-serif;font-size:20px;line-height:1.18;margin:0;color:#fff}
+  #sShots .demo-email-hero p{font-size:11.5px;line-height:1.4;margin:7px 0 0;color:#e8fff1}
+  #sShots .demo-score-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center}
+  #sShots .demo-score-main{min-width:0}
+  #sShots .demo-score-main .demo-email-brand{margin-bottom:7px}
+  #sShots .demo-score-kicker{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:11.5px;color:#e5ffed}
+  #sShots .demo-email-score{text-align:right;min-width:76px;color:#fff}
+  #sShots .demo-email-score span{display:block;font-size:10px;letter-spacing:.11em;margin-bottom:2px;color:#d7f6e2}
+  #sShots .demo-email-score strong{font-size:38px;line-height:1;font-weight:700}
+  #sShots .demo-email-score em{font-style:normal;font-size:15px;color:#d7f6e2}
   #sShots .demo-email-content{padding:16px 18px 19px;color:#222}
   #sShots .demo-priority{font-size:11px;line-height:1.45;margin:0 0 11px;color:#222}
   #sShots .demo-priority b{font-weight:700}
@@ -1926,16 +1934,18 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots .demo-email-section p,#sShots .demo-email-section li{font-size:10.5px;line-height:1.45;color:#34383a}
   #sShots .demo-email-section p{margin:0}
   #sShots .demo-email-section ul{margin:0;padding-left:17px;display:grid;gap:4px}
-  #sShots .demo-notes-hero{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:11px;color:#e5ffed}
   #sShots .demo-notes-pill{padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.22);font-size:8.5px;font-weight:700;letter-spacing:.08em}
-  #sShots .demo-notes-bg{padding:15px 15px 20px;background:#f4f5f6;color:#222}
-  #sShots .demo-notes-hi{font-size:11px;margin:0 0 14px}
-  #sShots .demo-notes-title{font-size:14px;color:#009443;margin:0 0 9px}
+  #sShots .demo-notes-bg{padding:15px 16px 20px;background:#f4f5f6;color:#222}
+  #sShots .demo-notes-title{font-size:10px;letter-spacing:.13em;color:#9aa1ac;margin:0 0 9px;text-transform:uppercase}
   #sShots .demo-notes-card{padding:15px 17px;background:#fff;border:1px solid #dcdfe3;border-radius:13px}
-  #sShots .demo-notes-card h4{font-size:12px;margin:0 0 10px;color:#222}
+  #sShots .demo-notes-card + .demo-notes-card{margin-top:12px}
+  #sShots .demo-notes-card h4{font-size:12.5px;margin:0 0 8px;color:#344054}
   #sShots .demo-notes-card h5{font-size:11px;margin:11px 0 5px;color:#222}
-  #sShots .demo-notes-card p,#sShots .demo-notes-card li{font-size:10.5px;line-height:1.45;color:#303236}
+  #sShots .demo-notes-card p,#sShots .demo-notes-card li{font-size:11px;line-height:1.45;color:#344054}
   #sShots .demo-notes-card ul{padding-left:17px;display:grid;gap:4px}
+  #sShots .demo-debrief-coach{display:grid;grid-template-columns:46px minmax(0,1fr);gap:11px;align-items:center;margin-top:11px;padding-top:10px;border-top:1px solid #d9dde3}
+  #sShots .demo-debrief-coach .demo-coach-face{width:46px;height:46px}
+  #sShots .demo-debrief-coach .demo-coach-signature{width:92px;height:27px}
   #sShots .sShots-grid{animation:none;opacity:1}
   #sShots .sShots-card{opacity:0}
   #sShots.active .sShots-card{animation:shotsRise .6s cubic-bezier(.2,.85,.25,1) forwards}
@@ -1943,11 +1953,11 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots.active .sShots-card:nth-child(2){animation-delay:.42s}
   @keyframes shotsRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
   @media (max-height:820px){
-    #sShots h1{font-size:clamp(27px,3.6vw,43px)}
+    #sShots h1{font-size:clamp(29px,2.65vw,37px)}
     #sShots .eyebrow{margin-bottom:.75rem}
-    #sShots .sShots-grid{margin-top:.9rem;gap:1.5rem;max-width:980px}
+    #sShots .sShots-grid{margin-top:.75rem;gap:1.35rem}
     #sShots .sShots-lbl{margin-bottom:.45rem}
-    #sShots .sShots-mail{height:382px}
+    #sShots .sShots-mail{height:430px}
   }
   @media (max-width:820px){ #sShots .sShots-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto} }
   @media (prefers-reduced-motion:reduce){
@@ -1971,7 +1981,7 @@ Then stop and tell me the one thing that changed most.</div>
               </div>
               <div class="demo-mail-body">
                 <article class="demo-email">
-                  <header class="demo-email-hero"><div class="demo-email-brand">WINGREP</div><h3>Tomorrow's game plan for Maya Chen - Tue, Jul 21</h3><p>Focus areas and prep to help you win tomorrow's meetings</p></header>
+                  <header class="demo-email-hero"><div class="demo-email-brand"><img data-asset="ui_brand" alt="WingRep"></div><h3>Tomorrow's game plan for Maya Chen - Tue, Jul 21</h3><p>Focus areas and prep to help you win tomorrow's meetings</p></header>
                   <div class="demo-email-content">
                     <p class="demo-priority"><b>Tomorrow's priority:</b> Your 10:30 AM trial check-in with Alex.</p>
                     <p class="demo-priority">Make this meeting count. Lock in clear next steps, confirm the decision process, and leave with the pilot date.</p>
@@ -1996,11 +2006,11 @@ Then stop and tell me the one thing that changed most.</div>
               </div>
               <div class="demo-mail-body">
                 <article class="demo-email">
-                  <header class="demo-email-hero"><div class="demo-notes-hero"><span>WingRep Notes</span><span class="demo-notes-pill">PRE-SALES</span></div><h3>Northstar trial check-in</h3></header>
+                  <header class="demo-email-hero demo-score-hero"><div class="demo-score-main"><div class="demo-email-brand"><img data-asset="ui_brand" alt="WingRep"></div><div class="demo-score-kicker"><span>WingRep Debrief</span><span class="demo-notes-pill">PRE-SALES</span></div><h3>Northstar trial check-in</h3></div><div class="demo-email-score" aria-label="Score 8.1 out of 10"><span>SCORE</span><strong>8.1</strong><em>/10</em></div></header>
                   <div class="demo-notes-bg">
-                    <p class="demo-notes-hi">Hi Maya,</p>
-                    <h3 class="demo-notes-title">Meeting Notes</h3>
-                    <div class="demo-notes-card"><h4>Meeting: Northstar trial check-in</h4><h5>Decision Process</h5><ul><li>Alex owns the operations rollout decision.</li><li>Sales Enablement joins the pilot kickoff next week.</li><li>Success means less manager-review time without new CRM work.</li></ul><h5>What Moved Forward</h5><ul><li>The team agreed to a two-week pilot.</li><li>Maya confirmed the kickoff date and participant list.</li><li>The rollout outline will be shared today.</li></ul><h5>Coaching Insight</h5><p>The strongest moment came when Maya repeated the rollout concern before answering. Next time, leave one more beat of silence after the first objection.</p><h5>Follow-ups</h5><ul><li>Send Alex the rollout outline.</li><li>Invite Jordan Lee to the kickoff.</li><li>Log the pilot date and success criteria.</li></ul></div>
+                    <h3 class="demo-notes-title">Coaching</h3>
+                    <div class="demo-notes-card"><h4>Strong call. You connected the rollout to the buyer's real constraint.</h4><p>You confirmed the decision process and earned a clear pilot date. Next time, leave one more beat of silence after the first objection so the buyer can finish the thought.</p><div class="demo-debrief-coach"><img class="demo-coach-face" src="webinar-demo/assets/email-jeffrey-gitomer.jpg" alt="Jeffrey Gitomer"><div class="demo-coach-copy">Yours in sales<br><b>Jeffrey Gitomer</b><img class="demo-coach-signature" src="webinar-demo/assets/email-jeffrey-signature.png" alt="Jeffrey Gitomer signature"></div></div></div>
+                    <div class="demo-notes-card"><h4>What Went Well</h4><ul><li>Mapped the rollout concern to manager-review time.</li><li>Confirmed Alex owns the operations decision.</li><li>Closed on a two-week pilot and kickoff date.</li></ul><h5>Follow-ups</h5><ul><li>Send the rollout outline.</li><li>Invite the enablement lead.</li><li>Log the pilot date and success criteria.</li></ul></div>
                   </div>
                 </article>
               </div>
@@ -2011,68 +2021,49 @@ Then stop and tell me the one thing that changed most.</div>
     </div>
   </section>
 
-  <!-- 17 STANDARD TRIAL: three weeks on real calls, with no founder-bonus preview. -->
+  <!-- 17 STANDARD TRIAL: a simple three-week decision framework, with no repeated product UI or founder-bonus preview. -->
   <style>
-  /* ===== slide 17 (#trial): headline + bold 3-week list, authentic product filmstrip ===== */
-  #trial .trial-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(310px,.92fr);gap:clamp(2rem,4vw,3.4rem);align-items:start;margin-top:1.05rem}
-  #trial .trial-left{min-width:0}
-  #trial .trial-left .body{margin-top:.7rem;max-width:31rem}
-  /* the three weeks as a bold numbered list, not a thin chart */
-  #trial .trial-weeks{list-style:none;margin:1.1rem 0 0;padding:0;display:grid;gap:.8rem}
-  #trial .trial-weeks li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:baseline}
-  #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(14px,1.5vw,18px);color:var(--green);letter-spacing:.02em}
-  #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.85vw,21px);color:var(--ink);display:block;line-height:1.12}
-  #trial .tw-s{font-size:clamp(12.5px,1.25vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.12rem}
-  #trial .trial-right{min-width:0;padding-top:.2rem}
-  #trial .trial-film{width:min(100%,370px);margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-  #trial .trial-shot{display:grid;grid-template-columns:72px minmax(0,1fr);height:108px;margin:0;border-bottom:1px solid var(--line);background:#fff;overflow:hidden}
-  #trial .trial-shot:last-child{border-bottom:0}
-  #trial .trial-shot figcaption{display:flex;align-items:center;justify-content:center;padding:.55rem;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep);background:#f7f2e8;border-right:1px solid var(--line);writing-mode:vertical-rl;transform:rotate(180deg)}
-  #trial .trial-shot img{width:100%;height:108px;display:block;object-fit:cover;object-position:50% 18%}
-  #trial .trial-shot.live figcaption{color:#fff;background:var(--green)}
+  /* ===== slide 17 (#trial): one decision, expressed as three clear weeks ===== */
+  #trial .trial-main{margin-top:1.05rem}
+  #trial .trial-main .body{margin-top:.7rem;max-width:42rem}
+  #trial .trial-weeks{list-style:none;margin:1.65rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}
+  #trial .trial-weeks li{min-width:0;padding:1.25rem clamp(1rem,2.1vw,1.7rem)}
+  #trial .trial-weeks li:first-child{padding-left:0}
+  #trial .trial-weeks li + li{border-left:1.5px solid var(--line)}
+  #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(13px,1.2vw,15px);color:var(--green);letter-spacing:.08em;display:block;margin-bottom:.75rem}
+  #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(18px,1.9vw,23px);color:var(--ink);display:block;line-height:1.08}
+  #trial .tw-s{font-size:clamp(12.5px,1.2vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.45rem;max-width:25ch}
   #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
-  /* reveal: one cohesive real-product composition lands, then the weeks rise. */
-  #trial .trial-film,#trial .trial-weeks li{opacity:0}
-  #trial.active .trial-film{animation:theroin .7s cubic-bezier(.2,.8,.2,1) .25s forwards}
+  /* reveal: the three-week sequence rises as one restrained composition. */
+  #trial .trial-weeks li{opacity:0}
   #trial.active .trial-weeks li{animation:trise .5s cubic-bezier(.2,.8,.2,1) forwards}
   #trial.active .trial-weeks li:nth-child(1){animation-delay:.35s}
   #trial.active .trial-weeks li:nth-child(2){animation-delay:.48s}
   #trial.active .trial-weeks li:nth-child(3){animation-delay:.61s}
-  @keyframes theroin{from{opacity:0;transform:translateY(14px) scale(.975)}to{opacity:1;transform:none}}
   @keyframes trise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   /* Short viewports keep the customer strip clear of the trial steps. */
   @media (max-height:800px){
     #trial .bandlab{margin-top:1.2rem}
-    #trial .trial-film{width:min(100%,310px)}
-    #trial .trial-shot{height:88px}
-    #trial .trial-shot img{height:88px}
+    #trial .trial-weeks{margin-top:1rem}
+    #trial .trial-weeks li{padding-top:.9rem;padding-bottom:.9rem}
   }
   @media (prefers-reduced-motion:reduce){
-    #trial .trial-film,#trial .trial-weeks li{opacity:1}
-    #trial.active .trial-film,#trial.active .trial-weeks li{animation:none}
+    #trial .trial-weeks li{opacity:1}
+    #trial.active .trial-weeks li{animation:none}
   }
   </style>
   <section class="slide wr-theme" id="trial">
     <div class="wrap">
       <div class="eyebrow">How to start</div>
-      <div class="trial-grid">
-        <div class="trial-left">
+      <div class="trial-main">
           <h1>Run it on real calls for <span class="hl">three weeks.</span></h1>
           <p class="body">Start with a few reps. If you're on Google Workspace, setup takes about twenty minutes.</p>
           <ol class="trial-weeks">
-            <li><span class="tw-num">01</span><span><span class="tw-b">Connect a few reps.</span><span class="tw-s">Start with one team and the calls they already run.</span></span></li>
-            <li><span class="tw-num">02</span><span><span class="tw-b">Let the loop run.</span><span class="tw-s">Prep before, support during, follow-through after.</span></span></li>
-            <li><span class="tw-num">03</span><span><span class="tw-b">Decide from real evidence.</span><span class="tw-s">Did the next calls improve? Did the admin disappear?</span></span></li>
+            <li><span class="tw-num">WEEK 01</span><span class="tw-b">Connect a few reps.</span><span class="tw-s">Start with one team and the calls they already run.</span></li>
+            <li><span class="tw-num">WEEK 02</span><span class="tw-b">Let the loop run.</span><span class="tw-s">Prep before, support during, follow-through after.</span></li>
+            <li><span class="tw-num">WEEK 03</span><span class="tw-b">Decide from evidence.</span><span class="tw-s">Did the next calls improve? Did the admin disappear?</span></li>
           </ol>
-        </div>
-        <div class="trial-right">
-          <div class="trial-film" aria-label="Real WingRep product views across the call workflow">
-            <figure class="trial-shot"><figcaption>Before</figcaption><img data-img="shot_prep" alt="WingRep preparation view before a call"></figure>
-            <figure class="trial-shot live"><figcaption>During</figcaption><img data-img="shot_during" alt="WingRep guidance during a call"></figure>
-            <figure class="trial-shot"><figcaption>After</figcaption><img data-img="shot_after" alt="WingRep actions after a call"></figure>
-          </div>
-        </div>
       </div>
       <div class="bandlab">Teams leveling up with WingRep</div>
       <div class="logobanner"><div class="bandstrip">
