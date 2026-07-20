@@ -19,7 +19,7 @@ Slide 5 ("Hi, I'm Alan") deliberately uses an opaque paper background so the glo
 
 Slide 7 ("AI, minus the jargon") shows the Fable 5 butterfly numeral from `window.ASSETS.slide9_fable`. The transparent cutout and drifting butterflies self-hide below 820px and stop moving under `prefers-reduced-motion`.
 
-Slide 10 is the audience follow-along build. Its visible prompts and copy buttons use bracketed templates; the fictional Cobalt values live only in the presenter runbook. Slide 12 is presenter-controlled: Forward moves Before → During → After → slide 13, Previous reverses those states, the stage pills jump directly, and Replay resets to Before. Nothing advances on a timer.
+Slide 10 is the audience follow-along build. Its visible prompts and copy buttons use bracketed templates; the fictional Cobalt values live only in the presenter runbook. Slide 12 is presenter-controlled: Forward moves Before → During → After → slide 13, Previous reverses those states, and the stage pills jump directly. Nothing advances on a timer.
 
 Slides 13 through 19 follow one closing arc: product proof, differentiation, the manual-admin game, the audience recap, the standard trial, the first founder-onboarding reveal, and a final `wingrep.ai/webinar` CTA.
 
