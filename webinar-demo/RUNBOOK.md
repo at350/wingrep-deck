@@ -135,9 +135,9 @@ Exit line: *"Pasting fixed it. Pasting is also the problem. Let me show you the 
 
 Five jobs, one loop. Name the discipline: *"the AI world calls this loop engineering; sales just calls it coaching that sticks."* Advance to slide 10.
 
-## Slide 10, "Build it live, click each tab" → DEMO 2 (~8 min)
+## Slide 10, "Build yours live, one tab at a time" → DEMO 2 (~8 min)
 
-This slide is the SalesOS window with six tabs: **1 Memory, 2 The loop, 3 Calendar, 4 Automation, 5 Drill, 6 The catch.** The rhythm for each tab is: click the tab on the slide → say the line → switch to the Claude desktop app → do the thing → switch back → next tab. The desktop app is already open on `~/Coaching Demo/`.
+This slide is the SalesOS window with six tabs: **1 Memory, 2 The loop, 3 Calendar, 4 Automation, 5 Drill, 6 The catch.** The screen uses reusable bracketed templates so the room can follow along; your live app fills those brackets with the fictional Cobalt example. Say once: *"Use the brackets on screen for your call. I'm running the exact same structure on our fictional Cobalt deal."* The rhythm for each tab is: click the tab on the slide → say the line → switch to the Claude desktop app → do the thing → switch back → next tab. The desktop app is already open on `~/Coaching Demo/`.
 
 **Tab 1 · Memory**, say: *"the deal file started empty this morning. The log and the scorecard carry two weeks of calls. Nobody typed a word of any of them; the loop wrote every entry."* Show the folder in the app: the three files (`cobalt-deal-file.md`, `cobalt-deal-scorecard.md`, `jordan-coaching-log.md`), the transcripts, and the empty `game-plans/`.
 
@@ -173,11 +173,21 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Transition into slide 11:** *"The loop preps, reviews, even drills. Here's the one thing it cannot do..."* → advance to slide 11 → the typer plays → bridge into the reveal: *"Keep the loop, it's on your cheat sheet, it's free, and it's genuinely good. We built it, ran it, loved it, and hit the same wall you just saw: it has no ears. So we gave it ears."* → slide 12 reveal.
 
-Slide 13, the real thing: point at each screenshot, one sentence each, this is the live product, not a render.
+**Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
-From slide 12 on it is pure deck to the end (slide 18 is `Book time with Amit`, just present it, nothing to switch to), through the WingRep reveal to the close.
+**Slide 13, outcome proof:** point at the two real screenshots. On “In the moment,” land the live nudge. On “Three minutes later,” land the score and completed follow-through. The point is what changed for the rep, not whether the interface is a mockup.
 
-**Finale (slide 19):** As this slide lands, paste into the Zoom chat: the cheat-sheet PDF link and the deck link. Say: "everything on screen is in the chat right now."
+**Slide 14, differentiation:** most call tools preserve the conversation; WingRep changes the next call. Read the comparison as the answer to “why another tool?”
+
+**Slide 15, manual-admin game:** let the room feel the cost of running the loop by hand. Play or skip, then advance.
+
+**Slide 16, recap:** give the workflow away cleanly: five prompts, four moves, one coaching rhythm. The room can run it with or without WingRep.
+
+**Slide 17, standard trial:** present the ordinary three-week pilot. Do not mention Amit or founder onboarding yet.
+
+**Slide 18, founder bonus:** this is the first founder-deal reveal. Present the webinar-only 20-minute onboarding, what to bring, and what the attendee leaves with. Point to `wingrep.ai/webinar`.
+
+**Finale (slide 19):** point to `wingrep.ai/webinar`, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
 
 ---
 

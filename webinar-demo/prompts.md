@@ -19,7 +19,7 @@ Swap MEDDIC for SPICED, BANT, or Sandler; the structure holds.
 > Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 
 ### 5. Drill
-> Play [buyer name], the [role] from these transcripts. I want to practice [the moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
+> Play [buyer], the [role] from these transcripts. I want to practice [moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
 
 ## Part 2 · The deal-desk extras
 
