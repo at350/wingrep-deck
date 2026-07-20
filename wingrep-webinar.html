@@ -256,13 +256,13 @@
 
   /* slide 3 agenda: roomy now that the presenter beat moved out */
   .slide.s3c{padding-top:5.2vh;padding-bottom:5.5vh}
-  .s3c h1{font-size:clamp(32px,5vw,64px);white-space:nowrap}
+  .s3c h1{font-size:clamp(30px,4.4vw,58px);white-space:nowrap}
   .s3c .checks{margin-top:1.2rem;gap:.85rem}
   .s3c .checks li{font-size:clamp(15px,1.55vw,18px)}
   .s3c .sub{margin-top:1.1rem;font-size:clamp(16px,1.7vw,19px);line-height:1.4}
 
   /* ===== about-Alan slide: a restrained credential shelf, not a giant fake brick ===== */
-  .slide.sAlan{padding-top:1.0vh;padding-bottom:1.0vh;overflow:hidden}
+  .slide.sAlan{padding-top:3.5vh;padding-bottom:1.0vh;overflow:hidden}
   .sAlan-wrap{position:relative;max-width:1240px}
   .sAlan h1{font-size:clamp(36px,5vw,64px);margin-bottom:.05rem}
   .sAlan-grid{display:grid;grid-template-columns:1.14fr .86fr;gap:clamp(1.4rem,3.2vw,2.8rem);align-items:start;margin-top:.55rem}
@@ -1081,9 +1081,9 @@
         against 90px on UChicago), so UChicago read as a bigger brick rather than a longer
         one. Same box, same brick, different word. */
   .slide.sAlan{
-    --brickH:clamp(84px,15.2vh,124px);
+    --brickH:clamp(76px,12.2vh,100px);
     --stackW:calc(var(--brickH) * 3.084);   /* every plate is now 515/167 */
-    --dvdSZ:clamp(132px,27.5vh,220px);      /* Alan wanted the bouncing headshot twice as big */
+    --dvdSZ:clamp(118px,20vh,164px);
     background:var(--paper);
   }
   /* The wrap is the deck-standard 1100px, like every other slide: at 1010px this was the
@@ -1094,10 +1094,10 @@
      .sAlan-slot is aspect-ratio:4/3, so extra width becomes extra HEIGHT and overflows the
      slide (which is overflow:hidden, so it would clip the bottom polaroid row at 1280x720).
      The right track therefore restates its old derived width: old wrap - left track - gap. */
-  .sAlan-wrap{max-width:1100px}
+  .sAlan-wrap{max-width:1020px}
   .sAlan h1{margin-bottom:0}
-  .sAlan-grid{grid-template-columns:var(--stackW) minmax(0,calc(1010px - var(--stackW) - clamp(1.4rem,2.9vw,2.4rem)));
-    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.3rem}
+  .sAlan-grid{grid-template-columns:var(--stackW) minmax(0,520px);
+    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:.1rem}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
   /* The bio sits under the headline and the brick shelf is pinned to the bottom of the
@@ -1106,7 +1106,7 @@
      up when the bio happened to fill the column, and it drifted the moment the copy changed.
      The space between the bio and the shelf now reads as the break between who-I-am and the
      credentials rather than a stranded sentence. */
-  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1.4rem,4vh,2.4rem);height:100%}
+  .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1rem,2.4vh,1.5rem);height:100%}
   .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(15px,1.55vw,19px);line-height:1.5}
   /* the hackathon wins are demoted from the headline claim to a quiet, captioned strip:
      the AI-research line above now carries the credibility, these are human texture. */
@@ -1125,6 +1125,9 @@
      are all that is left of the hand-placed feel. */
   .sAlan .s3-marks img.mk:nth-of-type(1){transform:rotate(-.5deg)}
   .sAlan .s3-marks img.mk:nth-of-type(2){transform:rotate(.35deg)}
+  .sAlan .sAlan-wall{--faceD:clamp(180px,24vh,210px);--faceP:clamp(36px,5vh,50px);padding-bottom:6px}
+  .sAlan .sAlan-polaroid{padding:6px 6px 5px}
+  .sAlan .sAlan-polaroid figcaption{font-size:13px;margin-top:4px}
 
   /* ---- the bouncing headshot: it lays a LEGO plate track behind it ----
      The old tail was eight DOM ghosts parked at distance-gated past positions: a sample was
@@ -1659,7 +1662,8 @@ Then stop and tell me the one thing that changed most.</div>
   #wingrepReveal{overflow:hidden}
   #wingrepReveal .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,390px);gap:clamp(28px,5vw,76px);align-items:center;max-width:1100px}
   #wingrepReveal .wrintro{min-width:0}
-  #wingrepReveal h1{font-size:clamp(36px,4.8vw,60px);line-height:1.01;max-width:10ch}
+  #wingrepReveal h1{font-size:clamp(36px,4.8vw,60px);line-height:1.01;max-width:12ch}
+  #wingrepReveal h1 .hl{white-space:nowrap}
   #wingrepReveal .wrdemo{display:flex;align-items:center;justify-content:center;margin:0;min-width:0}
   #wingrepReveal .wrrail{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:clamp(1.2rem,3vh,1.8rem)}
   #wingrepReveal .wrrail button{appearance:none;display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:lowercase;color:var(--ink-soft);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:.55rem .8rem;cursor:pointer;opacity:.58;transition:opacity .25s,color .25s,border-color .25s,background .25s}
@@ -1728,9 +1732,11 @@ Then stop and tell me the one thing that changed most.</div>
   #wingrepReveal .wrpanel .lbl .now{margin-left:auto;font-family:var(--body);font-weight:600;letter-spacing:0;text-transform:none;color:var(--c-mut);font-size:11px}
   #wingrepReveal .wrpanel .bd{font-size:clamp(13px,1.3vw,15px);line-height:1.42;font-weight:500;color:var(--c-tx)}
   #wingrepReveal .wrpanel .bd b{color:#fff;font-weight:800}
-  /* score panel: big right-aligned number */
-  #wingrepReveal .wrpanel.score .bd{padding-right:2.9rem}
-  #wingrepReveal .wrpanel.score .num{position:absolute;top:clamp(9px,1.1vw,13px);right:clamp(12px,1.3vw,15px);font-family:var(--display);font-weight:800;font-size:clamp(27px,3.1vw,37px);line-height:1;color:var(--disc-lit)}
+  /* score panel: number owns its own grid column, so it can never overlap the copy */
+  #wingrepReveal .wrpanel.score{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:.8rem;align-items:start}
+  #wingrepReveal .wrpanel.score .lbl{grid-column:1;margin-bottom:.4rem}
+  #wingrepReveal .wrpanel.score .bd{grid-column:1;padding-right:0}
+  #wingrepReveal .wrpanel.score .num{position:static;grid-column:2;grid-row:1 / 3;align-self:center;font-family:var(--display);font-weight:800;font-size:clamp(27px,3.1vw,37px);line-height:1;color:var(--disc-lit)}
   /* the confirmed positive outcome stays green, not violet */
   #wingrepReveal .nconf{margin-top:.5rem;display:inline-flex;align-items:center;gap:.3rem;font-size:12.5px;font-weight:700;color:var(--wr-lit);opacity:0;transform:translateY(3px);transition:opacity .5s,transform .5s}
   #wingrepReveal .nconf.on{opacity:1;transform:none}
@@ -1871,33 +1877,28 @@ Then stop and tell me the one thing that changed most.</div>
     </div>
   </section>
 
-  <!-- 13 OUTCOME PROOF: two live product screenshots (during-call + after-call),
-       cropped straight from wingrep.ai's own hero card. Sits right after the reveal so
-       the room reads the animated demo as the shipping product, not a render. All CSS
-       scoped to #sShots; the two cards stagger up on entry and go static under reduced
-       motion; no em dashes. The screenshots are baked into window.IMG (shot_during,
-       shot_after) in wingrep-assets.js. -->
+  <!-- 13 OUTCOME PROOF: the real inbox deliverables, rendered from the supplied
+       WingRep game-plan and debrief email PDFs. This advances the story beyond the
+       product UI on slide 12: what matters is what the rep receives before and after. -->
   <style>
-  #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,3vw,2.4rem);align-items:start;margin-top:clamp(1.3rem,3.4vh,2rem);max-width:1000px}
+  #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.4rem,3vw,2.4rem);align-items:start;margin-top:clamp(1.1rem,2.6vh,1.55rem);max-width:1040px}
   #sShots .sShots-card{margin:0;min-width:0}
-  /* small mono label above each shot, green dot accent, says what the state is */
   #sShots .sShots-lbl{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-weight:600;letter-spacing:.02em;font-size:clamp(12px,1.2vw,14px);color:var(--green);margin-bottom:.6rem}
   #sShots .sShots-lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none;box-shadow:0 0 0 3px var(--green-wash)}
-  /* frame each shot with the deck's own card border + shadow */
-  #sShots .sShots-card img{width:100%;display:block;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
-  /* entry: opt the grid out of the generic .wrap>* rev so the two cards own the stagger */
+  #sShots .sShots-mail{height:clamp(330px,48vh,430px);overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:#fff}
+  #sShots .sShots-mail img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center}
   #sShots .sShots-grid{animation:none;opacity:1}
   #sShots .sShots-card{opacity:0}
   #sShots.active .sShots-card{animation:shotsRise .6s cubic-bezier(.2,.85,.25,1) forwards}
   #sShots.active .sShots-card:nth-child(1){animation-delay:.28s}
   #sShots.active .sShots-card:nth-child(2){animation-delay:.42s}
   @keyframes shotsRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-  /* short viewports: trim type + margins so the taller after-call card never overflows */
   @media (max-height:820px){
-    #sShots h1{font-size:clamp(28px,4vw,48px)}
+    #sShots h1{font-size:clamp(27px,3.6vw,43px)}
     #sShots .eyebrow{margin-bottom:.75rem}
-    #sShots .sShots-grid{margin-top:1.05rem;gap:1.5rem;max-width:940px}
+    #sShots .sShots-grid{margin-top:.9rem;gap:1.5rem;max-width:980px}
     #sShots .sShots-lbl{margin-bottom:.45rem}
+    #sShots .sShots-mail{height:390px}
   }
   @media (max-width:820px){ #sShots .sShots-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto} }
   @media (prefers-reduced-motion:reduce){
@@ -1907,16 +1908,16 @@ Then stop and tell me the one thing that changed most.</div>
   </style>
   <section class="slide wr-theme" id="sShots">
     <div class="wrap">
-      <div class="eyebrow">What changes for the rep</div>
-      <h1>The call ends. <span class="hl">The work is already done.</span></h1>
+      <div class="eyebrow">What lands in the rep's inbox</div>
+      <h1>The prep arrives before. <span class="hl">The debrief lands after.</span></h1>
       <div class="sShots-grid">
         <figure class="sShots-card">
-          <div class="sShots-lbl">In the moment</div>
-          <img data-img="shot_during" alt="WingRep live during a call: a real-time nudge to slow down on budget, and a talk-ratio meter">
+          <div class="sShots-lbl">Before the call · Tomorrow's game plan</div>
+          <div class="sShots-mail"><img src="webinar-demo/assets/email-game-plan.png" alt="WingRep game-plan email in a Gmail inbox"></div>
         </figure>
         <figure class="sShots-card">
-          <div class="sShots-lbl">Three minutes later</div>
-          <img data-img="shot_after" alt="WingRep after the call: the call scored 7.8 with drafted follow-ups queued">
+          <div class="sShots-lbl">After the call · Scored debrief</div>
+          <div class="sShots-mail"><img src="webinar-demo/assets/email-debrief.png" alt="WingRep scored debrief email in a Gmail inbox"></div>
         </figure>
       </div>
     </div>
@@ -1935,8 +1936,8 @@ Then stop and tell me the one thing that changed most.</div>
   #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(16px,1.85vw,21px);color:var(--ink);display:block;line-height:1.12}
   #trial .tw-s{font-size:clamp(12.5px,1.25vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.12rem}
   /* the hero: the real product card owns the right, the meme rides its corner */
-  #trial .trial-right{position:relative}
-  #trial .trial-hero{position:relative;margin:0 auto;width:min(100%,384px)}
+  #trial .trial-right{position:relative;padding-top:clamp(1.4rem,3.2vh,2.2rem)}
+  #trial .trial-hero{position:relative;margin:0 auto;width:min(100%,360px)}
   /* aspect-ratio matches the captured card crop so the UI is never cut */
   #trial .trial-hero img{width:100%;display:block;aspect-ratio:1200/1270;object-fit:cover;border-radius:18px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
   /* the meme, polaroid-style, tucked onto the card's bottom-right corner.
@@ -1960,6 +1961,8 @@ Then stop and tell me the one thing that changed most.</div>
   /* Short viewports keep the customer strip clear of the trial steps. */
   @media (max-height:800px){
     #trial .bandlab{margin-top:1.2rem}
+    #trial .trial-right{padding-top:2rem}
+    #trial .trial-hero{width:min(100%,338px)}
   }
   @media (prefers-reduced-motion:reduce){
     #trial .trial-hero,#trial .trial-weeks li,#trial .trial-meme{opacity:1}
@@ -2165,10 +2168,10 @@ Then stop and tell me the one thing that changed most.</div>
     </div>
   </section>
 
-  <!-- 18 FOUNDER BONUS: first and only founder-onboarding reveal. -->
+  <!-- 18 FOUNDER BONUS: the original attendee-only offer and flip clock, restored. -->
   <style>
   .sOffer .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.4rem,4vw,3rem);align-items:center}
-  .sOffer h1{font-size:clamp(25px,3.5vw,46px);line-height:1.04;max-width:18ch}
+  .sOffer h1{font-size:clamp(25px,3.5vw,46px);line-height:1.04;max-width:15ch}
   .sOffer .sub{font-size:clamp(14px,1.5vw,18px);line-height:1.5;max-width:42ch;margin-top:1rem}
   .sOffer-book{display:flex;align-items:center;gap:.85rem;margin-top:clamp(1.1rem,2.6vh,1.6rem)}
   .sOffer-ava{width:clamp(50px,5vw,60px);height:clamp(50px,5vw,60px);border-radius:50%;overflow:hidden;flex:none;
@@ -2176,45 +2179,115 @@ Then stop and tell me the one thing that changed most.</div>
   .sOffer-ava img{width:100%;height:100%;object-fit:cover;display:block}
   .sOffer-book .btn{margin:0}
   .sOffer-url{font-family:var(--mono);font-size:20px;color:var(--green-deep);margin-top:.75rem;opacity:.9;letter-spacing:.01em}
-  .sOffer-brief{border-left:4px solid var(--green-bright);padding:.2rem 0 .2rem clamp(1.1rem,2.5vw,1.8rem)}
-  .sOffer-briefrow{padding:clamp(.8rem,2vh,1.15rem) 0}
-  .sOffer-briefrow+.sOffer-briefrow{border-top:1px solid var(--line)}
-  .sOffer-briefrow b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.35rem}
-  .sOffer-briefrow p{font-size:clamp(16px,1.7vw,20px);line-height:1.42;font-weight:600;color:var(--ink);max-width:28ch}
-  .sOffer-spots{margin-top:1rem;font-family:var(--hand);font-weight:700;color:var(--green);font-size:clamp(18px,2vw,24px);transform:rotate(-1deg)}
-  @media (max-width:820px){ .sOffer .wrap{grid-template-columns:1fr;gap:1.3rem} }
-  @media (max-height:780px){
-    .sOffer h1{font-size:clamp(23px,3vw,38px)}
-    .sOffer .sub{margin-top:.7rem}
+  .sOffer-clockzone{display:flex;flex-direction:column;align-items:center;gap:.9rem}
+  .sOffer-clocklbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(9px,1.05vw,11.5px);color:var(--ink-soft);text-align:center}
+  .sOffer-clock{display:flex;align-items:flex-start;gap:clamp(.25rem,.7vw,.5rem)}
+  .sOffer-grp{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+  .sOffer-flip{position:relative;width:clamp(50px,6.2vw,84px);height:clamp(68px,8.6vw,114px);perspective:360px;
+    font-family:var(--mono);font-weight:800;font-size:clamp(35px,4.6vw,66px);color:#F3EEE1;line-height:1;border-radius:10px;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+  .sOffer-panel{position:absolute;left:0;width:100%;height:50%;overflow:hidden;background:linear-gradient(#12241a,#0c1a12)}
+  .sOffer-panel span{position:absolute;left:0;width:100%;height:200%;display:block;text-align:center;line-height:clamp(68px,8.6vw,114px);font-variant-numeric:tabular-nums}
+  .sOffer-panel.top{top:0;border-radius:10px 10px 0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .sOffer-panel.top span{top:0}
+  .sOffer-panel.bottom{bottom:0;border-radius:0 0 10px 10px;background:linear-gradient(#0e1e15,#0a1710)}
+  .sOffer-panel.bottom span{bottom:0}
+  .sOffer-flip::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-1px);background:rgba(0,0,0,.5);z-index:7;pointer-events:none}
+  .sOffer-flip::before{content:"";position:absolute;left:-3px;top:calc(50% - 6px);width:6px;height:12px;border-radius:2px;background:#0a1710;box-shadow:calc(100% + 6px) 0 0 #0a1710;z-index:8}
+  .sOffer-flap{visibility:hidden;backface-visibility:hidden;z-index:6}
+  .sOffer-flip.go .sOffer-flap{visibility:visible}
+  .sOffer-flap.top{transform-origin:50% 100%}
+  .sOffer-flap.bottom{transform-origin:50% 0%;transform:rotateX(90deg)}
+  .sOffer-flip.go .sOffer-flap.top{animation:sOfferFoldTop .30s ease-in forwards}
+  .sOffer-flip.go .sOffer-flap.bottom{animation:sOfferFoldBot .30s .30s ease-out forwards}
+  @keyframes sOfferFoldTop{from{transform:rotateX(0)}to{transform:rotateX(-90deg)}}
+  @keyframes sOfferFoldBot{from{transform:rotateX(90deg)}to{transform:rotateX(0)}}
+  .sOffer-glbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:clamp(8px,.95vw,10.5px);color:var(--ink-soft)}
+  .sOffer-colon{font-family:var(--mono);font-weight:800;font-size:clamp(26px,3.4vw,46px);color:var(--ink-soft);opacity:.5;margin-top:clamp(.9rem,2vh,1.5rem)}
+  .sOffer-closed{display:none;font-size:clamp(13px,1.4vw,16px);line-height:1.5;color:var(--ink-soft);max-width:28ch;text-align:center}
+  .sOffer-closed a{color:var(--green);font-weight:700}
+  .sOffer.is-closed .sOffer-clock{display:none}
+  .sOffer.is-closed .sOffer-closed{display:block}
+  @media (max-width:820px){.sOffer .wrap{grid-template-columns:1fr;gap:1.3rem}.sOffer-clockzone{align-items:flex-start}}
+  @media (max-height:840px){
+    .sOffer h1{font-size:clamp(23px,3vw,40px)}
+    .sOffer .sub{margin-top:.75rem}
     .sOffer-book{margin-top:1rem}
-    .sOffer-briefrow{padding:.65rem 0}
+    .sOffer-flip{width:clamp(46px,5.4vw,72px);height:clamp(62px,7.6vw,100px);font-size:clamp(30px,4vw,58px)}
+    .sOffer-panel span{line-height:clamp(62px,7.6vw,100px)}
   }
+  @media (prefers-reduced-motion:reduce){.sOffer-flip.go .sOffer-flap.top,.sOffer-flip.go .sOffer-flap.bottom{animation:none!important}}
   </style>
   <section class="slide sOffer wr-theme" id="founderOffer">
     <div class="wrap">
       <div class="sOffer-col">
-        <div class="eyebrow">Webinar-only onboarding</div>
-        <h1>Book 20 minutes with Amit. <span class="hl">We'll build your first loop with you.</span></h1>
-        <p class="sub">Bring your sales process and one real call. Amit will help configure the first workflow and get the pilot live.</p>
+        <div class="eyebrow">For the teams who showed up today</div>
+        <h1>You just felt the admin. <span class="hl">Amit will get you live on your calls.</span></h1>
+        <p class="sub">Twenty minutes with <b>Amit, our founder</b>, and you'll walk out knowing how to get WingRep live on your real calls. He's holding a few slots this week for teams who were here today.</p>
         <div class="sOffer-book">
           <span class="sOffer-ava"><img data-asset="s_amit" alt="Amit, founder of WingRep"></span>
-          <a class="btn btn-primary" href="https://wingrep.ai/webinar" target="_blank" rel="noopener">Book founder onboarding →</a>
+          <a class="btn btn-primary" href="https://wingrep.ai/webinar" target="_blank" rel="noopener">Book exclusive time with Amit →</a>
         </div>
         <div class="sOffer-url">wingrep.ai/webinar · attendees only</div>
       </div>
-      <div class="sOffer-brief" aria-label="What to bring and what you leave with">
-        <div class="sOffer-briefrow">
-          <b>Bring</b>
-          <p>Your sales process and one real call.</p>
+      <div class="sOffer-clockzone">
+        <div class="sOffer-clocklbl">Today's spots close in</div>
+        <div class="sOffer-clock" aria-label="Time remaining for today's founder slots">
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="h"><div class="sOffer-panel top"><span>08</span></div><div class="sOffer-panel bottom"><span>08</span></div><div class="sOffer-panel top sOffer-flap"><span>08</span></div><div class="sOffer-panel bottom sOffer-flap"><span>08</span></div></div>
+            <span class="sOffer-glbl">Hrs</span>
+          </div>
+          <span class="sOffer-colon">:</span>
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="m"><div class="sOffer-panel top"><span>12</span></div><div class="sOffer-panel bottom"><span>12</span></div><div class="sOffer-panel top sOffer-flap"><span>12</span></div><div class="sOffer-panel bottom sOffer-flap"><span>12</span></div></div>
+            <span class="sOffer-glbl">Mins</span>
+          </div>
+          <span class="sOffer-colon">:</span>
+          <div class="sOffer-grp">
+            <div class="sOffer-flip" data-unit="s"><div class="sOffer-panel top"><span>47</span></div><div class="sOffer-panel bottom"><span>47</span></div><div class="sOffer-panel top sOffer-flap"><span>47</span></div><div class="sOffer-panel bottom sOffer-flap"><span>47</span></div></div>
+            <span class="sOffer-glbl">Secs</span>
+          </div>
         </div>
-        <div class="sOffer-briefrow">
-          <b>Leave with</b>
-          <p>Your first workflow configured and the pilot ready to run.</p>
-        </div>
-        <div class="sOffer-spots">a few attendee slots this week.</div>
+        <div class="sOffer-closed">Today's founder slots are taken. You can still see the attendee options at <a href="https://wingrep.ai/webinar" target="_blank" rel="noopener">wingrep.ai/webinar</a>.</div>
       </div>
     </div>
   </section>
+  <script>
+  (function(){
+    var slide=document.getElementById('founderOffer'); if(!slide) return;
+    var SPOTS_CLOSE=null; /* set an absolute local close time here for a specific webinar */
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function pad(n){return (n<10?'0':'')+n;}
+    function endOfToday(){var d=new Date();d.setHours(23,59,59,999);return d.getTime();}
+    var end=SPOTS_CLOSE?new Date(SPOTS_CLOSE).getTime():endOfToday();
+    var units={};
+    slide.querySelectorAll('.sOffer-flip').forEach(function(f){
+      var sp=f.querySelectorAll('span');
+      units[f.dataset.unit]={el:f,topS:sp[0],botS:sp[1],topF:sp[2],botF:sp[3],v:sp[0].textContent,t:0};
+    });
+    function set(u,val){
+      if(val===u.v)return;
+      var old=u.v;
+      u.topS.textContent=val;u.botS.textContent=old;u.topF.textContent=old;u.botF.textContent=val;u.v=val;
+      if(reduce){u.botS.textContent=val;return;}
+      u.el.classList.remove('go');void u.el.offsetWidth;u.el.classList.add('go');
+      clearTimeout(u.t);u.t=setTimeout(function(){u.botS.textContent=val;u.el.classList.remove('go');},620);
+    }
+    var closed=false,iv;
+    function closeOut(){
+      if(closed)return;closed=true;slide.classList.add('is-closed');
+      var lbl=slide.querySelector('.sOffer-clocklbl');if(lbl)lbl.textContent='Founder slots for today are taken';
+      var cta=slide.querySelector('.sOffer-book .btn');if(cta)cta.textContent='See attendee options →';
+      if(iv)clearInterval(iv);
+    }
+    function tick(){
+      var d=end-Date.now();
+      if(d<=0){set(units.h,'00');set(units.m,'00');set(units.s,'00');closeOut();return;}
+      var t=Math.floor(d/1000);
+      set(units.h,pad(Math.floor(t/3600)));set(units.m,pad(Math.floor(t%3600/60)));set(units.s,pad(t%60));
+    }
+    tick();iv=setInterval(tick,1000);
+  })();
+  </script>
 
   <!-- 19 single-destination close + confetti -->
   <style>
@@ -2524,7 +2597,7 @@ Then stop and tell me the one thing that changed most.</div>
   var wrStageIndex=0;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Where Claude falls short","Before, during, after","The work is already done","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Founder onboarding","One next step"];
+  var titles=["Starting soon","The after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Where Claude falls short","Before, during, after","Prep and debrief in the inbox","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Founder onboarding","One next step"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
