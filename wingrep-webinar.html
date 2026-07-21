@@ -1882,14 +1882,20 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots h1{font-size:clamp(30px,2.65vw,38px);line-height:1.04;white-space:nowrap}
   #sShots .sShots-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.3rem,2.4vw,2rem);align-items:start;margin-top:clamp(.8rem,1.9vh,1.15rem);max-width:none}
   #sShots .sShots-card{margin:0;min-width:0}
-  #sShots .sShots-lbl{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-weight:600;letter-spacing:.02em;font-size:clamp(12px,1.2vw,14px);color:var(--green);margin-bottom:.6rem}
-  #sShots .sShots-lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none;box-shadow:0 0 0 3px var(--green-wash)}
+  #sShots .sShots-lbl{display:flex;align-items:center;justify-content:space-between;gap:.8rem;font-family:var(--mono);font-weight:600;letter-spacing:.02em;font-size:clamp(12px,1.2vw,14px);color:var(--green);margin-bottom:.6rem}
+  #sShots .sShots-lbl-copy{display:flex;align-items:center;gap:.55rem;min-width:0}
+  #sShots .sShots-lbl-copy::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-bright);flex:none;box-shadow:0 0 0 3px var(--green-wash)}
+  #sShots .mail-expand,#sShots .demo-mail-close{appearance:none;border:1px solid #b9cfbf;background:#fff;color:#08763d;font:700 11px/1 var(--body);white-space:nowrap;cursor:pointer}
+  #sShots .mail-expand{padding:.45rem .65rem;border-radius:999px}
+  #sShots .mail-expand:hover,#sShots .mail-expand:focus-visible,#sShots .demo-mail-close:hover,#sShots .demo-mail-close:focus-visible{background:#eff9f2;border-color:#3f9362;outline:none}
+  #sShots .mail-expand:active,#sShots .demo-mail-close:active{transform:translateY(1px)}
   #sShots .sShots-mail{height:clamp(400px,54vh,470px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124}
   #sShots .demo-mail-toolbar{height:39px;flex:none;display:flex;align-items:center;gap:.7rem;padding:0 .75rem;background:#fff;border-bottom:1px solid #e6e8eb;font-family:Arial,sans-serif;color:#5f6368}
   #sShots .demo-mail-gmail{width:67px;height:auto;display:block;flex:none}
   #sShots .demo-mail-search{flex:1;height:25px;display:flex;align-items:center;padding:0 .7rem;border-radius:8px;background:#f1f3f4;font-size:10px;color:#80868b}
   #sShots .demo-mail-tools{display:flex;gap:.38rem;align-items:center}
   #sShots .demo-mail-tools i{display:block;width:5px;height:5px;border-radius:50%;background:#9aa0a6}
+  #sShots .demo-mail-close{display:none;padding:.48rem .7rem;border-radius:7px}
   #sShots .demo-mail-scroll{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-color:#b8bdc5 #f1f3f4;scrollbar-width:thin;background:#fff}
   #sShots .demo-mail-subject,#sShots .demo-mail-from{overflow-wrap:anywhere}
   #sShots .demo-mail-scroll::-webkit-scrollbar{width:9px}
@@ -1946,6 +1952,102 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots .demo-debrief-coach{display:grid;grid-template-columns:46px minmax(0,1fr);gap:11px;align-items:center;margin-top:11px;padding-top:10px;border-top:1px solid #d9dde3}
   #sShots .demo-debrief-coach .demo-coach-face{width:46px;height:46px}
   #sShots .demo-debrief-coach .demo-coach-signature{width:92px;height:27px}
+  #sShots .demo-debrief-band{padding:10px 16px 7px;background:#f4f5f6;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#747b86}
+  #sShots .demo-debrief-section{padding:0 16px 16px;background:#f4f5f6}
+  #sShots .demo-debrief-section .demo-notes-card{border-radius:10px}
+  #sShots .demo-score-table,#sShots .demo-framework{overflow:hidden;border:1px solid #dcdfe3;border-radius:10px;background:#fff}
+  #sShots .demo-table-row{display:grid;grid-template-columns:minmax(0,.78fr) 54px minmax(0,1.65fr);align-items:stretch;border-top:1px solid #e1e4e8}
+  #sShots .demo-table-row:first-child{border-top:0}
+  #sShots .demo-table-row > span{padding:8px 9px;font-size:9.5px;line-height:1.35;color:#344054;border-left:1px solid #e1e4e8}
+  #sShots .demo-table-row > span:first-child{border-left:0;font-weight:700;color:#222}
+  #sShots .demo-table-row > .demo-cell-score{display:flex;align-items:center;justify-content:center;font-weight:700;color:#009443;white-space:nowrap}
+  #sShots .demo-table-head{background:#edf0f2}
+  #sShots .demo-table-head > span{font-size:8px;font-weight:700;letter-spacing:.08em;color:#707782;text-transform:uppercase}
+  #sShots .demo-overall{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:9px 10px;background:#fff;border:1px solid #dcdfe3;border-top:0;border-radius:0 0 10px 10px;font-size:9px;color:#707782}
+  #sShots .demo-overall b{font-size:16px;color:#009443}
+  #sShots .demo-sync{display:flex;gap:9px;align-items:flex-start;margin-top:10px;padding:9px 10px;border-radius:8px;background:#eaf8ef;color:#235d3b;font-size:9.5px;line-height:1.4}
+  #sShots .demo-sync::before{content:"✓";display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#009443;color:#fff;font-weight:700;flex:none}
+  #sShots .demo-framework .demo-table-row{grid-template-columns:88px 60px minmax(0,1fr)}
+  #sShots .demo-status{font-size:7.5px!important;font-weight:700;letter-spacing:.05em;text-align:center;color:#315c43!important;background:#eef8f1}
+  #sShots .demo-status.partial{color:#80600b!important;background:#fff8dc}
+  #sShots .demo-status.missing{color:#9b3c32!important;background:#fff0ee}
+  #sShots .demo-followup{padding:12px 13px;background:#fff;border:1px solid #dcdfe3;border-radius:10px;color:#344054}
+  #sShots .demo-followup-meta{display:grid;gap:3px;padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid #e1e4e8;font-size:9.5px}
+  #sShots .demo-followup p{font-size:9.5px;line-height:1.45;margin:0 0 8px}
+  #sShots .demo-followup p:last-child{margin-bottom:0}
+  #sShots .demo-draft-btn{display:inline-flex;margin-bottom:10px;padding:6px 9px;border-radius:6px;background:#009443;color:#fff;font-size:8.5px;font-weight:700}
+  #sShots .demo-action-list{margin:0;padding-left:17px;display:grid;gap:6px}
+  #sShots .demo-action-list li{font-size:9.5px;line-height:1.4;color:#344054}
+  /* Presenter reading mode. This is a CSS overlay instead of the browser Fullscreen
+     API, so it remains reliable when the deck is opened directly from file://. */
+  #sShots .mail-backdrop{position:fixed;inset:0;z-index:90;border:0;background:rgba(21,28,24,.72);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility .18s ease;cursor:zoom-out}
+  body.mail-reading .deck{z-index:100}
+  body.mail-reading .topbar,body.mail-reading .chrome,body.mail-reading .progress,body.mail-reading .toast,body.mail-reading .index{display:none!important}
+  #sShots.mail-open{overflow:hidden}
+  #sShots.mail-open .mail-backdrop{opacity:1;visibility:visible;pointer-events:auto}
+  #sShots.mail-open .wrap{z-index:91}
+  #sShots.mail-returned .sShots-grid,#sShots.mail-returned .sShots-card{animation:none!important;transform:none!important;opacity:1!important}
+  #sShots.mail-open .sShots-card.is-expanded{position:relative;z-index:92}
+  #sShots.mail-open .wrap > .eyebrow,#sShots.mail-open .wrap > h1,#sShots.mail-open .sShots-card:not(.is-expanded),#sShots.mail-open .sShots-card.is-expanded .sShots-lbl{visibility:hidden}
+  #sShots .sShots-card.is-expanded .sShots-mail{position:fixed;inset:clamp(12px,2.4vh,24px) clamp(12px,2.5vw,36px);z-index:92;width:auto;height:auto!important;max-height:none;border-radius:16px;box-shadow:0 26px 80px rgba(14,28,20,.34)}
+  #sShots .sShots-card.is-expanded .demo-mail-toolbar{height:50px;padding:0 1rem;gap:.9rem}
+  #sShots .sShots-card.is-expanded .demo-mail-gmail{width:82px}
+  #sShots .sShots-card.is-expanded .demo-mail-search{height:32px;font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-mail-tools{display:none}
+  #sShots .sShots-card.is-expanded .demo-mail-close{display:inline-flex;align-items:center;justify-content:center}
+  #sShots .sShots-card.is-expanded .demo-mail-scroll{scrollbar-width:auto}
+  #sShots .sShots-card.is-expanded .demo-mail-head{padding:17px clamp(18px,2vw,28px) 14px}
+  #sShots .sShots-card.is-expanded .demo-mail-subject{font-size:19px;margin-bottom:10px}
+  #sShots .sShots-card.is-expanded .demo-mail-from,#sShots .sShots-card.is-expanded .demo-mail-date{font-size:13px}
+  #sShots .sShots-card.is-expanded .demo-mail-from b{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-mail-body{padding:24px}
+  #sShots .sShots-card.is-expanded .demo-email{max-width:860px}
+  #sShots .sShots-card.is-expanded .demo-email-hero{padding:27px 30px 24px}
+  #sShots .sShots-card.is-expanded .demo-email-brand img{height:29px}
+  #sShots .sShots-card.is-expanded .demo-email-hero h3{font-size:27px}
+  #sShots .sShots-card.is-expanded .demo-email-hero p{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-score-kicker{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-email-score{min-width:104px}
+  #sShots .sShots-card.is-expanded .demo-email-score span{font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-email-score strong{font-size:52px}
+  #sShots .sShots-card.is-expanded .demo-email-score em{font-size:19px}
+  #sShots .sShots-card.is-expanded .demo-email-content{padding:22px 26px 26px}
+  #sShots .sShots-card.is-expanded .demo-priority{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-coach-copy{font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-coach-face{width:52px;height:52px}
+  #sShots .sShots-card.is-expanded .demo-coach-signature{width:105px;height:32px}
+  #sShots .sShots-card.is-expanded .demo-email-bar{padding:13px 26px;font-size:13px}
+  #sShots .sShots-card.is-expanded .demo-email-bar b{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-email-context{padding:11px 26px;font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-meeting{padding:22px 26px 28px}
+  #sShots .sShots-card.is-expanded .demo-meeting h4{font-size:19px}
+  #sShots .sShots-card.is-expanded .demo-email-meta{font-size:13px}
+  #sShots .sShots-card.is-expanded .demo-email-section h5{font-size:15px}
+  #sShots .sShots-card.is-expanded .demo-email-section p,#sShots .sShots-card.is-expanded .demo-email-section li{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-notes-pill{font-size:10px}
+  #sShots .sShots-card.is-expanded .demo-notes-bg{padding:22px 24px 28px}
+  #sShots .sShots-card.is-expanded .demo-notes-title{font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-notes-card{padding:20px 22px}
+  #sShots .sShots-card.is-expanded .demo-notes-card h4{font-size:16px}
+  #sShots .sShots-card.is-expanded .demo-notes-card h5{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-notes-card p,#sShots .sShots-card.is-expanded .demo-notes-card li{font-size:14px}
+  #sShots .sShots-card.is-expanded .demo-debrief-coach{grid-template-columns:56px minmax(0,1fr)}
+  #sShots .sShots-card.is-expanded .demo-debrief-coach .demo-coach-face{width:56px;height:56px}
+  #sShots .sShots-card.is-expanded .demo-debrief-coach .demo-coach-signature{width:112px;height:33px}
+  #sShots .sShots-card.is-expanded .demo-debrief-band{padding:14px 24px 10px;font-size:11px}
+  #sShots .sShots-card.is-expanded .demo-debrief-section{padding:0 24px 22px}
+  #sShots .sShots-card.is-expanded .demo-table-row{grid-template-columns:minmax(0,.78fr) 74px minmax(0,1.65fr)}
+  #sShots .sShots-card.is-expanded .demo-table-row > span{padding:11px 13px;font-size:12.5px}
+  #sShots .sShots-card.is-expanded .demo-table-head > span{font-size:10px}
+  #sShots .sShots-card.is-expanded .demo-overall{font-size:12px}
+  #sShots .sShots-card.is-expanded .demo-overall b{font-size:20px}
+  #sShots .sShots-card.is-expanded .demo-sync{font-size:12.5px}
+  #sShots .sShots-card.is-expanded .demo-framework .demo-table-row{grid-template-columns:120px 86px minmax(0,1fr)}
+  #sShots .sShots-card.is-expanded .demo-status{font-size:9.5px!important}
+  #sShots .sShots-card.is-expanded .demo-followup{padding:17px 18px}
+  #sShots .sShots-card.is-expanded .demo-followup-meta,#sShots .sShots-card.is-expanded .demo-followup p{font-size:12.5px}
+  #sShots .sShots-card.is-expanded .demo-draft-btn{font-size:11px;padding:8px 11px}
+  #sShots .sShots-card.is-expanded .demo-action-list li{font-size:12.5px}
   #sShots .sShots-grid{animation:none;opacity:1}
   #sShots .sShots-card{opacity:0}
   #sShots.active .sShots-card{animation:shotsRise .6s cubic-bezier(.2,.85,.25,1) forwards}
@@ -1959,21 +2061,28 @@ Then stop and tell me the one thing that changed most.</div>
     #sShots .sShots-lbl{margin-bottom:.45rem}
     #sShots .sShots-mail{height:430px}
   }
-  @media (max-width:820px){ #sShots .sShots-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto} }
+  @media (max-width:820px){
+    #sShots .sShots-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
+    #sShots .sShots-lbl{align-items:flex-start}
+    #sShots .sShots-card.is-expanded .sShots-mail{inset:8px}
+    #sShots .sShots-card.is-expanded .demo-mail-body{padding:12px}
+    #sShots .sShots-card.is-expanded .demo-email-hero{padding:22px 20px}
+  }
   @media (prefers-reduced-motion:reduce){
     #sShots .sShots-card{opacity:1}
     #sShots.active .sShots-card{animation:none}
   }
   </style>
   <section class="slide wr-theme" id="sShots">
+    <button class="mail-backdrop" type="button" aria-label="Close expanded email"></button>
     <div class="wrap">
       <div class="eyebrow">What lands in the rep's inbox</div>
       <h1>The prep arrives before. <span class="hl">The debrief lands after.</span></h1>
       <div class="sShots-grid">
         <figure class="sShots-card">
-          <div class="sShots-lbl">Before the call · Tomorrow's game plan</div>
-          <div class="sShots-mail" aria-label="Scrollable fictional game-plan email">
-            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span></div>
+          <div class="sShots-lbl"><span class="sShots-lbl-copy">Before the call · Tomorrow's game plan</span><button class="mail-expand" type="button" data-mail-expand aria-controls="gamePlanEmail" aria-expanded="false">Expand email</button></div>
+          <div class="sShots-mail" id="gamePlanEmail" aria-label="Scrollable fictional game-plan email">
+            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span><button class="demo-mail-close" type="button" data-mail-close>Close</button></div>
             <div class="demo-mail-scroll" tabindex="0" role="region" aria-label="Fictional game-plan email, scroll for the full message">
               <div class="demo-mail-head">
                 <div class="demo-mail-subject">Tomorrow's game plan for Maya Chen - Tue, Jul 21</div>
@@ -1996,9 +2105,9 @@ Then stop and tell me the one thing that changed most.</div>
           </div>
         </figure>
         <figure class="sShots-card">
-          <div class="sShots-lbl">After the call · Scored debrief</div>
-          <div class="sShots-mail" aria-label="Scrollable fictional scored-debrief email">
-            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span></div>
+          <div class="sShots-lbl"><span class="sShots-lbl-copy">After the call · Scored debrief</span><button class="mail-expand" type="button" data-mail-expand aria-controls="debriefEmail" aria-expanded="false">Expand email</button></div>
+          <div class="sShots-mail" id="debriefEmail" aria-label="Scrollable fictional scored-debrief email">
+            <div class="demo-mail-toolbar"><img class="demo-mail-gmail" src="webinar-demo/assets/email-gmail-logo.png" alt="Gmail"><span class="demo-mail-search">Search mail</span><span class="demo-mail-tools" aria-hidden="true"><i></i><i></i><i></i></span><button class="demo-mail-close" type="button" data-mail-close>Close</button></div>
             <div class="demo-mail-scroll" tabindex="0" role="region" aria-label="Fictional scored-debrief email, scroll for the full message">
               <div class="demo-mail-head">
                 <div class="demo-mail-subject">WingRep Debrief - Northstar trial check-in</div>
@@ -2010,7 +2119,43 @@ Then stop and tell me the one thing that changed most.</div>
                   <div class="demo-notes-bg">
                     <h3 class="demo-notes-title">Coaching</h3>
                     <div class="demo-notes-card"><h4>Strong call. You connected the rollout to the buyer's real constraint.</h4><p>You confirmed the decision process and earned a clear pilot date. Next time, leave one more beat of silence after the first objection so the buyer can finish the thought.</p><div class="demo-debrief-coach"><img class="demo-coach-face" src="webinar-demo/assets/email-jeffrey-gitomer.jpg" alt="Jeffrey Gitomer"><div class="demo-coach-copy">Yours in sales<br><b>Jeffrey Gitomer</b><img class="demo-coach-signature" src="webinar-demo/assets/email-jeffrey-signature.png" alt="Jeffrey Gitomer signature"></div></div></div>
-                    <div class="demo-notes-card"><h4>What Went Well</h4><ul><li>Mapped the rollout concern to manager-review time.</li><li>Confirmed Alex owns the operations decision.</li><li>Closed on a two-week pilot and kickoff date.</li></ul><h5>Follow-ups</h5><ul><li>Send the rollout outline.</li><li>Invite the enablement lead.</li><li>Log the pilot date and success criteria.</li></ul></div>
+                    <div class="demo-notes-card"><h4>What Went Well</h4><ul><li>Mapped the rollout concern to six hours of manager-review time each week.</li><li>Repeated Alex's CRM concern before showing how the workflow fits.</li><li>Closed on a two-week pilot with a kickoff date and success criteria.</li></ul><h5>Coaching Insights</h5><ul><li>Quantify the cost one layer earlier, before the product walkthrough.</li><li>Confirm the CFO approval path while Alex is still describing the rollout.</li></ul><h5>Suggested Questions</h5><ul><li>What would make the pilot an obvious yes after two weeks?</li><li>Who besides you needs to trust the CRM workflow?</li></ul></div>
+                  </div>
+                  <div class="demo-debrief-band">Performance</div>
+                  <div class="demo-debrief-section">
+                    <div class="demo-score-table" aria-label="Fictional performance scorecard">
+                      <div class="demo-table-row demo-table-head"><span>Criterion</span><span>Score</span><span>Explanation</span></div>
+                      <div class="demo-table-row"><span>Discovery depth</span><span class="demo-cell-score">8.4</span><span>Quantified the manager-review burden and tied it to delayed follow-through.</span></div>
+                      <div class="demo-table-row"><span>Qualification rigor</span><span class="demo-cell-score">7.6</span><span>Confirmed Alex owns operations; CFO approval still needs a direct question.</span></div>
+                      <div class="demo-table-row"><span>Value articulation</span><span class="demo-cell-score">8.5</span><span>Connected the workflow to faster reviews and no extra CRM maintenance.</span></div>
+                      <div class="demo-table-row"><span>Call control</span><span class="demo-cell-score">8.0</span><span>Kept the discussion on rollout risk, though the first objection ran long.</span></div>
+                      <div class="demo-table-row"><span>Closing with next step</span><span class="demo-cell-score">8.1</span><span>Secured the pilot, kickoff date, owners, and a measurable review point.</span></div>
+                    </div>
+                    <div class="demo-overall"><span>OVERALL SCORE</span><b>8.1/10</b></div>
+                  </div>
+                  <div class="demo-debrief-band">Actions</div>
+                  <div class="demo-debrief-section">
+                    <div class="demo-notes-card"><h4>CRM Summary</h4><p>Northstar agreed to a two-week pilot for the operations team. Success means reducing weekly manager-review time from six hours to under two without adding CRM work. Alex Rivera owns the rollout; CFO approval is the remaining commercial dependency. Kickoff is Tuesday with an evidence review on August 7.</p><div class="demo-sync"><span><b>Syncing to your CRM</b><br>Creating the opportunity, writing the meeting notes, and adding the pilot milestones in the background.</span></div></div>
+                  </div>
+                  <div class="demo-debrief-section">
+                    <h3 class="demo-notes-title">Sales Framework · MEDDIC</h3>
+                    <div class="demo-framework" aria-label="Fictional MEDDIC framework capture">
+                      <div class="demo-table-row demo-table-head"><span>Component</span><span>Status</span><span>Captured</span></div>
+                      <div class="demo-table-row"><span>Metrics</span><span class="demo-status">COMPLETE</span><span>Six review hours weekly; pilot target is under two.</span></div>
+                      <div class="demo-table-row"><span>Economic Buyer</span><span class="demo-status partial">PARTIAL</span><span>Alex owns operations; CFO approval path is not confirmed.</span></div>
+                      <div class="demo-table-row"><span>Decision Criteria</span><span class="demo-status">COMPLETE</span><span>Time saved, CRM fit, rep adoption, and manager visibility.</span></div>
+                      <div class="demo-table-row"><span>Decision Process</span><span class="demo-status">COMPLETE</span><span>Two-week pilot, then an operations review on August 7.</span></div>
+                      <div class="demo-table-row"><span>Identify Pain</span><span class="demo-status">COMPLETE</span><span>Manual reviews delay follow-through until the next day.</span></div>
+                      <div class="demo-table-row"><span>Champion</span><span class="demo-status partial">PARTIAL</span><span>Alex will sponsor kickoff; enablement still needs alignment.</span></div>
+                    </div>
+                  </div>
+                  <div class="demo-debrief-section">
+                    <h3 class="demo-notes-title">Follow-Up Email</h3>
+                    <div class="demo-followup"><span class="demo-draft-btn">Open follow-up in email app</span><div class="demo-followup-meta"><span><b>To:</b> alex@northstar.example</span><span><b>Subject:</b> Northstar pilot kickoff and success criteria</span></div><p>Hi Alex,</p><p>Thanks for working through the rollout details today. We aligned on a two-week pilot for the operations team, starting Tuesday.</p><p>We will measure one thing first: reducing weekly manager-review time from six hours to under two without adding CRM work. I will send the rollout outline today and include the enablement lead on the kickoff.</p><p>For our August 7 review, we will bring adoption, time-saved, and follow-through data so the team can decide from evidence.</p><p>Best,<br>Maya</p></div>
+                  </div>
+                  <div class="demo-debrief-section">
+                    <h3 class="demo-notes-title">Action Items</h3>
+                    <div class="demo-notes-card"><ul class="demo-action-list"><li>Send Alex the rollout outline today.</li><li>Invite the enablement lead to Tuesday's kickoff.</li><li>Confirm the CFO approval path before the evidence review.</li><li>Track adoption, manager time saved, and follow-through speed.</li></ul></div>
                   </div>
                 </article>
               </div>
@@ -2668,6 +2813,54 @@ Then stop and tell me the one thing that changed most.</div>
     mail.addEventListener('touchstart',function(e){e.stopPropagation();},{passive:true});
     mail.addEventListener('touchend',function(e){e.stopPropagation();},{passive:true});
   });
+
+  // Slide 13 reading mode keeps the fictional inbox content legible in a live room.
+  // It deliberately stays inside the deck instead of invoking browser fullscreen.
+  var mailSlide=document.getElementById('sShots'), expandedMailCard=null, expandedMailTrigger=null;
+  function closeExpandedMail(restoreFocus){
+    if(!mailSlide)return;
+    document.body.classList.remove('mail-reading');
+    mailSlide.classList.remove('mail-open');
+    if(!expandedMailCard)return;
+    var mail=expandedMailCard.querySelector('.sShots-mail');
+    expandedMailCard.classList.remove('is-expanded');
+    if(mail){mail.removeAttribute('role');mail.removeAttribute('aria-modal');}
+    if(expandedMailTrigger){
+      expandedMailTrigger.setAttribute('aria-expanded','false');
+      if(restoreFocus!==false)expandedMailTrigger.focus({preventScroll:true});
+    }
+    expandedMailCard=null;expandedMailTrigger=null;
+  }
+  function openExpandedMail(trigger){
+    if(!mailSlide)return;
+    var card=trigger.closest('.sShots-card'), mail=card&&card.querySelector('.sShots-mail');
+    if(!card||!mail)return;
+    if(expandedMailCard)closeExpandedMail();
+    expandedMailCard=card;expandedMailTrigger=trigger;
+    card.classList.add('is-expanded');mailSlide.classList.add('mail-open','mail-returned');document.body.classList.add('mail-reading');
+    trigger.setAttribute('aria-expanded','true');mail.setAttribute('role','dialog');mail.setAttribute('aria-modal','true');
+    var scroll=mail.querySelector('.demo-mail-scroll');
+    if(scroll)scroll.focus({preventScroll:true});
+  }
+  if(mailSlide){
+    mailSlide.querySelectorAll('[data-mail-expand]').forEach(function(trigger){
+      trigger.addEventListener('click',function(){openExpandedMail(trigger);});
+      trigger.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')e.stopPropagation();});
+    });
+    mailSlide.querySelectorAll('[data-mail-close]').forEach(function(button){
+      button.addEventListener('click',closeExpandedMail);
+      button.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')e.stopPropagation();});
+    });
+    mailSlide.querySelector('.mail-backdrop').addEventListener('click',closeExpandedMail);
+    new MutationObserver(function(){
+      if(!mailSlide.classList.contains('active')){mailSlide.classList.remove('mail-returned');closeExpandedMail(false);}
+    }).observe(mailSlide,{attributes:true,attributeFilter:['class']});
+    document.addEventListener('keydown',function(e){
+      if(!expandedMailCard)return;
+      if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeExpandedMail();return;}
+      if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();e.stopImmediatePropagation();}
+    },true);
+  }
 
   // Keep each set-piece's styles next to its source markup, then arrange the closing
   // sequence in one explicit place: proof, differentiation, pain, recap, trial, bonus, CTA.
