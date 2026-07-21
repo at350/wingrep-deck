@@ -175,7 +175,7 @@ Claude opens as Marcus. Answer out loud as yourself, once or twice max (your reh
 
 **Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
-**Slide 13, outcome proof:** scroll the two large native emails. The Gmail mark, WingRep wordmark, scored debrief treatment, and Jeffrey Gitomer coach assets come from the supplied email examples; every account, address, meeting, and performance detail is fictional. Point to the 8.1 score before scrolling. The game plan arrives before the call; the debrief lands after it. The point is that reps do not need to reopen the product to get the workflow's value.
+**Slide 13, outcome proof:** use **Expand email** when the room needs to read either message, then scroll inside it. **Escape**, **Close**, or the shaded backdrop returns to the two-email view. The Gmail mark, WingRep wordmark, scored debrief treatment, and Jeffrey Gitomer coach assets come from the supplied email examples; every account, address, meeting, and performance detail is fictional. Point to the 8.1 score first, then scroll the debrief through coaching, the performance scorecard, CRM sync, MEDDIC capture, the drafted follow-up email, and action items. The game plan arrives before the call; the full debrief lands after it. The point is that reps do not need to reopen the product to get the workflow's value.
 
 **Slide 14, differentiation:** most call tools preserve the conversation; WingRep changes the next call. Read the comparison as the answer to “why another tool?”
 
