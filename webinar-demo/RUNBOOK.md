@@ -137,11 +137,11 @@ Click **Continue** without warning. The deck becomes a blue screen. Pause for th
 
 **Slide 16, recap:** give the workflow away cleanly: four prompts, four moves, one coaching rhythm. The room can run it with or without WingRep.
 
-**Slide 17, standard trial:** present the ordinary pilot as one simple three-week progression: connect a few reps, let the loop run, then make the removal test tangible. Land on *"Hate to see it go away"* and explain that taking WingRep back off the reps is the actual test. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Amit or founder onboarding yet.
+**Slide 17, standard trial:** present the ordinary pilot as one simple three-week progression: connect a few reps, let the loop run, then make the removal test tangible. Land on *"Hate to see it go away"* and explain that taking WingRep back off the reps is the actual test. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Alan's attendee setup session yet.
 
-**Slide 18, founder bonus:** this is the first founder-deal reveal. Say: *"You just felt the admin. Now get live with Amit."* Present the attendee-only 20-minute onboarding, point to the larger live founder-slot clock, and send the room to `wingrep.ai/webinar`.
+**Slide 18, attendee setup:** say: *"You just felt the admin. Now let's build yours."* Present the attendee-only 30-minute session with Alan as hands-on help turning the framework into their own sales assistant and getting WingRep set up for real calls. Point to the live setup-slot clock, then send the room to `https://calendly.com/alan-selfactualize/30min`.
 
-**Finale (slide 19):** point to `wingrep.ai/webinar`, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
+**Finale (slide 19):** point to Alan's Calendly link, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
 
 ---
 
