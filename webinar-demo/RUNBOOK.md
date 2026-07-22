@@ -139,7 +139,7 @@ Click **Continue** without warning. The deck becomes a blue screen. Pause for th
 
 **Slide 17, standard trial:** present the ordinary pilot as one simple three-week progression: connect a few reps, let the loop run, then make the removal test tangible. Land on *"Hate to see it go away"* and explain that taking WingRep back off the reps is the actual test. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Alan's attendee setup session yet.
 
-**Slide 18, attendee setup:** say: *"You just felt the admin. Now let's build yours."* Present the attendee-only 30-minute session with Alan as hands-on help turning the framework into their own sales assistant and getting WingRep set up for real calls. Point to the live setup-slot clock, then send the room to `https://calendly.com/alan-selfactualize/30min`.
+**Slide 18, attendee setup:** say: *"You just felt the admin. Now let's build yours."* Present the attendee-only 30-minute session with Alan as hands-on help turning the framework into their own sales assistant and getting WingRep set up for real calls. Point to the live setup-slot clock, then send the room to `https://calendly.com/alan-wingrep/30min`.
 
 **Finale (slide 19):** point to Alan's Calendly link, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
 
