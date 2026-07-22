@@ -5,6 +5,7 @@
 !/index.html
 !/wingrep-webinar.html
 !/wingrep-assets.js
+!/wingrep-demo-data.js
 !/README.md
 !/.gitignore
 # Fictional webinar demo kit (transcripts, prompt library); contains no real customer or company data.

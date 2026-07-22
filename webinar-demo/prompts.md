@@ -2,7 +2,7 @@
 
 Every prompt here uses the same four moves: give it a role, show it a real transcript, give it memory, and make one clear ask. The phrase "quote the exact moment or mark it MISSING" does the heavy lifting; it forces the answer to come from the transcript instead of being made up.
 
-## Part 1 · The five prompts to steal (the slide-8 live loop, in order)
+## Part 1 · The four core prompts (the webinar workflow, in order)
 
 ### 1. Capture
 > Here's today's call with [prospect]. Write the entry I should append to this deal's running file: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
@@ -18,9 +18,6 @@ Swap MEDDIC for SPICED, BANT, or Sandler; the structure holds.
 ### 4. Game plan
 > Using the deal file and the transcripts: the next call is [the meeting] with [buyer]. Give me a 60-second brief for it: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line.
 
-### 5. Drill
-> Play [buyer], the [role] from these transcripts. I want to practice [moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.
-
 ## Part 2 · The deal-desk extras
 
 ### Champion test
@@ -35,11 +32,11 @@ Swap MEDDIC for SPICED, BANT, or Sandler; the structure holds.
 ### Forecast honesty check
 > I have this deal at 70% to close this quarter in my CRM. Using only what's in these transcripts, argue against that number. What has the buyer actually committed to, in their own words? What am I assuming that no one ever said?
 
-## Part 3 · Put it on a loop (Claude desktop app)
+## Part 3 · Put it on a loop (Claude Cowork)
 
 Prompts are the steps. The upgrade is the loop: memory it writes to, senses that feed it, and a schedule that runs it. Set up once, per rep.
 
-1. Install the Claude desktop app (claude.ai/download) and point it at a folder.
+1. Open Claude Cowork (claude.ai/download) and point it at a folder.
 2. In the folder: your call transcripts plus two empty files, a deal file and a coaching log. You never type in them; the loop appends, call by call.
 3. Connect Google Calendar in the app's settings, so the loop knows which calls are coming.
 4. Schedule the automation below for 7am weekdays. Your reps start every day prepped.

@@ -35,7 +35,7 @@
 
   .slide{position:absolute;inset:0;display:none;padding:6.5vh clamp(20px,6vw,104px) 8.5vh;flex-direction:column;justify-content:center;overflow-y:auto;z-index:3}
   .slide.active{display:flex}
-  /* 1280x720 is a real laptop and two slides (the five prompts, and the trial) ran
+  /* 1280x720 is a real laptop and two slides (the four prompts, and the trial) ran
      about 85px past their content box there, so they scrolled and slid under the top
      bar. Reclaim the height at short viewports. Padding-top is left alone on purpose:
      it is what clears the fixed top bar. */
@@ -158,28 +158,50 @@
 
   /* loop diagram */
   .loopwrap{margin-top:1.4rem;display:flex;justify-content:center}
-  /* self-typing ledger */
-  .typer{margin-top:1.5rem;max-width:520px;background:#160c08;border:1px solid #45281d;border-radius:12px;padding:1rem 1.1rem;font-family:var(--mono);font-size:13px;line-height:1.6;color:#e7d6d0;min-height:96px;box-shadow:var(--shadow)}
-  .typer .g{color:#de9a81;font-weight:700}
-  .typer .cr{display:inline-block;width:8px;height:1.05em;background:#a44927;vertical-align:-2px;animation:blink 1s steps(2) infinite}
-  @keyframes blink{50%{opacity:0}}
-
-  /* SalesOS */
-  .os{margin-top:1.1rem;max-width:1000px;background:#c6c2b6;border:2px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;box-shadow:7px 7px 0 rgba(20,18,13,.28)}
-  .os .titlebar{background:linear-gradient(90deg,#5f2a16,#7a361c);color:#fff;display:flex;align-items:center;gap:.5rem;padding:.35rem .5rem;font-family:var(--body);font-weight:700;font-size:13.5px}
-  .os .titlebar img{height:15px}
-  .os .titlebar .sp{margin-left:auto;display:flex;gap:.25rem}
-  .os .titlebar .sp i{width:18px;height:16px;background:#c6c2b6;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;font-style:normal;font-size:11px;color:#14120d;display:flex;align-items:center;justify-content:center}
-  .os .tabs{display:flex;gap:.18rem;padding:.45rem .45rem 0;flex-wrap:wrap}
-  .os .tabs button{font-family:var(--body);font-weight:700;font-size:12px;padding:.4rem .7rem;border:1.5px solid;border-color:#fdfcf7 #7c786c #c6c2b6 #fdfcf7;background:#bdb9ad;cursor:pointer;color:#2c2920;border-bottom:none}
+  /* SalesOS: readable from the back of a room and complete enough to run the
+     demo without opening a runbook or a second document. */
+  .sales-os-slide{padding-top:5.4vh;padding-bottom:3.5vh}
+  .sales-os-slide .wrap{max-width:1160px}
+  .sales-os-slide .eyebrow{margin-bottom:.55rem}
+  .os{margin-top:.35rem;max-width:none;background:#c6c2b6;border:2px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;box-shadow:8px 8px 0 rgba(20,18,13,.24);position:relative}
+  .os .titlebar{min-height:42px;background:linear-gradient(90deg,#4b2112,#713019);color:#fff;display:flex;align-items:center;gap:.75rem;padding:.45rem .65rem;font-family:var(--body);font-weight:700;font-size:15px}
+  .wingrep-os-logo{display:inline-flex;align-items:center;background:#fbf9f1;border:2px solid #14120d;box-shadow:2px 2px 0 #d97757;padding:.28rem .55rem;line-height:1;flex:none}
+  .wingrep-os-logo img{display:block;width:auto;height:25px;object-fit:contain}
+  .os-window-title{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+  .os-window-title em{font-style:normal;color:#efd4c9}
+  .os .titlebar .sp{margin-left:auto;display:flex;gap:.3rem}
+  .os .titlebar .sp i{width:22px;height:20px;background:#c6c2b6;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;font-style:normal;font-size:12px;color:#14120d;display:flex;align-items:center;justify-content:center}
+  .os .tabs{display:flex;gap:.3rem;padding:.55rem .6rem 0;align-items:flex-end;overflow-x:auto}
+  .os .tabs button{font-family:var(--body);font-weight:700;font-size:14px;line-height:1.2;padding:.6rem .9rem;border:1.5px solid;border-color:#fdfcf7 #69665d #c6c2b6 #fdfcf7;background:#b8b4a8;cursor:pointer;color:#27241d;border-bottom:none;white-space:nowrap;transition:background .18s,color .18s,transform .18s}
+  .os .tabs button:hover{background:#d8d4c8}
+  .os .tabs button:focus-visible,.os .copy:focus-visible,.demo-file-list button:focus-visible,.os-continue:focus-visible{outline:3px solid #d97757;outline-offset:2px}
   .os .tabs button.on{background:#fdfcf7;color:#14120d;position:relative;top:1px}
-  .os .screen{background:#fdfcf7;border:2px solid;border-color:#7c786c #fdfcf7 #fdfcf7 #7c786c;margin:0 .45rem;min-height:250px;padding:.9rem 1rem}
-  .os .pane{display:none} .os .pane.on{display:block;animation:rev .3s both}
-  .os .pane h4{font-family:var(--body);font-weight:700;font-size:14.5px;margin-bottom:.45rem;color:#14120d}
-  .os .pane p{font-size:14px;line-height:1.48;color:#2c2920;font-weight:500;max-width:62ch}
-  .os .term{font-family:var(--mono);font-size:13.5px;line-height:1.42;background:#1a120f;color:#e7d6d0;border-radius:6px;padding:.75rem .85rem;margin-top:.6rem;white-space:pre-wrap}
-  .os .term .g{color:#d19781}
-  .os .copy{margin-top:.55rem;font-family:var(--body);font-weight:700;font-size:12px;background:#bdb9ad;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;padding:.34rem .8rem;cursor:pointer;color:#14120d}
+  .os .tabs button[hidden]{display:none!important}
+  .os .screen{background:#fdfcf7;border:2px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;margin:0 .6rem;height:clamp(300px,48vh,430px);padding:1.15rem 1.25rem;overflow:hidden}
+  .os .pane{display:none;height:100%;overflow:auto;padding-right:.25rem} .os .pane.on{display:block;animation:rev .25s both}
+  .os .pane-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
+  .os .step-kicker{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8f3e24;margin-bottom:.25rem}
+  .os .pane h4{font-family:var(--body);font-weight:700;font-size:clamp(18px,1.65vw,22px);line-height:1.2;color:#14120d}
+  .os .pane p{font-size:clamp(14px,1.2vw,16px);line-height:1.5;color:#3f3a2f;font-weight:500;max-width:70ch}
+  .os .prompt-note{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;font-size:12.5px!important;color:#6a6253!important}
+  .os .prompt-note::before{content:"PASTE";font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.12em;color:#fff;background:#a44927;padding:.2rem .38rem}
+  .os .term{font-family:var(--mono);font-size:clamp(13px,1.02vw,15px);line-height:1.55;background:#1a120f;color:#f1e4df;border-radius:8px;padding:.9rem 1rem;margin-top:.55rem;white-space:pre-wrap;overflow:auto;max-height:calc(100% - 105px);border:1px solid #45281d;tab-size:2}
+  .os .term .g{color:#efad95;font-weight:700}
+  .os .copy,.os-continue{flex:none;font-family:var(--body);font-weight:700;font-size:14px;background:#b14a2c;color:#fff;border:2px solid #5f2a16;box-shadow:2px 2px 0 #6c675d;padding:.58rem .9rem;cursor:pointer;transition:transform .16s,background .16s}
+  .os .copy:hover,.os-continue:hover{background:#8f3e24;transform:translateY(-1px)}
+  .os .copy:active,.os-continue:active{transform:translateY(1px)}
+  .os .copy.secondary{background:#ece7d9;color:#2c2920;border-color:#8a8472}
+  .os .copy.secondary:hover{background:#fff}
+  .os-files{display:grid;grid-template-columns:minmax(225px,.72fr) minmax(0,1.7fr);gap:1rem;height:calc(100% - 110px)}
+  .demo-file-list{display:flex;flex-direction:column;gap:.45rem;min-width:0}
+  .demo-file-list button{font-family:var(--mono);font-size:11.5px;line-height:1.35;text-align:left;color:#2c2920;background:#eee9dc;border:1px solid #c9c1ae;padding:.58rem .65rem;cursor:pointer;overflow-wrap:anywhere;transition:background .16s,border-color .16s}
+  .demo-file-list button:hover,.demo-file-list button.on{background:#fff7da;border-color:#9a7a37}
+  .demo-file-actions{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:auto;padding-top:.25rem}
+  .demo-preview-wrap{display:flex;flex-direction:column;min-width:0;height:100%}
+  .demo-preview-name{font-family:var(--mono);font-size:12px;font-weight:700;color:#5f2a16;margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .demo-preview{flex:1;min-height:0;margin:0!important;max-height:none!important;font-size:12.5px!important}
+  .os-limit-actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.8rem;padding-top:.7rem;border-top:1px solid #d6cfbc}
+  .os-limit-actions p{font-size:13px!important;color:#6b6457!important}
   .ledger{font-family:var(--mono);font-size:13px;line-height:1.5;color:#2c2920;background:#fff;border:1px solid #d6cfbc;border-radius:6px;padding:.7rem .8rem;margin-top:.55rem}
   .ledger .stuck{background:#efddd7;color:#5f2a16;font-weight:700;padding:0 .2em} .ledger .slip{background:#f6dcd4;color:#b3381f;font-weight:700;padding:0 .2em} .ledger .hd{color:#8a8472}
   /* Slide 9, tab 3 scorecard. The five columns are the rep's last 5 calls; each
@@ -205,10 +227,30 @@
   .sc-key i.slip{background:#faf0eb;border:1.5px solid var(--rust)}
   .sc-gap{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft)}
   .sc-gap b{color:var(--green);font-weight:700}
-  .os .taskbar{display:flex;align-items:center;gap:.5rem;padding:.3rem .45rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.45rem}
-  .os .start{font-family:var(--body);font-weight:700;font-size:12.5px;padding:.28rem .65rem;border:1.5px solid;border-color:#fdfcf7 #7c786c #7c786c #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.35rem}
-  .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#7c786c #fdfcf7 #fdfcf7 #7c786c;padding:.2rem .55rem}
-  .os-cap{margin-top:.7rem;font-family:var(--hand);font-size:clamp(19px,2vw,27px);color:var(--green);font-weight:700;transform:rotate(-1.5deg)}
+  .os .taskbar{display:flex;align-items:center;gap:.65rem;padding:.38rem .6rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.5rem}
+  .os .start{font-family:var(--body);font-weight:700;font-size:13px;padding:.3rem .7rem;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.4rem}
+  .os .task-status{font-family:var(--mono);font-size:11px;color:#4f4a40}
+  .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;padding:.25rem .6rem}
+  .os-cap{margin-top:.6rem;font-family:var(--hand);font-size:clamp(18px,1.8vw,24px);color:var(--green);font-weight:700;transform:rotate(-1deg)}
+  @media(max-height:760px){
+    .sales-os-slide{padding-top:4.5vh;padding-bottom:2vh}
+    .os .screen{height:330px}
+    .os .titlebar{min-height:38px;padding:.32rem .55rem}
+    .os .tabs button{padding:.48rem .75rem;font-size:13px}
+    .os .screen{padding:.85rem 1rem}
+    .os .pane-top{margin-bottom:.5rem}
+    .os .term{line-height:1.45}
+    .os-cap{margin-top:.35rem}
+  }
+  @media(max-width:760px){
+    .wingrep-os-logo img{height:22px}.os-window-title em{display:none}
+    .os .tabs button{font-size:12px;padding:.5rem .65rem}
+    .os .screen{height:56vh;min-height:320px}
+    .os-files{grid-template-columns:1fr;height:auto}
+    .demo-file-list{display:grid;grid-template-columns:1fr 1fr}
+    .demo-file-actions{grid-column:1/-1}
+    .demo-preview{min-height:180px}
+  }
 
   .app{margin-top:1.2rem;max-width:64ch;border-radius:16px;overflow:hidden;border:1.5px solid #5b3a2d;box-shadow:var(--shadow);background:#23130d}
   .app .bar{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;background:#160c08}
@@ -442,7 +484,10 @@
      hides every competitor and customer logo in the deck. */
   .topbar .brand{opacity:0;visibility:hidden;transition:opacity .5s ease}
   .topbar .brand.on{opacity:1;visibility:visible}
-  .counter{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  /* Page numbers are a rehearsal aid. The shipped presentation starts clean;
+     press N at any time to reveal or hide them. */
+  .counter{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .18s,transform .18s,visibility .18s}
+  body.show-slide-numbers .counter{opacity:1;visibility:visible;transform:none}
   .chrome{position:fixed;bottom:18px;right:clamp(20px,6vw,104px);z-index:40;display:flex;gap:.5rem;align-items:center;transition:opacity .4s,transform .4s}
   .chrome.hide{opacity:0;transform:translateY(8px);pointer-events:none}
   .chrome button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);background:rgba(242,238,226,.85);backdrop-filter:blur(4px);font-size:18px;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:.14s}
@@ -751,8 +796,12 @@
      the square panel sets the row height; the box stretches to match so both columns are equal-height (no floating) */
   .s14-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.6rem;max-width:980px}
   /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
-  .s14-why{margin-top:1.15rem;margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
-  @media (max-width:760px){.s14-why{margin-left:0}}
+  .s14-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:980px;margin-top:1.05rem}
+  .s14-why{margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
+  .demo1-copy{flex:none;font-family:var(--body);font-size:13px;font-weight:700;color:#fff;background:#a44927;border:2px solid #5f2a16;padding:.58rem .85rem;cursor:pointer;box-shadow:3px 3px 0 rgba(95,42,22,.28);transition:transform .16s,background .16s}
+  .demo1-copy:hover{background:#8f3e24;transform:translateY(-1px)}
+  .demo1-copy:focus-visible{outline:3px solid #d97757;outline-offset:3px}
+  @media (max-width:760px){.s14-foot{align-items:flex-start;flex-direction:column}.s14-why{margin-left:0}}
   .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
   .s14-panel{margin:0;width:138px;aspect-ratio:1;overflow:hidden;border-radius:16px;border:1.5px solid var(--line);box-shadow:var(--shadow);background:var(--paper-2)}
   .s14-panel img{width:100%;height:100%;object-fit:cover;display:block}
@@ -824,23 +873,6 @@
   .glow-spark{position:relative}
   @media (max-width:680px){.glow-stage{grid-template-columns:1fr}}
 
-  /* NEW: Win95 easter eggs, Clippy + fake BSOD on tab 6 */
-  .os{position:relative}
-  .clippy{position:absolute;right:-6px;bottom:54px;z-index:6;display:flex;align-items:flex-end;gap:.4rem;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
-  .clippy.show{opacity:1;transform:none}
-  .clippy-bubble{max-width:210px;background:#fffbdc;border:1.5px solid #b8b48f;border-radius:10px;padding:.5rem .7rem;font-family:var(--body);font-weight:600;font-size:13px;line-height:1.35;color:#3a3722;box-shadow:3px 3px 0 rgba(20,18,13,.2)}
-  .clippy-art{line-height:0;animation:float 4s ease-in-out infinite}
-  .clippy-art svg{width:54px;height:74px;display:block;overflow:visible;filter:drop-shadow(1.5px 2.5px 1.5px rgba(20,18,13,.3))}
-  .clippy-brow{transform-box:fill-box;transform-origin:center 90%;animation:clippyBrow 3.4s ease-in-out infinite}
-  .clippy-brow.r{animation-delay:.12s}
-  @keyframes clippyBrow{0%,70%,100%{transform:translateY(0) rotate(0)}78%{transform:translateY(-2.5px) rotate(-4deg)}86%{transform:translateY(-1px) rotate(-1deg)}}
-  .bsod{position:absolute;inset:0;z-index:7;background:#0b3ec2;color:#fff;display:none;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:var(--mono)}
-  .bsod.show{display:flex}
-  .bsod-face{font-size:54px;font-weight:700;margin-bottom:1rem}
-  .bsod-in p{font-size:13.5px;line-height:1.6;max-width:44ch;margin:0 auto .8rem}
-  .bsod-press{opacity:.85;font-size:12px}
-  @media (max-width:680px){.clippy{display:none!important}}
-
   /* NEW: Konami emoji-rain easter egg */
   .emojirain{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
   .emojirain i{position:absolute;top:-40px;font-size:28px;animation:efall linear forwards}
@@ -869,7 +901,7 @@
       <p class="sub">Grab a coffee. Mute Slack.</p>
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
-      <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Get the <b>Claude desktop app</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
+      <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Open <b>Claude Cowork</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
     </div>
   </section>
 
@@ -1052,7 +1084,7 @@
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Memory.</b> Files that start empty and fill themselves, one per rep and per deal. Nothing resets on Monday.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Senses.</b> Connect your calendar so context arrives on its own. No pasting.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>A schedule.</b> One automation preps every rep's day before it starts.</span></li>
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Proof it stuck.</b> The loop checks whether coaching showed up on the next call, then drills it.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Proof it stuck.</b> The loop checks whether coaching showed up on the next call, then sets one focus.</span></li>
       </ul>
       <p class="sub" style="max-width:62ch">You set this up once for the team. The cheat sheet at the end has every step, and it's yours whether or not we ever talk again.</p>
       <figure class="s3c-claude" aria-hidden="true">
@@ -1407,7 +1439,7 @@
           <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap."</b> The real call in, the real deal out.</div></div>
         </div>
       </div>
-      <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
+      <div class="s14-foot"><div class="scribble s14-why">make it quote the transcript and it can't make things up.</div><button class="demo1-copy" id="copyDemo1">Copy transcript + exact prompt</button></div>
     </div>
     <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
@@ -1490,13 +1522,12 @@
   <section class="slide sFive">
     <div class="wrap">
       <div class="eyebrow">Loop engineering</div>
-      <h1>Five jobs. One loop.<br>Run on <span class="hl">every call.</span></h1>
+      <h1>Four jobs. One loop.<br>Run on <span class="hl">every call.</span></h1>
       <ol class="prompts5">
         <li><b>Capture</b>, an empty file per deal that Claude fills, call by call.</li>
         <li><b>Coaching ledger</b>, did last call's focus stick? Checked on every rep.</li>
         <li><b>Deal scorecard</b>, MEDDIC letter by letter, evidence quoted.</li>
         <li><b>Game plan</b>, a 60-second pre-call brief.</li>
-        <li><b>Drill</b>, practice the pitch on Claude, not the customer.</li>
       </ol>
       <div class="glow" aria-label="Drag to upgrade a lazy prompt into a structured one">
         <div class="glow-stage">
@@ -1510,91 +1541,124 @@
   </section>
 
   <!-- 10 SalesOS -->
-  <section class="slide">
+  <section class="slide sales-os-slide" id="salesOsSlide">
     <div class="wrap">
       <div class="eyebrow">Build yours live, one tab at a time</div>
-      <div class="os">
-        <div class="bsod" id="bsod" aria-hidden="true"><div class="bsod-in"><div class="bsod-face">:(</div><p>COACHING.EXE has stopped responding.<br>Eight reps, eight folders, one of you.</p><p class="bsod-press">click tab 6 again to continue _</p></div></div>
-        <div class="clippy" id="clippy" aria-hidden="true"><div class="clippy-bubble">It looks like you're coaching a rep. Want Claude to remember it for you?</div><div class="clippy-art"><svg viewBox="0 0 120 168" role="img" aria-label="Clippy"><defs><linearGradient id="clippyMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2ee"/><stop offset=".45" stop-color="#b3b3c9"/><stop offset="1" stop-color="#83839b"/></linearGradient></defs><g transform="rotate(-5 60 90)"><path d="M20 54 A34 34 0 0 1 88 54 L88 122 A34 34 0 0 1 20 122 Z" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M72 108 L72 66 A18 18 0 0 0 36 66 L36 106 A18 18 0 0 0 68 114" fill="none" stroke="url(#clippyMetal)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g><g><ellipse cx="45" cy="51" rx="15" ry="16.5" fill="#fff" stroke="#242424" stroke-width="2.4"/><ellipse cx="75" cy="45" rx="16.5" ry="18" fill="#fff" stroke="#242424" stroke-width="2.4"/><circle cx="49.5" cy="55" r="7.6" fill="#1b1b1b"/><circle cx="79.5" cy="49" r="8.2" fill="#1b1b1b"/><circle cx="46.6" cy="51.5" r="2.5" fill="#fff"/><circle cx="76.4" cy="45.4" r="2.7" fill="#fff"/></g><path class="clippy-brow" d="M29 34 Q43 24 55 32" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/><path class="clippy-brow r" d="M61 28 Q76 20 89 30" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/></svg></div></div>
-        <div class="titlebar"><img data-asset="ui_titlebar" alt=""> SalesOS '95, coaching.exe <span class="sp"><i>_</i><i>▢</i><i>✕</i></span></div>
-        <div class="tabs">
-          <button class="on" data-tab="t1">1 · Memory</button>
-          <button data-tab="t2">2 · The loop</button>
-          <button data-tab="t3">3 · Calendar</button>
-          <button data-tab="t4">4 · Automation</button>
-          <button data-tab="t5">5 · Drill</button>
-          <button data-tab="t6">6 · The catch</button>
+      <div class="os" id="salesOs">
+        <div class="titlebar">
+          <span class="wingrep-os-logo"><img data-asset="ui_brand" alt="WingRep"></span>
+          <span class="os-window-title">Sales OS <em>· coaching workspace</em></span>
+          <span class="sp" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
         </div>
+        <nav class="tabs" role="tablist" aria-label="Sales OS workflow">
+          <button class="on" id="tab-t1" role="tab" data-tab="t1" aria-controls="t1" aria-selected="true" tabindex="0">1 · Set up memory</button>
+          <button id="tab-t2" role="tab" data-tab="t2" aria-controls="t2" aria-selected="false" tabindex="-1">2 · Run the loop</button>
+          <button id="tab-t3" role="tab" data-tab="t3" aria-controls="t3" aria-selected="false" tabindex="-1">3 · Read calendar</button>
+          <button id="tab-t4" role="tab" data-tab="t4" aria-controls="t4" aria-selected="false" tabindex="-1">4 · Automate prep</button>
+          <button id="tab-t5" role="tab" data-tab="t5" aria-controls="t5" aria-selected="false" tabindex="-1">5 · Demo files</button>
+        </nav>
         <div class="screen">
-          <div class="pane on" id="t1"><h4>Step 1, start with one real call</h4>
-            <p>Make a folder with one transcript and <b>three empty files</b>. The loop will fill them after every call.</p>
-            <div class="term">C:\coaching\> dir
-<span class="g">[transcript file]</span>   deal.md   coaching.md
-scorecard.md   <span class="g">game-plans\</span></div></div>
-          <div class="pane" id="t2"><h4>Step 2, run the same loop after every call</h4>
-            <p>Replace the brackets once. The loop captures the deal, checks the coaching, updates the scorecard, <b>then stops</b>.</p>
-            <div class="term">Run my after-call loop on today's call with [prospect] ([transcript file]), in this order:
-1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.
-2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.
-3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.
-Then stop and tell me the one thing that changed most.</div>
-            <button class="copy" data-copy="loop">Copy prompt</button>
-            <div class="ledger"><span class="hd">ONE REPEATABLE PASS</span>
+          <section class="pane on" id="t1" role="tabpanel" aria-labelledby="tab-t1">
+            <div class="pane-top"><div><div class="step-kicker">Step 1 · One paste</div><h4>Create the reusable workspace and load the demo deal</h4></div><button class="copy" data-copy="setup">Copy setup + files</button></div>
+            <p>The workspace is built for every deal and every rep. Cobalt Freight is simply the first populated example so the room can watch the workflow run on real files.</p>
+            <div class="term">Set up a reusable sales-coaching workspace for all of my deals.
 
-<span class="stuck">[transcript] → deal file + coaching log + scorecard</span></div></div>
-          <div class="pane" id="t3"><h4>Step 3, give the loop senses</h4>
-            <p>Connect Google Calendar in the app. The loop now knows which calls are coming; <b>context arrives on its own</b>.</p>
-            <div class="term">You: what's my first call tomorrow?
-<span class="g">Claude: [time] · [buyer] · [company] · [duration]</span></div></div>
-          <div class="pane" id="t4"><h4>Step 4, put the loop on a schedule</h4>
-            <p>Clear goal, right context, and a stopping rule: <b>that's a loop you can trust</b>.</p>
-            <div class="term">Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.</div>
-            <button class="copy" data-copy="auto">Copy prompt</button></div>
-          <div class="pane" id="t5"><h4>Step 5, practice on Claude, not the customer</h4>
-            <p>Reps get reps. Claude plays the skeptic so the real call isn't the first try.</p>
-            <div class="term">Play [buyer], the [role] from these transcripts. I want to practice [moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting.</div>
-            <button class="copy" data-copy="drill">Copy prompt</button></div>
-          <div class="pane" id="t6"><h4>…and here's where it falls apart</h4>
-            <ul class="gap" style="margin-top:.3rem">
-              <li>The loop preps and reviews. Nobody is in the call. Mid-call, your rep is still alone.</li>
-              <li>It runs per person. Eight reps means eight folders, eight connectors, eight schedules, and you babysit all of them.</li>
-              <li>Your CRM still writes itself the old way: by a rep, at 6pm, from memory.</li>
-              <li>Coaching quality is capped by what a transcript can carry. Tone, timing, the moment it went sideways: not in the file.</li>
-            </ul></div>
+deals/&lt;company-slug&gt;/
+  transcripts/
+  deal-file.md
+  deal-scorecard.md
+reps/&lt;rep-slug&gt;/coaching-log.md
+game-plans/
+
+Load Cobalt Freight as the first demo deal, create the workspace guide, verify the structure, and stop. Do not analyze the calls yet.</div>
+          </section>
+          <section class="pane" id="t2" role="tabpanel" aria-labelledby="tab-t2">
+            <div class="pane-top"><div><div class="step-kicker">Step 2 · After the call</div><h4>Update the deal, the coaching, and the scorecard</h4></div><button class="copy" data-copy="loop">Copy exact prompt</button></div>
+            <p>The filenames and company are already filled in, so Claude can execute immediately and return one clear takeaway.</p>
+            <div class="term">Run my after-call loop on today's call with Cobalt Freight using deals/cobalt-freight/transcripts/call-2-trial-checkin-cobalt.md. Work in this exact order:
+
+1. Append to deals/cobalt-freight/deal-file.md: date, attendees, what changed since the last call, every decision, and every commitment with an owner and date.
+2. Append to reps/jordan-avila/coaching-log.md: what went well, gaps, and exactly one focus for the next call. First check whether the prior focus stuck and quote the timestamped evidence.
+3. Update deals/cobalt-freight/deal-scorecard.md. For each MEDDIC letter, quote timestamped evidence or mark it MISSING. Call out what moved since call 1.
+4. Do not rewrite or delete prior entries. Do not ask questions. If evidence is absent, say MISSING instead of guessing.
+
+When all three files are saved, tell me the single most important change and stop.</div>
+          </section>
+          <section class="pane" id="t3" role="tabpanel" aria-labelledby="tab-t3">
+            <div class="pane-top"><div><div class="step-kicker">Step 3 · Senses</div><h4>Read the next sales call from the calendar</h4></div><button class="copy" data-copy="calendar">Copy exact prompt</button></div>
+            <p>This uses the connected calendar and returns a fixed, presenter-friendly format instead of an open-ended summary.</p>
+            <div class="term">Use my connected calendar to find my first external sales call tomorrow after 8:00 AM local time. Ignore personal events, focus blocks, holds, and meetings with no external attendee.
+
+Return exactly these five lines:
+Time:
+Buyer:
+Role:
+Company:
+Duration:
+
+If the calendar connector is unavailable, say "Calendar unavailable" and stop. Do not ask me to clarify and do not invent a meeting.</div>
+          </section>
+          <section class="pane" id="t4" role="tabpanel" aria-labelledby="tab-t4">
+            <div class="pane-top"><div><div class="step-kicker">Step 4 · Every weekday</div><h4>Generate the pre-call brief automatically</h4></div><button class="copy" data-copy="auto">Copy exact prompt</button></div>
+            <p>The task has a schedule, trusted inputs, a defined output, failure behavior, and a stopping rule.</p>
+            <div class="term">Every weekday at 7:00 AM local time, check my connected calendar for today's external sales calls. Ignore personal events, focus blocks, holds, and meetings with no external attendee.
+
+For each sales call:
+1. Match the company and rep to deals/&lt;company-slug&gt;/ and reps/&lt;rep-slug&gt;/.
+2. Read that deal's deal-file.md and deal-scorecard.md plus that rep's coaching-log.md.
+3. Write a 60-second brief with: one goal, three questions, one landmine, the exact opening line, and one coaching focus quoted from the log.
+4. Save it to game-plans/YYYY-MM-DD-company.md. Never overwrite another company's brief.
+
+If required context is missing, write "MISSING CONTEXT" in that brief instead of guessing. When every call has one saved brief, list the files created and stop.</div>
+          </section>
+          <section class="pane" id="t5" role="tabpanel" aria-labelledby="tab-t5">
+            <div class="pane-top"><div><div class="step-kicker">Step 5 · Built into this screen</div><h4>Open or copy any demo file</h4></div></div>
+            <div class="os-files">
+              <div class="demo-file-list" aria-label="Demo files">
+                <button class="on" data-demo-file="deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md">📄 call-1-discovery-cobalt.md</button>
+                <button data-demo-file="deals/cobalt-freight/transcripts/call-2-trial-checkin-cobalt.md">📄 call-2-trial-checkin-cobalt.md</button>
+                <button data-demo-file="deals/cobalt-freight/deal-scorecard.md">📊 deal-scorecard.md</button>
+                <button data-demo-file="reps/jordan-avila/coaching-log.md">🧠 coaching-log.md</button>
+                <div class="demo-file-actions"><button class="copy secondary" id="copyDemoFile">Copy open file</button></div>
+              </div>
+              <div class="demo-preview-wrap"><div class="demo-preview-name" id="demoPreviewName">deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md</div><pre class="term demo-preview" id="demoPreview" tabindex="0" aria-label="Demo file contents"></pre></div>
+            </div>
+            <div class="os-limit-actions"><p>Everything needed for the build is now on this screen.</p><button class="os-continue" id="continueToCrash">Continue →</button></div>
+          </section>
         </div>
-        <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Start</span><span class="clock">11:42 AM</span></div>
+        <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span><span class="task-status">reusable workspace · 4 source files · ready to paste</span><span class="clock">11:42 AM</span></div>
       </div>
-      <div class="os-cap">one rep: an evening. a team: a job. ↓</div>
+      <div class="os-cap">copy here. paste into Claude. come right back. ↑</div>
     </div>
   </section>
 
-  <!-- 11 where Claude falls short. Scoped styles only, nothing outside .sShort. -->
+  <!-- 11: the complete Windows-style workflow hits the one moment it cannot handle. -->
   <style>
-    /* Slide 10. The loop does the prep and the review well, then hits the two
-       things it cannot do: it cannot sit in the live call, and it does not scale
-       itself across a team. It just sits there blinking. The stall is the
-       argument, so the caret never goes away. Refusals are dimmed rather than
-       alarmed: this is a boundary, not a bug. */
-    .sShort h1{white-space:nowrap}
-    /* height is reserved for all 9 lines up front, otherwise the panel grows as it
-       types and shoves the line underneath it down the screen. 9 lines x 1.78 =
-       16.02em, plus headroom for the caret: it is an inline-block taller than the
-       text it sits next to, so the final line box outgrows a plain one and the
-       panel would still tick down ~2px right as the run lands. Reserved in em so
-       it also holds at the 880px breakpoint's smaller type. */
-    .sShort .typer{max-width:700px;margin-top:1.6rem;font-size:15px;line-height:1.78;padding:1.15rem 1.3rem;min-height:calc(16.2em + 2.3rem)}
-    .sShort .typer .n{color:#a68b80}
-    .sShort .s10-cap{margin-top:1.15rem;font-size:clamp(15px,1.6vw,19px);line-height:1.4;font-weight:600;color:var(--ink-soft);max-width:48ch}
-    .sShort .s10-cap b{color:var(--green);font-weight:700}
-    @media (max-width:880px){.sShort .typer{font-size:13.5px;line-height:1.7}}
-    @media (prefers-reduced-motion:reduce){.sShort .typer .cr{animation:none;opacity:1}}
+    body.bsod-mode .topbar,body.bsod-mode .chrome,body.bsod-mode .progress,body.bsod-mode .toast,body.bsod-mode .amb{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+    .sBsod{background:#0000aa!important;color:#fff!important;padding:clamp(28px,7vh,72px) clamp(26px,9vw,130px)!important;overflow:hidden;justify-content:center}
+    .sBsod::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 4px);pointer-events:none}
+    .sBsod .bsod-shell{position:relative;width:min(900px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(14px,1.55vw,19px);line-height:1.48;text-shadow:none;animation:bsodCrash .16s steps(2,end) both}
+    .sBsod .bsod-title{display:table;margin:0 auto 2rem;background:#c0c0c0;color:#0000aa;padding:.12rem .72rem;font-weight:700;letter-spacing:.04em}
+    .sBsod p{max-width:none;color:#fff;font:inherit;margin:.95rem 0}
+    .sBsod .bsod-code{margin:1.4rem 0;padding:1rem 1.2rem;border:2px solid #fff;background:#00008a;display:grid;grid-template-columns:auto 1fr;gap:.3rem 1.4rem;font-size:clamp(12px,1.25vw,16px)}
+    .sBsod .bsod-code b{font:inherit;font-weight:700}.sBsod .bsod-code span{text-align:right}
+    .sBsod .bsod-fail{background:#fff;color:#0000aa;padding:0 .25em;font-weight:700}
+    .sBsod .bsod-next{text-align:center;margin-top:2rem!important}
+    .sBsod .bsod-key{display:inline-block;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #555 #555 #fff;padding:.08rem .55rem;font-weight:700;box-shadow:2px 2px 0 #000;margin:0 .2rem}
+    .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) infinite}
+    @keyframes bsodCrash{0%{opacity:0;transform:translateX(-18px) skewX(-2deg)}55%{opacity:1;transform:translateX(8px) skewX(1deg)}100%{transform:none}}
+    @keyframes bsodBlink{50%{opacity:0}}
+    @media(max-width:700px){.sBsod .bsod-code{grid-template-columns:1fr}.sBsod .bsod-code span{text-align:left}.sBsod .bsod-title{margin-bottom:1.2rem}}
+    @media(prefers-reduced-motion:reduce){.sBsod .bsod-shell,.sBsod .bsod-cursor{animation:none}}
   </style>
-  <section class="slide sShort" data-animate="type">
-    <div class="wrap">
-      <div class="eyebrow">Where Claude falls short</div>
-      <h1>The loop preps and reviews.<br>Nobody's <span class="hl">in the call.</span></h1>
-      <div class="typer" id="typer" role="img" aria-label="A chat with Claude: the after-call loop and tomorrow's morning game plans both come back done, then asking it to join the 2pm call and nudge live, and to run for all eight reps, both get an honest no. The cursor sits waiting."></div>
-      <p class="s10-cap">All of that is yours, and it runs without you. <b>The one place it can't coach is the call itself.</b></p>
+  <section class="slide sBsod" id="bsodSlide" aria-label="Sales OS blue screen error">
+    <div class="bsod-shell">
+      <div class="bsod-title">Sales OS</div>
+      <p>A fatal exception 0E has occurred at 0028:C0ACH1NG in CLAUDE_WORKFLOW.</p>
+      <p>The workflow completed the prep, calendar read, automation, and after-call files. Then the buyer started speaking.</p>
+      <div class="bsod-code" aria-label="Workflow status"><b>BEFORE_CALL</b><span>OK</span><b>AFTER_CALL</b><span>OK</span><b>DURING_CALL</b><span class="bsod-fail">LIVE_AUDIO_NOT_FOUND</span></div>
+      <p>Claude can read what happened. It cannot hear the call or coach the rep in the moment.</p>
+      <p class="bsod-next">Press <span class="bsod-key">→</span> to restart with live call support.<i class="bsod-cursor" aria-hidden="true"></i></p>
     </div>
   </section>
 
@@ -1889,7 +1953,7 @@ Then stop and tell me the one thing that changed most.</div>
   #sShots .mail-expand{padding:.45rem .65rem;border-radius:999px}
   #sShots .mail-expand:hover,#sShots .mail-expand:focus-visible,#sShots .demo-mail-close:hover,#sShots .demo-mail-close:focus-visible{background:#eff9f2;border-color:#3f9362;outline:none}
   #sShots .mail-expand:active,#sShots .demo-mail-close:active{transform:translateY(1px)}
-  #sShots .sShots-mail{height:clamp(400px,54vh,470px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124}
+  #sShots .sShots-mail{height:clamp(400px,54vh,470px);display:flex;flex-direction:column;overflow:hidden;border-radius:13px;border:1px solid #d9dde3;box-shadow:var(--shadow);background:#fff;color:#202124;contain:layout paint style}
   #sShots .demo-mail-toolbar{height:39px;flex:none;display:flex;align-items:center;gap:.7rem;padding:0 .75rem;background:#fff;border-bottom:1px solid #e6e8eb;font-family:Arial,sans-serif;color:#5f6368}
   #sShots .demo-mail-gmail{width:67px;height:auto;display:block;flex:none}
   #sShots .demo-mail-search{flex:1;height:25px;display:flex;align-items:center;padding:0 .7rem;border-radius:8px;background:#f1f3f4;font-size:10px;color:#80868b}
@@ -2351,7 +2415,7 @@ Then stop and tell me the one thing that changed most.</div>
       <div class="eyebrow">Either way</div>
       <h1>The loop is <span class="hl">yours.</span></h1>
       <ul class="checks">
-        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Five prompts.</b> Capture, ledger, scorecard, game plan, drill.</span></li>
+        <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Four prompts.</b> Capture, ledger, scorecard, game plan.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Four prompting moves.</b> Role, example, memory, self-critique.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>One coaching rhythm.</b> Coach, check, adjust.</span></li>
         <li><svg width="26" height="26" viewBox="0 0 24 24"><path class="ck" d="M5 13l4 4 10-11"/></svg><span><b>Run it yourself tonight</b>, or let WingRep run it on every call.</span></li>
@@ -2360,29 +2424,65 @@ Then stop and tell me the one thing that changed most.</div>
   </section>
 
   <!-- 15 MANUAL COST GAME -->
+  <style>
+    #adminGame h1{font-size:clamp(30px,4.5vw,54px)}
+    #adminGame .game{max-width:880px;margin-top:1rem}
+    #adminGame .gamehud{margin-bottom:.7rem}
+    #adminGame .gamehud .pill{font-size:13.5px;padding:.4rem .85rem}
+    #adminGame .gamearea{height:clamp(300px,42vh,370px);background:repeating-linear-gradient(45deg,#eef5ef,#eef5ef 17px,#e5eee7 17px,#e5eee7 34px);border-color:#0a4a2a;border-radius:18px;isolation:isolate}
+    #adminGame .task{font-size:13px;padding:.48rem .68rem;border-color:#cf5235;color:#9e351f;box-shadow:0 8px 20px -12px rgba(20,18,13,.75);z-index:3;transition:transform .72s cubic-bezier(.2,.8,.2,1),opacity .58s,filter .58s}
+    #adminGame .task.swept{transform:translate(var(--sweep-x,40px),var(--sweep-y,-60px)) scale(.18) rotate(18deg)!important;opacity:0;filter:blur(3px)}
+    .game-intro{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(250,252,249,.94);padding:1.4rem;transition:opacity .25s}
+    .game-intro.hide{opacity:0;pointer-events:none}
+    .game-intro .game-rule{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0c703d;margin-bottom:.7rem}
+    .game-intro h3{font-family:var(--display);font-size:clamp(22px,3vw,34px);line-height:1.15;max-width:22ch}
+    .game-intro p{font-size:15px;line-height:1.45;color:#4f5e52;max-width:42ch;margin-top:.65rem}
+    .game-start-row{display:flex;align-items:center;gap:.7rem;margin-top:.75rem}
+    .game-start-row .hint{font-family:var(--mono);font-size:11px;color:#696f69}
+    #adminGame .game-start{font-size:15px;padding:.72rem 1.35rem;background:#05713f;box-shadow:0 10px 22px -12px rgba(5,113,63,.8)}
+    .game-status{position:absolute;left:50%;top:1rem;transform:translate(-50%,-10px);z-index:8;min-width:min(430px,85%);background:#15231a;color:#fff;border:1px solid #2c6c48;border-radius:12px;padding:.72rem 1rem;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;box-shadow:0 14px 30px -18px rgba(10,32,19,.9)}
+    .game-status.show{opacity:1;transform:translate(-50%,0)}
+    .game-status b{display:block;font-family:var(--display);font-size:15px}
+    .game-status span{display:block;font-size:12.5px;color:#c9d9ce;margin-top:.25rem}
+    .wing-agent{position:absolute;left:-260px;top:54%;z-index:9;display:flex;align-items:center;gap:.45rem;opacity:0;filter:drop-shadow(0 10px 8px rgba(5,75,42,.25));pointer-events:none}
+    .wing-agent .agent-wing{width:36px;height:24px;border-top:4px solid #12a150;border-bottom:4px solid #12a150;border-radius:60% 10%;transform:skewX(-18deg)}
+    .wing-agent .agent-core{width:154px;height:64px;border-radius:18px;background:#fbf9f1;border:3px solid #d9f4e3;display:grid;place-items:center;padding:0 13px;box-shadow:0 0 0 5px rgba(18,161,80,.18)}
+    .wing-agent .agent-core img{display:block;width:100%;height:auto;object-fit:contain}
+    .wing-agent.run{animation:agentSweep 4s cubic-bezier(.2,.72,.2,1) forwards}
+    @keyframes agentSweep{0%{opacity:0;transform:translate(0,30px) rotate(-8deg)}12%{opacity:1}45%{transform:translate(48vw,-70px) rotate(4deg)}72%{transform:translate(72vw,34px) rotate(-3deg);opacity:1}100%{transform:translate(98vw,-26px) rotate(5deg);opacity:0}}
+    #adminGame .gameover{z-index:10;background:linear-gradient(145deg,rgba(5,68,38,.97),rgba(7,35,23,.98));padding:1.5rem}
+    #adminGame .gameover h3{font-size:clamp(26px,3.5vw,40px)}
+    #adminGame .gameover p{max-width:52ch;color:#e2eee6;font-size:15px;line-height:1.45}
+    .game-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:1rem;width:min(620px,100%)}
+    .game-outcomes div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:.65rem .75rem}
+    .game-outcomes b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#83dfa9}
+    .game-outcomes span{display:block;font-size:13px;font-weight:600;margin-top:.25rem;color:#fff}
+    @media(max-height:760px){#adminGame .gamearea{height:300px}#adminGame .game{margin-top:.65rem}#adminGame .gamehud{margin-bottom:.45rem}}
+    @media(max-width:680px){.game-outcomes{grid-template-columns:1fr}.wing-agent .agent-wing{display:none}}
+    @media(prefers-reduced-motion:reduce){.wing-agent.run{animation:none;opacity:0}#adminGame .task.swept{transition:none;opacity:0}}
+  </style>
   <section class="slide wr-theme" id="adminGame">
     <div class="wrap">
-      <div class="eyebrow">Feel why the manual loop doesn't scale</div>
-      <h1>Clear the admin. <span class="hl">Manually.</span></h1>
+      <div class="eyebrow">One rep · one pile · no automation</div>
+      <h1>Try to keep up. <span class="hl">Manually.</span></h1>
       <div class="game">
         <div class="gamehud">
           <span class="pill" id="gScore">Cleared: 0</span>
           <span class="pill bad" id="gMiss">Piled up: 0</span>
-          <span class="pill" id="gTime">0:30</span>
+          <span class="pill" id="gTime">0:18</span>
           <span class="stress"><i id="gStress"></i></span>
         </div>
         <div class="gamearea" id="gameArea">
+          <div class="game-intro" id="gameIntro"><div class="game-rule">The manual challenge</div><h3>Click every admin task before it piles up.</h3><p>Follow-ups, CRM notes, next steps, manager updates. The work keeps arriving while the rep is trying to sell.</p></div>
+          <div class="game-status" id="gameStatus" aria-live="polite"><b>Clicks cannot keep pace.</b><span>WingRep is taking over the workload.</span></div>
+          <div class="wing-agent" id="wingAgent" aria-hidden="true"><i class="agent-wing"></i><b class="agent-core"><img data-asset="ui_brand" alt=""></b><i class="agent-wing"></i></div>
           <div class="gameover" id="gameOver">
-            <h3 id="goTitle">Tired yet?</h3>
-            <p id="goText"></p>
-            <div class="scribble" id="goScribble"></div>
-            <div class="gamebtns">
-              <button class="btn btn-ghost" id="goAgain" style="font-size:14px;padding:.6rem 1.2rem">Play again</button>
-              <button class="btn btn-primary" id="goWing" style="font-size:14px;padding:.6rem 1.2rem">Let WingRep handle it →</button>
-            </div>
+            <h3 id="goTitle">Work handled. Rep ready.</h3>
+            <p id="goText">Follow-ups, CRM updates, and coaching actions are taken care of automatically, giving the rep time back to sell and a stronger next call.</p>
+            <div class="game-outcomes"><div><b>Admin</b><span>Taken care of</span></div><div><b>Rep time</b><span>Back to selling</span></div><div><b>Next call</b><span>Better prepared</span></div></div>
           </div>
         </div>
-        <div class="gamebtns" id="gameControls" style="justify-content:flex-start"><button class="btn btn-primary" id="gStart" style="font-size:14px;padding:.65rem 1.3rem">Start</button><button class="btn btn-ghost" id="gWingTop" style="font-size:14px;padding:.65rem 1.3rem">Skip, let WingRep do it</button></div>
+        <div class="game-start-row" id="gameControls"><button class="btn btn-primary game-start" id="gStart">Try to clear it manually →</button><span class="hint">18 seconds · click the tasks</span></div>
       </div>
     </div>
   </section>
@@ -2592,9 +2692,10 @@ Then stop and tell me the one thing that changed most.</div>
   <button id="prev" aria-label="Previous">←</button>
   <button id="next" aria-label="Next">→</button>
 </div>
-<div class="toast" id="toast"><span>Use <kbd>←</kbd> <kbd>→</kbd> · <kbd>F</kbd> fullscreen · <kbd>S</kbd> index</span></div>
+<div class="toast" id="toast"><span>Use <kbd>←</kbd> <kbd>→</kbd> · <kbd>F</kbd> fullscreen · <kbd>S</kbd> index · <kbd>N</kbd> page numbers</span></div>
 <div class="index" id="index"><button class="close" id="closeIndex">Close ✕</button><h2>Jump to slide</h2><ol id="indexList"></ol></div>
 <script src="wingrep-assets.js"></script>
+<script src="wingrep-demo-data.js"></script>
 <script>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
@@ -2852,13 +2953,11 @@ Then stop and tell me the one thing that changed most.</div>
       button.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter')e.stopPropagation();});
     });
     mailSlide.querySelector('.mail-backdrop').addEventListener('click',closeExpandedMail);
-    new MutationObserver(function(){
-      if(!mailSlide.classList.contains('active')){mailSlide.classList.remove('mail-returned');closeExpandedMail(false);}
-    }).observe(mailSlide,{attributes:true,attributeFilter:['class']});
     document.addEventListener('keydown',function(e){
       if(!expandedMailCard)return;
       if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeExpandedMail();return;}
-      if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();e.stopImmediatePropagation();}
+      if(e.key==='ArrowRight'){e.preventDefault();e.stopImmediatePropagation();closeExpandedMail(false);next();return;}
+      if(e.key==='ArrowLeft'){e.preventDefault();e.stopImmediatePropagation();closeExpandedMail(false);prev();}
     },true);
   }
 
@@ -2871,7 +2970,7 @@ Then stop and tell me the one thing that changed most.</div>
   var wrStageIndex=0;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","Prep and after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Where Claude falls short","Before, during, after","Prep and debrief in the inbox","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Founder onboarding","One next step"];
+  var titles=["Starting soon","Prep and after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Sales OS crash","Before, during, after","Prep and debrief in the inbox","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Founder onboarding","One next step"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
@@ -2881,7 +2980,9 @@ Then stop and tell me the one thing that changed most.</div>
 
   function show(n){
     n=Math.max(0,Math.min(total-1,n)); stopGame(); stopBall(); stopConfetti();
+    if(slides[i]===mailSlide){mailSlide.classList.remove('mail-returned');closeExpandedMail(false);}
     slides[i].classList.remove('active'); i=n; slides[i].classList.add('active');
+    document.body.classList.toggle('bsod-mode',slides[i].id==='bsodSlide');
     counter.textContent=pad(i+1)+' / '+pad(total);
     if(brand) brand.classList.toggle('on', revealAt>=0 && i>=revealAt);
     progress.style.width=((i+1)/total*100)+'%';
@@ -2889,9 +2990,9 @@ Then stop and tell me the one thing that changed most.</div>
     var a=slides[i].dataset.animate;
     if(a==='count')runCount(slides[i]);
     if(a==='app')runApp();
-    if(a==='type')runTyper();
     if(a==='confetti')startConfetti();
     if(slides[i].querySelector('#ballCanvas'))startBall();
+    if(slides[i].id==='salesOsSlide')resetSalesOs();
     // presenter-gated slides reset to stage 1 every time they are (re-)entered
     if(slides[i].classList.contains('swall'))slides[i].classList.remove('stage2');
   }
@@ -2920,10 +3021,15 @@ Then stop and tell me the one thing that changed most.</div>
   document.addEventListener('keydown',function(e){
     var mail=e.target.closest&&e.target.closest('.demo-mail-scroll');
     if(mail&&(e.key===' '||e.key==='PageDown'||e.key==='PageUp'))return;
+    var typing=e.target.matches&&e.target.matches('input,textarea,[contenteditable="true"]');
+    if(typing)return;
+    var interactive=e.target.closest&&e.target.closest('button,input,textarea,select,[contenteditable="true"],.term[tabindex]');
+    if(interactive&&(e.key===' '||e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='PageDown'||e.key==='PageUp'))return;
     if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
     else if(e.key.toLowerCase()==='f')toggleFull();
     else if(e.key.toLowerCase()==='s')index.classList.toggle('open');
+    else if(e.key.toLowerCase()==='n'){document.body.classList.toggle('show-slide-numbers');}
     else if(e.key==='Escape')index.classList.remove('open');
   });
   var x0=null;
@@ -2977,65 +3083,74 @@ Then stop and tell me the one thing that changed most.</div>
   }
   function stopBall(){if(ballRAF)cancelAnimationFrame(ballRAF);ballRAF=null;}
 
-  /* SalesOS */
-  document.querySelectorAll('.os .tabs button').forEach(function(b){b.onclick=function(){
-    document.querySelectorAll('.os .tabs button').forEach(function(x){x.classList.remove('on');});
-    document.querySelectorAll('.os .pane').forEach(function(p){p.classList.remove('on');});
-    b.classList.add('on'); document.getElementById(b.dataset.tab).classList.add('on');
-  };});
-  /* Audience-facing templates: these stay aligned with prompts.md and the handout.
-     The presenter runbook intentionally fills the brackets with the fictional Cobalt
-     demo data so Alan can show the same reusable structure on a concrete call. */
+  /* Sales OS live-demo cockpit. Every copy works from file://, including a
+     textarea fallback for browsers that do not expose navigator.clipboard there. */
+  var salesOs=document.getElementById('salesOs');
+  var DEMO_FILES=window.WINGREP_DEMO_FILES||{};
   var PROMPTS={
-    loop:"Run my after-call loop on today's call with [prospect] ([transcript file]), in this order:\n1. Deal file: append an entry: date, attendees, what changed since the last call, every decision made, and every commitment with an owner and a date. Keep it tight; this file is the deal's memory.\n2. Coaching log: add a dated entry: what went well, gaps, one focus for next call. First, check if last call's focus stuck, and quote the moment.\n3. Scorecard: update the MEDDIC scorecard from today's transcript. For each letter, quote the exact moment that proves it, or mark it MISSING, and call out which letters moved since the last call.\nThen stop and tell me the one thing that changed most.",
-    auto:"Every weekday at 7am: check my calendar for today's sales calls. For each one, read the deal file and my coaching log, then write a 60-second brief: the one goal, the three questions to ask, the landmine to avoid, and the exact opening line. End with the one coaching focus to practice on this call, quoted from my log. Save each brief to game-plans/ and stop when every call has one.",
-    drill:"Play [buyer], the [role] from these transcripts. I want to practice [moment]. Push back the way they would, don't go easy on me, and after each of my responses break character for one line of coaching. Start the meeting."
+    loop:"Run my after-call loop on today's call with Cobalt Freight using deals/cobalt-freight/transcripts/call-2-trial-checkin-cobalt.md. Work in this exact order:\n\n1. Append to deals/cobalt-freight/deal-file.md: date, attendees, what changed since the last call, every decision, and every commitment with an owner and date.\n2. Append to reps/jordan-avila/coaching-log.md: what went well, gaps, and exactly one focus for the next call. First check whether the prior focus stuck and quote the timestamped evidence.\n3. Update deals/cobalt-freight/deal-scorecard.md. For each MEDDIC letter, quote timestamped evidence or mark it MISSING. Call out what moved since call 1.\n4. Do not rewrite or delete prior entries. Do not ask questions. If evidence is absent, say MISSING instead of guessing.\n\nWhen all three files are saved, tell me the single most important change and stop.",
+    calendar:"Use my connected calendar to find my first external sales call tomorrow after 8:00 AM local time. Ignore personal events, focus blocks, holds, and meetings with no external attendee.\n\nReturn exactly these five lines:\nTime:\nBuyer:\nRole:\nCompany:\nDuration:\n\nIf the calendar connector is unavailable, say \"Calendar unavailable\" and stop. Do not ask me to clarify and do not invent a meeting.",
+    auto:"Every weekday at 7:00 AM local time, check my connected calendar for today's external sales calls. Ignore personal events, focus blocks, holds, and meetings with no external attendee.\n\nFor each sales call:\n1. Match the company and rep to deals/<company-slug>/ and reps/<rep-slug>/.\n2. Read that deal's deal-file.md and deal-scorecard.md plus that rep's coaching-log.md.\n3. Write a 60-second brief with: one goal, three questions, one landmine, the exact opening line, and one coaching focus quoted from the log.\n4. Save it to game-plans/YYYY-MM-DD-company.md. Never overwrite another company's brief.\n\nIf required context is missing, write \"MISSING CONTEXT\" in that brief instead of guessing. When every call has one saved brief, list the files created and stop."
   };
-  document.querySelectorAll('.os .copy').forEach(function(b){b.onclick=function(){
-    var t=PROMPTS[b.dataset.copy]; if(!t)return;
-    navigator.clipboard&&navigator.clipboard.writeText(t).then(function(){var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
-  };});
-
-  /* slide 10, "where Claude falls short". Types PLAIN text per line, colorizes
-     only once a line is done. The loop delivers: the after-call work and the
-     morning game plans both come back done. Then the two asks it cannot meet,
-     joining the live call and scaling to all eight reps, get an honest no. The
-     run ends on a prompt that never goes anywhere: the waiting IS the point, so
-     the caret stays. */
-  var typeTimer;
-  var TYPER_TAIL='> ';
-  function runTyper(){
-    var el=document.getElementById('typer'); if(!el)return;
-    // {t: plain text, g: true => Claude delivered, n: true => Claude cannot}
-    var lines=[
-      {t:'> run my after-call loop'},
-      {t:'deal file, coaching log, scorecard: updated ✓', g:true},
-      {t:'> game plans for tomorrow'},
-      {t:'written at 7:00am, before you woke ✓', g:true},
-      {t:'> join my 2pm call and nudge me live'},
-      {t:'I have no ears. I can only read what you record.', n:true},
-      {t:'> run this for all eight of my reps'},
-      {t:'Eight folders, eight schedules. Who maintains them?', n:true}
-    ];
-    function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    function line(l){var c=l.g?'g':(l.n?'n':''); return c ? '<span class="'+c+'">'+esc(l.t)+'</span>' : esc(l.t);}
-    function render(done,cur,caret){
-      var html=done.map(line).join('<br>');
-      if(cur!==null){ if(done.length) html+='<br>'; html+=esc(cur)+(caret?'<span class="cr"></span>':''); }
-      return html;
-    }
-    clearTimeout(typeTimer);
-    if(reduce){ el.innerHTML=lines.map(line).join('<br>')+'<br>'+esc(TYPER_TAIL)+'<span class="cr"></span>'; return; }
-    var li=0,ch=0,done=[]; el.innerHTML='';
-    function tick(){
-      if(li>=lines.length){ el.innerHTML=render(done,TYPER_TAIL,true); return; }
-      var full=lines[li].t; ch++;
-      el.innerHTML=render(done, full.slice(0,ch), true);
-      if(ch>=full.length){ done.push(lines[li]); li++; ch=0; typeTimer=setTimeout(tick,lines[li]&&lines[li].n?420:300); }
-      else{ typeTimer=setTimeout(tick,22); }
-    }
-    tick();
+  function setupPrompt(){
+    var intro="Set up a reusable sales-coaching workspace for all of my deals and reps in the folder I selected. Cobalt Freight is the first fictional demo deal, not the scope of the whole workspace. Do not ask clarifying questions. Follow these instructions exactly:\n\n1. Create this folder structure:\n   - deals/cobalt-freight/transcripts/\n   - reps/jordan-avila/\n   - game-plans/\n2. Create WORKSPACE.md with these operating rules:\n   - Every company gets deals/<company-slug>/ with transcripts/, deal-file.md, and deal-scorecard.md.\n   - Every rep gets reps/<rep-slug>/coaching-log.md.\n   - Never mix evidence, commitments, or scorecards between companies.\n   - When a new company appears, create its deal folder before running the loop.\n   - Save pre-call briefs to game-plans/YYYY-MM-DD-company.md.\n3. For every FILE block below, write its contents to the exact relative path shown. Preserve the text exactly.\n4. Create deals/cobalt-freight/deal-file.md as a new, completely empty file.\n5. Do not analyze, summarize, score, or modify the calls yet.\n6. Verify WORKSPACE.md, game-plans/, the Cobalt Freight deal folder, the Jordan Avila rep folder, the four bundled source files, and the empty deal-file.md.\n7. Report the exact paths you created, confirm that deals/cobalt-freight/deal-file.md is empty, then stop.";
+    return intro+Object.keys(DEMO_FILES).map(function(path){return "\n\n===== BEGIN FILE: "+path+" =====\n"+DEMO_FILES[path]+"\n===== END FILE: "+path+" =====";}).join('');
   }
+  PROMPTS.setup=setupPrompt();
+  function fallbackCopy(text){
+    return new Promise(function(resolve,reject){
+      var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy')?resolve():reject(new Error('copy failed'));}catch(err){reject(err);}finally{ta.remove();}
+    });
+  }
+  function copyText(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(text).catch(function(){return fallbackCopy(text);});
+    return fallbackCopy(text);
+  }
+  function copied(button){
+    var old=button.textContent;button.textContent='Copied ✓';button.disabled=true;
+    setTimeout(function(){button.textContent=old;button.disabled=false;},1400);
+  }
+  function openOsPane(button){
+    if(!salesOs||!button)return;
+    salesOs.querySelectorAll('.tabs button').forEach(function(x){var on=x===button;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
+    salesOs.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id===button.dataset.tab);});
+  }
+  function resetSalesOs(){
+    if(!salesOs)return;
+    openOsPane(salesOs.querySelector('[data-tab="t1"]'));
+  }
+  if(salesOs){
+    salesOs.querySelectorAll('.tabs button').forEach(function(button){
+      button.addEventListener('click',function(){openOsPane(button);});
+      button.addEventListener('keydown',function(event){
+        if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight'&&event.key!=='Home'&&event.key!=='End')return;
+        event.preventDefault();event.stopPropagation();
+        var tabs=[].slice.call(salesOs.querySelectorAll('.tabs button:not([hidden])'));
+        var current=tabs.indexOf(button),next=current;
+        if(event.key==='Home')next=0;
+        else if(event.key==='End')next=tabs.length-1;
+        else next=(current+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+        openOsPane(tabs[next]);tabs[next].focus();
+      });
+    });
+    salesOs.querySelectorAll('[data-copy]').forEach(function(button){button.addEventListener('click',function(){var text=PROMPTS[button.dataset.copy];if(!text)return;copyText(text).then(function(){copied(button);});});});
+    var preview=salesOs.querySelector('#demoPreview'),previewName=salesOs.querySelector('#demoPreviewName'),openFile='deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md';
+    function showDemoFile(path){
+      if(!DEMO_FILES[path])return;openFile=path;preview.textContent=DEMO_FILES[path];previewName.textContent=path;preview.scrollTop=0;
+      salesOs.querySelectorAll('[data-demo-file]').forEach(function(button){button.classList.toggle('on',button.dataset.demoFile===path);});
+    }
+    salesOs.querySelectorAll('[data-demo-file]').forEach(function(button){button.addEventListener('click',function(){showDemoFile(button.dataset.demoFile);});});
+    salesOs.querySelector('#copyDemoFile').addEventListener('click',function(){var button=this;copyText(DEMO_FILES[openFile]).then(function(){copied(button);});});
+    salesOs.querySelector('#continueToCrash').addEventListener('click',next);
+    showDemoFile(openFile);
+  }
+  var demo1Copy=document.getElementById('copyDemo1');
+  if(demo1Copy){demo1Copy.addEventListener('click',function(){
+    var button=this;
+    var text=DEMO_FILES['deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md']+"\n\nYou're my deal-desk analyst. The text above is the complete call transcript. Score the call on MEDDIC: for each letter, quote the exact timestamped moment that proves it, or mark it MISSING. Do not infer facts that were not said. Then draft the follow-up email that closes the single biggest gap. Stop after the email.";
+    copyText(text).then(function(){copied(button);});
+  });}
 
   /* ROI: numbers roll toward their target as you drag; payoff reframes the cost */
   (function(){
@@ -3103,12 +3218,23 @@ Then stop and tell me the one thing that changed most.</div>
 
   /* GAME */
   var area=document.getElementById('gameArea'), over=document.getElementById('gameOver'), controls=document.getElementById('gameControls');
+  var intro=document.getElementById('gameIntro'),gameStatus=document.getElementById('gameStatus'),wingAgent=document.getElementById('wingAgent');
   var gScore=document.getElementById('gScore'), gMiss=document.getElementById('gMiss'), gTime=document.getElementById('gTime'), gStress=document.getElementById('gStress');
-  var TASKS=["Update CRM","Draft follow-up","Log the call","Set next step","Notify manager","Fill 14 fields","Forecast notes"];
-  var score=0,miss=0,time=30,spawnT=null,tickT=null,live=[];
-  function clearTasks(){live.forEach(function(o){clearTimeout(o.t);if(o.el.parentNode)o.el.remove();});live=[];}
-  function stopGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();if(over)over.classList.remove('show');if(controls)controls.hidden=false;}
-  function hud(){gScore.textContent='Cleared: '+score;gMiss.textContent='Piled up: '+miss;gTime.textContent='0:'+pad(time);gStress.style.width=Math.min(100,miss/12*100)+'%';}
+  var TASKS=["Update CRM","Draft follow-up","Log the call","Set next step","Notify manager","Fill 14 fields","Forecast notes","Send recap","Assign action item"];
+  var score=0,miss=0,time=18,spawnT=null,tickT=null,live=[],ending=false,gameTimers=[];
+  function queue(fn,delay){var id=setTimeout(fn,delay);gameTimers.push(id);return id;}
+  function clearTasks(){
+    live.forEach(function(o){clearTimeout(o.t);});live=[];
+    if(area)area.querySelectorAll('.task,.gpart,.burst').forEach(function(el){el.remove();});
+  }
+  function stopGame(){
+    if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;
+    gameTimers.forEach(clearTimeout);gameTimers=[];ending=false;clearTasks();
+    if(over)over.classList.remove('show');if(gameStatus)gameStatus.classList.remove('show');
+    if(wingAgent)wingAgent.classList.remove('run');if(intro)intro.classList.remove('hide');if(controls)controls.hidden=false;
+    score=0;miss=0;time=18;hud();
+  }
+  function hud(){gScore.textContent='Cleared: '+score;gMiss.textContent='Piled up: '+miss;gTime.textContent='0:'+pad(time);gStress.style.width=Math.min(100,miss/9*100)+'%';}
   function burst(x,y){
     if(!reduce){ for(var i=0;i<8;i++){ var p=document.createElement('div'); p.className='gpart';
       var a=(i/8)*Math.PI*2+Math.random()*0.6, d=14+Math.random()*24;
@@ -3118,29 +3244,38 @@ Then stop and tell me the one thing that changed most.</div>
     var b=document.createElement('div');b.className='burst';b.textContent='✓';b.style.left=x+'px';b.style.top=y+'px';area.appendChild(b);setTimeout(function(){b.remove();},500);}
   function spawn(){
     var el=document.createElement('div');el.className='task';el.textContent=TASKS[(Math.random()*TASKS.length)|0];
-    el.style.left=(8+Math.random()*78)+'%';el.style.top=(10+Math.random()*72)+'%';
+    el.style.left=(5+Math.random()*78)+'%';el.style.top=(12+Math.random()*68)+'%';
     area.appendChild(el);
-    var o={el:el,t:setTimeout(function(){if(el.parentNode){miss++;hud();el.remove();}live=live.filter(function(z){return z!==o;});if(miss>=12)endGame();},1700)};
+    var o={el:el,t:setTimeout(function(){if(el.parentNode){miss++;hud();el.remove();}live=live.filter(function(z){return z!==o;});if(miss>=9)endGame();},1150)};
     el.onclick=function(){score++;hud();burst(el.offsetLeft,el.offsetTop);clearTimeout(o.t);el.remove();live=live.filter(function(z){return z!==o;});};
     live.push(o);
   }
-  function startGame(){stopGame();if(controls)controls.hidden=true;score=0;miss=0;time=30;hud();over.classList.remove('show');
-    spawnT=setInterval(function(){spawn();if(score>8)spawn();},680);
-    tickT=setInterval(function(){time--;hud();if(time<=0)endGame();},1000);}
-  function endGame(){if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();if(controls)controls.hidden=true;
-    document.getElementById('goTitle').textContent=miss>=12?"Buried.":"Time. You cleared "+score+".";
-    document.getElementById('goText').textContent=miss>=12?"The admin won. "+miss+" tasks piled up while you were heads-down.":"And "+miss+" still slipped through. That's a normal Tuesday for ONE rep.";
-    document.getElementById('goScribble').textContent="now multiply by your whole team.";
-    over.classList.add('show');}
-  function wingClear(){stopGame();if(controls)controls.hidden=true;
-    document.getElementById('goTitle').textContent="Inbox zero.";
-    document.getElementById('goText').textContent="Every task cleared. You touched none of it. That's the point.";
-    document.getElementById('goScribble').textContent="this is just WingRep.";
-    over.classList.add('show');}
+  function startGame(){
+    stopGame();ending=false;if(controls)controls.hidden=true;if(intro)intro.classList.add('hide');
+    spawn();spawnT=setInterval(function(){spawn();if(time<11)spawn();},520);
+    tickT=setInterval(function(){time--;hud();if(time<=0)endGame();},1000);
+  }
+  function renderBacklog(){
+    var pos=[[5,16],[24,11],[47,18],[69,12],[12,38],[35,33],[58,40],[76,34],[4,61],[27,57],[49,63],[71,56],[17,76],[41,75],[62,78],[78,72]];
+    pos.forEach(function(point,n){var el=document.createElement('div');el.className='task';el.textContent=TASKS[n%TASKS.length];el.style.left=point[0]+'%';el.style.top=point[1]+'%';el.style.pointerEvents='none';area.appendChild(el);});
+  }
+  function finishCleanup(){clearTasks();if(gameStatus)gameStatus.classList.remove('show');if(over)over.classList.add('show');}
+  function runWingCleanup(){
+    if(reduce){finishCleanup();return;}
+    if(wingAgent){wingAgent.classList.remove('run');void wingAgent.offsetWidth;wingAgent.classList.add('run');}
+    var tasks=[].slice.call(area.querySelectorAll('.task'));
+    tasks.forEach(function(task,n){
+      task.style.setProperty('--sweep-x',(80+(n%4)*22)+'px');task.style.setProperty('--sweep-y',(-45+(n%5)*18)+'px');
+      queue(function(){task.classList.add('swept');},420+n*120);
+    });
+    queue(finishCleanup,4300);
+  }
+  function endGame(){
+    if(ending)return;ending=true;if(spawnT)clearInterval(spawnT);if(tickT)clearInterval(tickT);spawnT=tickT=null;clearTasks();
+    miss=Math.max(miss,9);hud();renderBacklog();if(controls)controls.hidden=true;
+    if(gameStatus)gameStatus.classList.add('show');queue(runWingCleanup,850);
+  }
   document.getElementById('gStart').onclick=startGame;
-  document.getElementById('goAgain').onclick=startGame;
-  document.getElementById('goWing').onclick=wingClear;
-  document.getElementById('gWingTop').onclick=wingClear;
 
   show(0);
 })();
@@ -3153,7 +3288,7 @@ Then stop and tell me the one thing that changed most.</div>
   "use strict";
   // slide 3: "break free". a ball escapes concentric rotating rings, each ring
   // SHATTERS as it passes through the gap. Metaphor: no lock-in, the value breaks free.
-  var canvas=null, ctx=null, raf=null, started=false;
+  var canvas=null, ctx=null, raf=null, started=false, slide=null;
   var DPR=Math.max(1,Math.min(2,window.devicePixelRatio||1));
   var W=0,H=0,cx=0,cy=0,base=0;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3305,7 +3440,12 @@ Then stop and tell me the one thing that changed most.</div>
   }
 
   var last=0;
-  function frame(ts){ if(!last)last=ts; var dt=Math.min(0.032,(ts-last)/1000); last=ts; step(dt); render(); raf=requestAnimationFrame(frame); }
+  function frame(ts){
+    if(!slide||!slide.classList.contains('active')){raf=null;last=0;return;}
+    if(!last)last=ts;var dt=Math.min(0.032,(ts-last)/1000);last=ts;step(dt);render();raf=requestAnimationFrame(frame);
+  }
+  function pause(){if(raf)cancelAnimationFrame(raf);raf=null;last=0;}
+  function resume(){if(reduce||raf||!slide||!slide.classList.contains('active'))return;last=0;raf=requestAnimationFrame(frame);}
 
   function renderStatic(){
     makeRings(); resetBall();
@@ -3317,12 +3457,17 @@ Then stop and tell me the one thing that changed most.</div>
   function s3StartBall(c){
     canvas=c||document.getElementById('s3-canvas'); if(!canvas) return;
     if(started) return; started=true;
+    slide=canvas.closest('.slide');
     ctx=canvas.getContext('2d');
     mark=document.getElementById('markImg');
     resize();
-    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(function(){ resize(); if(!reduce) fullReset(); else renderStatic(); },150); });
+    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(function(){ if(!slide.classList.contains('active'))return;resize();if(!reduce)fullReset();else renderStatic(); },150); });
+    new MutationObserver(function(){
+      if(slide.classList.contains('active')){resize();if(reduce)renderStatic();else resume();}
+      else pause();
+    }).observe(slide,{attributes:true,attributeFilter:['class']});
     if(reduce){ renderStatic(); return; }
-    fullReset(); last=0; raf=requestAnimationFrame(frame);
+    fullReset();resume();
   }
   window.s3StartBall=s3StartBall;
 
@@ -3586,7 +3731,7 @@ Then stop and tell me the one thing that changed most.</div>
 })();
 </script>
 <script>
-/* NEW fun + teaching effects: prompt glow-up slider, Win95 Clippy + BSOD, Konami emoji rain */
+/* Teaching effect: prompt glow-up slider. Easter egg: Konami emoji rain. */
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -3612,37 +3757,6 @@ Then stop and tell me the one thing that changed most.</div>
       pr.textContent=st.p; out.textContent=st.o; lab.textContent=st.lab;
     }
     r.oninput=paint; paint();
-  })();
-
-  /* ---- Win95 Clippy appears on the SalesOS slide; BSOD gag on tab 6 ---- */
-  (function(){
-    var clippy=document.getElementById('clippy'); if(!clippy) return;
-    var os=clippy.closest('.slide');
-    // show clippy a beat after the SalesOS slide becomes active
-    var seen=false,dismissed=false;
-    var obs=new MutationObserver(function(){
-      if(os.classList.contains('active')&&!seen){ seen=true; setTimeout(function(){ if(!dismissed) clippy.classList.add('show'); },900); }
-    });
-    obs.observe(os,{attributes:true,attributeFilter:['class']});
-
-    // Clippy is a greeting, not a fixture: the moment the presenter starts
-    // clicking through the tabs, fade it out so its bubble never covers the
-    // panel content underneath.
-    function dismissClippy(){ dismissed=true; clippy.classList.remove('show'); }
-    document.querySelectorAll('.os .tabs button').forEach(function(b){
-      b.addEventListener('click',dismissClippy);
-    });
-
-    var bsod=document.getElementById('bsod');
-    var t6=document.querySelector('.os .tabs button[data-tab="t6"]');
-    if(t6&&bsod){
-      t6.addEventListener('click',function(){
-        if(reduce) return;
-        if(bsod.classList.contains('show')){ bsod.classList.remove('show'); return; }
-        bsod.classList.add('show');
-        setTimeout(function(){ bsod.classList.remove('show'); },2600);
-      });
-    }
   })();
 
   /* ---- Konami code -> emoji rain ---- */
