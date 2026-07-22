@@ -2487,7 +2487,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     </div>
   </section>
 
-  <!-- 18 FOUNDER BONUS: the original attendee-only offer and flip clock, restored. -->
+  <!-- 18 ATTENDEE SETUP: hands-on build help and WingRep setup, using the existing offer layout and flip clock. -->
   <style>
   .sOffer .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.4rem,4vw,3rem);align-items:center}
   .sOffer h1{font-size:clamp(25px,3.5vw,46px);line-height:1.04;max-width:15ch}
@@ -2540,17 +2540,17 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     <div class="wrap">
       <div class="sOffer-col">
         <div class="eyebrow">For the teams who showed up today</div>
-        <h1>Get live with <span class="hl">Amit.</span></h1>
-        <p class="sub">Twenty minutes with <b>Amit, our founder</b>, and you'll walk out knowing how to get WingRep live on your real calls. He's holding a few slots this week for teams who were here today.</p>
+        <h1>Build yours with <span class="hl">Alan.</span></h1>
+        <p class="sub">Thirty minutes with <b>Alan</b> to turn today's framework into your own sales assistant. Bring your workflow and stack; you'll leave with a practical build plan plus hands-on help getting WingRep set up for your real calls.</p>
         <div class="sOffer-book">
-          <span class="sOffer-ava"><img data-asset="s_amit" alt="Amit, founder of WingRep"></span>
-          <a class="btn btn-primary" href="https://wingrep.ai/webinar" target="_blank" rel="noopener">Book exclusive time with Amit →</a>
+          <span class="sOffer-ava"><img data-asset="s_alan" alt="Alan Tai"></span>
+          <a class="btn btn-primary" href="https://calendly.com/alan-selfactualize/30min" target="_blank" rel="noopener">Grab exclusive time with Alan →</a>
         </div>
-        <div class="sOffer-url">wingrep.ai/webinar · attendees only</div>
+        <div class="sOffer-url">calendly.com/alan-selfactualize · attendees only</div>
       </div>
       <div class="sOffer-clockzone">
         <div class="sOffer-clocklbl">Today's spots close in</div>
-        <div class="sOffer-clock" aria-label="Time remaining for today's founder slots">
+        <div class="sOffer-clock" aria-label="Time remaining for today's setup slots">
           <div class="sOffer-grp">
             <div class="sOffer-flip" data-unit="h"><div class="sOffer-panel top"><span>08</span></div><div class="sOffer-panel bottom"><span>08</span></div><div class="sOffer-panel top sOffer-flap"><span>08</span></div><div class="sOffer-panel bottom sOffer-flap"><span>08</span></div></div>
             <span class="sOffer-glbl">Hrs</span>
@@ -2566,7 +2566,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
             <span class="sOffer-glbl">Secs</span>
           </div>
         </div>
-        <div class="sOffer-closed">Today's founder slots are taken. You can still see the attendee options at <a href="https://wingrep.ai/webinar" target="_blank" rel="noopener">wingrep.ai/webinar</a>.</div>
+        <div class="sOffer-closed">Today's setup slots are taken. You can still book the next available time with Alan on <a href="https://calendly.com/alan-selfactualize/30min" target="_blank" rel="noopener">Calendly</a>.</div>
       </div>
     </div>
   </section>
@@ -2594,8 +2594,8 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     var closed=false,iv;
     function closeOut(){
       if(closed)return;closed=true;slide.classList.add('is-closed');
-      var lbl=slide.querySelector('.sOffer-clocklbl');if(lbl)lbl.textContent='Founder slots for today are taken';
-      var cta=slide.querySelector('.sOffer-book .btn');if(cta)cta.textContent='See attendee options →';
+      var lbl=slide.querySelector('.sOffer-clocklbl');if(lbl)lbl.textContent='Setup slots for today are taken';
+      var cta=slide.querySelector('.sOffer-book .btn');if(cta)cta.textContent='See Alan\'s next times →';
       if(iv)clearInterval(iv);
     }
     function tick(){
@@ -2634,7 +2634,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   /* the CTA is typable, not clickable: most of the room reads this off a shared screen
      and can only type what they see, so the trial link is a big mono URL in the .s19-ct
      treatment (green accent, underline offset), still an <a> for the click-capable few. */
-  .s19-url{display:inline-block;font-family:var(--mono);font-weight:800;font-size:clamp(26px,3.2vw,40px);line-height:1.05;letter-spacing:-.01em;color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(0,148,67,.45);transition:text-decoration-color .16s}
+  .s19-url{display:inline-block;font-family:var(--mono);font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-.01em;color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(0,148,67,.45);transition:text-decoration-color .16s;white-space:nowrap}
   .s19-url:hover,.s19-url:focus-visible{text-decoration-color:var(--green)}
   .s19-say{margin-top:.6rem;font-size:clamp(15px,1.5vw,18px);line-height:1.4;color:var(--ink-soft);font-weight:500}
   .s19-chatnote{margin-top:.9rem;font-size:clamp(15px,1.5vw,18px);line-height:1.4;color:var(--ink-soft);font-weight:500}
@@ -2658,9 +2658,9 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
       <div class="s19-grid">
         <div>
           <h1>Take the workflow.<br>Or let WingRep run it.</h1>
-          <p class="body">The SalesOS workflow is yours, no strings. If you want the version that runs on every call, start with the webinar page.</p>
-          <div class="cta-row"><a class="s19-url" href="https://wingrep.ai/webinar" target="_blank" rel="noopener">wingrep.ai/webinar</a></div>
-          <p class="s19-say">Start a free three-week pilot or book 20 minutes with Amit.</p>
+          <p class="body">The SalesOS workflow is yours, no strings. If you want hands-on help building it around your calls and getting WingRep set up, book a session with Alan.</p>
+          <div class="cta-row"><a class="s19-url" href="https://calendly.com/alan-selfactualize/30min" target="_blank" rel="noopener">calendly.com/alan-selfactualize</a></div>
+          <p class="s19-say">Build your own sales assistant and get WingRep running on your real calls.</p>
           <div class="s19-contact">
             <span class="s19-hand">questions later? come find me.</span>
             <div class="s19-links">
@@ -2696,6 +2696,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
 <div class="index" id="index"><button class="close" id="closeIndex">Close ✕</button><h2>Jump to slide</h2><ol id="indexList"></ol></div>
 <script src="wingrep-assets.js"></script>
 <script src="wingrep-demo-data.js"></script>
+<script src="alan-linkedin-asset.js"></script>
 <script>
 (function(){
   var dvd=document.getElementById('s3dvd'); if(!dvd) return;
@@ -2970,7 +2971,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   var wrStageIndex=0;
   var counter=document.getElementById('counter'), progress=document.getElementById('progress');
   var prevB=document.getElementById('prev'), nextB=document.getElementById('next');
-  var titles=["Starting soon","Prep and after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Sales OS crash","Before, during, after","Prep and debrief in the inbox","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Founder onboarding","One next step"];
+  var titles=["Starting soon","Prep and after-call work","Every tool, same problem","Build a sales assistant","Meet Alan","How to talk to Claude","AI, minus the jargon","Bad prompt vs good prompt","Loop engineering","Build yours live","Sales OS crash","Before, during, after","Prep and debrief in the inbox","Why WingRep","The admin pile-up","The loop is yours","The free 3-week trial","Hands-on setup","One next step"];
   var pad=function(n){return (n<10?'0':'')+n;};
   // WingRep stays invisible until the reveal slide, so the first two thirds of the
   // deck read as a workshop, not an ad. Anchored to the slide, not an index, so it
