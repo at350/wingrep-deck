@@ -1676,9 +1676,9 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   <style>
     body.bsod-mode .topbar,body.bsod-mode .chrome,body.bsod-mode .progress,body.bsod-mode .toast,body.bsod-mode .amb{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
     .sBsod{isolation:isolate;background:#0000aa!important;color:#fff!important;padding:clamp(22px,5vh,56px) clamp(26px,9vw,130px)!important;overflow:hidden;justify-content:center}
-    .sBsod::before{content:"";position:absolute;z-index:2;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0,rgba(255,255,255,.08) 1px,transparent 1px,transparent 5px);background-position:0 60px;opacity:.22;pointer-events:none;animation:bsodScanRoll 2.8s steps(18,end) both}
-    .sBsod::after{content:"";position:absolute;z-index:3;inset:0;background:linear-gradient(180deg,transparent 0 9%,rgba(255,255,255,.9) 9% 11%,transparent 11% 27%,rgba(0,255,255,.55) 27% 32%,transparent 32% 51%,rgba(255,0,70,.55) 51% 56%,transparent 56% 78%,rgba(255,255,255,.65) 78% 80%,transparent 80%),repeating-linear-gradient(90deg,rgba(255,0,70,.18) 0 3px,transparent 3px 9px,rgba(0,255,255,.16) 9px 12px,transparent 12px 19px);mix-blend-mode:screen;opacity:0;pointer-events:none;animation:bsodTear 2.8s steps(1,end) both}
-    .sBsod .bsod-shell{position:relative;z-index:1;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash 2.8s linear both;will-change:transform,filter,clip-path}
+    .sBsod::before{content:"";position:absolute;z-index:2;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0,rgba(255,255,255,.08) 1px,transparent 1px,transparent 5px);background-position:0 60px;opacity:.22;pointer-events:none;animation:bsodScanRoll 1s steps(18,end) both}
+    .sBsod::after{content:"";position:absolute;z-index:3;inset:0;background:linear-gradient(180deg,transparent 0 9%,rgba(255,255,255,.9) 9% 11%,transparent 11% 27%,rgba(0,255,255,.55) 27% 32%,transparent 32% 51%,rgba(255,0,70,.55) 51% 56%,transparent 56% 78%,rgba(255,255,255,.65) 78% 80%,transparent 80%),repeating-linear-gradient(90deg,rgba(255,0,70,.18) 0 3px,transparent 3px 9px,rgba(0,255,255,.16) 9px 12px,transparent 12px 19px);mix-blend-mode:screen;opacity:0;pointer-events:none;animation:bsodTear 1s steps(1,end) both}
+    .sBsod .bsod-shell{position:relative;z-index:1;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash 1s linear both;will-change:transform,filter,clip-path}
     .sBsod .bsod-title{display:table;margin:0 auto 1.25rem;background:#c0c0c0;color:#0000aa;padding:.14rem .8rem;font-weight:700;letter-spacing:.04em}
     .sBsod .bsod-kicker{text-align:center;font-weight:700;letter-spacing:.08em;margin:.4rem 0 .8rem}
     .sBsod .bsod-headline{font-family:"Courier New",var(--mono);font-size:clamp(32px,4.2vw,54px);line-height:1.04;letter-spacing:-.025em;text-align:center;text-transform:uppercase;margin:0 auto 1rem;max-width:none}
@@ -1691,7 +1691,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     .sBsod .bsod-takeaway{text-align:center;font-weight:700}
     .sBsod .bsod-next{text-align:center;margin-top:1.5rem!important}
     .sBsod .bsod-key{display:inline-block;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #555 #555 #fff;padding:.08rem .55rem;font-weight:700;box-shadow:2px 2px 0 #000;margin:0 .2rem}
-    .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) 2.8s infinite}
+    .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) 1s infinite}
     @keyframes bsodCrash{
       0%{opacity:0;transform:translate(-130px,-10px) skewX(-12deg) scaleY(.08);clip-path:inset(0 0 86% 0);filter:brightness(4) contrast(2.2) drop-shadow(-14px 0 #ff0046) drop-shadow(14px 0 #00ffff)}
       4%{opacity:1;transform:translate(92px,18px) skewX(10deg) scaleY(.72);clip-path:inset(7% 0 53% 0);filter:brightness(2.8) contrast(2) drop-shadow(-12px 0 #ff0046) drop-shadow(12px 0 #00ffff)}

@@ -127,7 +127,7 @@ THE MEMORY PAYOFF, give it a beat. When the coaching-log step quotes the thirty-
 
 **Tab 6 · Recap:** read the three verbs only: *"Remember. Learn. Prepare."* Land: *"You built a loop that compounds instead of rebuilding context every time. Keep it. It is yours."*
 
-Click **See the missing piece**. The deck becomes a blue screen. Let the 2.8-second crash finish, pause for the laugh, then read the headline and the three status lines: *"The workflow works, but you still run it. Get the transcript: manual copy. Run the prompt: manual paste. During the call: missing live audio."* Land: *"Claude can reason over what you feed it, but you are still moving the transcript, restarting the prompt, and carrying the workflow. It also cannot hear the buyer or coach the rep live."* Press **→** to remove those handoffs, add live support, and reveal slide 12.
+Click **See the missing piece**. The deck becomes a blue screen. Let the one-second crash finish, pause for the laugh, then read the headline and the three status lines: *"The workflow works, but you still run it. Get the transcript: manual copy. Run the prompt: manual paste. During the call: missing live audio."* Land: *"Claude can reason over what you feed it, but you are still moving the transcript, restarting the prompt, and carrying the workflow. It also cannot hear the buyer or coach the rep live."* Press **→** to remove those handoffs, add live support, and reveal slide 12.
 
 **Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
