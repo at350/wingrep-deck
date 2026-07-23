@@ -199,8 +199,6 @@
   .demo-preview-wrap{display:flex;flex-direction:column;min-width:0;height:100%}
   .demo-preview-name{font-family:var(--mono);font-size:13.5px;font-weight:700;color:#5f2a16;margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .demo-preview{flex:1;min-height:0;margin:0!important;max-height:none!important;font-size:14.5px!important}
-  .os-limit-actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.8rem;padding-top:.7rem;border-top:1px solid #d6cfbc}
-  .os-limit-actions p{font-size:15px!important;color:#6b6457!important}
   .os-recap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
   .os-recap-card{background:#f4efe2;border:1px solid #d0c6af;border-left:5px solid #b14a2c;padding:1rem 1.05rem;min-width:0}
   .os-recap-card b{display:block;font-family:var(--display);font-size:clamp(18px,1.65vw,22px);line-height:1.1;color:#5f2a16;margin-bottom:.45rem}
@@ -236,6 +234,15 @@
   .os .taskbar{display:flex;align-items:center;gap:.65rem;padding:.38rem .6rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.5rem}
   .os .start{font-family:var(--body);font-weight:700;font-size:13px;padding:.3rem .7rem;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.4rem}
   .os .task-status{font-family:var(--mono);font-size:13px;color:#4f4a40}
+  .clippy-copy{display:inline-flex;align-items:center;gap:.4rem;min-height:34px;padding:.18rem .55rem .18rem .35rem;background:#fffbdc;color:#332f1f;border:1.5px solid;border-color:#fff #69665d #69665d #fff;box-shadow:1px 1px 0 rgba(20,18,13,.24);font-family:var(--body);font-size:12.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:background .16s,transform .16s}
+  .clippy-copy:hover{background:#fff4ad;transform:translateY(-1px)}
+  .clippy-copy:active{transform:translateY(1px)}
+  .clippy-copy:focus-visible{outline:3px solid #d97757;outline-offset:2px}
+  .clippy-art{width:32px;height:38px;display:block;line-height:0;animation:float 4s ease-in-out infinite}
+  .clippy-art svg{width:32px;height:42px;display:block;overflow:visible;filter:drop-shadow(1px 1.5px 1px rgba(20,18,13,.3))}
+  .clippy-brow{transform-box:fill-box;transform-origin:center 90%;animation:clippyBrow 3.4s ease-in-out infinite}
+  .clippy-brow.r{animation-delay:.12s}
+  @keyframes clippyBrow{0%,70%,100%{transform:translateY(0) rotate(0)}78%{transform:translateY(-2.5px) rotate(-4deg)}86%{transform:translateY(-1px) rotate(-1deg)}}
   .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;padding:.25rem .6rem}
   .os-cap{margin-top:.6rem;font-family:var(--hand);font-size:clamp(18px,1.8vw,24px);color:var(--green);font-weight:700;transform:rotate(-1deg)}
   @media(max-height:760px){
@@ -256,6 +263,7 @@
   }
   @media(max-width:760px){
     .os-window-title em{display:none}
+    .clippy-label{display:none}
     .os .tabs button{font-size:12px;padding:.5rem .65rem}
     .os .screen{height:56vh;min-height:320px}
     .os-files{grid-template-columns:1fr;height:auto}
@@ -813,7 +821,7 @@
      the square panel sets the row height; the box stretches to match so both columns are equal-height (no floating) */
   .s14-grid{display:flex;flex-direction:column;gap:1rem;margin-top:1.6rem;max-width:980px}
   /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
-  .s14-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:980px;margin-top:1.05rem}
+  .s14-foot{position:relative;z-index:8;display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:980px;margin-top:1.05rem}
   .s14-why{margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
   .demo1-actions{position:relative;z-index:8;display:flex;flex-direction:column;align-items:stretch;gap:.55rem}
   .demo1-copy{flex:none;font-family:var(--body);font-size:15px;font-weight:700;color:#fff;background:#a44927;border:2px solid #5f2a16;padding:.62rem .9rem;cursor:pointer;box-shadow:3px 3px 0 rgba(95,42,22,.28);transition:transform .16s,background .16s;white-space:nowrap;text-align:center}
@@ -1136,18 +1144,14 @@
     --dvdSZ:clamp(118px,20vh,164px);
     background:var(--paper);
   }
-  /* The wrap is the deck-standard 1100px, like every other slide: at 1010px this was the
-     only narrowed column in the deck, so its headline sat 45px further in than every other
-     headline and 58px inside the brand mark it is supposed to register against.
-     The reclaimed 90px must go to the GUTTER, not to either column. The left track is
-     deliberately exactly one nameplate wide, and the photo wall cannot grow because
-     .sAlan-slot is aspect-ratio:4/3, so extra width becomes extra HEIGHT and overflows the
-     slide (which is overflow:hidden, so it would clip the bottom polaroid row at 1280x720).
-     The right track therefore restates its old derived width: old wrap - left track - gap. */
+  /* Keep the standard 1100px headline track, but let the bio use the middle of the slide.
+     The older layout made the left column exactly one nameplate wide and pushed every
+     reclaimed pixel into the gutter, leaving an accidental empty stripe between Alan's
+     story and the photo wall. A wider bio plus one explicit gutter reads as one composition. */
   .sAlan-wrap{max-width:1100px}
   .sAlan h1{margin-bottom:0}
-  .sAlan-grid{grid-template-columns:var(--stackW) minmax(0,520px);
-    justify-content:space-between;gap:clamp(1.4rem,2.9vw,2.4rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
+  .sAlan-grid{grid-template-columns:minmax(0,420px) minmax(0,520px);
+    justify-content:start;gap:clamp(2rem,3.8vw,3rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
   /* The bio sits under the headline and the brick shelf is pinned to the bottom of the
@@ -1463,7 +1467,6 @@
       <div class="s14-foot">
         <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
         <div class="demo1-actions">
-          <button class="demo1-copy secondary" id="copyDemoLink">Copy prompts link for Zoom</button>
           <button class="demo1-copy" id="copyDemo1">Copy transcript + exact prompt</button>
         </div>
       </div>
@@ -1650,7 +1653,6 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
               </div>
               <div class="demo-preview-wrap"><div class="demo-preview-name" id="demoPreviewName">deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md</div><pre class="term demo-preview" id="demoPreview" tabindex="0" aria-label="Demo file contents"></pre></div>
             </div>
-            <div class="os-limit-actions"><p>Everything needed for the build is now on this screen.</p></div>
           </section>
           <section class="pane" id="t6" role="tabpanel" aria-labelledby="tab-t6">
             <div class="pane-top"><div><div class="step-kicker">Quick recap · What you built</div><h4>You just made a coaching loop that compounds</h4></div></div>
@@ -1663,7 +1665,15 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
             <div class="os-recap-end"><p><b>Keep this workflow. It is yours.</b> Now, what happens when coaching needs to happen during the call?</p><button class="os-continue" id="continueToCrash">See the missing piece →</button></div>
           </section>
         </div>
-        <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span><span class="task-status">6-step workflow · 4 source files · ready to paste</span><span class="clock">11:42 AM</span></div>
+        <div class="taskbar">
+          <span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span>
+          <span class="task-status">6-step workflow · 4 source files · ready to paste</span>
+          <button class="clippy-copy" id="copyDemoLink" type="button" title="Copy prompts link for Zoom" aria-label="Copy prompts link for Zoom">
+            <span class="clippy-art" aria-hidden="true"><svg viewBox="0 0 120 168"><defs><linearGradient id="clippyMetalTask" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2ee"/><stop offset=".45" stop-color="#b3b3c9"/><stop offset="1" stop-color="#83839b"/></linearGradient></defs><g transform="rotate(-5 60 90)"><path d="M20 54 A34 34 0 0 1 88 54 L88 122 A34 34 0 0 1 20 122 Z" fill="none" stroke="url(#clippyMetalTask)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M72 108 L72 66 A18 18 0 0 0 36 66 L36 106 A18 18 0 0 0 68 114" fill="none" stroke="url(#clippyMetalTask)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g><g><ellipse cx="45" cy="51" rx="15" ry="16.5" fill="#fff" stroke="#242424" stroke-width="2.4"/><ellipse cx="75" cy="45" rx="16.5" ry="18" fill="#fff" stroke="#242424" stroke-width="2.4"/><circle cx="49.5" cy="55" r="7.6" fill="#1b1b1b"/><circle cx="79.5" cy="49" r="8.2" fill="#1b1b1b"/><circle cx="46.6" cy="51.5" r="2.5" fill="#fff"/><circle cx="76.4" cy="45.4" r="2.7" fill="#fff"/></g><path class="clippy-brow" d="M29 34 Q43 24 55 32" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/><path class="clippy-brow r" d="M61 28 Q76 20 89 30" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/></svg></span>
+            <span class="clippy-label">Clippy: copy prompts</span>
+          </button>
+          <span class="clock">11:42 AM</span>
+        </div>
       </div>
       <div class="os-cap">copy here. paste into Claude. come right back. ↑</div>
     </div>
@@ -1696,11 +1706,11 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     <div class="bsod-shell">
       <div class="bsod-title">Sales OS</div>
       <p class="bsod-kicker">WORKFLOW LIMIT REACHED</p>
-      <h1 class="bsod-headline">The workflow works. Until the call starts.</h1>
-      <p class="bsod-summary">Prep and follow-up are automated. The one missing moment is the live conversation.</p>
-      <div class="bsod-code" aria-label="Workflow status"><b>BEFORE THE CALL</b><span>PREP READY</span><b>AFTER THE CALL</b><span>FOLLOW-UP DONE</span><b>DURING THE CALL</b><span class="bsod-fail">MISSING: LIVE AUDIO</span></div>
-      <p class="bsod-takeaway">Claude can read the record. It cannot hear the buyer or coach the rep live.</p>
-      <p class="bsod-next">Press <span class="bsod-key">→</span> to add live call support.<i class="bsod-cursor" aria-hidden="true"></i></p>
+      <h1 class="bsod-headline">The workflow works. But you still run it.</h1>
+      <p class="bsod-summary">After every call, someone still has to move the transcript, paste the prompt, and restart the loop.</p>
+      <div class="bsod-code" aria-label="Workflow status"><b>GET THE TRANSCRIPT</b><span>MANUAL COPY</span><b>RUN THE PROMPT</b><span>MANUAL PASTE</span><b>DURING THE CALL</b><span class="bsod-fail">MISSING: LIVE AUDIO</span></div>
+      <p class="bsod-takeaway">Claude can reason over what you feed it. It cannot capture the call, move the context, or coach the rep live.</p>
+      <p class="bsod-next">Press <span class="bsod-key">→</span> to remove the handoffs and add live support.<i class="bsod-cursor" aria-hidden="true"></i></p>
     </div>
   </section>
 
@@ -2679,7 +2689,12 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   .s19-url{display:inline-block;font-family:var(--mono);font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-.01em;color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(0,148,67,.45);transition:text-decoration-color .16s;white-space:nowrap}
   .s19-url:hover,.s19-url:focus-visible{text-decoration-color:var(--green)}
   .s19-say{margin-top:.6rem;font-size:clamp(17px,1.65vw,20px);line-height:1.38;color:var(--ink-soft);font-weight:500}
-  .s19-chatnote{margin-top:.9rem;font-size:clamp(17px,1.65vw,20px);line-height:1.38;color:var(--ink-soft);font-weight:500}
+  .s19-chatrow{margin-top:.8rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+  .s19-copy{font-family:var(--body);font-size:15px;font-weight:800;color:#fff;background:var(--green);border:2px solid #075e31;border-radius:999px;padding:.62rem 1rem;cursor:pointer;box-shadow:2px 2px 0 rgba(7,94,49,.24);transition:transform .16s,background .16s;white-space:nowrap}
+  .s19-copy:hover{background:#08763e;transform:translateY(-1px)}
+  .s19-copy:active{transform:translateY(1px)}
+  .s19-copy:focus-visible{outline:3px solid #6cc291;outline-offset:3px}
+  .s19-chatnote{margin:0;font-size:clamp(16px,1.5vw,18px);line-height:1.32;color:var(--ink-soft);font-weight:500}
   @keyframes s19rise{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
   .s19.active .s19-hand{animation:s19rise .5s .30s both cubic-bezier(.22,1,.36,1)}
   .s19.active .s19-cx:nth-of-type(1){animation:s19rise .5s .44s both cubic-bezier(.22,1,.36,1)}
@@ -2690,7 +2705,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     .s19-url{font-size:clamp(24px,2.9vw,34px)}
     .s19-say{margin-top:.5rem}
     .s19-contact{margin-top:1.1rem;padding-top:.9rem}
-    .s19-chatnote{margin-top:.7rem}
+    .s19-chatrow{margin-top:.65rem;gap:.6rem}
   }
   @media (max-width:760px){.s19-contact{margin-top:1.2rem}}
   </style>
@@ -2715,7 +2730,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
                 <span class="s19-ct">linkedin.com/in/alan-tai-nu</span>
               </a>
             </div>
-            <p class="s19-chatnote">Cheat sheet and these slides: dropping in the chat right now.</p>
+            <div class="s19-chatrow"><button class="s19-copy" id="copyCheatSheet" type="button">Copy cheat sheet link</button><p class="s19-chatnote">Grab it from the chat with these slides.</p></div>
           </div>
         </div>
         <figure class="s19-cheers">
@@ -3204,8 +3219,22 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   var demoLinkCopy=document.getElementById('copyDemoLink');
   if(demoLinkCopy){demoLinkCopy.addEventListener('click',function(){
     var button=this;
+    var label=button.querySelector('.clippy-label');
+    var old=label?label.textContent:'Clippy: copy prompts';
     var url='https://docs.google.com/document/d/1tISF0UDQvQEt2Q_SDRs5H3DpST4xfa-WO_d2hUxR8eM/edit?usp=sharing';
-    handleCopy(button,url);
+    copyText(url).then(function(){
+      if(label)label.textContent='Clippy copied it ✓';
+      button.disabled=true;
+      setTimeout(function(){if(label)label.textContent=old;button.disabled=false;},1600);
+    }).catch(function(){
+      if(label)label.textContent='Copy failed';
+      button.disabled=true;
+      setTimeout(function(){if(label)label.textContent=old;button.disabled=false;},1800);
+    });
+  });}
+  var cheatSheetCopy=document.getElementById('copyCheatSheet');
+  if(cheatSheetCopy){cheatSheetCopy.addEventListener('click',function(){
+    handleCopy(this,'https://docs.google.com/document/d/1uKgB_gGQalDGzqriGD35aldt2UWpQgi8_1NFsiIZ_dc/edit?usp=sharing');
   });}
 
   /* ROI: numbers roll toward their target as you drag; payoff reframes the cost */
