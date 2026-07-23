@@ -757,10 +757,10 @@
      presentation's reading order. */
   .s1-blimp-flight{position:absolute;top:clamp(3px,1.5vh,16px);right:clamp(16px,4vw,58px);width:max-content;z-index:4;pointer-events:none;animation:s1-blimp-pass 22s linear infinite}
   .s1-blimp{display:flex;align-items:center;gap:.5rem;color:var(--green-deep);animation:s1-blimp-bob 3.8s ease-in-out infinite}
-  .s1-blimp-airship{position:relative;width:58px;height:27px;flex:0 0 auto;border:1.5px solid var(--rust-deep);border-radius:50% 50% 47% 47%;background:linear-gradient(135deg,#F5E6DD 0 32%,#D97757 32% 67%,#B14A2C 67%);box-shadow:0 5px 10px -8px rgba(20,18,13,.8)}
+  .s1-blimp-airship{position:relative;width:66px;height:31px;flex:0 0 auto;border:1.5px solid var(--rust-deep);border-radius:50% 50% 47% 47%;background:linear-gradient(135deg,#F5E6DD 0 32%,#D97757 32% 67%,#B14A2C 67%);box-shadow:0 5px 10px -8px rgba(20,18,13,.8)}
   .s1-blimp-airship::before{content:"";position:absolute;right:-10px;top:8px;width:13px;height:10px;border:1.5px solid var(--rust-deep);border-left:0;border-radius:0 70% 70% 0;background:var(--rust-soft)}
   .s1-blimp-airship::after{content:"";position:absolute;left:20px;bottom:-7px;width:18px;height:6px;border:1.5px solid var(--rust-deep);border-radius:2px;background:var(--card)}
-  .s1-blimp-copy{font-family:var(--body);font-size:clamp(9px,.78vw,12px);font-weight:800;letter-spacing:.09em;line-height:1;white-space:nowrap;text-transform:uppercase;background:rgba(251,249,241,.88);border:1.5px solid var(--line);border-radius:999px;padding:.38rem .62rem;box-shadow:0 7px 16px -13px rgba(20,18,13,.72)}
+  .s1-blimp-copy{display:flex;flex-direction:column;gap:.08rem;font-family:var(--body);font-size:clamp(12px,1.08vw,16px);font-weight:800;letter-spacing:.075em;line-height:1.12;white-space:nowrap;text-align:left;text-transform:uppercase;background:rgba(251,249,241,.9);border:1.5px solid var(--line);border-radius:999px;padding:.45rem .72rem;box-shadow:0 7px 16px -13px rgba(20,18,13,.72)}
   @keyframes s1-blimp-pass{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 44rem))}}
   @keyframes s1-blimp-bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(5px) rotate(1deg)}}
   .s1-tick{font-family:var(--hand);color:var(--rust-deep);font-size:clamp(19px,2.3vw,27px);font-weight:700;margin-top:1.05rem;min-height:1.5em;transition:opacity .4s;transform:rotate(-1.3deg);max-width:34ch}
@@ -932,7 +932,7 @@
     <div class="s1-blimp-flight" aria-label="Free private building sessions if you stay until the end">
       <div class="s1-blimp">
         <span class="s1-blimp-airship" aria-hidden="true"></span>
-        <span class="s1-blimp-copy">Free private building sessions · stay until the end</span>
+        <span class="s1-blimp-copy"><span>Free private building</span><span>sessions · stay until the end</span></span>
       </div>
     </div>
     <div class="wrap">
