@@ -82,12 +82,12 @@ Work down this checklist:
 # Part 3 · THE LIVE SCRIPT (the only part you use on stage)
 
 **Slides 1 through 7: pure deck.** Two things to do while they are up:
-- On **slide 1**, during doors: point at the callout and say the install line, the room opens Claude Cowork while they wait.
+- On **slide 1**, during doors: point at the install callout, then the small bonus note. Say: *"Stay through the close and I will give you a free 30-minute build session to turn this into your own workflow."*
 - On **slide 4**: point at the artifact strip and say: *"that brief wrote itself at 7am. By slide 10 you'll know how."*
 
 ## Slide 8, "Garbage in, garbage out." → DEMO 1 (~90 sec)
 
-Read the ✕ and ✓ boxes on the slide aloud. Click **Copy transcript + exact prompt**, then: *"let me prove it on a real call"* → switch to the browser (Claude tab).
+Read the ✕ and ✓ boxes on the slide aloud. Click **Copy prompts link for Zoom**, paste the copied Google Doc link into Zoom chat, then click **Copy transcript + exact prompt**. Say: *"the prompts are in the chat so you can follow along. Let me prove it on a real call."* → switch to the browser (Claude tab).
 
 **Vibes prompt.** Click **New chat** (plain, no project). Type this by hand, casually, like a rep at 6pm:
 ```
@@ -111,7 +111,7 @@ Four jobs, one loop. Name the discipline: *"the AI world calls this loop enginee
 
 ## Slide 10, "Build yours live, one tab at a time" → DEMO 2 (~8 min)
 
-Five tabs are visible: **1 Set up memory, 2 Run the loop, 3 Read calendar, 4 Automate prep, 5 Demo files.** There is no sixth warning tab; the limitation arrives as the surprise blue screen on slide 11. The structure is reusable for every deal; the filled prompts use Cobalt Freight only as the live example. Say once: *"This workspace holds every deal. Cobalt is just the first one we are loading so you can watch the loop work."* The rhythm is: click the tab → copy → switch to Claude Cowork → paste and run → switch back.
+Six tabs are visible: **1 Set up memory, 2 Run the loop, 3 Read calendar, 4 Automate prep, 5 Demo files, 6 Recap.** The limitation still arrives as the surprise blue screen on slide 11, after the recap. The structure is reusable for every deal; the filled prompts use Cobalt Freight only as the live example. Say once: *"This workspace holds every deal. Cobalt is just the first one we are loading so you can watch the loop work."* The rhythm is: click the tab → copy → switch to Claude Cowork → paste and run → switch back.
 
 **Tab 1 · Set up memory:** click **Copy setup + files**, switch to Cowork, paste, and send. This single paste creates the all-deals structure, writes `WORKSPACE.md`, and loads the two Cobalt transcripts, scorecard, and Jordan coaching log. When Claude reports the created paths, show `deals/cobalt-freight/`, `reps/jordan-avila/`, and `game-plans/`. Confirm that `deals/cobalt-freight/deal-file.md` is empty. Say: *"No hidden download and no external document. Cobalt is one deal inside a workspace built for all of them."*
 
@@ -125,7 +125,9 @@ THE MEMORY PAYOFF, give it a beat. When the coaching-log step quotes the thirty-
 
 **Tab 5 · Demo files:** click through both transcripts, the scorecard, and the coaching log inside Sales OS. Use **Copy open file** if you need to recover one file live. Land: *"The prompts and the source material stay in one presenter cockpit."*
 
-Click **Continue** without warning. The deck becomes a blue screen. Pause for the laugh, then read only the three status lines: *"Before call: OK. After call: OK. During call: live audio not found."* Land: *"The free workflow works. It just crashes at the exact moment the rep needs help."* Press **→** to restart with live call support and reveal slide 12.
+**Tab 6 · Recap:** read the three verbs only: *"Remember. Learn. Prepare."* Land: *"You built a loop that compounds instead of rebuilding context every time. Keep it. It is yours."*
+
+Click **See the missing piece**. The deck becomes a blue screen. Pause for the laugh, then read the headline and the three status lines: *"The workflow works until the call starts. Before: prep ready. After: follow-up done. During: missing live audio."* Land: *"Claude can read the record. It cannot hear the buyer or coach the rep live."* Press **→** to add live call support and reveal slide 12.
 
 **Slide 12, Before / During / After:** the slide now waits for you. It enters on **Before**. Advance once for **During**, once for **After**, and once more for slide 13. Previous reverses the states if you need to revisit a beat. Do not wait for an animation; nothing changes until you click.
 
@@ -139,7 +141,7 @@ Click **Continue** without warning. The deck becomes a blue screen. Pause for th
 
 **Slide 17, standard trial:** present the ordinary pilot as one simple three-week progression: connect a few reps, let the loop run, then make the removal test tangible. Land on *"Hate to see it go away"* and explain that taking WingRep back off the reps is the actual test. There is deliberately no product montage here; the audience has already seen the workflow. Do not mention Alan's attendee setup session yet.
 
-**Slide 18, attendee setup:** say: *"You just felt the admin. Now let's build yours."* Present the attendee-only 30-minute session with Alan as hands-on help turning the framework into their own sales assistant and getting WingRep set up for real calls. Point to the live setup-slot clock, then send the room to `https://calendly.com/alan-wingrep/30min`.
+**Slide 18, attendee setup:** say: *"You just felt the admin. Now let's build yours."* Present the free attendee-only 30-minute session with Alan as hands-on help turning the framework into their own sales assistant and getting WingRep set up for real calls. Point to the live setup-slot clock, then send the room to `https://calendly.com/alan-wingrep/30min`.
 
 **Finale (slide 19):** point to Alan's Calendly link, then paste the cheat-sheet PDF link and deck link into the Zoom chat. Say: "everything on screen is in the chat right now."
 
