@@ -82,7 +82,7 @@ Work down this checklist:
 # Part 3 · THE LIVE SCRIPT (the only part you use on stage)
 
 **Slides 1 through 7: pure deck.** Two things to do while they are up:
-- On **slide 1**, during doors: the rotating line opens with the free 30-minute build session, then moves into the usual waiting-room jokes. Point at it once and say: *"Stay through the close and I will give you a free 30-minute build session to turn this into your own workflow."*
+- On **slide 1**, a blimp across the top reads: **“Free private building sessions · stay until the end.”** Point it out and say it aloud immediately, then continue with your normal opener.
 - On **slide 4**: point at the artifact strip and say: *"that brief wrote itself at 7am. By slide 10 you'll know how."*
 
 ## Slide 8, "Garbage in, garbage out." → DEMO 1 (~90 sec)
