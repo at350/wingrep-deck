@@ -41,6 +41,7 @@
      it is what clears the fixed top bar. */
   @media (max-height:800px){
     .slide{padding-bottom:3.5vh}
+    .slide.soon .wrap{transform:translateY(-36px)}
     .sFive h1{font-size:clamp(26px,3.5vw,42px)}
     .sFive .prompts5{margin-top:.7rem}
     .sFive .prompts5 li{padding-top:.42rem;padding-bottom:.42rem}
@@ -73,19 +74,19 @@
   .slide.active h1 .ln:nth-child(2){animation-delay:.14s}
   .slide.active h1 .ln:nth-child(3){animation-delay:.26s}
 
-  .eyebrow{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(11px,1.05vw,13px);color:var(--green);display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem}
+  .eyebrow{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(13px,1.15vw,15px);color:var(--green);display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem}
   .eyebrow::before{content:"";width:30px;height:3px;background:var(--green-bright)}
   h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5.4vw,60px);line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
   h1 .hl{color:var(--green)} h1 .rust{color:var(--rust)}
-  .sub{font-size:clamp(16px,2vw,23px);line-height:1.45;color:var(--ink-soft);margin-top:1.2rem;max-width:46ch;font-weight:500}
-  p.body{font-size:clamp(16px,1.6vw,20px);line-height:1.55;margin-top:1.1rem;max-width:56ch;font-weight:500}
+  .sub{font-size:clamp(18px,2.05vw,25px);line-height:1.42;color:var(--ink-soft);margin-top:1.2rem;max-width:46ch;font-weight:500}
+  p.body{font-size:clamp(18px,1.7vw,22px);line-height:1.5;margin-top:1.1rem;max-width:56ch;font-weight:500}
   .scribble{font-family:var(--hand);color:var(--green);font-size:clamp(21px,2.4vw,31px);font-weight:700;display:inline-block;transform:rotate(-3deg)}
   .scribble.r{color:var(--rust)}
 
   .stats{list-style:none;margin-top:1.3rem;display:grid;gap:.9rem;max-width:64ch}
   .stats li{display:flex;gap:1rem;align-items:center}
   .stats .num{font-family:var(--display);font-weight:800;color:var(--green);font-size:clamp(26px,3.4vw,44px);line-height:1;min-width:3.1em}
-  .stats .txt{font-size:clamp(15px,1.55vw,19px);font-weight:500}
+  .stats .txt{font-size:clamp(17px,1.65vw,21px);font-weight:500}
 
   .logorow{display:flex;flex-wrap:wrap;gap:.7rem 1.1rem;align-items:center;margin-top:1.3rem}
   .lchip{display:inline-flex;align-items:center;height:40px;transition:transform .2s}
@@ -125,20 +126,20 @@
   .ocard:last-child .art img.ill{animation-delay:-2.5s}
   @keyframes float{50%{transform:translateY(-9px)}}
   .ocard h3{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.4vw,28px);color:var(--rust);margin-bottom:.35rem}
-  .ocard p{font-size:15px;line-height:1.42;color:var(--ink-soft);font-weight:500}
+  .ocard p{font-size:17px;line-height:1.4;color:var(--ink-soft);font-weight:500}
 
   .three{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.7rem}
   .tcard{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:1.2rem 1.3rem;transition:transform .2s,box-shadow .2s}
   .tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
   .tcard .tag{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--ink-soft);margin-bottom:.4rem}
   .tcard h3{font-family:var(--display);font-weight:800;font-size:clamp(17px,2vw,23px);margin-bottom:.4rem}
-  .tcard p{font-size:14px;line-height:1.42;color:var(--ink-soft);font-weight:500}
+  .tcard p{font-size:16px;line-height:1.4;color:var(--ink-soft);font-weight:500}
   .tcard.win{border:2px solid var(--green);background:var(--green-wash);animation:winpulse 2.4s ease-in-out infinite}
   .tcard.win .tag{color:var(--green)}
   @keyframes winpulse{50%{box-shadow:0 0 0 6px rgba(164,73,39,.14)}}
 
   ul.gap{list-style:none;margin-top:1.4rem;display:grid;gap:.8rem;max-width:64ch}
-  ul.gap li{font-size:clamp(15px,1.55vw,19px);line-height:1.38;font-weight:500;padding-left:1.9rem;position:relative}
+  ul.gap li{font-size:clamp(17px,1.65vw,21px);line-height:1.36;font-weight:500;padding-left:1.9rem;position:relative}
   ul.gap li::before{content:"✕";position:absolute;left:0;top:0;color:var(--rust);font-weight:800;font-size:1.1em}
   ul.win li::before{content:"";width:22px;height:22px;border:none}
   .dark ul.win li{color:#f4edea}
@@ -164,15 +165,13 @@
   .sales-os-slide .wrap{max-width:1160px}
   .sales-os-slide .eyebrow{margin-bottom:.55rem}
   .os{margin-top:.35rem;max-width:none;background:#c6c2b6;border:2px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;box-shadow:8px 8px 0 rgba(20,18,13,.24);position:relative}
-  .os .titlebar{min-height:42px;background:linear-gradient(90deg,#4b2112,#713019);color:#fff;display:flex;align-items:center;gap:.75rem;padding:.45rem .65rem;font-family:var(--body);font-weight:700;font-size:15px}
-  .wingrep-os-logo{display:inline-flex;align-items:center;background:#fbf9f1;border:2px solid #14120d;box-shadow:2px 2px 0 #d97757;padding:.28rem .55rem;line-height:1;flex:none}
-  .wingrep-os-logo img{display:block;width:auto;height:25px;object-fit:contain}
-  .os-window-title{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+  .os .titlebar{min-height:42px;background:linear-gradient(90deg,#4b2112,#713019);color:#fff;display:flex;align-items:center;gap:.75rem;padding:.45rem .65rem;font-family:var(--body);font-weight:700;font-size:16px}
+  .os-window-title{font-family:var(--mono);font-size:15px;letter-spacing:.02em}
   .os-window-title em{font-style:normal;color:#efd4c9}
   .os .titlebar .sp{margin-left:auto;display:flex;gap:.3rem}
   .os .titlebar .sp i{width:22px;height:20px;background:#c6c2b6;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;font-style:normal;font-size:12px;color:#14120d;display:flex;align-items:center;justify-content:center}
   .os .tabs{display:flex;gap:.3rem;padding:.55rem .6rem 0;align-items:flex-end;overflow-x:auto}
-  .os .tabs button{font-family:var(--body);font-weight:700;font-size:14px;line-height:1.2;padding:.6rem .9rem;border:1.5px solid;border-color:#fdfcf7 #69665d #c6c2b6 #fdfcf7;background:#b8b4a8;cursor:pointer;color:#27241d;border-bottom:none;white-space:nowrap;transition:background .18s,color .18s,transform .18s}
+  .os .tabs button{font-family:var(--body);font-weight:700;font-size:15px;line-height:1.2;padding:.6rem .8rem;border:1.5px solid;border-color:#fdfcf7 #69665d #c6c2b6 #fdfcf7;background:#b8b4a8;cursor:pointer;color:#27241d;border-bottom:none;white-space:nowrap;transition:background .18s,color .18s,transform .18s}
   .os .tabs button:hover{background:#d8d4c8}
   .os .tabs button:focus-visible,.os .copy:focus-visible,.demo-file-list button:focus-visible,.os-continue:focus-visible{outline:3px solid #d97757;outline-offset:2px}
   .os .tabs button.on{background:#fdfcf7;color:#14120d;position:relative;top:1px}
@@ -180,28 +179,35 @@
   .os .screen{background:#fdfcf7;border:2px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;margin:0 .6rem;height:clamp(300px,48vh,430px);padding:1.15rem 1.25rem;overflow:hidden}
   .os .pane{display:none;height:100%;overflow:auto;padding-right:.25rem} .os .pane.on{display:block;animation:rev .25s both}
   .os .pane-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem}
-  .os .step-kicker{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8f3e24;margin-bottom:.25rem}
-  .os .pane h4{font-family:var(--body);font-weight:700;font-size:clamp(18px,1.65vw,22px);line-height:1.2;color:#14120d}
-  .os .pane p{font-size:clamp(14px,1.2vw,16px);line-height:1.5;color:#3f3a2f;font-weight:500;max-width:70ch}
+  .os .step-kicker{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#8f3e24;margin-bottom:.25rem}
+  .os .pane h4{font-family:var(--body);font-weight:700;font-size:clamp(20px,1.8vw,24px);line-height:1.18;color:#14120d}
+  .os .pane p{font-size:clamp(16px,1.35vw,18px);line-height:1.45;color:#3f3a2f;font-weight:500;max-width:70ch}
   .os .prompt-note{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;font-size:12.5px!important;color:#6a6253!important}
   .os .prompt-note::before{content:"PASTE";font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:.12em;color:#fff;background:#a44927;padding:.2rem .38rem}
-  .os .term{font-family:var(--mono);font-size:clamp(13px,1.02vw,15px);line-height:1.55;background:#1a120f;color:#f1e4df;border-radius:8px;padding:.9rem 1rem;margin-top:.55rem;white-space:pre-wrap;overflow:auto;max-height:calc(100% - 105px);border:1px solid #45281d;tab-size:2}
+  .os .term{font-family:var(--mono);font-size:clamp(15px,1.15vw,17px);line-height:1.5;background:#1a120f;color:#f1e4df;border-radius:8px;padding:.9rem 1rem;margin-top:.55rem;white-space:pre-wrap;overflow:auto;max-height:calc(100% - 112px);border:1px solid #45281d;tab-size:2}
   .os .term .g{color:#efad95;font-weight:700}
-  .os .copy,.os-continue{flex:none;font-family:var(--body);font-weight:700;font-size:14px;background:#b14a2c;color:#fff;border:2px solid #5f2a16;box-shadow:2px 2px 0 #6c675d;padding:.58rem .9rem;cursor:pointer;transition:transform .16s,background .16s}
+  .os .copy,.os-continue{flex:none;font-family:var(--body);font-weight:700;font-size:15px;background:#b14a2c;color:#fff;border:2px solid #5f2a16;box-shadow:2px 2px 0 #6c675d;padding:.62rem .95rem;cursor:pointer;transition:transform .16s,background .16s}
   .os .copy:hover,.os-continue:hover{background:#8f3e24;transform:translateY(-1px)}
   .os .copy:active,.os-continue:active{transform:translateY(1px)}
   .os .copy.secondary{background:#ece7d9;color:#2c2920;border-color:#8a8472}
   .os .copy.secondary:hover{background:#fff}
   .os-files{display:grid;grid-template-columns:minmax(225px,.72fr) minmax(0,1.7fr);gap:1rem;height:calc(100% - 110px)}
   .demo-file-list{display:flex;flex-direction:column;gap:.45rem;min-width:0}
-  .demo-file-list button{font-family:var(--mono);font-size:11.5px;line-height:1.35;text-align:left;color:#2c2920;background:#eee9dc;border:1px solid #c9c1ae;padding:.58rem .65rem;cursor:pointer;overflow-wrap:anywhere;transition:background .16s,border-color .16s}
+  .demo-file-list button{font-family:var(--mono);font-size:13px;line-height:1.35;text-align:left;color:#2c2920;background:#eee9dc;border:1px solid #c9c1ae;padding:.58rem .65rem;cursor:pointer;overflow-wrap:anywhere;transition:background .16s,border-color .16s}
   .demo-file-list button:hover,.demo-file-list button.on{background:#fff7da;border-color:#9a7a37}
   .demo-file-actions{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:auto;padding-top:.25rem}
   .demo-preview-wrap{display:flex;flex-direction:column;min-width:0;height:100%}
-  .demo-preview-name{font-family:var(--mono);font-size:12px;font-weight:700;color:#5f2a16;margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .demo-preview{flex:1;min-height:0;margin:0!important;max-height:none!important;font-size:12.5px!important}
+  .demo-preview-name{font-family:var(--mono);font-size:13.5px;font-weight:700;color:#5f2a16;margin-bottom:.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .demo-preview{flex:1;min-height:0;margin:0!important;max-height:none!important;font-size:14.5px!important}
   .os-limit-actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.8rem;padding-top:.7rem;border-top:1px solid #d6cfbc}
-  .os-limit-actions p{font-size:13px!important;color:#6b6457!important}
+  .os-limit-actions p{font-size:15px!important;color:#6b6457!important}
+  .os-recap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+  .os-recap-card{background:#f4efe2;border:1px solid #d0c6af;border-left:5px solid #b14a2c;padding:1rem 1.05rem;min-width:0}
+  .os-recap-card b{display:block;font-family:var(--display);font-size:clamp(18px,1.65vw,22px);line-height:1.1;color:#5f2a16;margin-bottom:.45rem}
+  .os-recap-card span{display:block;font-size:clamp(15px,1.25vw,17px);line-height:1.42;color:#3f3a2f;font-weight:500}
+  .os-recap-end{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;margin-top:1rem;padding-top:.85rem;border-top:1px solid #d6cfbc}
+  .os-recap-end p{max-width:60ch!important}
+  .os-recap-end p b{color:#5f2a16}
   .ledger{font-family:var(--mono);font-size:13px;line-height:1.5;color:#2c2920;background:#fff;border:1px solid #d6cfbc;border-radius:6px;padding:.7rem .8rem;margin-top:.55rem}
   .ledger .stuck{background:#efddd7;color:#5f2a16;font-weight:700;padding:0 .2em} .ledger .slip{background:#f6dcd4;color:#b3381f;font-weight:700;padding:0 .2em} .ledger .hd{color:#8a8472}
   /* Slide 9, tab 3 scorecard. The five columns are the rep's last 5 calls; each
@@ -229,27 +235,35 @@
   .sc-gap b{color:var(--green);font-weight:700}
   .os .taskbar{display:flex;align-items:center;gap:.65rem;padding:.38rem .6rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.5rem}
   .os .start{font-family:var(--body);font-weight:700;font-size:13px;padding:.3rem .7rem;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.4rem}
-  .os .task-status{font-family:var(--mono);font-size:11px;color:#4f4a40}
+  .os .task-status{font-family:var(--mono);font-size:13px;color:#4f4a40}
   .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;padding:.25rem .6rem}
   .os-cap{margin-top:.6rem;font-family:var(--hand);font-size:clamp(18px,1.8vw,24px);color:var(--green);font-weight:700;transform:rotate(-1deg)}
   @media(max-height:760px){
     .sales-os-slide{padding-top:4.5vh;padding-bottom:2vh}
-    .os .screen{height:330px}
+    .os .screen{height:355px}
     .os .titlebar{min-height:38px;padding:.32rem .55rem}
-    .os .tabs button{padding:.48rem .75rem;font-size:13px}
+    .os .tabs button{padding:.48rem .7rem;font-size:14px}
     .os .screen{padding:.85rem 1rem}
     .os .pane-top{margin-bottom:.5rem}
     .os .term{line-height:1.45}
+    .os-recap-grid{gap:.65rem;margin-top:.6rem}
+    .os-recap-card{padding:.75rem .8rem}
+    .os-recap-card b{font-size:18px;margin-bottom:.3rem}
+    .os-recap-card span{font-size:15px;line-height:1.32}
+    .os-recap-end{gap:.8rem;margin-top:.65rem;padding-top:.55rem}
+    .os-recap-end p{font-size:15px;line-height:1.35}
     .os-cap{margin-top:.35rem}
   }
   @media(max-width:760px){
-    .wingrep-os-logo img{height:22px}.os-window-title em{display:none}
+    .os-window-title em{display:none}
     .os .tabs button{font-size:12px;padding:.5rem .65rem}
     .os .screen{height:56vh;min-height:320px}
     .os-files{grid-template-columns:1fr;height:auto}
     .demo-file-list{display:grid;grid-template-columns:1fr 1fr}
     .demo-file-actions{grid-column:1/-1}
     .demo-preview{min-height:180px}
+    .os-recap-grid{grid-template-columns:1fr}
+    .os-recap-end{align-items:flex-start;flex-direction:column}
   }
 
   .app{margin-top:1.2rem;max-width:64ch;border-radius:16px;overflow:hidden;border:1.5px solid #5b3a2d;box-shadow:var(--shadow);background:#23130d}
@@ -288,7 +302,7 @@
 
   /* animated checks */
   .checks{margin-top:1.4rem;display:grid;gap:.9rem;max-width:62ch}
-  .checks li{list-style:none;display:flex;gap:.8rem;align-items:flex-start;font-size:clamp(15px,1.55vw,19px);font-weight:500;color:var(--ink);line-height:1.35}
+  .checks li{list-style:none;display:flex;gap:.8rem;align-items:flex-start;font-size:clamp(17px,1.65vw,21px);font-weight:500;color:var(--ink);line-height:1.34}
   .checks svg{flex:0 0 auto;margin-top:2px}
   .checks .ck{stroke:#a44927;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s ease forwards}
   .checks li:nth-child(2) .ck{animation-delay:.5s} .checks li:nth-child(3) .ck{animation-delay:1s} .checks li:nth-child(4) .ck{animation-delay:1.5s}
@@ -297,8 +311,8 @@
   .slide.s3c{padding-top:5.2vh;padding-bottom:5.5vh}
   .s3c h1{font-size:clamp(30px,4.4vw,58px);white-space:nowrap}
   .s3c .checks{margin-top:1.2rem;gap:.85rem}
-  .s3c .checks li{font-size:clamp(15px,1.55vw,18px)}
-  .s3c .sub{margin-top:1.1rem;font-size:clamp(16px,1.7vw,19px);line-height:1.4}
+  .s3c .checks li{font-size:clamp(17px,1.65vw,20px)}
+  .s3c .sub{margin-top:1.1rem;font-size:clamp(18px,1.8vw,21px);line-height:1.38}
 
   /* ===== about-Alan slide: a restrained credential shelf, not a giant fake brick ===== */
   .slide.sAlan{padding-top:3.5vh;padding-bottom:1.0vh;overflow:hidden}
@@ -418,10 +432,13 @@
   /* scoped: compact single-line install pill (reads as a visual element, not a paragraph).
      kbd/chip language: mono, pill bg + border. white-space:nowrap keeps it to one line;
      at 1280 wide the full label fits, so the trailing clause stays. Visible under reduced motion. */
-  .soon-install{margin-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;max-width:100%;font-family:var(--mono);font-size:clamp(14px,1.4vw,15px);line-height:1;color:var(--green-deep);border:1.5px solid var(--line);border-radius:999px;background:var(--card);padding:.5rem 1rem}
+  .soon-install{margin-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;max-width:100%;font-family:var(--mono);font-size:clamp(16px,1.45vw,18px);line-height:1;color:var(--green-deep);border:1.5px solid var(--line);border-radius:999px;background:var(--card);padding:.58rem 1.05rem}
   .soon-install span{white-space:nowrap}
   .soon-install b{color:var(--green);font-weight:700}
   .soon-install svg{flex:0 0 auto;width:18px;height:18px;stroke:var(--green)}
+  .soon-perk{margin-top:.65rem;display:inline-flex;align-items:center;gap:.55rem;font-size:clamp(15px,1.35vw,17px);line-height:1.25;color:var(--ink-soft);font-weight:600}
+  .soon-perk::before{content:"BONUS";font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.1em;color:#fff;background:var(--rust-deep);padding:.24rem .42rem}
+  .soon-perk b{color:var(--ink);font-weight:800}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
   .soonmark svg{width:84px;height:84px;transform-origin:center;animation:breathe 4.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
@@ -430,7 +447,7 @@
   .rings span:nth-child(2){animation-delay:.8s} .rings span:nth-child(3){animation-delay:1.6s}
   .rings b{position:absolute;inset:0;margin:auto;width:34px;height:34px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
   @keyframes ripple{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.4);opacity:0}}
-  .live{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--rust-deep);margin-bottom:1.2rem}
+  .live{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--rust-deep);margin-bottom:1.2rem}
   .live .d{width:9px;height:9px;border-radius:50%;background:var(--rust);animation:pulse 1.4s infinite}
   .claude-by{margin-top:1.4rem;display:inline-flex;align-items:center;gap:.55rem;font-family:var(--body);font-weight:600;font-size:13px;color:var(--ink-soft);border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:.42rem .95rem}
   .dark .claude-by{color:#e6d6d0;border-color:#5b3a2d;background:rgba(255,255,255,.05)}
@@ -728,7 +745,7 @@
 
   /* slide 1: countdown + rotating line + controls hint */
   .s1-count{margin-top:1.7rem;display:flex;flex-direction:column;align-items:center;gap:.3rem}
-  .s1-clabel{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--ink-soft)}
+  .s1-clabel{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:13px;color:var(--ink-soft)}
   .s1-clock{font-family:var(--mono);font-weight:600;font-size:clamp(34px,6.4vw,58px);line-height:1;color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:.03em}
   .s1-clock.live{color:var(--rust)}
   .s1-tick{font-family:var(--hand);color:var(--rust-deep);font-size:clamp(19px,2.3vw,27px);font-weight:700;margin-top:1.2rem;min-height:1.5em;transition:opacity .4s;transform:rotate(-1.3deg);max-width:34ch}
@@ -758,7 +775,7 @@
   @keyframes s2bob{0%,100%{transform:rotate(2.4deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-13px)}}
   .s2-polaroid::before{content:"";position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-3deg);width:92px;height:26px;background:rgba(217,119,87,.3);border:1px solid rgba(217,119,87,.28);border-radius:2px}
   /* the after-call work, drifting around the photo as a swarm */
-  .s2-chip{position:absolute;font-family:var(--body);font-weight:700;font-size:12px;color:var(--rust);background:var(--card);border:1.5px solid var(--rust-soft);border-radius:999px;padding:.34rem .7rem;box-shadow:0 12px 26px -14px rgba(20,18,13,.45);white-space:nowrap;z-index:4}
+  .s2-chip{position:absolute;font-family:var(--body);font-weight:700;font-size:14px;color:var(--rust);background:var(--card);border:1.5px solid var(--rust-soft);border-radius:999px;padding:.38rem .75rem;box-shadow:0 12px 26px -14px rgba(20,18,13,.45);white-space:nowrap;z-index:4}
   .s2-chip::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--rust);margin-right:.42rem;vertical-align:middle;animation:s2blink 1.8s ease-in-out infinite}
   @keyframes s2blink{50%{opacity:.35}}
   .s2-stage .c1{top:5%;left:0;animation:s2drift 7s ease-in-out infinite}
@@ -798,8 +815,11 @@
   /* the one-line why under the pair: evidence-quoting is the whole trick, said once in the hand voice */
   .s14-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:980px;margin-top:1.05rem}
   .s14-why{margin-left:clamp(138px,138px + 2.5vw,170px);font-size:clamp(17px,1.9vw,24px)}
-  .demo1-copy{flex:none;font-family:var(--body);font-size:13px;font-weight:700;color:#fff;background:#a44927;border:2px solid #5f2a16;padding:.58rem .85rem;cursor:pointer;box-shadow:3px 3px 0 rgba(95,42,22,.28);transition:transform .16s,background .16s}
+  .demo1-actions{position:relative;z-index:8;display:flex;flex-direction:column;align-items:stretch;gap:.55rem}
+  .demo1-copy{flex:none;font-family:var(--body);font-size:15px;font-weight:700;color:#fff;background:#a44927;border:2px solid #5f2a16;padding:.62rem .9rem;cursor:pointer;box-shadow:3px 3px 0 rgba(95,42,22,.28);transition:transform .16s,background .16s;white-space:nowrap;text-align:center}
+  .demo1-copy.secondary{color:#5f2a16;background:#f4efe2;border-color:#8f3e24;box-shadow:3px 3px 0 rgba(95,42,22,.18)}
   .demo1-copy:hover{background:#8f3e24;transform:translateY(-1px)}
+  .demo1-copy.secondary:hover{color:#fff}
   .demo1-copy:focus-visible{outline:3px solid #d97757;outline-offset:3px}
   @media (max-width:760px){.s14-foot{align-items:flex-start;flex-direction:column}.s14-why{margin-left:0}}
   .s14-row{display:grid;grid-template-columns:138px 1fr;gap:clamp(18px,2.5vw,32px);align-items:stretch}
@@ -810,7 +830,7 @@
   .s14-opt{display:flex;gap:.9rem;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.4rem;box-shadow:var(--shadow);transition:transform .2s}
   .s14-opt:hover{transform:translateX(4px)}
   .s14-opt b{font-family:var(--display);font-weight:800}
-  .s14-opt>div{font-size:15.5px;line-height:1.5;color:var(--ink-soft);font-weight:500}
+  .s14-opt>div{font-size:17px;line-height:1.46;color:var(--ink-soft);font-weight:500}
   .s14-opt.no{background:#F4F0E4}
   .s14-opt.yes{border-color:var(--green-bright);background:var(--green-wash);opacity:1;box-shadow:0 22px 50px -24px rgba(110,49,26,.5)}
   .s14-opt.yes b{color:var(--green)} .s14-opt.yes>div{color:var(--ink)}
@@ -852,7 +872,7 @@
 
   /* NEW: five-prompts takeaway list */
   ol.prompts5{list-style:none;counter-reset:p;margin-top:1.3rem;display:grid;gap:.55rem;max-width:60ch}
-  ol.prompts5 li{counter-increment:p;position:relative;padding:.55rem .9rem .55rem 3rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;font-size:clamp(14px,1.5vw,17px);font-weight:500;line-height:1.35}
+  ol.prompts5 li{counter-increment:p;position:relative;padding:.55rem .9rem .55rem 3rem;background:var(--card);border:1.5px solid var(--line);border-radius:12px;font-size:clamp(15px,1.55vw,18px);font-weight:500;line-height:1.34}
   ol.prompts5 li::before{content:counter(p);position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:1.7rem;height:1.7rem;border-radius:50%;background:var(--green);color:#fff;font-family:var(--display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
   ol.prompts5 li b{color:var(--ink)}
 
@@ -861,7 +881,7 @@
   .glow-stage{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   .glow-col{display:flex;flex-direction:column;gap:.4rem}
   .glow-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-  .glow-prompt,.glow-out{font-family:var(--mono);font-size:14px;line-height:1.5;border-radius:10px;padding:.75rem .85rem;min-height:108px;transition:background .35s,color .35s,box-shadow .35s,border-color .35s}
+  .glow-prompt,.glow-out{font-family:var(--mono);font-size:15.5px;line-height:1.46;border-radius:10px;padding:.75rem .85rem;min-height:108px;transition:background .35s,color .35s,box-shadow .35s,border-color .35s}
   .glow-prompt{background:#1a120f;color:#e7d6d0;border:1px solid #45281d}
   .glow-out{background:#fff;color:#56503f;border:1.5px solid var(--line)}
   .glow.lvl2 .glow-out{color:#2c2920}
@@ -902,6 +922,7 @@
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
       <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Open <b>Claude Cowork</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
+      <div class="soon-perk"><span><b>Stay through the close:</b> attendees get a free 30-minute build session.</span></div>
     </div>
   </section>
 
@@ -1136,11 +1157,11 @@
      The space between the bio and the shelf now reads as the break between who-I-am and the
      credentials rather than a stranded sentence. */
   .sAlan .s3-guide{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(1rem,2.4vh,1.5rem);height:100%}
-  .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(15px,1.55vw,19px);line-height:1.5}
+  .sAlan .s3-tie{margin-top:0;max-width:none;font-size:clamp(17px,1.65vw,21px);line-height:1.45}
   /* the hackathon wins are demoted from the headline claim to a quiet, captioned strip:
      the AI-research line above now carries the credibility, these are human texture. */
   .sAlan .s3-markwrap{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;width:auto;margin-top:auto}
-  .sAlan .s3-markcap{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.05em;
+  .sAlan .s3-markcap{font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.04em;
     text-transform:uppercase;color:var(--rust-deep)}
   /* the shelf: three plates of one mould, stacked, widening to the base */
   .sAlan .s3-marks{width:auto;margin-top:0;padding-top:0;border-top:none;gap:5px}
@@ -1156,7 +1177,7 @@
   .sAlan .s3-marks img.mk:nth-of-type(2){transform:rotate(.35deg)}
   .sAlan .sAlan-wall{--faceD:clamp(180px,24vh,210px);--faceP:clamp(36px,5vh,50px);padding-bottom:6px}
   .sAlan .sAlan-polaroid{padding:6px 6px 5px}
-  .sAlan .sAlan-polaroid figcaption{font-size:13px;margin-top:4px}
+  .sAlan .sAlan-polaroid figcaption{font-size:15px;margin-top:4px}
 
   /* ---- the bouncing headshot: it lays a LEGO plate track behind it ----
      The old tail was eight DOM ghosts parked at distance-gated past positions: a sample was
@@ -1267,7 +1288,7 @@
   .ailit .viz svg{width:100%;height:100%;overflow:visible}
   .ailit .term{font-family:var(--display);font-weight:800;color:var(--green);font-size:clamp(19px,2.2vw,27px);line-height:1.02}
   .ailit .term small{display:block;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;color:var(--rust-deep);margin-top:.25rem}
-  .ailit .def{font-size:clamp(14px,1.5vw,17px);line-height:1.42;color:var(--ink-soft);font-weight:500}
+  .ailit .def{font-size:clamp(16px,1.6vw,19px);line-height:1.4;color:var(--ink-soft);font-weight:500}
   .ailit .def b{color:var(--ink);font-weight:700}
   @media (max-width:640px){.ailit li{grid-template-columns:48px 1fr;column-gap:.9rem;row-gap:.2rem;align-items:start}.ailit .viz{grid-column:1;grid-row:1 / span 2;align-self:center;width:48px;height:44px}.ailit .term{grid-column:2;grid-row:1}.ailit .def{grid-column:2;grid-row:2}.ailit .term small{margin-top:.15rem}}
 
@@ -1276,7 +1297,7 @@
      closing scribble. Values scoped to .s9lit so no other slide is touched. */
   .s9lit .eyebrow{margin-bottom:.7rem}
   .s9lit h1{font-size:clamp(26px,4vw,48px);line-height:1.04}
-  .s9lit .sub{font-size:clamp(14px,1.45vw,16.5px);line-height:1.42;max-width:56ch}
+  .s9lit .sub{font-size:clamp(16.5px,1.55vw,18.5px);line-height:1.4;max-width:56ch}
   /* Two-zone hero layout when the Fable 5 numeral is present: teaching content
      on the left, the oversized butterfly "5" anchored large on the right with a
      small margin. Trim the slide's right padding so the numeral sits close to the
@@ -1295,7 +1316,7 @@
   .s9lit.has-fable .ailit{margin-top:.6rem;gap:.5rem}
   .s9lit.has-fable .ailit li{padding-top:.5rem;padding-bottom:.5rem}
   .s9lit .ailit .term{font-size:clamp(17px,1.9vw,24px)}
-  .s9lit .ailit .def{font-size:clamp(13px,1.4vw,15.5px);line-height:1.38}
+  .s9lit .ailit .def{font-size:clamp(15px,1.5vw,17.5px);line-height:1.36}
   .s9lit .scribble{font-size:clamp(17px,2vw,26px)}
   /* the payoff line was crowding the last card; give it room to breathe, but scale
      the gap with viewport height so a 720px laptop still fits the whole slide */
@@ -1304,7 +1325,7 @@
      field, not one model, so name it in plain deck type (no logos, no chips).
      This is where Fable 5 gets its single mention, as one popular example, which
      also grounds the oversized "5" numeral without letting it own the slide. */
-  .s9-models{margin-top:clamp(.55rem,1.7vh,1.1rem);font-size:clamp(12.5px,1.35vw,15px);line-height:1.5;color:var(--ink-soft);font-weight:500;max-width:58ch}
+  .s9-models{margin-top:clamp(.55rem,1.7vh,1.1rem);font-size:clamp(14.5px,1.45vw,17px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:58ch}
   .s9-models b{color:var(--green);font-weight:700;white-space:nowrap}
   .s9-models .sep{color:var(--line);margin:0 .5em}
   .s9-models .nb{white-space:nowrap}
@@ -1439,7 +1460,13 @@
           <div class="s14-opt yes"><span class="s14-mk">&#10003;</span><div><b>"You're my deal-desk analyst. Here's the real transcript. Score the call on MEDDIC: for each letter, quote the exact moment that proves it, or mark it MISSING. Then draft the follow-up that closes the biggest gap."</b> The real call in, the real deal out.</div></div>
         </div>
       </div>
-      <div class="s14-foot"><div class="scribble s14-why">make it quote the transcript and it can't make things up.</div><button class="demo1-copy" id="copyDemo1">Copy transcript + exact prompt</button></div>
+      <div class="s14-foot">
+        <div class="scribble s14-why">make it quote the transcript and it can't make things up.</div>
+        <div class="demo1-actions">
+          <button class="demo1-copy secondary" id="copyDemoLink">Copy prompts link for Zoom</button>
+          <button class="demo1-copy" id="copyDemo1">Copy transcript + exact prompt</button>
+        </div>
+      </div>
     </div>
     <div class="gio-oscar" id="gioOscar" aria-hidden="true"><span class="gio-runner"><span class="gio-lean"><img data-asset="oscar_grouch" alt=""></span></span></div>
   </section>
@@ -1546,7 +1573,6 @@
       <div class="eyebrow">Build yours live, one tab at a time</div>
       <div class="os" id="salesOs">
         <div class="titlebar">
-          <span class="wingrep-os-logo"><img data-asset="ui_brand" alt="WingRep"></span>
           <span class="os-window-title">Sales OS <em>· coaching workspace</em></span>
           <span class="sp" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
         </div>
@@ -1556,6 +1582,7 @@
           <button id="tab-t3" role="tab" data-tab="t3" aria-controls="t3" aria-selected="false" tabindex="-1">3 · Read calendar</button>
           <button id="tab-t4" role="tab" data-tab="t4" aria-controls="t4" aria-selected="false" tabindex="-1">4 · Automate prep</button>
           <button id="tab-t5" role="tab" data-tab="t5" aria-controls="t5" aria-selected="false" tabindex="-1">5 · Demo files</button>
+          <button id="tab-t6" role="tab" data-tab="t6" aria-controls="t6" aria-selected="false" tabindex="-1">6 · Recap</button>
         </nav>
         <div class="screen">
           <section class="pane on" id="t1" role="tabpanel" aria-labelledby="tab-t1">
@@ -1623,10 +1650,20 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
               </div>
               <div class="demo-preview-wrap"><div class="demo-preview-name" id="demoPreviewName">deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md</div><pre class="term demo-preview" id="demoPreview" tabindex="0" aria-label="Demo file contents"></pre></div>
             </div>
-            <div class="os-limit-actions"><p>Everything needed for the build is now on this screen.</p><button class="os-continue" id="continueToCrash">Continue →</button></div>
+            <div class="os-limit-actions"><p>Everything needed for the build is now on this screen.</p></div>
+          </section>
+          <section class="pane" id="t6" role="tabpanel" aria-labelledby="tab-t6">
+            <div class="pane-top"><div><div class="step-kicker">Quick recap · What you built</div><h4>You just made a coaching loop that compounds</h4></div></div>
+            <p>The rep stops rebuilding context from scratch. The same history now powers three repeatable jobs.</p>
+            <div class="os-recap-grid">
+              <div class="os-recap-card"><b>Remember</b><span>Every call updates the deal file, scorecard, and coaching history.</span></div>
+              <div class="os-recap-card"><b>Learn</b><span>The loop checks whether the last coaching focus showed up this time.</span></div>
+              <div class="os-recap-card"><b>Prepare</b><span>The calendar and 7:00 AM task turn that history into the next-call brief.</span></div>
+            </div>
+            <div class="os-recap-end"><p><b>Keep this workflow. It is yours.</b> Now, what happens when coaching needs to happen during the call?</p><button class="os-continue" id="continueToCrash">See the missing piece →</button></div>
           </section>
         </div>
-        <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span><span class="task-status">reusable workspace · 4 source files · ready to paste</span><span class="clock">11:42 AM</span></div>
+        <div class="taskbar"><span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span><span class="task-status">6-step workflow · 4 source files · ready to paste</span><span class="clock">11:42 AM</span></div>
       </div>
       <div class="os-cap">copy here. paste into Claude. come right back. ↑</div>
     </div>
@@ -1637,13 +1674,17 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     body.bsod-mode .topbar,body.bsod-mode .chrome,body.bsod-mode .progress,body.bsod-mode .toast,body.bsod-mode .amb{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
     .sBsod{background:#0000aa!important;color:#fff!important;padding:clamp(28px,7vh,72px) clamp(26px,9vw,130px)!important;overflow:hidden;justify-content:center}
     .sBsod::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 4px);pointer-events:none}
-    .sBsod .bsod-shell{position:relative;width:min(900px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(14px,1.55vw,19px);line-height:1.48;text-shadow:none;animation:bsodCrash .16s steps(2,end) both}
-    .sBsod .bsod-title{display:table;margin:0 auto 2rem;background:#c0c0c0;color:#0000aa;padding:.12rem .72rem;font-weight:700;letter-spacing:.04em}
-    .sBsod p{max-width:none;color:#fff;font:inherit;margin:.95rem 0}
-    .sBsod .bsod-code{margin:1.4rem 0;padding:1rem 1.2rem;border:2px solid #fff;background:#00008a;display:grid;grid-template-columns:auto 1fr;gap:.3rem 1.4rem;font-size:clamp(12px,1.25vw,16px)}
+    .sBsod .bsod-shell{position:relative;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash .16s steps(2,end) both}
+    .sBsod .bsod-title{display:table;margin:0 auto 1.25rem;background:#c0c0c0;color:#0000aa;padding:.14rem .8rem;font-weight:700;letter-spacing:.04em}
+    .sBsod .bsod-kicker{text-align:center;font-weight:700;letter-spacing:.08em;margin:.4rem 0 .8rem}
+    .sBsod .bsod-headline{font-family:"Courier New",var(--mono);font-size:clamp(32px,4.2vw,54px);line-height:1.04;letter-spacing:-.025em;text-align:center;text-transform:uppercase;margin:0 auto 1rem;max-width:18ch}
+    .sBsod p{max-width:none;color:#fff;font:inherit;margin:.8rem 0}
+    .sBsod .bsod-summary{text-align:center;max-width:58ch;margin-left:auto;margin-right:auto}
+    .sBsod .bsod-code{margin:1.25rem 0;padding:1rem 1.2rem;border:2px solid #fff;background:#00008a;display:grid;grid-template-columns:auto 1fr;gap:.42rem 1.4rem;font-size:clamp(16px,1.45vw,20px)}
     .sBsod .bsod-code b{font:inherit;font-weight:700}.sBsod .bsod-code span{text-align:right}
     .sBsod .bsod-fail{background:#fff;color:#0000aa;padding:0 .25em;font-weight:700}
-    .sBsod .bsod-next{text-align:center;margin-top:2rem!important}
+    .sBsod .bsod-takeaway{text-align:center;font-weight:700}
+    .sBsod .bsod-next{text-align:center;margin-top:1.5rem!important}
     .sBsod .bsod-key{display:inline-block;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #555 #555 #fff;padding:.08rem .55rem;font-weight:700;box-shadow:2px 2px 0 #000;margin:0 .2rem}
     .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) infinite}
     @keyframes bsodCrash{0%{opacity:0;transform:translateX(-18px) skewX(-2deg)}55%{opacity:1;transform:translateX(8px) skewX(1deg)}100%{transform:none}}
@@ -1654,11 +1695,12 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   <section class="slide sBsod" id="bsodSlide" aria-label="Sales OS blue screen error">
     <div class="bsod-shell">
       <div class="bsod-title">Sales OS</div>
-      <p>A fatal exception 0E has occurred at 0028:C0ACH1NG in CLAUDE_WORKFLOW.</p>
-      <p>The workflow completed the prep, calendar read, automation, and after-call files. Then the buyer started speaking.</p>
-      <div class="bsod-code" aria-label="Workflow status"><b>BEFORE_CALL</b><span>OK</span><b>AFTER_CALL</b><span>OK</span><b>DURING_CALL</b><span class="bsod-fail">LIVE_AUDIO_NOT_FOUND</span></div>
-      <p>Claude can read what happened. It cannot hear the call or coach the rep in the moment.</p>
-      <p class="bsod-next">Press <span class="bsod-key">→</span> to restart with live call support.<i class="bsod-cursor" aria-hidden="true"></i></p>
+      <p class="bsod-kicker">WORKFLOW LIMIT REACHED</p>
+      <h1 class="bsod-headline">The workflow works. Until the call starts.</h1>
+      <p class="bsod-summary">Prep and follow-up are automated. The one missing moment is the live conversation.</p>
+      <div class="bsod-code" aria-label="Workflow status"><b>BEFORE THE CALL</b><span>PREP READY</span><b>AFTER THE CALL</b><span>FOLLOW-UP DONE</span><b>DURING THE CALL</b><span class="bsod-fail">MISSING: LIVE AUDIO</span></div>
+      <p class="bsod-takeaway">Claude can read the record. It cannot hear the buyer or coach the rep live.</p>
+      <p class="bsod-next">Press <span class="bsod-key">→</span> to add live call support.<i class="bsod-cursor" aria-hidden="true"></i></p>
     </div>
   </section>
 
@@ -2239,10 +2281,10 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   #trial .trial-weeks li{min-width:0;padding:1.25rem clamp(1rem,2.1vw,1.7rem)}
   #trial .trial-weeks li:first-child{padding-left:0}
   #trial .trial-weeks li + li{border-left:1.5px solid var(--line)}
-  #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(13px,1.2vw,15px);color:var(--green);letter-spacing:.08em;display:block;margin-bottom:.75rem}
-  #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(18px,1.9vw,23px);color:var(--ink);display:block;line-height:1.08}
-  #trial .tw-s{font-size:clamp(12.5px,1.2vw,14.5px);line-height:1.4;color:var(--ink-soft);display:block;margin-top:.45rem;max-width:25ch}
-  #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
+  #trial .tw-num{font-family:var(--mono);font-weight:700;font-size:clamp(15px,1.3vw,17px);color:var(--green);letter-spacing:.07em;display:block;margin-bottom:.75rem}
+  #trial .tw-b{font-family:var(--display);font-weight:800;font-size:clamp(20px,2vw,25px);color:var(--ink);display:block;line-height:1.08}
+  #trial .tw-s{font-size:clamp(15px,1.35vw,17.5px);line-height:1.38;color:var(--ink-soft);display:block;margin-top:.45rem;max-width:25ch}
+  #trial .bandlab{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13.5px;color:var(--ink-soft);margin:2rem 0 .6rem}
   #trial .logobanner{margin-top:0}
   /* reveal: the three-week sequence rises as one restrained composition. */
   #trial .trial-weeks li{opacity:0}
@@ -2324,12 +2366,12 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   .sFaq .watchrow .lchip.hasimg{gap:.42rem;padding:.36rem .62rem .36rem .42rem;border-radius:12px;box-shadow:0 8px 18px -13px rgba(20,18,13,.6)}
   .sFaq .watchrow .lchip.hasimg img.brand{height:24px;width:24px;max-width:24px;border-radius:7px}
   .sFaq .watchrow .lchip.hasimg b{font-size:14.5px}
-  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(15px,1.35vw,15.5px);line-height:1.45;color:var(--ink-soft);font-weight:500;max-width:48ch}
+  .sFaq .cmp-line{margin-top:.7rem;font-size:clamp(16.5px,1.5vw,18px);line-height:1.42;color:var(--ink-soft);font-weight:500;max-width:48ch}
   .sFaq .cmp-line b{color:var(--ink);font-weight:700}
 
   .sFaq .cmp-we{padding:clamp(1.05rem,2.1vh,1.35rem) clamp(1.15rem,1.7vw,1.55rem)}
   .sFaq .cmp-do{list-style:none;display:grid;gap:.78rem;margin:0}
-  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(15px,1.4vw,16px);line-height:1.42;font-weight:500}
+  .sFaq .cmp-do li{display:grid;grid-template-columns:23px 1fr;gap:.7rem;align-items:start;font-size:clamp(16.5px,1.5vw,18px);line-height:1.4;font-weight:500}
   .sFaq .cmp-do .n{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:var(--green-wash);margin-top:.06rem}
   .sFaq .cmp-do li.loop{font-weight:700}
   .sFaq .cmp-do li.loop .n{background:var(--green);color:#fff}
@@ -2436,14 +2478,14 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     .game-intro.hide{opacity:0;pointer-events:none}
     .game-intro .game-rule{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0c703d;margin-bottom:.7rem}
     .game-intro h3{font-family:var(--display);font-size:clamp(22px,3vw,34px);line-height:1.15;max-width:22ch}
-    .game-intro p{font-size:15px;line-height:1.45;color:#4f5e52;max-width:42ch;margin-top:.65rem}
+    .game-intro p{font-size:17px;line-height:1.42;color:#4f5e52;max-width:42ch;margin-top:.65rem}
     .game-start-row{display:flex;align-items:center;gap:.7rem;margin-top:.75rem}
     .game-start-row .hint{font-family:var(--mono);font-size:11px;color:#696f69}
-    #adminGame .game-start{font-size:15px;padding:.72rem 1.35rem;background:#05713f;box-shadow:0 10px 22px -12px rgba(5,113,63,.8)}
+    #adminGame .game-start{font-size:17px;padding:.72rem 1.35rem;background:#05713f;box-shadow:0 10px 22px -12px rgba(5,113,63,.8)}
     .game-status{position:absolute;left:50%;top:1rem;transform:translate(-50%,-10px);z-index:8;min-width:min(430px,85%);background:#15231a;color:#fff;border:1px solid #2c6c48;border-radius:12px;padding:.72rem 1rem;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;box-shadow:0 14px 30px -18px rgba(10,32,19,.9)}
     .game-status.show{opacity:1;transform:translate(-50%,0)}
-    .game-status b{display:block;font-family:var(--display);font-size:15px}
-    .game-status span{display:block;font-size:12.5px;color:#c9d9ce;margin-top:.25rem}
+    .game-status b{display:block;font-family:var(--display);font-size:17px}
+    .game-status span{display:block;font-size:14.5px;color:#c9d9ce;margin-top:.25rem}
     .wing-agent{position:absolute;left:-260px;top:54%;z-index:9;display:flex;align-items:center;gap:.45rem;opacity:0;filter:drop-shadow(0 10px 8px rgba(5,75,42,.25));pointer-events:none}
     .wing-agent .agent-wing{width:36px;height:24px;border-top:4px solid #12a150;border-bottom:4px solid #12a150;border-radius:60% 10%;transform:skewX(-18deg)}
     .wing-agent .agent-core{width:154px;height:64px;border-radius:18px;background:#fbf9f1;border:3px solid #d9f4e3;display:grid;place-items:center;padding:0 13px;box-shadow:0 0 0 5px rgba(18,161,80,.18)}
@@ -2452,11 +2494,11 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     @keyframes agentSweep{0%{opacity:0;transform:translate(0,30px) rotate(-8deg)}12%{opacity:1}45%{transform:translate(48vw,-70px) rotate(4deg)}72%{transform:translate(72vw,34px) rotate(-3deg);opacity:1}100%{transform:translate(98vw,-26px) rotate(5deg);opacity:0}}
     #adminGame .gameover{z-index:10;background:linear-gradient(145deg,rgba(5,68,38,.97),rgba(7,35,23,.98));padding:1.5rem}
     #adminGame .gameover h3{font-size:clamp(26px,3.5vw,40px)}
-    #adminGame .gameover p{max-width:52ch;color:#e2eee6;font-size:15px;line-height:1.45}
+    #adminGame .gameover p{max-width:52ch;color:#e2eee6;font-size:17px;line-height:1.42}
     .game-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:1rem;width:min(620px,100%)}
     .game-outcomes div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:.65rem .75rem}
     .game-outcomes b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#83dfa9}
-    .game-outcomes span{display:block;font-size:13px;font-weight:600;margin-top:.25rem;color:#fff}
+    .game-outcomes span{display:block;font-size:15px;font-weight:600;margin-top:.25rem;color:#fff}
     @media(max-height:760px){#adminGame .gamearea{height:300px}#adminGame .game{margin-top:.65rem}#adminGame .gamehud{margin-bottom:.45rem}}
     @media(max-width:680px){.game-outcomes{grid-template-columns:1fr}.wing-agent .agent-wing{display:none}}
     @media(prefers-reduced-motion:reduce){.wing-agent.run{animation:none;opacity:0}#adminGame .task.swept{transition:none;opacity:0}}
@@ -2491,7 +2533,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   <style>
   .sOffer .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(1.4rem,4vw,3rem);align-items:center}
   .sOffer h1{font-size:clamp(25px,3.5vw,46px);line-height:1.04;max-width:15ch}
-  .sOffer .sub{font-size:clamp(14px,1.5vw,18px);line-height:1.5;max-width:42ch;margin-top:1rem}
+  .sOffer .sub{font-size:clamp(17px,1.7vw,21px);line-height:1.45;max-width:42ch;margin-top:1rem}
   .sOffer-book{display:flex;align-items:center;gap:.85rem;margin-top:clamp(1.1rem,2.6vh,1.6rem)}
   .sOffer-ava{width:clamp(50px,5vw,60px);height:clamp(50px,5vw,60px);border-radius:50%;overflow:hidden;flex:none;
     border:2.5px solid #fff;box-shadow:0 0 0 2px var(--green),0 8px 18px -8px rgba(20,18,13,.55);background:var(--green-wash)}
@@ -2499,7 +2541,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   .sOffer-book .btn{margin:0}
   .sOffer-url{font-family:var(--mono);font-size:20px;color:var(--green-deep);margin-top:.75rem;opacity:.9;letter-spacing:.01em}
   .sOffer-clockzone{display:flex;flex-direction:column;align-items:center;gap:.9rem}
-  .sOffer-clocklbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(9px,1.05vw,11.5px);color:var(--ink-soft);text-align:center}
+  .sOffer-clocklbl{font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.15em;font-size:clamp(11.5px,1.15vw,13.5px);color:var(--ink-soft);text-align:center}
   .sOffer-clock{display:flex;align-items:flex-start;gap:clamp(.25rem,.7vw,.5rem)}
   .sOffer-grp{display:flex;flex-direction:column;align-items:center;gap:.5rem}
   .sOffer-flip{position:relative;width:clamp(64px,6.8vw,94px);height:clamp(86px,9.2vw,124px);perspective:360px;
@@ -2541,7 +2583,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
       <div class="sOffer-col">
         <div class="eyebrow">For the teams who showed up today</div>
         <h1>Build yours with <span class="hl">Alan.</span></h1>
-        <p class="sub">Thirty minutes with <b>Alan</b> to turn today's framework into your own sales assistant. Bring your workflow and stack; you'll leave with a practical build plan plus hands-on help getting WingRep set up for your real calls.</p>
+        <p class="sub">A free 30-minute working session with <b>Alan</b> to turn today's framework into your own sales assistant. Bring your workflow and stack; you'll leave with a practical build plan plus hands-on help getting WingRep set up for your real calls.</p>
         <div class="sOffer-book">
           <span class="sOffer-ava"><img data-asset="s_alan" alt="Alan Tai"></span>
           <a class="btn btn-primary" href="https://calendly.com/alan-wingrep/30min" target="_blank" rel="noopener">Grab exclusive time with Alan →</a>
@@ -2616,7 +2658,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
      "Reply to whoever invited you" ghost button pointed at a dead href="#" and
      is dropped, the mailto below does that job directly and better. */
   .s19 h1{font-size:clamp(30px,3.6vw,45px);white-space:nowrap}
-  .s19 p.body{margin-top:.9rem;max-width:44ch;font-size:clamp(15px,1.5vw,18px)}
+  .s19 p.body{margin-top:.9rem;max-width:44ch;font-size:clamp(17px,1.65vw,20px)}
   .s19 .cta-row{margin-top:1.2rem}
   .s19-contact{margin-top:1.45rem;padding-top:1.2rem;border-top:1px dashed var(--line)}
   .s19-hand{font-family:var(--hand);color:var(--green);font-weight:700;font-size:clamp(18px,2vw,24px);display:inline-block;transform:rotate(-1.2deg);margin-bottom:.5rem}
@@ -2636,8 +2678,8 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
      treatment (green accent, underline offset), still an <a> for the click-capable few. */
   .s19-url{display:inline-block;font-family:var(--mono);font-weight:800;font-size:clamp(26px,2.8vw,36px);line-height:1.05;letter-spacing:-.01em;color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:rgba(0,148,67,.45);transition:text-decoration-color .16s;white-space:nowrap}
   .s19-url:hover,.s19-url:focus-visible{text-decoration-color:var(--green)}
-  .s19-say{margin-top:.6rem;font-size:clamp(15px,1.5vw,18px);line-height:1.4;color:var(--ink-soft);font-weight:500}
-  .s19-chatnote{margin-top:.9rem;font-size:clamp(15px,1.5vw,18px);line-height:1.4;color:var(--ink-soft);font-weight:500}
+  .s19-say{margin-top:.6rem;font-size:clamp(17px,1.65vw,20px);line-height:1.38;color:var(--ink-soft);font-weight:500}
+  .s19-chatnote{margin-top:.9rem;font-size:clamp(17px,1.65vw,20px);line-height:1.38;color:var(--ink-soft);font-weight:500}
   @keyframes s19rise{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
   .s19.active .s19-hand{animation:s19rise .5s .30s both cubic-bezier(.22,1,.36,1)}
   .s19.active .s19-cx:nth-of-type(1){animation:s19rise .5s .44s both cubic-bezier(.22,1,.36,1)}
@@ -3112,6 +3154,13 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     var old=button.textContent;button.textContent='Copied ✓';button.disabled=true;
     setTimeout(function(){button.textContent=old;button.disabled=false;},1400);
   }
+  function copyFailed(button){
+    var old=button.textContent;button.textContent='Copy failed';button.disabled=true;
+    setTimeout(function(){button.textContent=old;button.disabled=false;},1800);
+  }
+  function handleCopy(button,text){
+    copyText(text).then(function(){copied(button);}).catch(function(){copyFailed(button);});
+  }
   function openOsPane(button){
     if(!salesOs||!button)return;
     salesOs.querySelectorAll('.tabs button').forEach(function(x){var on=x===button;x.classList.toggle('on',on);x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
@@ -3135,14 +3184,14 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
         openOsPane(tabs[next]);tabs[next].focus();
       });
     });
-    salesOs.querySelectorAll('[data-copy]').forEach(function(button){button.addEventListener('click',function(){var text=PROMPTS[button.dataset.copy];if(!text)return;copyText(text).then(function(){copied(button);});});});
+    salesOs.querySelectorAll('[data-copy]').forEach(function(button){button.addEventListener('click',function(){var text=PROMPTS[button.dataset.copy];if(!text)return;handleCopy(button,text);});});
     var preview=salesOs.querySelector('#demoPreview'),previewName=salesOs.querySelector('#demoPreviewName'),openFile='deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md';
     function showDemoFile(path){
       if(!DEMO_FILES[path])return;openFile=path;preview.textContent=DEMO_FILES[path];previewName.textContent=path;preview.scrollTop=0;
       salesOs.querySelectorAll('[data-demo-file]').forEach(function(button){button.classList.toggle('on',button.dataset.demoFile===path);});
     }
     salesOs.querySelectorAll('[data-demo-file]').forEach(function(button){button.addEventListener('click',function(){showDemoFile(button.dataset.demoFile);});});
-    salesOs.querySelector('#copyDemoFile').addEventListener('click',function(){var button=this;copyText(DEMO_FILES[openFile]).then(function(){copied(button);});});
+    salesOs.querySelector('#copyDemoFile').addEventListener('click',function(){handleCopy(this,DEMO_FILES[openFile]);});
     salesOs.querySelector('#continueToCrash').addEventListener('click',next);
     showDemoFile(openFile);
   }
@@ -3150,7 +3199,13 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   if(demo1Copy){demo1Copy.addEventListener('click',function(){
     var button=this;
     var text=DEMO_FILES['deals/cobalt-freight/transcripts/call-1-discovery-cobalt.md']+"\n\nYou're my deal-desk analyst. The text above is the complete call transcript. Score the call on MEDDIC: for each letter, quote the exact timestamped moment that proves it, or mark it MISSING. Do not infer facts that were not said. Then draft the follow-up email that closes the single biggest gap. Stop after the email.";
-    copyText(text).then(function(){copied(button);});
+    handleCopy(button,text);
+  });}
+  var demoLinkCopy=document.getElementById('copyDemoLink');
+  if(demoLinkCopy){demoLinkCopy.addEventListener('click',function(){
+    var button=this;
+    var url='https://docs.google.com/document/d/1tISF0UDQvQEt2Q_SDRs5H3DpST4xfa-WO_d2hUxR8eM/edit?usp=sharing';
+    handleCopy(button,url);
   });}
 
   /* ROI: numbers roll toward their target as you drag; payoff reframes the cost */
