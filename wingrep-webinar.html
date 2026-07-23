@@ -443,13 +443,6 @@
   .soon-install span{white-space:nowrap}
   .soon-install b{color:var(--green);font-weight:700}
   .soon-install svg{flex:0 0 auto;width:18px;height:18px;stroke:var(--green)}
-  /* Keep the attendee bonus visible without turning the opening into another paragraph.
-     It lives in the unused corner as a small ticket; the full explanation returns on slide 18. */
-  .soon-perk{position:absolute;top:.1rem;right:0;display:flex;flex-direction:column;align-items:flex-start;min-width:164px;padding:.68rem .85rem .64rem;text-align:left;background:#fff8e6;border:1.5px solid var(--rust-deep);box-shadow:3px 3px 0 rgba(164,73,39,.18);transform:rotate(2deg);color:var(--ink);line-height:1}
-  .soon-perk-kicker{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--rust-deep)}
-  .soon-perk strong{margin-top:.35rem;font-family:var(--display);font-size:18px;line-height:1.05;color:var(--ink)}
-  .soon-perk-free{position:absolute;right:-11px;top:-11px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--rust-deep);color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-9deg)}
-  @media(max-width:900px){.soon-perk{top:-.3rem;right:.2rem;transform:rotate(2deg) scale(.88);transform-origin:top right}}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
   .soonmark svg{width:84px;height:84px;transform-origin:center;animation:breathe 4.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
@@ -931,13 +924,8 @@
       <h1><span class="ln">Build your own AI sales</span><br><span class="ln">assistant <span class="hl">with Claude</span></span></h1>
       <p class="sub">Grab a coffee. Mute Slack.</p>
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
-      <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
+      <div class="s1-tick" id="s1Tick">stay to the end. your 30-minute build session is free.</div>
       <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Open <b>Claude Cowork</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
-      <div class="soon-perk" aria-label="Stay through the close for a free 30-minute build session">
-        <span class="soon-perk-kicker">Stay to the end</span>
-        <strong>30-min build</strong>
-        <span class="soon-perk-free">Free</span>
-      </div>
     </div>
   </section>
 
@@ -1151,14 +1139,13 @@
     --dvdSZ:clamp(118px,20vh,164px);
     background:var(--paper);
   }
-  /* Keep the standard 1100px headline track, but let the bio use the middle of the slide.
-     The older layout made the left column exactly one nameplate wide and pushed every
-     reclaimed pixel into the gutter, leaving an accidental empty stripe between Alan's
-     story and the photo wall. A wider bio plus one explicit gutter reads as one composition. */
-  .sAlan-wrap{max-width:1100px}
+  /* Center the complete 988px composition as one frame so the eyebrow, headline, bio,
+     and photo wall share the same geometry. Centering only the grid left the headline
+     56px behind the paragraph, which made otherwise left-aligned copy look indented. */
+  .sAlan-wrap{max-width:988px}
   .sAlan h1{margin-bottom:0}
   .sAlan-grid{grid-template-columns:minmax(0,420px) minmax(0,520px);
-    justify-content:center;gap:clamp(2rem,3.8vw,3rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
+    justify-content:start;gap:clamp(2rem,3.8vw,3rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
   /* The bio sits under the headline and the brick shelf is pinned to the bottom of the
@@ -1694,7 +1681,8 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     .sBsod .bsod-shell{position:relative;z-index:1;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash 2.8s linear both;will-change:transform,filter,clip-path}
     .sBsod .bsod-title{display:table;margin:0 auto 1.25rem;background:#c0c0c0;color:#0000aa;padding:.14rem .8rem;font-weight:700;letter-spacing:.04em}
     .sBsod .bsod-kicker{text-align:center;font-weight:700;letter-spacing:.08em;margin:.4rem 0 .8rem}
-    .sBsod .bsod-headline{font-family:"Courier New",var(--mono);font-size:clamp(32px,4.2vw,54px);line-height:1.04;letter-spacing:-.025em;text-align:center;text-transform:uppercase;margin:0 auto 1rem;max-width:18ch}
+    .sBsod .bsod-headline{font-family:"Courier New",var(--mono);font-size:clamp(32px,4.2vw,54px);line-height:1.04;letter-spacing:-.025em;text-align:center;text-transform:uppercase;margin:0 auto 1rem;max-width:none}
+    .sBsod .bsod-line{display:block;white-space:nowrap}
     .sBsod p{max-width:none;color:#fff;font:inherit;margin:.8rem 0}
     .sBsod .bsod-summary{text-align:center;max-width:58ch;margin-left:auto;margin-right:auto}
     .sBsod .bsod-code{margin:1.25rem 0;padding:1rem 1.2rem;border:2px solid #fff;background:#00008a;display:grid;grid-template-columns:auto 1fr;gap:.42rem 1.4rem;font-size:clamp(16px,1.45vw,20px)}
@@ -1738,14 +1726,14 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     }
     @keyframes bsodScanRoll{0%{opacity:0;background-position:0 -60px}6%{opacity:.72}24%{opacity:.46}58%{opacity:.3}86%,100%{opacity:.22;background-position:0 60px}}
     @keyframes bsodBlink{50%{opacity:0}}
-    @media(max-width:700px){.sBsod .bsod-code{grid-template-columns:1fr}.sBsod .bsod-code span{text-align:left}.sBsod .bsod-title{margin-bottom:1.2rem}}
+    @media(max-width:700px){.sBsod .bsod-code{grid-template-columns:1fr}.sBsod .bsod-code span{text-align:left}.sBsod .bsod-title{margin-bottom:1.2rem}.sBsod .bsod-line{white-space:normal}}
     @media(prefers-reduced-motion:reduce){.sBsod::before,.sBsod::after,.sBsod .bsod-shell,.sBsod .bsod-cursor{animation:none}.sBsod::after{display:none}}
   </style>
   <section class="slide sBsod" id="bsodSlide" aria-label="Sales OS blue screen error">
     <div class="bsod-shell">
       <div class="bsod-title">Sales OS</div>
       <p class="bsod-kicker">WORKFLOW LIMIT REACHED</p>
-      <h1 class="bsod-headline">The workflow works. But you still run it.</h1>
+      <h1 class="bsod-headline"><span class="bsod-line">The workflow works.</span> <span class="bsod-line">But you still run it.</span></h1>
       <p class="bsod-summary">After every call, someone still has to move the transcript, paste the prompt, and restart the loop.</p>
       <div class="bsod-code" aria-label="Workflow status"><b>GET THE TRANSCRIPT</b><span>MANUAL COPY</span><b>RUN THE PROMPT</b><span>MANUAL PASTE</span><b>DURING THE CALL</b><span class="bsod-fail">MISSING: LIVE AUDIO</span></div>
       <p class="bsod-takeaway">Claude can reason over what you feed it. It cannot capture the call, move the context, or coach the rep live.</p>
@@ -3755,6 +3743,7 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   function label12(p){var ap=p.h<12?'am':'pm',hh=p.h%12||12;return hh+':'+pad(p.m)+ap;}
 
   var lines=[
+    "stay to the end. your 30-minute build session is free.",
     "yes, this is being recorded. no, you will not rewatch it.",
     "there is a meme about your week 3. you have been warned.",
     "we will not say 'revenue acceleration platform.' not once.",
