@@ -233,17 +233,16 @@
   .sc-gap b{color:var(--green);font-weight:700}
   .os .taskbar{display:flex;align-items:center;gap:.65rem;padding:.38rem .6rem;background:#c6c2b6;border-top:2px solid #fdfcf7;margin-top:.5rem}
   .os .start{font-family:var(--body);font-weight:700;font-size:13px;padding:.3rem .7rem;border:1.5px solid;border-color:#fdfcf7 #69665d #69665d #fdfcf7;background:#c6c2b6;display:flex;align-items:center;gap:.4rem}
-  .os .task-status{font-family:var(--mono);font-size:13px;color:#4f4a40}
-  .clippy-copy{display:inline-flex;align-items:center;gap:.4rem;min-height:34px;padding:.18rem .55rem .18rem .35rem;background:#fffbdc;color:#332f1f;border:1.5px solid;border-color:#fff #69665d #69665d #fff;box-shadow:1px 1px 0 rgba(20,18,13,.24);font-family:var(--body);font-size:12.5px;font-weight:800;cursor:pointer;white-space:nowrap;transition:background .16s,transform .16s}
-  .clippy-copy:hover{background:#fff4ad;transform:translateY(-1px)}
-  .clippy-copy:active{transform:translateY(1px)}
-  .clippy-copy:focus-visible{outline:3px solid #d97757;outline-offset:2px}
-  .clippy-art{width:32px;height:38px;display:block;line-height:0;animation:float 4s ease-in-out infinite}
-  .clippy-art svg{width:32px;height:42px;display:block;overflow:visible;filter:drop-shadow(1px 1.5px 1px rgba(20,18,13,.3))}
-  .clippy-brow{transform-box:fill-box;transform-origin:center 90%;animation:clippyBrow 3.4s ease-in-out infinite}
-  .clippy-brow.r{animation-delay:.12s}
-  @keyframes clippyBrow{0%,70%,100%{transform:translateY(0) rotate(0)}78%{transform:translateY(-2.5px) rotate(-4deg)}86%{transform:translateY(-1px) rotate(-1deg)}}
-  .os .clock{margin-left:auto;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;padding:.25rem .6rem}
+  .clippy-copy{position:relative;display:grid;place-items:center;flex:0 0 38px;width:38px;height:34px;margin-left:auto;padding:0;background:transparent;color:#332f1f;border:1.5px solid transparent;box-shadow:none;font-family:var(--body);font-size:12px;font-weight:700;cursor:pointer;transition:background .16s,border-color .16s}
+  .clippy-copy:hover{background:#d5d1c6;border-color:#fdfcf7 #69665d #69665d #fdfcf7}
+  .clippy-copy:active{background:#bbb7ac;border-color:#69665d #fdfcf7 #fdfcf7 #69665d}
+  .clippy-copy:focus-visible{outline:2px solid #6e311a;outline-offset:2px}
+  .clippy-copy:disabled{cursor:default}
+  .clippy-art{width:25px;height:29px;display:block;line-height:0}
+  .clippy-art svg{width:25px;height:32px;display:block;overflow:visible;filter:drop-shadow(.5px 1px .6px rgba(20,18,13,.24))}
+  .clippy-label{position:absolute;left:50%;bottom:calc(100% + 6px);z-index:5;padding:.32rem .5rem;background:#332f1f;color:#fff;border:1px solid #111;font-family:var(--body);font-size:11.5px;font-weight:700;line-height:1;white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transform:translate(-50%,4px);transition:opacity .14s,transform .14s,visibility .14s}
+  .clippy-copy:hover .clippy-label,.clippy-copy:focus-visible .clippy-label,.clippy-copy:disabled .clippy-label{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .os .clock{margin-left:0;font-family:var(--mono);font-size:12px;border:1.5px solid;border-color:#69665d #fdfcf7 #fdfcf7 #69665d;padding:.25rem .6rem}
   .os-cap{margin-top:.6rem;font-family:var(--hand);font-size:clamp(18px,1.8vw,24px);color:var(--green);font-weight:700;transform:rotate(-1deg)}
   @media(max-height:760px){
     .sales-os-slide{padding-top:4.5vh;padding-bottom:2vh}
@@ -444,9 +443,13 @@
   .soon-install span{white-space:nowrap}
   .soon-install b{color:var(--green);font-weight:700}
   .soon-install svg{flex:0 0 auto;width:18px;height:18px;stroke:var(--green)}
-  .soon-perk{margin-top:.65rem;display:inline-flex;align-items:center;gap:.55rem;font-size:clamp(15px,1.35vw,17px);line-height:1.25;color:var(--ink-soft);font-weight:600}
-  .soon-perk::before{content:"BONUS";font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.1em;color:#fff;background:var(--rust-deep);padding:.24rem .42rem}
-  .soon-perk b{color:var(--ink);font-weight:800}
+  /* Keep the attendee bonus visible without turning the opening into another paragraph.
+     It lives in the unused corner as a small ticket; the full explanation returns on slide 18. */
+  .soon-perk{position:absolute;top:.1rem;right:0;display:flex;flex-direction:column;align-items:flex-start;min-width:164px;padding:.68rem .85rem .64rem;text-align:left;background:#fff8e6;border:1.5px solid var(--rust-deep);box-shadow:3px 3px 0 rgba(164,73,39,.18);transform:rotate(2deg);color:var(--ink);line-height:1}
+  .soon-perk-kicker{font-family:var(--mono);font-size:10.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--rust-deep)}
+  .soon-perk strong{margin-top:.35rem;font-family:var(--display);font-size:18px;line-height:1.05;color:var(--ink)}
+  .soon-perk-free{position:absolute;right:-11px;top:-11px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--rust-deep);color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-9deg)}
+  @media(max-width:900px){.soon-perk{top:-.3rem;right:.2rem;transform:rotate(2deg) scale(.88);transform-origin:top right}}
   .soonmark{width:84px;height:84px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center}
   .soonmark svg{width:84px;height:84px;transform-origin:center;animation:breathe 4.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
@@ -930,7 +933,11 @@
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
       <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
       <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Open <b>Claude Cowork</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
-      <div class="soon-perk"><span><b>Stay through the close:</b> attendees get a free 30-minute build session.</span></div>
+      <div class="soon-perk" aria-label="Stay through the close for a free 30-minute build session">
+        <span class="soon-perk-kicker">Stay to the end</span>
+        <strong>30-min build</strong>
+        <span class="soon-perk-free">Free</span>
+      </div>
     </div>
   </section>
 
@@ -1151,7 +1158,7 @@
   .sAlan-wrap{max-width:1100px}
   .sAlan h1{margin-bottom:0}
   .sAlan-grid{grid-template-columns:minmax(0,420px) minmax(0,520px);
-    justify-content:start;gap:clamp(2rem,3.8vw,3rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
+    justify-content:center;gap:clamp(2rem,3.8vw,3rem);align-items:stretch;margin-top:clamp(1.6rem,2.6vh,1.85rem)}
   @media(max-width:900px){.sAlan-grid{grid-template-columns:1fr}}
 
   /* The bio sits under the headline and the brick shelf is pinned to the bottom of the
@@ -1667,10 +1674,9 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
         </div>
         <div class="taskbar">
           <span class="start"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6e311a"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg> Sales OS</span>
-          <span class="task-status">6-step workflow · 4 source files · ready to paste</span>
           <button class="clippy-copy" id="copyDemoLink" type="button" title="Copy prompts link for Zoom" aria-label="Copy prompts link for Zoom">
             <span class="clippy-art" aria-hidden="true"><svg viewBox="0 0 120 168"><defs><linearGradient id="clippyMetalTask" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e2ee"/><stop offset=".45" stop-color="#b3b3c9"/><stop offset="1" stop-color="#83839b"/></linearGradient></defs><g transform="rotate(-5 60 90)"><path d="M20 54 A34 34 0 0 1 88 54 L88 122 A34 34 0 0 1 20 122 Z" fill="none" stroke="url(#clippyMetalTask)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M72 108 L72 66 A18 18 0 0 0 36 66 L36 106 A18 18 0 0 0 68 114" fill="none" stroke="url(#clippyMetalTask)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></g><g><ellipse cx="45" cy="51" rx="15" ry="16.5" fill="#fff" stroke="#242424" stroke-width="2.4"/><ellipse cx="75" cy="45" rx="16.5" ry="18" fill="#fff" stroke="#242424" stroke-width="2.4"/><circle cx="49.5" cy="55" r="7.6" fill="#1b1b1b"/><circle cx="79.5" cy="49" r="8.2" fill="#1b1b1b"/><circle cx="46.6" cy="51.5" r="2.5" fill="#fff"/><circle cx="76.4" cy="45.4" r="2.7" fill="#fff"/></g><path class="clippy-brow" d="M29 34 Q43 24 55 32" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/><path class="clippy-brow r" d="M61 28 Q76 20 89 30" fill="none" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/></svg></span>
-            <span class="clippy-label">Clippy: copy prompts</span>
+            <span class="clippy-label" aria-live="polite">Copy prompts</span>
           </button>
           <span class="clock">11:42 AM</span>
         </div>
@@ -1682,9 +1688,10 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   <!-- 11: the complete Windows-style workflow hits the one moment it cannot handle. -->
   <style>
     body.bsod-mode .topbar,body.bsod-mode .chrome,body.bsod-mode .progress,body.bsod-mode .toast,body.bsod-mode .amb{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-    .sBsod{background:#0000aa!important;color:#fff!important;padding:clamp(28px,7vh,72px) clamp(26px,9vw,130px)!important;overflow:hidden;justify-content:center}
-    .sBsod::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 4px);pointer-events:none}
-    .sBsod .bsod-shell{position:relative;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash .16s steps(2,end) both}
+    .sBsod{isolation:isolate;background:#0000aa!important;color:#fff!important;padding:clamp(22px,5vh,56px) clamp(26px,9vw,130px)!important;overflow:hidden;justify-content:center}
+    .sBsod::before{content:"";position:absolute;z-index:2;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0,rgba(255,255,255,.08) 1px,transparent 1px,transparent 5px);background-position:0 60px;opacity:.22;pointer-events:none;animation:bsodScanRoll 2.8s steps(18,end) both}
+    .sBsod::after{content:"";position:absolute;z-index:3;inset:0;background:linear-gradient(180deg,transparent 0 9%,rgba(255,255,255,.9) 9% 11%,transparent 11% 27%,rgba(0,255,255,.55) 27% 32%,transparent 32% 51%,rgba(255,0,70,.55) 51% 56%,transparent 56% 78%,rgba(255,255,255,.65) 78% 80%,transparent 80%),repeating-linear-gradient(90deg,rgba(255,0,70,.18) 0 3px,transparent 3px 9px,rgba(0,255,255,.16) 9px 12px,transparent 12px 19px);mix-blend-mode:screen;opacity:0;pointer-events:none;animation:bsodTear 2.8s steps(1,end) both}
+    .sBsod .bsod-shell{position:relative;z-index:1;width:min(980px,100%);margin:auto;font-family:"Courier New",var(--mono);font-size:clamp(17px,1.7vw,22px);line-height:1.42;text-shadow:none;animation:bsodCrash 2.8s linear both;will-change:transform,filter,clip-path}
     .sBsod .bsod-title{display:table;margin:0 auto 1.25rem;background:#c0c0c0;color:#0000aa;padding:.14rem .8rem;font-weight:700;letter-spacing:.04em}
     .sBsod .bsod-kicker{text-align:center;font-weight:700;letter-spacing:.08em;margin:.4rem 0 .8rem}
     .sBsod .bsod-headline{font-family:"Courier New",var(--mono);font-size:clamp(32px,4.2vw,54px);line-height:1.04;letter-spacing:-.025em;text-align:center;text-transform:uppercase;margin:0 auto 1rem;max-width:18ch}
@@ -1696,11 +1703,43 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
     .sBsod .bsod-takeaway{text-align:center;font-weight:700}
     .sBsod .bsod-next{text-align:center;margin-top:1.5rem!important}
     .sBsod .bsod-key{display:inline-block;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #555 #555 #fff;padding:.08rem .55rem;font-weight:700;box-shadow:2px 2px 0 #000;margin:0 .2rem}
-    .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) infinite}
-    @keyframes bsodCrash{0%{opacity:0;transform:translateX(-18px) skewX(-2deg)}55%{opacity:1;transform:translateX(8px) skewX(1deg)}100%{transform:none}}
+    .sBsod .bsod-cursor{display:inline-block;width:.68em;height:1.1em;vertical-align:-.18em;background:#c0c0c0;margin-left:.22em;animation:bsodBlink .8s steps(2,end) 2.8s infinite}
+    @keyframes bsodCrash{
+      0%{opacity:0;transform:translate(-130px,-10px) skewX(-12deg) scaleY(.08);clip-path:inset(0 0 86% 0);filter:brightness(4) contrast(2.2) drop-shadow(-14px 0 #ff0046) drop-shadow(14px 0 #00ffff)}
+      4%{opacity:1;transform:translate(92px,18px) skewX(10deg) scaleY(.72);clip-path:inset(7% 0 53% 0);filter:brightness(2.8) contrast(2) drop-shadow(-12px 0 #ff0046) drop-shadow(12px 0 #00ffff)}
+      8%{transform:translate(-76px,-15px) skewX(-9deg) scaleY(1.12);clip-path:inset(44% 0 12% 0);filter:brightness(1.8) contrast(2.4) drop-shadow(-10px 0 #ff0046) drop-shadow(10px 0 #00ffff)}
+      12%{opacity:.22;transform:translate(34px,0) skewX(7deg) scaleY(.03);clip-path:inset(0);filter:brightness(5) contrast(3)}
+      16%{opacity:1;transform:translate(-58px,10px) skewX(-8deg);clip-path:polygon(0 0,100% 0,100% 19%,4% 19%,4% 33%,100% 33%,100% 58%,0 58%,0 74%,96% 74%,96% 100%,0 100%);filter:contrast(2.2) drop-shadow(-11px 0 #ff0046) drop-shadow(11px 0 #00ffff)}
+      23%{transform:translate(74px,-8px) skewX(6deg);clip-path:polygon(0 0,100% 0,100% 16%,0 16%,0 48%,94% 48%,94% 63%,0 63%,0 86%,100% 86%,100% 100%,0 100%);filter:brightness(1.5) contrast(2) drop-shadow(-8px 0 #ff0046) drop-shadow(8px 0 #00ffff)}
+      30%{opacity:.5;transform:translate(-30px,14px) skewX(-5deg) scaleX(1.08);clip-path:inset(0);filter:brightness(2.5) contrast(1.8)}
+      36%{opacity:1;transform:translate(42px,-5px) skewX(4deg) scaleX(.96);filter:contrast(1.9) drop-shadow(-7px 0 #ff0046) drop-shadow(7px 0 #00ffff)}
+      43%{transform:translate(-31px,7px) skewX(-3deg);filter:brightness(1.35) contrast(1.75) drop-shadow(-6px 0 #ff0046) drop-shadow(6px 0 #00ffff)}
+      50%{transform:translate(22px,-4px) skewX(2deg);filter:contrast(1.55) drop-shadow(-5px 0 #ff0046) drop-shadow(5px 0 #00ffff)}
+      58%{transform:translate(-15px,3px) skewX(-1.5deg);filter:contrast(1.4) drop-shadow(-4px 0 #ff0046) drop-shadow(4px 0 #00ffff)}
+      66%{transform:translate(9px,-2px) skewX(1deg);filter:contrast(1.28) drop-shadow(-3px 0 rgba(255,0,70,.8)) drop-shadow(3px 0 rgba(0,255,255,.8))}
+      74%{transform:translate(-5px,1px) skewX(-.5deg);filter:contrast(1.16) drop-shadow(-2px 0 rgba(255,0,70,.55)) drop-shadow(2px 0 rgba(0,255,255,.55))}
+      84%{opacity:1;transform:translate(2px,0);clip-path:inset(0);filter:contrast(1.05)}
+      100%{opacity:1;transform:none;clip-path:inset(0);filter:none}
+    }
+    @keyframes bsodTear{
+      0%,2%,100%{opacity:0;transform:translate(0)}
+      3%{opacity:1;transform:translate(-8%,18%) skewY(3deg)}
+      7%{opacity:.72;transform:translate(11%,-22%) skewY(-4deg)}
+      11%{opacity:.95;transform:translate(-14%,7%) scaleY(1.35)}
+      15%{opacity:.35;transform:translate(5%,-15%)}
+      20%{opacity:.88;transform:translate(13%,21%) skewY(2deg)}
+      27%{opacity:.6;transform:translate(-9%,-9%) scaleY(.8)}
+      34%{opacity:.76;transform:translate(6%,12%)}
+      42%{opacity:.5;transform:translate(-5%,-6%)}
+      52%{opacity:.42;transform:translate(3%,5%)}
+      62%{opacity:.28;transform:translate(-2%,-3%)}
+      74%{opacity:.14;transform:translate(1%,1%)}
+      86%{opacity:0;transform:none}
+    }
+    @keyframes bsodScanRoll{0%{opacity:0;background-position:0 -60px}6%{opacity:.72}24%{opacity:.46}58%{opacity:.3}86%,100%{opacity:.22;background-position:0 60px}}
     @keyframes bsodBlink{50%{opacity:0}}
     @media(max-width:700px){.sBsod .bsod-code{grid-template-columns:1fr}.sBsod .bsod-code span{text-align:left}.sBsod .bsod-title{margin-bottom:1.2rem}}
-    @media(prefers-reduced-motion:reduce){.sBsod .bsod-shell,.sBsod .bsod-cursor{animation:none}}
+    @media(prefers-reduced-motion:reduce){.sBsod::before,.sBsod::after,.sBsod .bsod-shell,.sBsod .bsod-cursor{animation:none}.sBsod::after{display:none}}
   </style>
   <section class="slide sBsod" id="bsodSlide" aria-label="Sales OS blue screen error">
     <div class="bsod-shell">
