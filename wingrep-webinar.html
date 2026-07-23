@@ -752,7 +752,18 @@
   .s1-clabel{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:13px;color:var(--ink-soft)}
   .s1-clock{font-family:var(--mono);font-weight:600;font-size:clamp(34px,6.4vw,58px);line-height:1;color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:.03em}
   .s1-clock.live{color:var(--rust)}
-  .s1-tick{font-family:var(--hand);color:var(--rust-deep);font-size:clamp(19px,2.3vw,27px);font-weight:700;margin-top:1.2rem;min-height:1.5em;transition:opacity .4s;transform:rotate(-1.3deg);max-width:34ch}
+  /* The end-of-session offer needs to be memorable without becoming another line
+     in the opener. A small, looping sky-writer keeps it visible but out of the
+     presentation's reading order. */
+  .s1-blimp-flight{position:absolute;top:clamp(3px,1.5vh,16px);right:clamp(16px,4vw,58px);width:max-content;z-index:4;pointer-events:none;animation:s1-blimp-pass 22s linear infinite}
+  .s1-blimp{display:flex;align-items:center;gap:.5rem;color:var(--green-deep);animation:s1-blimp-bob 3.8s ease-in-out infinite}
+  .s1-blimp-airship{position:relative;width:58px;height:27px;flex:0 0 auto;border:1.5px solid var(--rust-deep);border-radius:50% 50% 47% 47%;background:linear-gradient(135deg,#F5E6DD 0 32%,#D97757 32% 67%,#B14A2C 67%);box-shadow:0 5px 10px -8px rgba(20,18,13,.8)}
+  .s1-blimp-airship::before{content:"";position:absolute;right:-10px;top:8px;width:13px;height:10px;border:1.5px solid var(--rust-deep);border-left:0;border-radius:0 70% 70% 0;background:var(--rust-soft)}
+  .s1-blimp-airship::after{content:"";position:absolute;left:20px;bottom:-7px;width:18px;height:6px;border:1.5px solid var(--rust-deep);border-radius:2px;background:var(--card)}
+  .s1-blimp-copy{font-family:var(--body);font-size:clamp(9px,.78vw,12px);font-weight:800;letter-spacing:.09em;line-height:1;white-space:nowrap;text-transform:uppercase;background:rgba(251,249,241,.88);border:1.5px solid var(--line);border-radius:999px;padding:.38rem .62rem;box-shadow:0 7px 16px -13px rgba(20,18,13,.72)}
+  @keyframes s1-blimp-pass{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 44rem))}}
+  @keyframes s1-blimp-bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(5px) rotate(1deg)}}
+  .s1-tick{font-family:var(--hand);color:var(--rust-deep);font-size:clamp(19px,2.3vw,27px);font-weight:700;margin-top:1.05rem;min-height:1.5em;transition:opacity .4s;transform:rotate(-1.3deg);max-width:34ch}
   .s1-keys{margin-top:1.6rem;font-family:var(--body);font-size:12.5px;color:var(--ink-soft);font-weight:600;display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;justify-content:center}
   .s1-keys kbd{font-family:var(--mono);background:var(--card);border:1.5px solid var(--line);border-radius:6px;padding:.08rem .42rem;font-size:11.5px;color:var(--ink)}
   /* presenter-only start-time setter (hidden until the "t" key is pressed) */
@@ -764,7 +775,7 @@
   .s1-ts-in:focus{border-color:var(--green-bright)}
   .s1-ts-in.bad{border-color:#c0392b;animation:s1shake .34s}
   @keyframes s1shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
-  @media (prefers-reduced-motion: reduce){.s1-ts-in.bad{animation:none}}
+  @media (prefers-reduced-motion: reduce){.s1-ts-in.bad,.s1-blimp-flight,.s1-blimp{animation:none}.s1-blimp-flight{right:clamp(16px,4vw,58px);top:12px}}
   .s1-ts-hint{margin-top:.8rem;font-size:12.5px;color:var(--ink-soft);font-weight:600}
   .s1-ts-hint b{color:var(--ink);font-weight:800}
   .s1-ts-keys{margin-top:.9rem;font-size:11px;color:var(--ink-soft);font-weight:700}
@@ -918,13 +929,19 @@
 
   <!-- 1 -->
   <section class="slide soon active">
+    <div class="s1-blimp-flight" aria-label="Free private building sessions if you stay until the end">
+      <div class="s1-blimp">
+        <span class="s1-blimp-airship" aria-hidden="true"></span>
+        <span class="s1-blimp-copy">Free private building sessions · stay until the end</span>
+      </div>
+    </div>
     <div class="wrap">
       <div class="soonmark"><svg viewBox="0 0 24 24" fill="#D97757" aria-hidden="true"><use href="#claudeMark"/></svg></div>
       <div class="live"><span class="d"></span> Live workshop · starting soon</div>
       <h1><span class="ln">Build your own AI sales</span><br><span class="ln">assistant <span class="hl">with Claude</span></span></h1>
       <p class="sub">Grab a coffee. Mute Slack.</p>
       <div class="s1-count"><span class="s1-clabel">Doors open in</span><span class="s1-clock" id="s1Clock" data-minutes="5">05:00</span></div>
-      <div class="s1-tick" id="s1Tick">stay to the end. your 30-minute build session is free.</div>
+      <div class="s1-tick" id="s1Tick">yes, this is being recorded. no, you will not rewatch it.</div>
       <div class="soon-install"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Open <b>Claude Cowork</b> · <b>claude.ai/download</b> · you build with it tonight</span></div>
     </div>
   </section>
@@ -3743,7 +3760,6 @@ If required context is missing, write "MISSING CONTEXT" in that brief instead of
   function label12(p){var ap=p.h<12?'am':'pm',hh=p.h%12||12;return hh+':'+pad(p.m)+ap;}
 
   var lines=[
-    "stay to the end. your 30-minute build session is free.",
     "yes, this is being recorded. no, you will not rewatch it.",
     "there is a meme about your week 3. you have been warned.",
     "we will not say 'revenue acceleration platform.' not once.",
